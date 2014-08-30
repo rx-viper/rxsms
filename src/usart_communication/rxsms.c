@@ -2,7 +2,7 @@
  *
  * \brief  XMEGA USART interrupt driven driver example source.
  *
- *      This file contains an application that simulates an Radio connection between the rexus rocket and the Ground statioin. 
+ *      This file contains an application that simulates an Radio connection between the rexus rocket and the Ground statioin.
  *		For the communication it uses 2 Uarts, potis and swiches as control.
  *
  * \par Simulator for Radio Connection
@@ -101,7 +101,7 @@ void uart_init()
 	/* Enable both RX and TX. */
 	USART_Rx_Enable(UsartDataGnd.usart);
 	USART_Tx_Enable(UsartDataGnd.usart);
-	
+
 	PORTD.DIRSET = PIN3_bm;  	//TX - USARTD0 As ExperimentUsart (tg: checked)
 	PORTD.DIRCLR = PIN2_bm;		//RX
 
@@ -131,7 +131,7 @@ void uart_init()
  */
 void adc_init(void) //tg: somebody should check this
 {
-		
+
 		/* Move stored calibration values to ADC B */
 		ADC_CalibrationValues_Load(&ADCA);
 
@@ -149,12 +149,12 @@ void adc_init(void) //tg: somebody should check this
 		ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH2,ADC_CH_INPUTMODE_SINGLEENDED_gc,ADC_CH_GAIN_1X_gc);
 		ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH3,ADC_CH_INPUTMODE_SINGLEENDED_gc,ADC_CH_GAIN_1X_gc);
 
-		ADC_Ch_InputMux_Config(&ADCA.CH0, ADC_CH_MUXPOS_PIN1_gc, 0); // Using 3 diffr. channes for 3 inputs 
+		ADC_Ch_InputMux_Config(&ADCA.CH0, ADC_CH_MUXPOS_PIN1_gc, 0); // Using 3 diffr. channes for 3 inputs
 		ADC_Ch_InputMux_Config(&ADCA.CH1, ADC_CH_MUXPOS_PIN2_gc, 0);
 		ADC_Ch_InputMux_Config(&ADCA.CH2, ADC_CH_MUXPOS_PIN3_gc, 0);
 		ADC_Ch_InputMux_Config(&ADCA.CH3, ADC_CH_MUXINT_TEMP_gc, 0); //Internal uc temperature
-		
-		ADC_Enable(&ADCA); 
+
+		ADC_Enable(&ADCA);
 
 		// Wait until the ADC is ready
 		ADC_Wait_32MHz(&ADCA);
@@ -182,7 +182,7 @@ void adc_init(void) //tg: somebody should check this
  *	\param max Maximum timer value
  *
  */
-void start_timer(uint16_t max) 
+void start_timer(uint16_t max)
 {
 	TCC0.PER = max;
 	TC0_ConfigClockSource(&TCC0,TC_CLKSEL_DIV1024_gc);
@@ -193,7 +193,7 @@ void start_timer(uint16_t max)
  *  Stop TC0 by setting max value to 0
  *
  */
-void stop_timer() 
+void stop_timer()
 {
 	TC0_ConfigClockSource(&TCC0,TC_CLKSEL_OFF_gc);
 	TCC0.PER=0;
@@ -206,35 +206,35 @@ void stop_timer()
  *	\todo clean up, put more code outside of this function
  */
 int main(void)
-{	
+{
 	uint16_t seed;
 	cli();
 	FUSE_FUSEBYTE5 |=  BODACT_CONTINUOUS_gc|BODLVL_2V8_gc; // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
-	clock_init();  
-	uart_init(); 
+	clock_init();
+	uart_init();
 	set_directions();
     adc_init();
 	interrupt_init();
 	timer_init();
-	
-	// Initialise interrupts for switches 
+
+	// Initialise interrupts for switches
 	PORTCFG.MPCMASK |= SWLO_bm | SWSOE_bm | SWSODS_bm | SWPS_bm;
 	SW_PORT.PIN5CTRL |= PORT_ISC_FALLING_gc | PORT_OPC_PULLUP_gc; // First 4 switches
-	
+
 	SW_PORT.INT0MASK |= SWLO_bm | SWSOE_bm | SWSODS_bm | SWPS_bm;
 	SW_PORT.INTCTRL |= PORT_INT0LVL_LO_gc;
-	
+
 	SWPWR_PORT.PIN1CTRL |= PORT_ISC_FALLING_gc|PORT_OPC_PULLUP_gc;
 	SWPWR_PORT.INT0MASK |= SWPWR_bm;
 	SWPWR_PORT.INTCTRL |= PORT_INT0LVL_LO_gc;
 	sei();
-	
+
 	// Initialize seed for Random - variable
 	ADC_Ch_Conversion_Start(&ADCA.CH3);
 	while(!ADC_Ch_Conversion_Complete(&ADCA.CH3)){}
 	seed = (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH3,0));
 	rando = seed;
-	
+
 	while(1)
 	{
 		// Start 3 single conversions
@@ -243,12 +243,12 @@ int main(void)
 		ADC_Ch_Conversion_Start(&ADCA.CH2);
 		ADC_Ch_Conversion_Start(&ADCA.CH3);
 		while(!ADC_Ch_Conversion_Complete(&ADCA.CH0));		// It's enough time to wait for only one Channel
-		
+
 		// Get the results, 12 Bit, right adjusted
-		poti1 =  (2.3*(ADC_ResultCh_GetWord_Unsigned(&ADCA.CH0,0)) - 400); 
+		poti1 =  (2.3*(ADC_ResultCh_GetWord_Unsigned(&ADCA.CH0,0)) - 400);
 		poti2 =  (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH1,180)>>4);
 		poti3 =  (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH2,180)<<4);
-		
+
 		//generate compare Value for error randomizer : from 12 bit into 32 bit
 		if (poti1 <= 80)
 		{
@@ -258,7 +258,7 @@ int main(void)
 		{
 			compare = ((uint32_t)poti1<<6);
 		}
-		
+
 		// Checking for error number(poti2) , If bigger : Start timer and wait a certain time(poti3) while not transmitting data.
 		if (counter >= poti2)
 		{
@@ -267,7 +267,7 @@ int main(void)
 			LED_RXTX_PORT.OUTSET = LRX_bm|LTX_bm;
 		}
 
-		
+
 	}
 }
 
@@ -299,19 +299,19 @@ ISR(USARTD0_RXC_vect) // DATA DIRECTION FROM experiment to GROUND
 			{
 				counter++;
 			}
-			
+
 			data ^= err_var;
 			USARTGROUND.DATA = data;
 			LED_RXTX_PORT.OUTTGL = LRX_bm;
 		}
-		
+
 	}
 	else
 	{
 		USARTGROUND.DATA = data;
 		LED_RXTX_PORT.OUTTGL = LRX_bm;
 	}
-	
+
 }
 
 /*! \brief Ground USART Interrupt
@@ -338,7 +338,7 @@ ISR(USARTE0_RXC_vect) // DATA DIRECTION FROM GROUND to experiment
 ISR(PORTB_INT0_vect)
 {
 	const uint8_t pins = ~(SW_PORT.IN);
-	
+
 	if ((pins & SWLO_bm)) 				// readout switches and set a job variable for each switch
 	{
 		LED_PORT.OUTTGL = LLO_bm;		//switch led indicator on/off
@@ -353,13 +353,13 @@ ISR(PORTB_INT0_vect)
 	{
 		LED_PORT.OUTTGL = LSODS_bm;
 		RXSIG_PORT.OUTTGL = SODS_bm;
-	}	
+	}
 	if ((pins & SWPS_bm))
 	{
 		LED_PORT.OUTTGL = LPS_bm;		//override indicator led
 		disable_noise_generation ^= 1;  //XORG/Toogle bit 0.
-	}	
-}	
+	}
+}
 
 /*! \brief Button press interrupt
  *
@@ -371,12 +371,12 @@ ISR(PORTB_INT0_vect)
 ISR(PORTC_INT0_vect)
 {
 	const uint8_t pins = ~(SWPWR_PORT.IN); // same for power supply
-	
+
 	if (pins & SWPWR_bm)
 	{
 		LED5_PORT.OUTTGL = LPWR_bm;
 		SUPPLY_CTRL_PORT.OUTTGL = SUPPLY_CTRL_bm;
-	}	
+	}
 }
 
 /*! \brief Timer overflow interrupt

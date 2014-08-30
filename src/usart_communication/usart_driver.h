@@ -87,7 +87,7 @@
 /*
 			/ * \brief USART transmit and receive ring buffer. * /
 			typedef struct USART_Buffer
-			{	
+			{
 				/ * \brief Receive buffer. * /
 				volatile uint8_t RX[USART_RX_BUFFER_SIZE];
 				/ * \brief Transmit buffer. * /
@@ -99,8 +99,8 @@
 				/ * \brief Transmit buffer head. * /
 				volatile uint8_t TX_Head;
 				/ * \brief Transmit buffer tail. * /
-				volatile uint8_t TX_Tail; 
-			} USART_Buffer_t;*/ 
+				volatile uint8_t TX_Tail;
+			} USART_Buffer_t;*/
 
 
 	/*! \brief Struct used when interrupt driven driver is used.
@@ -114,7 +114,7 @@
 		USART_t * usart;
 		/* \brief Data register empty interrupt level. */
 		USART_DREINTLVL_t dreIntLevel;
-		/* \brief Data buffer. 
+		/* \brief Data buffer.
 		USART_Buffer_t buffer;*/
 	} USART_data_t;
 

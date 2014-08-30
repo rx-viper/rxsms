@@ -2,7 +2,7 @@
  *
  * \brief  XMEGA USART interrupt driven driver example source.
  *
- *      This file contains an application that simulates an Radio connection between the rexus rocket and the Ground statioin. 
+ *      This file contains an application that simulates an Radio connection between the rexus rocket and the Ground statioin.
  *		For the communication it uses 2 Uarts, potis and swiches as control.
  *
  * \par Simulator for Radio Connection

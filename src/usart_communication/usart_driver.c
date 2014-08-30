@@ -108,7 +108,7 @@ void usart_number(uint16_t variable,USART_t *usart,bool CF,bool comma)
 {
 	char Buffer[10];
 	itoa((uint16_t)variable,Buffer,10);
-	
+
 	usart_string(Buffer,usart,CF,comma);
 }
 
@@ -127,7 +127,7 @@ void usart_string(char *c, USART_t *usart,bool CF, bool comma)
 	{
 		usart_put(',',usart);
 	}
-	
+
 }
 
 void usart_put(char c, USART_t *usart)

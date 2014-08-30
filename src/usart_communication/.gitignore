@@ -1,5 +1,9 @@
 *.o
+*.swp
+*~
 rxsms-dense.lss
+rxsms-dense.prev.lss
+rxsms.prev.lss
 rxsms.eep
 rxsms.elf
 rxsms.hex
