@@ -72,9 +72,9 @@
 
 #ifndef __HAS_ELPM__
 #define _MEMATTR  __flash
-#else /* __HAS_ELPM__ */
+#else                           /* __HAS_ELPM__ */
 #define _MEMATTR  __farflash
-#endif /* __HAS_ELPM__ */
+#endif                          /* __HAS_ELPM__ */
 
 /*! \brief Perform a delay of \c us microseconds.
  *
@@ -123,7 +123,6 @@
 #define PGM_READ_WORD(x) *(x)
 
 #define SHORTENUM /**/
-
 #elif defined( __GNUC__ )
 
 #include <avr/io.h>
@@ -151,4 +150,3 @@
 #endif
 
 #endif
-

@@ -78,12 +78,13 @@
  *  \param usart                The USART module.
  *  \param dreIntLevel          Data register empty interrupt level.
  */
-void USART_InterruptDriver_Initialize(USART_data_t * usart_data,
-                                      USART_t * usart,
-                                      USART_DREINTLVL_t dreIntLevel)
+void
+USART_InterruptDriver_Initialize(USART_data_t * usart_data,
+                                 USART_t * usart,
+                                 USART_DREINTLVL_t dreIntLevel)
 {
-	usart_data->usart = usart;
-	usart_data->dreIntLevel = dreIntLevel;
+    usart_data->usart = usart;
+    usart_data->dreIntLevel = dreIntLevel;
 }
 
 
@@ -98,40 +99,41 @@ void USART_InterruptDriver_Initialize(USART_data_t * usart_data,
  *  \param usart_data         The USART_data_t struct instance
  *  \param dreIntLevel        Interrupt level of the DRE interrupt.
  */
-void USART_InterruptDriver_DreInterruptLevel_Set(USART_data_t * usart_data,
-                                                 USART_DREINTLVL_t dreIntLevel)
+void
+USART_InterruptDriver_DreInterruptLevel_Set(USART_data_t * usart_data,
+                                            USART_DREINTLVL_t dreIntLevel)
 {
-	usart_data->dreIntLevel = dreIntLevel;
+    usart_data->dreIntLevel = dreIntLevel;
 }
 
-void usart_number(uint16_t variable,USART_t *usart,bool CF,bool comma)
+void
+usart_number(uint16_t variable, USART_t * usart, bool CF, bool comma)
 {
-	char Buffer[10];
-	itoa((uint16_t)variable,Buffer,10);
+    char Buffer[10];
+    itoa((uint16_t) variable, Buffer, 10);
 
-	usart_string(Buffer,usart,CF,comma);
+    usart_string(Buffer, usart, CF, comma);
 }
 
-void usart_string(char *c, USART_t *usart,bool CF, bool comma)
+void
+usart_string(char *c, USART_t * usart, bool CF, bool comma)
 {
-	while(*c)
-	{
-		usart_put(*c,usart);
-		c++;
-	}
-	if(CF == true)
-	{
-		usart_put('\n',usart);
-	}
-	if(comma == true)
-	{
-		usart_put(',',usart);
-	}
+    while (*c) {
+        usart_put(*c, usart);
+        c++;
+    }
+    if (CF == true) {
+        usart_put('\n', usart);
+    }
+    if (comma == true) {
+        usart_put(',', usart);
+    }
 
 }
 
-void usart_put(char c, USART_t *usart)
+void
+usart_put(char c, USART_t * usart)
 {
-	 while (!( usart->STATUS & USART_DREIF_bm));
-	 usart->DATA = c;
+    while (!(usart->STATUS & USART_DREIF_bm));
+    usart->DATA = c;
 }

@@ -76,9 +76,10 @@
  *  \param tc              Timer/Counter module instance.
  *  \param clockSelection  Timer/Counter clock source setting.
  */
-void TC0_ConfigClockSource( volatile TC0_t * tc, TC_CLKSEL_t clockSelection )
+void
+TC0_ConfigClockSource(volatile TC0_t * tc, TC_CLKSEL_t clockSelection)
 {
-	tc->CTRLA = ( tc->CTRLA & ~TC0_CLKSEL_gm ) | clockSelection;
+    tc->CTRLA = (tc->CTRLA & ~TC0_CLKSEL_gm) | clockSelection;
 }
 
 /*! \brief Configures clock source for the Timer/Counter 1.
@@ -89,9 +90,10 @@ void TC0_ConfigClockSource( volatile TC0_t * tc, TC_CLKSEL_t clockSelection )
  *  \param tc              Timer/Counter module instance.
  *  \param clockSelection  Timer/Counter clock source setting.
  */
-void TC1_ConfigClockSource( volatile TC1_t * tc, TC_CLKSEL_t clockSelection )
+void
+TC1_ConfigClockSource(volatile TC1_t * tc, TC_CLKSEL_t clockSelection)
 {
-	tc->CTRLA = ( tc->CTRLA & ~TC1_CLKSEL_gm ) | clockSelection;
+    tc->CTRLA = (tc->CTRLA & ~TC1_CLKSEL_gm) | clockSelection;
 }
 
 
@@ -103,9 +105,10 @@ void TC1_ConfigClockSource( volatile TC1_t * tc, TC_CLKSEL_t clockSelection )
  *  \param tc    Timer/Counter module instance.
  *  \param wgm   Waveform generation mode.
  */
-void TC0_ConfigWGM( volatile TC0_t * tc, TC_WGMODE_t wgm )
+void
+TC0_ConfigWGM(volatile TC0_t * tc, TC_WGMODE_t wgm)
 {
-	tc->CTRLB = ( tc->CTRLB & ~TC0_WGMODE_gm ) | wgm;
+    tc->CTRLB = (tc->CTRLB & ~TC0_WGMODE_gm) | wgm;
 }
 
 
@@ -117,9 +120,10 @@ void TC0_ConfigWGM( volatile TC0_t * tc, TC_WGMODE_t wgm )
  *  \param tc    Timer/Counter module instance.
  *  \param wgm   Waveform generation mode.
  */
-void TC1_ConfigWGM( volatile TC1_t * tc, TC_WGMODE_t wgm )
+void
+TC1_ConfigWGM(volatile TC1_t * tc, TC_WGMODE_t wgm)
 {
-	tc->CTRLB = ( tc->CTRLB & ~TC1_WGMODE_gm ) | wgm;
+    tc->CTRLB = (tc->CTRLB & ~TC1_WGMODE_gm) | wgm;
 }
 
 
@@ -134,11 +138,11 @@ void TC1_ConfigWGM( volatile TC1_t * tc, TC_WGMODE_t wgm )
  *  \param tc               Timer/Counter module instance.
  *  \param eventSource      Event source selection.
  */
-void TC0_ConfigInputCapture( volatile TC0_t * tc, TC_EVSEL_t eventSource )
+void
+TC0_ConfigInputCapture(volatile TC0_t * tc, TC_EVSEL_t eventSource)
 {
-	tc->CTRLD = ( tc->CTRLD & ~( TC0_EVSEL_gm | TC0_EVACT_gm ) ) |
-	            eventSource |
-	            TC_EVACT_CAPT_gc;
+    tc->CTRLD = (tc->CTRLD & ~(TC0_EVSEL_gm | TC0_EVACT_gm)) |
+        eventSource | TC_EVACT_CAPT_gc;
 }
 
 
@@ -153,11 +157,11 @@ void TC0_ConfigInputCapture( volatile TC0_t * tc, TC_EVSEL_t eventSource )
  *  \param tc               Timer/Counter module instance.
  *  \param eventSource      Event source selection.
  */
-void TC1_ConfigInputCapture( volatile TC1_t * tc, TC_EVSEL_t eventSource )
+void
+TC1_ConfigInputCapture(volatile TC1_t * tc, TC_EVSEL_t eventSource)
 {
-	tc->CTRLD = ( tc->CTRLD & ~( TC1_EVSEL_gm | TC1_EVACT_gm ) ) |
-	            eventSource |
-	            TC_EVACT_CAPT_gc;
+    tc->CTRLD = (tc->CTRLD & ~(TC1_EVSEL_gm | TC1_EVACT_gm)) |
+        eventSource | TC_EVACT_CAPT_gc;
 }
 
 
@@ -179,13 +183,15 @@ void TC1_ConfigInputCapture( volatile TC1_t * tc, TC_EVSEL_t eventSource )
  *  \param tc               Timer/Counter module instance.
  *  \param enableMask       Mask of channels to enable.
  */
-void TC0_EnableCCChannels( volatile TC0_t * tc, uint8_t enableMask )
+void
+TC0_EnableCCChannels(volatile TC0_t * tc, uint8_t enableMask)
 {
-	/* Make sure only CCxEN bits are set in enableMask. */
-	enableMask &= ( TC0_CCAEN_bm | TC0_CCBEN_bm | TC0_CCCEN_bm | TC0_CCDEN_bm );
+    /* Make sure only CCxEN bits are set in enableMask. */
+    enableMask &=
+        (TC0_CCAEN_bm | TC0_CCBEN_bm | TC0_CCCEN_bm | TC0_CCDEN_bm);
 
-	/* Enable channels. */
-	tc->CTRLB |= enableMask;
+    /* Enable channels. */
+    tc->CTRLB |= enableMask;
 }
 
 /*! \brief Enables compare/capture channels for Timer/Counter 1.
@@ -204,13 +210,14 @@ void TC0_EnableCCChannels( volatile TC0_t * tc, uint8_t enableMask )
  *  \param tc               Timer/Counter module instance.
  *  \param enableMask       Mask of channels to enable.
  */
-void TC1_EnableCCChannels( volatile TC1_t * tc, uint8_t enableMask )
+void
+TC1_EnableCCChannels(volatile TC1_t * tc, uint8_t enableMask)
 {
-	/* Make sure only CCxEN bits are set in enableMask. */
-	enableMask &= ( TC1_CCAEN_bm | TC1_CCBEN_bm );
+    /* Make sure only CCxEN bits are set in enableMask. */
+    enableMask &= (TC1_CCAEN_bm | TC1_CCBEN_bm);
 
-	/* Enable channels. */
-	tc->CTRLB |= enableMask;
+    /* Enable channels. */
+    tc->CTRLB |= enableMask;
 }
 
 
@@ -229,13 +236,15 @@ void TC1_EnableCCChannels( volatile TC1_t * tc, uint8_t enableMask )
  *  \param tc               Timer/Counter module instance.
  *  \param disableMask      Mask of channels to disable.
  */
-void TC0_DisableCCChannels( volatile TC0_t * tc, uint8_t disableMask )
+void
+TC0_DisableCCChannels(volatile TC0_t * tc, uint8_t disableMask)
 {
-	/* Make sure only CCxEN bits are set in disableMask. */
-	disableMask &= ( TC0_CCAEN_bm | TC0_CCBEN_bm | TC0_CCCEN_bm | TC0_CCDEN_bm );
+    /* Make sure only CCxEN bits are set in disableMask. */
+    disableMask &=
+        (TC0_CCAEN_bm | TC0_CCBEN_bm | TC0_CCCEN_bm | TC0_CCDEN_bm);
 
-	/* Disable channels. */
-	tc->CTRLB &= ~disableMask;
+    /* Disable channels. */
+    tc->CTRLB &= ~disableMask;
 }
 
 
@@ -252,13 +261,14 @@ void TC0_DisableCCChannels( volatile TC0_t * tc, uint8_t disableMask )
  *  \param tc               Timer/Counter module instance.
  *  \param disableMask      Mask of channels to disable.
  */
-void TC1_DisableCCChannels( volatile TC1_t * tc, uint8_t disableMask )
+void
+TC1_DisableCCChannels(volatile TC1_t * tc, uint8_t disableMask)
 {
-	/* Make sure only CCxEN bits are set in disableMask. */
-	disableMask &= ( TC1_CCAEN_bm | TC1_CCBEN_bm );
+    /* Make sure only CCxEN bits are set in disableMask. */
+    disableMask &= (TC1_CCAEN_bm | TC1_CCBEN_bm);
 
-	/* Disable channels. */
-	tc->CTRLB &= ~disableMask;
+    /* Disable channels. */
+    tc->CTRLB &= ~disableMask;
 }
 
 /*! \brief Sets the overflow interrupt level.
@@ -268,9 +278,10 @@ void TC1_DisableCCChannels( volatile TC1_t * tc, uint8_t disableMask )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New overflow interrupt level.
  */
-void TC0_SetOverflowIntLevel( volatile TC0_t * tc, TC_OVFINTLVL_t intLevel )
+void
+TC0_SetOverflowIntLevel(volatile TC0_t * tc, TC_OVFINTLVL_t intLevel)
 {
-	tc->INTCTRLA = ( tc->INTCTRLA & ~TC0_OVFINTLVL_gm ) | intLevel;
+    tc->INTCTRLA = (tc->INTCTRLA & ~TC0_OVFINTLVL_gm) | intLevel;
 }
 
 
@@ -281,9 +292,10 @@ void TC0_SetOverflowIntLevel( volatile TC0_t * tc, TC_OVFINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New overflow interrupt level.
  */
-void TC1_SetOverflowIntLevel( volatile TC1_t * tc, TC_OVFINTLVL_t intLevel )
+void
+TC1_SetOverflowIntLevel(volatile TC1_t * tc, TC_OVFINTLVL_t intLevel)
 {
-	tc->INTCTRLA = ( tc->INTCTRLA & ~TC1_OVFINTLVL_gm ) | intLevel;
+    tc->INTCTRLA = (tc->INTCTRLA & ~TC1_OVFINTLVL_gm) | intLevel;
 }
 
 
@@ -294,9 +306,10 @@ void TC1_SetOverflowIntLevel( volatile TC1_t * tc, TC_OVFINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New error interrupt level.
  */
-void TC0_SetErrorIntLevel( volatile TC0_t * tc, TC_ERRINTLVL_t intLevel )
+void
+TC0_SetErrorIntLevel(volatile TC0_t * tc, TC_ERRINTLVL_t intLevel)
 {
-	tc->INTCTRLA = ( tc->INTCTRLA & ~TC0_ERRINTLVL_gm ) | intLevel;
+    tc->INTCTRLA = (tc->INTCTRLA & ~TC0_ERRINTLVL_gm) | intLevel;
 }
 
 
@@ -307,9 +320,10 @@ void TC0_SetErrorIntLevel( volatile TC0_t * tc, TC_ERRINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New error interrupt level.
  */
-void TC1_SetErrorIntLevel( volatile TC1_t * tc, TC_ERRINTLVL_t intLevel )
+void
+TC1_SetErrorIntLevel(volatile TC1_t * tc, TC_ERRINTLVL_t intLevel)
 {
-	tc->INTCTRLA = ( tc->INTCTRLA & ~TC1_ERRINTLVL_gm ) | intLevel;
+    tc->INTCTRLA = (tc->INTCTRLA & ~TC1_ERRINTLVL_gm) | intLevel;
 }
 
 
@@ -321,9 +335,10 @@ void TC1_SetErrorIntLevel( volatile TC1_t * tc, TC_ERRINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel A interrupt level.
  */
-void TC0_SetCCAIntLevel( volatile TC0_t * tc, TC_CCAINTLVL_t intLevel )
+void
+TC0_SetCCAIntLevel(volatile TC0_t * tc, TC_CCAINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC0_CCAINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC0_CCAINTLVL_gm) | intLevel;
 }
 
 
@@ -335,9 +350,10 @@ void TC0_SetCCAIntLevel( volatile TC0_t * tc, TC_CCAINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel A interrupt level.
  */
-void TC1_SetCCAIntLevel( volatile TC1_t * tc, TC_CCAINTLVL_t intLevel )
+void
+TC1_SetCCAIntLevel(volatile TC1_t * tc, TC_CCAINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC1_CCAINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC1_CCAINTLVL_gm) | intLevel;
 }
 
 
@@ -349,9 +365,10 @@ void TC1_SetCCAIntLevel( volatile TC1_t * tc, TC_CCAINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel B interrupt level.
  */
-void TC0_SetCCBIntLevel( volatile TC0_t * tc, TC_CCBINTLVL_t intLevel )
+void
+TC0_SetCCBIntLevel(volatile TC0_t * tc, TC_CCBINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC0_CCBINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC0_CCBINTLVL_gm) | intLevel;
 }
 
 
@@ -363,9 +380,10 @@ void TC0_SetCCBIntLevel( volatile TC0_t * tc, TC_CCBINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel B interrupt level.
  */
-void TC1_SetCCBIntLevel( volatile TC1_t * tc, TC_CCBINTLVL_t intLevel )
+void
+TC1_SetCCBIntLevel(volatile TC1_t * tc, TC_CCBINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC1_CCBINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC1_CCBINTLVL_gm) | intLevel;
 }
 
 
@@ -377,9 +395,10 @@ void TC1_SetCCBIntLevel( volatile TC1_t * tc, TC_CCBINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel A interrupt level.
  */
-void TC0_SetCCCIntLevel( volatile TC0_t * tc, TC_CCCINTLVL_t intLevel )
+void
+TC0_SetCCCIntLevel(volatile TC0_t * tc, TC_CCCINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC0_CCCINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC0_CCCINTLVL_gm) | intLevel;
 }
 
 
@@ -391,9 +410,10 @@ void TC0_SetCCCIntLevel( volatile TC0_t * tc, TC_CCCINTLVL_t intLevel )
  *  \param tc               Timer/Counter module instance.
  *  \param intLevel         New compare/capture channel A interrupt level.
  */
-void TC0_SetCCDIntLevel( volatile TC0_t * tc, TC_CCDINTLVL_t intLevel )
+void
+TC0_SetCCDIntLevel(volatile TC0_t * tc, TC_CCDINTLVL_t intLevel)
 {
-	tc->INTCTRLB = ( tc->INTCTRLB & ~TC0_CCDINTLVL_gm ) | intLevel;
+    tc->INTCTRLB = (tc->INTCTRLB & ~TC0_CCDINTLVL_gm) | intLevel;
 }
 
 
@@ -405,13 +425,14 @@ void TC0_SetCCDIntLevel( volatile TC0_t * tc, TC_CCDINTLVL_t intLevel )
  *
  *  \param tc  Timer/Counter 0 module instance.
  */
-void TC0_Reset( volatile TC0_t * tc )
+void
+TC0_Reset(volatile TC0_t * tc)
 {
-	/* TC must be turned off before a Reset command. */
-	tc->CTRLA = ( tc->CTRLA & ~TC0_CLKSEL_gm ) | TC_CLKSEL_OFF_gc;
+    /* TC must be turned off before a Reset command. */
+    tc->CTRLA = (tc->CTRLA & ~TC0_CLKSEL_gm) | TC_CLKSEL_OFF_gc;
 
-	/* Issue Reset command. */
-	tc->CTRLFSET = TC_CMD_RESET_gc;
+    /* Issue Reset command. */
+    tc->CTRLFSET = TC_CMD_RESET_gc;
 }
 
 
@@ -423,11 +444,12 @@ void TC0_Reset( volatile TC0_t * tc )
  *
  *  \param tc  Timer/Counter 1 module instance.
  */
-void TC1_Reset( volatile TC1_t * tc )
+void
+TC1_Reset(volatile TC1_t * tc)
 {
-	/* TC must be turned off before a Reset command. */
-	tc->CTRLA = ( tc->CTRLA & ~TC1_CLKSEL_gm ) | TC_CLKSEL_OFF_gc;
+    /* TC must be turned off before a Reset command. */
+    tc->CTRLA = (tc->CTRLA & ~TC1_CLKSEL_gm) | TC_CLKSEL_OFF_gc;
 
-	/* Issue Reset command. */
-	tc->CTRLFSET = TC_CMD_RESET_gc;
+    /* Issue Reset command. */
+    tc->CTRLFSET = TC_CMD_RESET_gc;
 }

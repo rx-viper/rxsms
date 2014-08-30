@@ -22,20 +22,20 @@
  * ----------------------------------------------------------------------------
  *****************************************************************************/
 
-#include <avr/io.h> // PINout and Registers
-#include <avr/interrupt.h> // interrupt driver
-#include "usart_driver.h" // Driver for usart
+#include <avr/io.h>             // PINout and Registers
+#include <avr/interrupt.h>      // interrupt driver
+#include "usart_driver.h"       // Driver for usart
 #include <util/delay.h>
 #include "adc_driver.h"
 
 // Led defines
 #define LED_PORT PORTE
 #define LED5_PORT PORTC
-#define LLO_bm PIN2_bm //1 and 3 changed in pcb layout	//Lift off indicator
-#define LSOE_bm PIN1_bm		//Start of Experiment indicator
-#define LSODS_bm PIN0_bm	//Stop of Experiment indicator
-#define LPS_bm PIN3_bm		//Pass-through / No noise indicator
-#define LPWR_bm PIN0_bm		//Experiment Power indicator
+#define LLO_bm PIN2_bm          //1 and 3 changed in pcb layout  //Lift off indicator
+#define LSOE_bm PIN1_bm         //Start of Experiment indicator
+#define LSODS_bm PIN0_bm        //Stop of Experiment indicator
+#define LPS_bm PIN3_bm          //Pass-through / No noise indicator
+#define LPWR_bm PIN0_bm         //Experiment Power indicator
 
 #define LED_RXTX_PORT PORTD
 #define LTX_bm PIN4_bm
@@ -44,11 +44,11 @@
 // Switch defines
 #define SW_PORT PORTB
 #define SWPWR_PORT PORTC
-#define SWLO_bm PIN0_bm		//Lift off switch
-#define SWSOE_bm PIN1_bm	//Start of Experiment switch
-#define SWSODS_bm PIN2_bm	//Stop of Experiment switch
-#define SWPS_bm PIN3_bm		//Pass-through / No noise activator
-#define SWPWR_bm PIN1_bm 	//Experiment Power switch
+#define SWLO_bm PIN0_bm         //Lift off switch
+#define SWSOE_bm PIN1_bm        //Start of Experiment switch
+#define SWSODS_bm PIN2_bm       //Stop of Experiment switch
+#define SWPS_bm PIN3_bm         //Pass-through / No noise activator
+#define SWPWR_bm PIN1_bm        //Experiment Power switch
 
 // Rocket flight signals
 #define RXSIG_PORT PORTA
@@ -75,4 +75,3 @@
 #ifndef F_CPU
 #define F_CPU 32000000
 #endif
-

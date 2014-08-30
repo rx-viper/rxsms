@@ -100,23 +100,23 @@
 				volatile uint8_t TX_Head;
 				/ * \brief Transmit buffer tail. * /
 				volatile uint8_t TX_Tail;
-			} USART_Buffer_t;*/
+			} USART_Buffer_t;
+*/
 
 
-	/*! \brief Struct used when interrupt driven driver is used.
-	*
-	*  Struct containing pointer to a usart, a buffer and a location to store Data
-	*  register interrupt level temporary.
-	*/
-	typedef struct Usart_and_buffer
-	{
-		/* \brief Pointer to USART module to use. */
-		USART_t * usart;
-		/* \brief Data register empty interrupt level. */
-		USART_DREINTLVL_t dreIntLevel;
-		/* \brief Data buffer.
-		USART_Buffer_t buffer;*/
-	} USART_data_t;
+/*! \brief Struct used when interrupt driven driver is used.
+ *
+ *  Struct containing pointer to a usart, a buffer and a location to store Data
+ *  register interrupt level temporary.
+ */
+typedef struct Usart_and_buffer {
+    /* \brief Pointer to USART module to use. */
+    USART_t *usart;
+    /* \brief Data register empty interrupt level. */
+    USART_DREINTLVL_t dreIntLevel;
+    /* \brief Data buffer.
+       USART_Buffer_t buffer; */
+} USART_data_t;
 
 
 /* Macros. */
@@ -291,12 +291,13 @@
 /* Functions for interrupt driven driver. */
 void USART_InterruptDriver_Initialize(USART_data_t * usart_data,
                                       USART_t * usart,
-                                      USART_DREINTLVL_t dreIntLevel );
+                                      USART_DREINTLVL_t dreIntLevel);
 
 void USART_InterruptDriver_DreInterruptLevel_Set(USART_data_t * usart_data,
-                                                 USART_DREINTLVL_t dreIntLevel);
-void usart_string(char *c, USART_t *usart,bool CF, bool comma);
-void usart_number(uint16_t variable, USART_t *usart,bool CF, bool comma);
-void usart_put(char c, USART_t *usart);
+                                                 USART_DREINTLVL_t
+                                                 dreIntLevel);
+void usart_string(char *c, USART_t * usart, bool CF, bool comma);
+void usart_number(uint16_t variable, USART_t * usart, bool CF, bool comma);
+void usart_put(char c, USART_t * usart);
 
 #endif

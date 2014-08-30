@@ -93,8 +93,7 @@ doxy: | $(DOCDIR)
 	$(DOXYGEN) Doxyfile
 
 indent:
-	$(INDENT) $(SRC) $(HDR)
-#	$(INDENT) -psl -nut $(SRC) $(HDR)
+	$(INDENT) -kr -psl -nut $(SRC) $(HDR)
 
 clean:
 	$(RM) -rf $(DOCDIR) $(TARGET).elf  $(TARGET).hex  \

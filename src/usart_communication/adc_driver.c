@@ -74,17 +74,26 @@
  *
  *  \param  adc          Pointer to ADC module register section.
  */
-void ADC_CalibrationValues_Load(ADC_t * adc)
+void
+ADC_CalibrationValues_Load(ADC_t * adc)
 {
-	if (&ADCA == adc) {
-		/* Get ADCACAL0 from production signature . */
-		adc->CALL = SP_ReadCalibrationByte( PROD_SIGNATURES_START + ADCACAL0_offset );
-		adc->CALH = SP_ReadCalibrationByte( PROD_SIGNATURES_START + ADCACAL1_offset );
-	} else {
-		/* Get ADCBCAL0 from production signature  */
-		adc->CALL = SP_ReadCalibrationByte( PROD_SIGNATURES_START + ADCBCAL0_offset );
-		adc->CALH = SP_ReadCalibrationByte( PROD_SIGNATURES_START + ADCBCAL1_offset );
-	}
+    if (&ADCA == adc) {
+        /* Get ADCACAL0 from production signature . */
+        adc->CALL =
+            SP_ReadCalibrationByte(PROD_SIGNATURES_START +
+                                   ADCACAL0_offset);
+        adc->CALH =
+            SP_ReadCalibrationByte(PROD_SIGNATURES_START +
+                                   ADCACAL1_offset);
+    } else {
+        /* Get ADCBCAL0 from production signature  */
+        adc->CALL =
+            SP_ReadCalibrationByte(PROD_SIGNATURES_START +
+                                   ADCBCAL0_offset);
+        adc->CALH =
+            SP_ReadCalibrationByte(PROD_SIGNATURES_START +
+                                   ADCBCAL1_offset);
+    }
 }
 
 
@@ -97,17 +106,18 @@ void ADC_CalibrationValues_Load(ADC_t * adc)
  *  \param  offset  Unsigned offset value to subtract.
  *  \return  The unsigned Conversion result with the offset substracted.
  */
-uint16_t ADC_ResultCh_GetWord_Unsigned(ADC_CH_t * adc_ch, uint8_t offset)
+uint16_t
+ADC_ResultCh_GetWord_Unsigned(ADC_CH_t * adc_ch, uint8_t offset)
 {
-	uint16_t answer;
+    uint16_t answer;
 
-	/* Clear interrupt flag.*/
-	adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
+    /* Clear interrupt flag. */
+    adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
 
-	/* Return result register contents*/
-	answer = adc_ch->RES - offset;
+    /* Return result register contents */
+    answer = adc_ch->RES - offset;
 
-	return answer;
+    return answer;
 }
 
 
@@ -120,17 +130,18 @@ uint16_t ADC_ResultCh_GetWord_Unsigned(ADC_CH_t * adc_ch, uint8_t offset)
  *  \param  offset  Offset value to subtract.
  *  \return  The signed Conversion result with the offset substracted.
  */
-int16_t ADC_ResultCh_GetWord_Signed(ADC_CH_t * adc_ch, int8_t signedOffset)
+int16_t
+ADC_ResultCh_GetWord_Signed(ADC_CH_t * adc_ch, int8_t signedOffset)
 {
-	int16_t answer;
+    int16_t answer;
 
-	/* Clear interrupt flag.*/
-	adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
+    /* Clear interrupt flag. */
+    adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
 
-	/* Return result register contents*/
-	answer = adc_ch->RES - signedOffset;
+    /* Return result register contents */
+    answer = adc_ch->RES - signedOffset;
 
-	return answer;
+    return answer;
 }
 
 /*! \brief This function clears the interrupt flag and returns the coversion result without compensating for offset.
@@ -141,13 +152,14 @@ int16_t ADC_ResultCh_GetWord_Signed(ADC_CH_t * adc_ch, int8_t signedOffset)
  *  \param  adc_ch  Pointer to ADC channel register section.
  *  \return  Signed conversion result.
  */
-uint16_t ADC_ResultCh_GetWord(ADC_CH_t * adc_ch)
+uint16_t
+ADC_ResultCh_GetWord(ADC_CH_t * adc_ch)
 {
-	/* Clear interrupt flag.*/
-	adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
+    /* Clear interrupt flag. */
+    adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
 
-	/* Return result register contents*/
-	return adc_ch->RES;;
+    /* Return result register contents */
+    return adc_ch->RES;;
 }
 
 
@@ -163,12 +175,13 @@ uint16_t ADC_ResultCh_GetWord(ADC_CH_t * adc_ch)
  *
  *  \return  Low byte of conversion result.
  */
-uint8_t ADC_ResultCh_GetLowByte(ADC_CH_t * adc_ch)
+uint8_t
+ADC_ResultCh_GetLowByte(ADC_CH_t * adc_ch)
 {
-	/* Clear interrupt flag.*/
-	adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
-	/* Return result register contents*/
-	return adc_ch->RESL;
+    /* Clear interrupt flag. */
+    adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
+    /* Return result register contents */
+    return adc_ch->RESL;
 }
 
 /*! \brief This function clears the interrupt flag and returns the high byte of the coversion result.
@@ -183,13 +196,14 @@ uint8_t ADC_ResultCh_GetLowByte(ADC_CH_t * adc_ch)
  *
  *  \return  High byte of conversion result.
  */
-uint8_t ADC_ResultCh_GetHighByte(ADC_CH_t * adc_ch)
+uint8_t
+ADC_ResultCh_GetHighByte(ADC_CH_t * adc_ch)
 {
-	/* Clear interrupt flag.*/
-	adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
+    /* Clear interrupt flag. */
+    adc_ch->INTFLAGS = ADC_CH_CHIF_bm;
 
-	/* Return low byte result register contents.*/
-	return adc_ch->RESH;
+    /* Return low byte result register contents. */
+    return adc_ch->RESH;
 }
 
 /*! \brief This function waits until the adc common mode is settled.
@@ -205,19 +219,20 @@ uint8_t ADC_ResultCh_GetHighByte(ADC_CH_t * adc_ch)
  *
  *  \param  adc Pointer to ADC module register section.
  */
-void ADC_Wait_8MHz(ADC_t * adc)
+void
+ADC_Wait_8MHz(ADC_t * adc)
 {
-	/* Store old prescaler value. */
-	uint8_t prescaler_val = adc->PRESCALER;
+    /* Store old prescaler value. */
+    uint8_t prescaler_val = adc->PRESCALER;
 
-	/* Set prescaler value to minimum value. */
-	adc->PRESCALER = ADC_PRESCALER_DIV4_gc;
+    /* Set prescaler value to minimum value. */
+    adc->PRESCALER = ADC_PRESCALER_DIV4_gc;
 
-	/* Wait 4*COMMON_MODE_CYCLES for common mode to settle. */
-	delay_us(4*COMMON_MODE_CYCLES);
+    /* Wait 4*COMMON_MODE_CYCLES for common mode to settle. */
+    delay_us(4 * COMMON_MODE_CYCLES);
 
-	/* Set prescaler to old value*/
-	adc->PRESCALER = prescaler_val;
+    /* Set prescaler to old value */
+    adc->PRESCALER = prescaler_val;
 }
 
 
@@ -237,19 +252,20 @@ void ADC_Wait_8MHz(ADC_t * adc)
  *
  *  \param  adc Pointer to ADC module register section.
  */
-void ADC_Wait_32MHz(ADC_t * adc)
+void
+ADC_Wait_32MHz(ADC_t * adc)
 {
-	/* Store old prescaler value. */
-	uint8_t prescaler_val = adc->PRESCALER;
+    /* Store old prescaler value. */
+    uint8_t prescaler_val = adc->PRESCALER;
 
-	/* Set prescaler value to minimum value. */
-	adc->PRESCALER = ADC_PRESCALER_DIV8_gc;
+    /* Set prescaler value to minimum value. */
+    adc->PRESCALER = ADC_PRESCALER_DIV8_gc;
 
-	/* wait 8*COMMON_MODE_CYCLES for common mode to settle*/
-	delay_us(8*COMMON_MODE_CYCLES);
+    /* wait 8*COMMON_MODE_CYCLES for common mode to settle */
+    delay_us(8 * COMMON_MODE_CYCLES);
 
-	/* Set prescaler to old value*/
-	adc->PRESCALER = prescaler_val;
+    /* Set prescaler to old value */
+    adc->PRESCALER = prescaler_val;
 }
 
 /*! \brief This function get the offset of the ADC when it is configured in unsigned mode
@@ -268,31 +284,32 @@ void ADC_Wait_32MHz(ADC_t * adc)
  *
  *  \return Offset on the selected ADC
  */
-uint8_t ADC_Offset_Get_Unsigned(ADC_t * adc, ADC_CH_t *ch, bool oversampling)
+uint8_t
+ADC_Offset_Get_Unsigned(ADC_t * adc, ADC_CH_t * ch, bool oversampling)
 {
-	if (oversampling) {
-		uint16_t offset=0;
-		for (int i=0; i<4; i++) {
-			/* Do one conversion to find offset. */
-			ADC_Ch_Conversion_Start(ch);
+    if (oversampling) {
+        uint16_t offset = 0;
+        for (int i = 0; i < 4; i++) {
+            /* Do one conversion to find offset. */
+            ADC_Ch_Conversion_Start(ch);
 
-			do{
-			} while (!ADC_Ch_Conversion_Complete(ch));
-			offset += ADC_ResultCh_GetWord_Unsigned(ch, 0x00);
-		}
-		return ((uint8_t)(offset>>2));
-	} else {
-		uint8_t offset=0;
+            do {
+            } while (!ADC_Ch_Conversion_Complete(ch));
+            offset += ADC_ResultCh_GetWord_Unsigned(ch, 0x00);
+        }
+        return ((uint8_t) (offset >> 2));
+    } else {
+        uint8_t offset = 0;
 
-		/* Do one conversion to find offset. */
-		ADC_Ch_Conversion_Start(ch);
+        /* Do one conversion to find offset. */
+        ADC_Ch_Conversion_Start(ch);
 
-		do{
-		} while (!ADC_Ch_Conversion_Complete(ch));
-		offset = (uint8_t)ADC_ResultCh_GetWord(ch);
+        do {
+        } while (!ADC_Ch_Conversion_Complete(ch));
+        offset = (uint8_t) ADC_ResultCh_GetWord(ch);
 
-		return offset;
-	}
+        return offset;
+    }
 }
 
 /*! \brief This function get the offset of the ADC when it is configured in signed mode
@@ -311,31 +328,32 @@ uint8_t ADC_Offset_Get_Unsigned(ADC_t * adc, ADC_CH_t *ch, bool oversampling)
  *
  *  \return Offset on the selected ADC
  */
-int8_t ADC_Offset_Get_Signed(ADC_t * adc, ADC_CH_t *ch, bool oversampling)
+int8_t
+ADC_Offset_Get_Signed(ADC_t * adc, ADC_CH_t * ch, bool oversampling)
 {
-	if (oversampling) {
-		int16_t offset=0;
-		for (int i=0; i<4; i++) {
-			/* Do one conversion to find offset. */
-			ADC_Ch_Conversion_Start(ch);
+    if (oversampling) {
+        int16_t offset = 0;
+        for (int i = 0; i < 4; i++) {
+            /* Do one conversion to find offset. */
+            ADC_Ch_Conversion_Start(ch);
 
-			do{
-			} while (!ADC_Ch_Conversion_Complete(ch));
-			offset += ADC_ResultCh_GetWord_Signed(ch, 0x00);
-		}
-		return ((int8_t)(offset/4));
-	} else {
-		int8_t offset=0;
+            do {
+            } while (!ADC_Ch_Conversion_Complete(ch));
+            offset += ADC_ResultCh_GetWord_Signed(ch, 0x00);
+        }
+        return ((int8_t) (offset / 4));
+    } else {
+        int8_t offset = 0;
 
-		/* Do one conversion to find offset. */
-		ADC_Ch_Conversion_Start(ch);
+        /* Do one conversion to find offset. */
+        ADC_Ch_Conversion_Start(ch);
 
-		do{
-		} while (!ADC_Ch_Conversion_Complete(ch));
-		offset = (uint8_t)ADC_ResultCh_GetWord_Signed(ch, 0x00);
+        do {
+        } while (!ADC_Ch_Conversion_Complete(ch));
+        offset = (uint8_t) ADC_ResultCh_GetWord_Signed(ch, 0x00);
 
-		return offset;
-	}
+        return offset;
+    }
 }
 
 
@@ -349,18 +367,19 @@ int8_t ADC_Offset_Get_Signed(ADC_t * adc, ADC_CH_t *ch, bool oversampling)
  *
  *  \return Calibration byte.
  */
-uint8_t SP_ReadCalibrationByte( uint8_t index )
+uint8_t
+SP_ReadCalibrationByte(uint8_t index)
 {
-	uint8_t result;
+    uint8_t result;
 
-	/* Load the NVM Command register to read the calibration row. */
-	NVM_CMD = NVM_CMD_READ_CALIB_ROW_gc;
-	result = pgm_read_byte(index);
+    /* Load the NVM Command register to read the calibration row. */
+    NVM_CMD = NVM_CMD_READ_CALIB_ROW_gc;
+    result = pgm_read_byte(index);
 
-	/* Clean up NVM Command register. */
-	NVM_CMD = NVM_CMD_NO_OPERATION_gc;
+    /* Clean up NVM Command register. */
+    NVM_CMD = NVM_CMD_NO_OPERATION_gc;
 
-	return result;
+    return result;
 }
 
 #endif

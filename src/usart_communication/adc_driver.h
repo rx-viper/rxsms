@@ -329,7 +329,7 @@
 
 
 /* Prototype for assembly macro. */
-uint8_t SP_ReadCalibrationByte( uint8_t index );
+uint8_t SP_ReadCalibrationByte(uint8_t index);
 
 /* Prototypes for functions. */
 void ADC_CalibrationValues_Load(ADC_t * adc);
@@ -337,12 +337,14 @@ void ADC_CalibrationValues_Load(ADC_t * adc);
 uint16_t ADC_ResultCh_GetWord_Unsigned(ADC_CH_t * adc_ch, uint8_t offset);
 int16_t ADC_ResultCh_GetWord_Signed(ADC_CH_t * adc_ch, int8_t offset);
 
-uint8_t ADC_Offset_Get_Unsigned(ADC_t * adc, ADC_CH_t *ch, bool oversampling);
-int8_t ADC_Offset_Get_Signed(ADC_t * adc, ADC_CH_t *ch, bool oversampling);
+uint8_t ADC_Offset_Get_Unsigned(ADC_t * adc, ADC_CH_t * ch,
+                                bool oversampling);
+int8_t ADC_Offset_Get_Signed(ADC_t * adc, ADC_CH_t * ch,
+                             bool oversampling);
 
 uint16_t ADC_ResultCh_GetWord(ADC_CH_t * adc_ch);
 uint8_t ADC_ResultCh_GetLowByte(ADC_CH_t * adc_ch);
-uint8_t  ADC_ResultCh_GetHighByte(ADC_CH_t * adc_ch);
+uint8_t ADC_ResultCh_GetHighByte(ADC_CH_t * adc_ch);
 
 void ADC_Wait_8MHz(ADC_t * adc);
 void ADC_Wait_32MHz(ADC_t * adc);
