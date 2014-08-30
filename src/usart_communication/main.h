@@ -71,6 +71,8 @@
 #define USARTGROUND USARTD1
 #define USARTROCKET USARTD0
 
- // Constants
- #define F_CPU 32000000
+// Constants
+#ifndef F_CPU
+#define F_CPU 32000000
+#endif
 
