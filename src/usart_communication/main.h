@@ -26,7 +26,6 @@
 #include <avr/interrupt.h>      // interrupt driver
 #include "usart_driver.h"       // Driver for usart
 #include <util/delay.h>
-#include "adc_driver.h"
 
 // Led defines
 #define LED_PORT PORTE

@@ -24,6 +24,8 @@
  *****************************************************************************/
 
 #include "main.h"
+#include "init.h"
+#include "bgtask_sample_adc_inputs.h"
 
 /*! USART data struct used in example. */
 USART_data_t UsartDataGnd;      // D1 USART - Data
@@ -33,20 +35,6 @@ volatile uint8_t stop_data;
 volatile uint32_t rando, compare;       // randomizer values
 volatile uint16_t poti1, poti2, poti3, counter; // POTENIOMETER values
 volatile uint8_t disable_noise_generation = 0;
-
-/*! \brief Clock init
- *
- *  Sets XMega Clock to 32MHz internal osc.
- *
- */
-void
-clock_init(void)                //
-{
-    OSC.CTRL |= OSC_RC32MEN_bm; // 32MHZ intern start oscillation
-    while (!(OSC.STATUS & OSC_RC32MRDY_bm));    // wait to stabilize
-    CCP = CCP_IOREG_gc;         // safety- 4 cycle intterupt  shutdown
-    CLK.CTRL = CLK_SCLKSEL_RC32M_gc;    // connect as osc. source
-}
 
 /*! \brief Interrupt init
  *
@@ -130,55 +118,6 @@ uart_init()
     USART_Tx_Enable(UsartDataExp.usart);
 }
 
-/*! \brief ADC Init
- *
- *  Enable ADC and config gain, input mode etc
- *
- *	\todo Look over it, i don't know what's going on here
- */
-void
-adc_init(void)                  //tg: somebody should check this
-{
-
-    /* Move stored calibration values to ADC B */
-    ADC_CalibrationValues_Load(&ADCA);
-
-    /* Set up ADC B to have signed conversion mode and 12 bit resolution. */
-    ADC_ConvMode_and_Resolution_Config(&ADCA, ADC_ConvMode_Unsigned,
-                                       ADC_RESOLUTION_12BIT_gc);
-
-    ADC_Reference_Config(&ADCA, ADC_REFSEL_AREFA_gc);
-
-
-    ADC_Prescaler_Config(&ADCA, ADC_PRESCALER_DIV256_gc);
-    ADC_TempReference_Enable(&ADCA);
-
-    ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH0,
-                                     ADC_CH_INPUTMODE_SINGLEENDED_gc,
-                                     ADC_CH_GAIN_1X_gc);
-    ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH1,
-                                     ADC_CH_INPUTMODE_SINGLEENDED_gc,
-                                     ADC_CH_GAIN_1X_gc);
-    ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH2,
-                                     ADC_CH_INPUTMODE_SINGLEENDED_gc,
-                                     ADC_CH_GAIN_1X_gc);
-    ADC_Ch_InputMode_and_Gain_Config(&ADCA.CH3,
-                                     ADC_CH_INPUTMODE_SINGLEENDED_gc,
-                                     ADC_CH_GAIN_1X_gc);
-
-    ADC_Ch_InputMux_Config(&ADCA.CH0, ADC_CH_MUXPOS_PIN1_gc, 0);        // Using 3 diffr. channes for 3 inputs
-    ADC_Ch_InputMux_Config(&ADCA.CH1, ADC_CH_MUXPOS_PIN2_gc, 0);
-    ADC_Ch_InputMux_Config(&ADCA.CH2, ADC_CH_MUXPOS_PIN3_gc, 0);
-    ADC_Ch_InputMux_Config(&ADCA.CH3, ADC_CH_MUXINT_TEMP_gc, 0);        //Internal uc temperature
-
-    ADC_Enable(&ADCA);
-
-    // Wait until the ADC is ready
-    ADC_Wait_32MHz(&ADCA);
-    /* Get offset value for ADC B.  */
-    //return ADC_Offset_Get_Unsigned(&ADCA, &(ADCA.CH0), true);
-}
-
 /*! \brief Timer init
  *
  *  Enable Timer/Counter 0.
@@ -228,13 +167,17 @@ stop_timer()
 int
 main(void)
 {
+    init_clock();
+    init_prr();
+    init_io();
+
+    bgtask_sample_adc_inputs.init();
+
     uint16_t seed;
     cli();
     FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
-    clock_init();
     uart_init();
     set_directions();
-    adc_init();
     interrupt_init();
     timer_init();
 
@@ -250,26 +193,12 @@ main(void)
     SWPWR_PORT.INTCTRL |= PORT_INT0LVL_LO_gc;
     sei();
 
-    // Initialize seed for Random - variable
-    ADC_Ch_Conversion_Start(&ADCA.CH3);
-    while (!ADC_Ch_Conversion_Complete(&ADCA.CH3)) {
-    }
-    seed = (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH3, 0));
-    rando = seed;
-
+    // TODO Initialize seed for Random - variable
     while (1) {
-        // Start 3 single conversions
-        ADC_Ch_Conversion_Start(&ADCA.CH0);
-        ADC_Ch_Conversion_Start(&ADCA.CH1);
-        ADC_Ch_Conversion_Start(&ADCA.CH2);
-        ADC_Ch_Conversion_Start(&ADCA.CH3);
-        while (!ADC_Ch_Conversion_Complete(&ADCA.CH0)); // It's enough time to wait for only one Channel
-
-        // Get the results, 12 Bit, right adjusted
-        poti1 =
-            (2.3 * (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH0, 0)) - 400);
-        poti2 = (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH1, 180) >> 4);
-        poti3 = (ADC_ResultCh_GetWord_Unsigned(&ADCA.CH2, 180) << 4);
+        ADCA.CTRLA |= ADC_CH0START_bm | ADC_CH1START_bm | ADC_CH2START_bm | ADC_CH3START_bm;
+        poti1 = 2.3 * adc_sense_buffer.poti_bit_error_rate - 400;
+        poti2 = (adc_sense_buffer.poti_blocking_rate - 180) >> 4;
+        poti3 = (adc_sense_buffer.poti_blocking_duration - 180) << 4;
 
         //generate compare Value for error randomizer : from 12 bit into 32 bit
         if (poti1 <= 80) {
