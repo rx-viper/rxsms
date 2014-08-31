@@ -1,0 +1,5 @@
+# shows how to use avarice with the JTAG ICE mk2
+sudo ./avrdude -C avrdude.conf -c jtag2pdi -p x32a4u -e -U flash:w:/path/to/rxsms.hex:i
+sudo /usr/local/bin/avarice -2 -f rxsms.elf  -j usb -B '1 MHz' -X localhost:6423
+avr-gdb -x gdb.conf
+# or: ddd --debugger 'avr-gdb -x gdb.conf'

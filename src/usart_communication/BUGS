@@ -1,0 +1,40 @@
+HARDWARE/PCB
+20140831-1 ADC Reference Voltage
+The ADC cannot be used with the current external reference voltage.
+
+According to Table 36-40 from the Xmega 32A4U device datasheet, the ADC
+reference voltage must fulfill
+    1V <= V_REF <= AVCC - 0.6V
+As AVCC = 3.3V, the maximum V_REF = 2.7V.
+
+Currently, the AREFA pin is connected to 3.3V, as well as the potentiometers
+(voltage dividers).
+
+Fix in SW:
+Use INTVCC2 as REFSEL and differential with gain of 0.5.
+This will set V_REF to 1.65V and scale the maximum poti value to 1.65V as well.
+
+Severity:
+Without fix, the ADC values are mostly useless.
+With the fix, accuracy might be lowered because INTVCC2 likely is not as
+accutate as the external AREFA, but overall it should be acceptable.
+
+20140831-2 Duplicate output lines for LEDs
+For example, the switch to toggle the LO signal has a nearby STATUS_LO LED.
+When the software detects that the switch is pressed, it will toggle the active
+low LO line for the UDN2596A voltage level shifter, as well as the LED.
+Therefore, the logical signal/state "LO" is given twice: to the LED (active high)
+and the level shifter (active low). It therefore consumes two IO pins.
+
+The affected LEDs are:
+- STATUS_LO
+- STATUS_SOE
+- STATUS_SODS
+- STATUS_SUPPLY_CTRL (note: SUPPLY_CTRL line to MOSFET is active high!)
+
+Fix in HW:
+A next release of the PCB should connect the affected LEDs _in active low_ mode
+to the output signal (level shifter). This simplifies the SW and frees one IO
+pin per LED signal.
+
+Severity: uncritical, fix in next PCB release
