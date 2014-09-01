@@ -99,6 +99,7 @@ clean:
 	$(RM) -rf $(DOCDIR) $(TARGET).elf  $(TARGET).hex  \
 		$(TARGET).lss $(TARGET).prev.lss \
 		$(TARGET)-dense.lss $(TARGET)-dense.prev.lss \
-		$(TARGET).eep $(TARGET).map $(OBJ)
+		$(TARGET).eep $(TARGET).map $(OBJ) \
+		$(wildcard *.i) $(wildcard *.s)
 
 .PHONY: all clean doxy indent

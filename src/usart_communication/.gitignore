@@ -1,4 +1,6 @@
 *.o
+*.i
+*.s
 *.swp
 *~
 rxsms-dense.lss
