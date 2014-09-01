@@ -25,6 +25,7 @@
 
 #include "main.h"
 #include "init.h"
+#include "sched.h"
 #include "bgtask_sample_adc_inputs.h"
 
 /*! USART data struct used in example. */
@@ -35,36 +36,6 @@ volatile uint8_t stop_data;
 volatile uint32_t rando, compare;       // randomizer values
 volatile uint16_t poti1, poti2, poti3, counter; // POTENIOMETER values
 volatile uint8_t disable_noise_generation = 0;
-
-/*! \brief Interrupt init
- *
- *  Enable all interrupts
- *
- *	\todo choose what to enable (high, low, mid)
- */
-void
-interrupt_init()
-{
-    PMIC.CTRL |= PMIC_HILVLEN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm;
-}
-
-/*! \brief Set PIN directions
- *
- *  All output pins to output
- *
- */
-void
-set_directions(void)
-{
-    LED_PORT.DIRSET = LLO_bm | LSOE_bm | LSODS_bm | LPS_bm;
-    LED5_PORT.DIRSET = LPWR_bm;
-
-    RXSIG_PORT.DIRSET = LO_bm | SOE_bm | SODS_bm;
-
-    SUPPLY_CTRL_PORT.DIRSET = SUPPLY_CTRL_bm;
-
-    LED_RXTX_PORT.DIRSET = LTX_bm | LRX_bm;
-}
 
 /*! \brief UART Init
  *
@@ -118,6 +89,7 @@ uart_init()
     USART_Tx_Enable(UsartDataExp.usart);
 }
 
+#if 0
 /*! \brief Timer init
  *
  *  Enable Timer/Counter 0.
@@ -157,6 +129,7 @@ stop_timer()
     TC0_ConfigClockSource(&TCC0, TC_CLKSEL_OFF_gc);
     TCC0.PER = 0;
 }
+#endif
 
 /*! \brief Main function
  *
@@ -173,28 +146,19 @@ main(void)
 
     bgtask_sample_adc_inputs.init();
 
-    uint16_t seed;
-    cli();
-    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
+//XXX    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
     uart_init();
-    set_directions();
-    interrupt_init();
+#if 0
     timer_init();
+#endif
 
-    // Initialise interrupts for switches
-    PORTCFG.MPCMASK |= SWLO_bm | SWSOE_bm | SWSODS_bm | SWPS_bm;
-    SW_PORT.PIN5CTRL |= PORT_ISC_FALLING_gc | PORT_OPC_PULLUP_gc;       // First 4 switches
-
-    SW_PORT.INT0MASK |= SWLO_bm | SWSOE_bm | SWSODS_bm | SWPS_bm;
-    SW_PORT.INTCTRL |= PORT_INT0LVL_LO_gc;
-
-    SWPWR_PORT.PIN1CTRL |= PORT_ISC_FALLING_gc | PORT_OPC_PULLUP_gc;
-    SWPWR_PORT.INT0MASK |= SWPWR_bm;
-    SWPWR_PORT.INTCTRL |= PORT_INT0LVL_LO_gc;
+    sched_init();
+    sched_start();
     sei();
 
     // TODO Initialize seed for Random - variable
     while (1) {
+#if 0
         ADCA.CTRLA |= ADC_CH0START_bm | ADC_CH1START_bm | ADC_CH2START_bm | ADC_CH3START_bm;
         poti1 = 2.3 * adc_sense_buffer.poti_bit_error_rate - 400;
         poti2 = (adc_sense_buffer.poti_blocking_rate - 180) >> 4;
@@ -213,8 +177,7 @@ main(void)
             start_timer(poti3);
             LED_RXTX_PORT.OUTSET = LRX_bm | LTX_bm;
         }
-
-
+#endif
     }
 }
 
@@ -268,53 +231,7 @@ ISR(USARTE0_RXC_vect)           // DATA DIRECTION FROM GROUND to experiment
     LED_RXTX_PORT.OUTTGL = LTX_bm;
 }
 
-/*! \brief Button press interrupt
- *
- *  Called for pressed buttons
- *
- *	\todo change to switch/case format
- *
- */
-ISR(PORTB_INT0_vect)
-{
-    const uint8_t pins = ~(SW_PORT.IN);
-
-    if ((pins & SWLO_bm))       // readout switches and set a job variable for each switch
-    {
-        LED_PORT.OUTTGL = LLO_bm;       //switch led indicator on/off
-        RXSIG_PORT.OUTTGL = LO_bm;      //switch rexus rocket signal on/off
-    }
-    if ((pins & SWSOE_bm)) {
-        LED_PORT.OUTTGL = LSOE_bm;      // -- "" --
-        RXSIG_PORT.OUTTGL = SOE_bm;
-    }
-    if ((pins & SWSODS_bm)) {
-        LED_PORT.OUTTGL = LSODS_bm;
-        RXSIG_PORT.OUTTGL = SODS_bm;
-    }
-    if ((pins & SWPS_bm)) {
-        LED_PORT.OUTTGL = LPS_bm;       //override indicator led
-        disable_noise_generation ^= 1;  //XORG/Toogle bit 0.
-    }
-}
-
-/*! \brief Button press interrupt
- *
- *  Called for pressed buttons
- *
- *	\todo change to switch/case format
- *
- */
-ISR(PORTC_INT0_vect)
-{
-    const uint8_t pins = ~(SWPWR_PORT.IN);      // same for power supply
-
-    if (pins & SWPWR_bm) {
-        LED5_PORT.OUTTGL = LPWR_bm;
-        SUPPLY_CTRL_PORT.OUTTGL = SUPPLY_CTRL_bm;
-    }
-}
-
+#if 0
 /*! \brief Timer overflow interrupt
  *
  *  Called on timer overflow. Deactivates stop_data so data will be transmitted again.
@@ -327,3 +244,4 @@ ISR(TCC0_OVF_vect)
     stop_timer();
     LED_RXTX_PORT.OUTCLR = LTX_bm | LRX_bm;     // i think we should switch them off earlier
 }
+#endif

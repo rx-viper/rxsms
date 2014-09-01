@@ -133,8 +133,9 @@ void init_prr(void)
 	PR.PRGEN = PR_USB_bm | PR_AES_bm | PR_EBI_bm | PR_RTC_bm | PR_EVSYS_bm;
         /* enable ADC */
 	PR.PRPA = PR_DAC_bm | PR_AC_bm;
+        /* enable TCC0 */
 	PR.PRPC = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
-            | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
+            | PR_HIRES_bm | PR_TC1_bm;
         /* enable USARTD0, USARTD1 */
 	PR.PRPD = PR_TWI_bm | PR_SPI_bm | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
 	PR.PRPE = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
