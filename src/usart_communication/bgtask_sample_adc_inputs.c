@@ -2,6 +2,9 @@
 #include "bgtask_sample_adc_inputs.h"
 #include "util.h"
 
+// TODO configure analog input pins with INTPUT_DISABLE
+//      in the respective PINnCTRL register of the IO port
+
 /*
  * Ressources used _once_ by this task:
  * (none)
