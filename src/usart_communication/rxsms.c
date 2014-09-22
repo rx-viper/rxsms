@@ -23,112 +23,18 @@
  * ----------------------------------------------------------------------------
  *****************************************************************************/
 
-#include "main.h"
+#include <avr/io.h>
+#include <avr/interrupt.h>
 #include "init.h"
 #include "sched.h"
 #include "bgtask_sample_adc_inputs.h"
 
-/*! USART data struct used in example. */
-USART_data_t UsartDataGnd;      // D1 USART - Data
-USART_data_t UsartDataExp;      // D0 Usart - Data
-
+#if 0
+// TODO delete
 volatile uint8_t stop_data;
 volatile uint32_t rando, compare;       // randomizer values
 volatile uint16_t poti1, poti2, poti3, counter; // POTENIOMETER values
 volatile uint8_t disable_noise_generation = 0;
-
-/*! \brief UART Init
- *
- *  Initializes+enables both USARTs
- *
- *	\todo maybe more beautiful if splitted into two functions with parameters
- */
-void
-uart_init()
-{
-    PORTD.DIRSET = PIN7_bm;     //TX - USARTD1 As GroundUsart (tg: checked)
-    PORTD.DIRCLR = PIN6_bm;     //RX
-
-    /* Use USARTD1 and initialize buffers. */
-    USART_InterruptDriver_Initialize(&UsartDataGnd, &USARTGROUND,
-                                     USART_DREINTLVL_HI_gc);
-
-    /* USARTD1, 8 Data bits, No Parity, 1 Stop bit. */
-    USART_Format_Set(UsartDataGnd.usart, USART_CHSIZE_8BIT_gc,
-                     USART_PMODE_DISABLED_gc, false);
-
-    /* Enable RXC interrupt. */
-    USART_RxdInterruptLevel_Set(UsartDataGnd.usart, USART_RXCINTLVL_HI_gc);
-
-    // Set Baudrate to 38,4 Kbps:
-    USART_Baudrate_Set(&USARTGROUND, 3269, -6);
-
-    /* Enable both RX and TX. */
-    USART_Rx_Enable(UsartDataGnd.usart);
-    USART_Tx_Enable(UsartDataGnd.usart);
-
-    PORTD.DIRSET = PIN3_bm;     //TX - USARTD0 As ExperimentUsart (tg: checked)
-    PORTD.DIRCLR = PIN2_bm;     //RX
-
-    /* Use USARTD0 and initialize buffers. */
-    USART_InterruptDriver_Initialize(&UsartDataExp, &USARTROCKET,
-                                     USART_DREINTLVL_HI_gc);
-
-    /* USARTD0, 8 Data bits, No Parity, 1 Stop bit. */
-    USART_Format_Set(UsartDataExp.usart, USART_CHSIZE_8BIT_gc,
-                     USART_PMODE_DISABLED_gc, false);
-
-    /* Enable RXC interrupt. */
-    USART_RxdInterruptLevel_Set(UsartDataExp.usart, USART_RXCINTLVL_HI_gc);
-
-    // Set Baudrate to 38.4 Kbps:
-    USART_Baudrate_Set(&USARTROCKET, 3269, -6); // eventually changeable Baud for Limit testing
-
-    /* Enable both RX and TX. */
-    USART_Rx_Enable(UsartDataExp.usart);
-    USART_Tx_Enable(UsartDataExp.usart);
-}
-
-#if 0
-/*! \brief Timer init
- *
- *  Enable Timer/Counter 0.
- *
- *	\see stop_timer()
- *	\see start_timer()
- */
-void
-timer_init()
-{
-    TC0_ConfigWGM(&TCC0, TC_WGMODE_NORMAL_gc);
-    TC0_SetOverflowIntLevel(&TCC0, PMIC_MEDLVLEN_bm);
-}
-
-/*! \brief Start timer
- *
- *  Start TC0
- *
- *	\param max Maximum timer value
- *
- */
-void
-start_timer(uint16_t max)
-{
-    TCC0.PER = max;
-    TC0_ConfigClockSource(&TCC0, TC_CLKSEL_DIV1024_gc);
-}
-
-/*! \brief Stop timer
- *
- *  Stop TC0 by setting max value to 0
- *
- */
-void
-stop_timer()
-{
-    TC0_ConfigClockSource(&TCC0, TC_CLKSEL_OFF_gc);
-    TCC0.PER = 0;
-}
 #endif
 
 /*! \brief Main function
@@ -147,10 +53,6 @@ main(void)
     bgtask_sample_adc_inputs.init();
 
 //XXX    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
-    uart_init();
-#if 0
-    timer_init();
-#endif
 
     sched_init();
     sched_start();
@@ -180,68 +82,3 @@ main(void)
 #endif
     }
 }
-
-/*! \brief Experiment USART Interrupt
- *
- *  Interrupt called when experiment sends data to ground
- *
- *	\todo write more beautiful code, e.g. use stdlib stuff or create a randr function instead of this calculation
- *	\todo hardware upgrade idea: use noise of a zener diode as random value
- *
- */
-ISR(USARTD0_RXC_vect)           // DATA DIRECTION FROM experiment to GROUND
-{
-    uint8_t data = USARTROCKET.DATA;
-    uint8_t err_var = 0;
-    if (disable_noise_generation == 0) {
-        if (stop_data == 0) {
-            for (uint8_t i = 0; i < 8; i++) {
-                rando = (rando * 217 + 667);
-                if (rando < compare) {
-                    err_var |= (1 << i);
-                }
-            }
-            if (err_var != 0) {
-                counter++;
-            }
-
-            data ^= err_var;
-            USARTGROUND.DATA = data;
-            LED_RXTX_PORT.OUTTGL = LRX_bm;
-        }
-
-    } else {
-        USARTGROUND.DATA = data;
-        LED_RXTX_PORT.OUTTGL = LRX_bm;
-    }
-
-}
-
-/*! \brief Ground USART Interrupt
- *
- *  Interrupt called when ground station sends data to experiment. No data loss simulated.
- *
- * \todo implement deactivateable data loss feature for experiments that use real uplink
- *
- */
-ISR(USARTE0_RXC_vect)           // DATA DIRECTION FROM GROUND to experiment
-{
-    uint8_t data = USARTGROUND.DATA;    // Transit without Interrupting data line but listening to magic strings
-    USARTROCKET.DATA = data;
-    LED_RXTX_PORT.OUTTGL = LTX_bm;
-}
-
-#if 0
-/*! \brief Timer overflow interrupt
- *
- *  Called on timer overflow. Deactivates stop_data so data will be transmitted again.
- *
- */
-ISR(TCC0_OVF_vect)
-{
-    counter = 0;
-    stop_data = false;
-    stop_timer();
-    LED_RXTX_PORT.OUTCLR = LTX_bm | LRX_bm;     // i think we should switch them off earlier
-}
-#endif
