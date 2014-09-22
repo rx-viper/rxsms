@@ -1,27 +1,21 @@
-/*! \file *********************************************************************
+/*
+ *   This file is part of RXSMS.
+ *   Copyright 2014  Kholodkov Jakov (original RXSMS author),
+ *                   Thomas Grübler, Nicolas Benes
  *
- * \brief  XMEGA USART interrupt driven driver example source.
+ *   RXSMS is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
  *
- *      This file contains an application that simulates an Radio connection between the rexus rocket and the Ground statioin.
- *		For the communication it uses 2 Uarts, potis and swiches as control.
+ *   RXSMS is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
  *
- * \par Simulator for Radio Connection
- *
- * \author
- *      Kholodkov Jakov, Thomas Gruebler \n
- *      Support email: jakov.kholodkov@tum.de, thomas.gruebler@tum.de
- *
- * $Date: 2013-06-25 13:20 +0200   \n
- * \license
- * ----------------------------------------------------------------------------
- * "THE BEERWARE LICENSE" (Revision 42):
- * Mister X wrote this file. As long as you retain this notice you
- * can do whatever you want with this stuff. If we meet some day, and you think
- * this stuff is worth it, you can give me something back in return. A beer for example.
- * Kholodkov Jakov
- * Copyleft !
- * ----------------------------------------------------------------------------
- *****************************************************************************/
+ *   You should have received a copy of the GNU General Public License
+ *   along with RXSMS.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
