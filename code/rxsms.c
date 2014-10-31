@@ -21,7 +21,6 @@
 #include <avr/interrupt.h>
 #include "init.h"
 #include "sched.h"
-#include "bgtask_sample_adc_inputs.h"
 
 #if 0
 // TODO delete
@@ -43,8 +42,6 @@ main(void)
     init_clock();
     init_prr();
     init_io();
-
-    bgtask_sample_adc_inputs.init();
 
 //XXX    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
 

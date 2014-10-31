@@ -16,14 +16,13 @@
  *   along with RXSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BGTASK_SAMPLE_ADC_INPUTS_H
-#define BGTASK_SAMPLE_ADC_INPUTS_H
+#ifndef TASK_SAMPLE_ADC_INPUTS_H
+#define TASK_SAMPLE_ADC_INPUTS_H
 
 #include <inttypes.h>
-#include "task.h" /* for struct bgtask */
+#include "task.h" /* for struct task */
 
-// TODO maybe set as const?
-const struct bgtask bgtask_sample_adc_inputs;
+const struct task task_sample_adc_inputs;
 
 struct
 {
@@ -31,6 +30,7 @@ struct
     uint16_t poti_blocking_rate;
     uint16_t poti_blocking_duration;
     uint16_t current_sense;
+    uint8_t is_updated;
 } adc_sense_buffer;
 
-#endif /* BGTASK_SAMPLE_ADC_INPUTS_H */
+#endif /* TASK_SAMPLE_ADC_INPUTS_H */
