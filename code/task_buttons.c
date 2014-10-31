@@ -93,7 +93,7 @@ init(void)
 }
 
 static void
-update_duration(uint8_t current, struct button * btn)
+debounce(uint8_t current, struct button * btn)
 {
     if (current) {
         if (btn->released) /* prevent underflow when already 0 */
@@ -121,11 +121,11 @@ run(void)
     const uint8_t port = BUTTON_PORT.IN;
     const uint8_t extended_port = BUTTON_EXTENDED_PORT.IN;
 
-    update_duration(port & _BV(BUTTON_LO_bp), &lo);
-    update_duration(port & _BV(BUTTON_SOE_bp), &soe);
-    update_duration(port & _BV(BUTTON_SODS_bp), &sods);
-    update_duration(port & _BV(BUTTON_ERRINH_bp), &errinh);
-    update_duration(extended_port & _BV(BUTTON_EXTENDED_PWR_bp), &pwr);
+    debounce(port & _BV(BUTTON_LO_bp), &lo);
+    debounce(port & _BV(BUTTON_SOE_bp), &soe);
+    debounce(port & _BV(BUTTON_SODS_bp), &sods);
+    debounce(port & _BV(BUTTON_ERRINH_bp), &errinh);
+    debounce(extended_port & _BV(BUTTON_EXTENDED_PWR_bp), &pwr);
 
     /* check if stable, and thus, valid */
     if (lo.triggered) {
