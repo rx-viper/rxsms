@@ -46,7 +46,7 @@ static const struct task *const scheduling_map[SLOT_COUNT] = {
 /// The current slot number the scheduler is in.
 static uint8_t next_slot;
 
-// Configure scheduling timer interrupt.
+/// Configure scheduling timer interrupt.
 void
 sched_init(void)
 {

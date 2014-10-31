@@ -117,7 +117,6 @@ update_led(struct uart_data *data, uint8_t ledmask)
     }
 }
 
-
 static void
 send_uart(USART_t *uart, struct uart_data *data)
 {
