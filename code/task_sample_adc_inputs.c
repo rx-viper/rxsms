@@ -44,6 +44,12 @@
 #define ADC_CH_MUXPOS_POTI_BLOCKING_DURATION_gc ADC_CH_MUXPOS_PIN3_gc
 #define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN4_gc
 
+#define ADC_PORT                        PORTA
+#define ADC_REF_bm                      PIN0_bm
+#define ADC_POTI_BIT_ERROR_RATE_bm      PIN1_bm
+#define ADC_POTI_BLOCKING_RATE_bm       PIN2_bm
+#define ADC_POTI_BLOCKING_DURATION_bm   PIN3_bm
+#define ADC_CURRENT_SENSE_bm            PIN4_bm
 
 static void init(void);
 static void run(void);
@@ -65,25 +71,23 @@ production_signature_row_read_calibration(uint16_t *adca_calibration, uint16_t *
 }
 
 /// Init the ADC to scan the potis and optional current sense input.
-///
-/// It uses the first ADC channel CH0 in FREERUNning mode and sets the
-/// SCAN register to consecutively sample the inputs for the three potis
-/// and the current sense input.
-/// The results are written to the given buffer through DMA CH0.
 static void
 init(void)
 {
     adc_sense_buffer.is_updated = 0;
 
     /* configure pins for input */
-    PORTA.DIRCLR = PIN0_bm | PIN1_bm | PIN2_bm | PIN3_bm | PIN4_bm;
-    PORTA.OUTCLR = PIN0_bm | PIN1_bm | PIN2_bm | PIN3_bm | PIN4_bm;
+    const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
+                 | ADC_POTI_BLOCKING_RATE_bm | ADC_POTI_BLOCKING_DURATION_bm
+                 | ADC_CURRENT_SENSE_bm;
+    ADC_PORT.DIRCLR = pins;
+    ADC_PORT.OUTCLR = pins;
 
     uint16_t adca_calibration, tempsense_calibration;
     production_signature_row_read_calibration(&adca_calibration,
            &tempsense_calibration);
 
-    /* init ADCA and ADC CH0 to be used in FREERUN and SCAN mode */
+    /* init ADCA CH0 and CH1 */
     ADCA.CTRLA = 0;
     ADCA.CTRLB = ADC_CURRLIMIT_LARGE_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
     ADCA.REFCTRL = ADC_REFSEL_AREFA_gc | ADC_TEMPREF_bm;
@@ -91,77 +95,66 @@ init(void)
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
     ADCA.INTFLAGS = ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
     ADCA.CAL = adca_calibration;
-
+#if 0
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
     ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
     ADCA.CH0.INTCTRL = 0;
-    ADCA.CH0.SCAN = 3;
+    // XXX ADCA.CH0.SCAN = 3;
+    ADCA.CH0.SCAN = 0;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
     ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
     ADCA.CH1.INTCTRL = 0;
-    ADCA.CH1.SCAN = 0;
 
     ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
+#endif
+    ADCA.CTRLA = ADC_ENABLE_bm;
 }
 
 
 static void
 run(void)
 {
+    return;
     static enum { INIT, BITERR, BLOCKRATE, BLOCKDUR, CURRSENSE } state = INIT;
-    switch (state)
-    {
-        case INIT:  /* throw away the first measurement, as it might be wrong */
-            ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
-            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
-            ADCA.CH0.SCAN = 3;
-            ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
-            state = BITERR;
-            break;
-        case BITERR:
-            if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) ||
-                !(ADCA.INTFLAGS & ADC_CH1IF_bm))
-                break;
+    const uint8_t s = state;
+    if (INIT == s) {
+        /* throw away the first measurement, as it might be wrong */
+        ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
+        ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+        ADCA.CH0.SCAN = 3;
+        ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
+        state = BITERR;
+    } else if (BITERR >= s && CURRSENSE <= s) {
+        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
+            return;
+
+        if (BITERR == s) {
             adc_sense_buffer.poti_bit_error_rate = ADCA.CH0RES;
             adc_sense_buffer.is_updated = 0;
             // TODO where to store the tempsense result?
-            ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
             state = BLOCKRATE;
-            break;
-        case BLOCKRATE:
-            if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) ||
-                !(ADCA.INTFLAGS & ADC_CH1IF_bm))
-                break;
+        } else if (BLOCKRATE == s) {
             adc_sense_buffer.poti_blocking_rate = ADCA.CH0RES;
             // TODO where to store the tempsense result?
-            ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
             state = BLOCKDUR;
-            break;
-        case BLOCKDUR:
-            if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) ||
-                !(ADCA.INTFLAGS & ADC_CH1IF_bm))
-                break;
+        } else if (BLOCKDUR == s) {
             adc_sense_buffer.poti_blocking_duration = ADCA.CH0RES;
             // TODO where to store the tempsense result?
-            ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
             state = CURRSENSE;
-            break;
-        case CURRSENSE:
-            if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) ||
-                !(ADCA.INTFLAGS & ADC_CH1IF_bm))
-                break;
+        } else if (CURRSENSE == s) {
             adc_sense_buffer.current_sense = ADCA.CH0RES;
             adc_sense_buffer.is_updated = 0xff;
             // TODO where to store the tempsense result?
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
             ADCA.CH0.SCAN = 3;
-            ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
             state = BITERR;
-            break;
-        default:
-            /* this should not happen */
-            init();
-            state = INIT;
+        }
+        ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
+        ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
+    } else {
+        /* this should not happen */
+        init();
+        state = INIT;
     }
 }
