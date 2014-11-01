@@ -95,27 +95,21 @@ init(void)
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
     ADCA.INTFLAGS = ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
     ADCA.CAL = adca_calibration;
-#if 0
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
     ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
     ADCA.CH0.INTCTRL = 0;
-    // XXX ADCA.CH0.SCAN = 3;
-    ADCA.CH0.SCAN = 0;
+    ADCA.CH0.SCAN = 3;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
     ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
     ADCA.CH1.INTCTRL = 0;
-
     ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
-#endif
-    ADCA.CTRLA = ADC_ENABLE_bm;
 }
 
 
 static void
 run(void)
 {
-    return;
     static enum { INIT, BITERR, BLOCKRATE, BLOCKDUR, CURRSENSE } state = INIT;
     const uint8_t s = state;
     if (INIT == s) {
@@ -125,7 +119,7 @@ run(void)
         ADCA.CH0.SCAN = 3;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
         state = BITERR;
-    } else if (BITERR >= s && CURRSENSE <= s) {
+    } else if (BITERR <= s && CURRSENSE >= s) {
         if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
