@@ -88,7 +88,9 @@ recv_uart(USART_t *uart, struct uart_data *data)
     uint8_t err_flags = USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm;
     if (uart->STATUS & err_flags) {
         /* clear error flags if set */
-        uart->STATUS |= err_flags;
+        uint8_t ignored __attribute__((unused));
+        ignored = uart->DATA;
+        ignored = uart->DATA;
         return;
     }
 
@@ -131,6 +133,7 @@ send_uart(USART_t *uart, struct uart_data *data)
     uart->DATA = data->data;
     data->updated = 0;
 }
+
 static void
 recv(void)
 {
