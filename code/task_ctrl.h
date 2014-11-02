@@ -23,7 +23,14 @@
 #include "task.h"
 
 const struct task task_ctrl;
-/// if 1, Inhibit bit error generation, else create bit errors as usual.
-uint8_t task_ctrl_is_error_inhibit;
+
+struct
+{
+    uint8_t lo_active : 1;
+    uint8_t soe_active : 1;
+    uint8_t sods_active : 1;
+    uint8_t pwr_on : 1;
+    uint8_t error_inhibit : 1;
+} task_ctrl_signals;
 
 #endif /* TASK_CTRL_H */
