@@ -123,21 +123,26 @@ run(void)
         if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
+        /* allow only non-negative values */
+        int16_t adc_value = ADCA.CH0RES;
+        if (adc_value < 0)
+            adc_value = 0;
+
         if (BITERR == s) {
-            adc_sense_buffer.poti_bit_error_rate = ADCA.CH0RES;
+            adc_sense_buffer.poti_bit_error_rate = adc_value;
             adc_sense_buffer.is_updated = 0;
             // TODO where to store the tempsense result?
             state = BLOCKRATE;
         } else if (BLOCKRATE == s) {
-            adc_sense_buffer.poti_blocking_rate = ADCA.CH0RES;
+            adc_sense_buffer.poti_blocking_rate = adc_value;
             // TODO where to store the tempsense result?
             state = BLOCKDUR;
         } else if (BLOCKDUR == s) {
-            adc_sense_buffer.poti_blocking_duration = ADCA.CH0RES;
+            adc_sense_buffer.poti_blocking_duration = adc_value;
             // TODO where to store the tempsense result?
             state = CURRSENSE;
         } else if (CURRSENSE == s) {
-            adc_sense_buffer.current_sense = ADCA.CH0RES;
+            adc_sense_buffer.current_sense = adc_value;
             adc_sense_buffer.is_updated = 0xff;
             // TODO where to store the tempsense result?
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
