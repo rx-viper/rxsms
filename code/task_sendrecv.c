@@ -55,6 +55,11 @@ static struct uart_data
 static void
 init(void)
 {
+    static uint8_t is_initialized = 0;
+    if (is_initialized)
+        return;     /* leave if init() is called multiple times */
+    is_initialized = 1;
+
     STATUS_LED_PORT.OUTCLR = STATUS_LED_UPLINK_bm | STATUS_LED_DOWNLINK_bm;
     STATUS_LED_PORT.DIRSET = STATUS_LED_UPLINK_bm | STATUS_LED_DOWNLINK_bm;
 
