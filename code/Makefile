@@ -49,7 +49,7 @@ CFLAGS += -Wextra
 CFLAGS += -Wmissing-prototypes
 CFLAGS += -Wpointer-arith
 CFLAGS += -Wstrict-prototypes
-CFLAGS += -pedantic
+#CFLAGS += -pedantic
 CFLAGS += -mrelax
 CFLAGS += -std=gnu99
 CFLAGS += -g3
