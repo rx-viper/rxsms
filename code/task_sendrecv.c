@@ -18,6 +18,7 @@
 
 #include <avr/io.h>
 #include "task_sendrecv.h"
+#include "task_ctrl.h"
 
 #define STATUS_LED_PORT         PORTD
 #define STATUS_LED_UPLINK_bm    PIN4_bm
@@ -138,8 +139,17 @@ static void
 recv(void)
 {
     recv_uart(&UART_EXPERIMENT, &from_exp);
-    recv_uart(&UART_GROUNDSTATION, &from_gnd);
     update_led(&from_exp, STATUS_LED_DOWNLINK_bm);
+
+    struct uart_data from_gnd_copy = from_gnd;
+    recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
+    if (task_ctrl_signals.lo_active) {
+        /* after LO we just ignore all incoming traffic from groundstation */
+        from_gnd.updated = 0;
+        from_gnd.inactivity = 0;
+    } else {
+        from_gnd = from_gnd_copy;
+    }
     update_led(&from_gnd, STATUS_LED_UPLINK_bm);
 }
 
@@ -147,8 +157,5 @@ static void
 send(void)
 {
     send_uart(&UART_GROUNDSTATION, &from_exp);
-    // TODO disable forwarding uplink when LO given
-    // if (enabled) {
     send_uart(&UART_EXPERIMENT, &from_gnd);
-    // }
 }
