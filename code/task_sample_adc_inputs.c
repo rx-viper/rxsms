@@ -133,7 +133,7 @@ generate_bit_flip (const uint32_t count)
 }
 
 static void
-update_error_generators(void)
+update_biterror_generators(void)
 {
     int16_t bit_error_rate = adc_sense_buffer.poti_bit_error_rate;
     if (bit_error_rate < 0)
@@ -143,6 +143,7 @@ update_error_generators(void)
        with respective probabilities 1/N:
          bin | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
        N=2^x |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
+       except bin 0 with probability 0 (error gen disabled)
      */
     uint8_t bin = bit_error_rate / 16;
     uint32_t count;
@@ -150,6 +151,9 @@ update_error_generators(void)
         count = 0;
     else
         count = ((uint32_t) 1) << (15 - bin + 7);
+
+    if (task_sample_adc_inputs_biterror_generator.total_bit_count != count)
+        task_sample_adc_inputs_biterror_generator.force_update = 1;
     task_sample_adc_inputs_biterror_generator.total_bit_count = count;
     task_sample_adc_inputs_biterror_generator.from_exp_flip =
         generate_bit_flip(count);
@@ -207,7 +211,7 @@ run(void)
             ADCA.CH0.SCAN = 3;
             state = BITERR;
 
-            update_error_generators();
+            update_biterror_generators();
         }
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
