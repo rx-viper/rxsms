@@ -24,13 +24,21 @@
 
 const struct task task_sample_adc_inputs;
 
+// TODO maybe remove entirely or move to task_$FOO.c file if not needed
 struct
 {
-    uint16_t poti_bit_error_rate;
-    uint16_t poti_blocking_rate;
-    uint16_t poti_blocking_duration;
-    uint16_t current_sense;
-    uint8_t is_updated;
+    int16_t poti_bit_error_rate;
+    int16_t poti_blocking_rate;
+    int16_t poti_blocking_duration;
+    int16_t current_sense;
 } adc_sense_buffer;
+
+struct
+{
+    uint32_t total_bit_count;
+    int32_t from_exp_flip;
+    int32_t from_gnd_flip;
+    uint8_t force_update;
+} task_sample_adc_inputs_biterror_generator;
 
 #endif /* TASK_SAMPLE_ADC_INPUTS_H */

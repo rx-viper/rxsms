@@ -18,6 +18,7 @@
 
 #include <avr/io.h>
 #include "task_sendrecv.h"
+#include "task_sample_adc_inputs.h"
 #include "task_ctrl.h"
 
 #define STATUS_LED_PORT         PORTD
@@ -50,6 +51,8 @@ static struct uart_data
     uint8_t updated : 1;
     uint16_t inactivity;
     uint16_t led_toggle_interval;
+    uint32_t biterr_total_count;
+    uint32_t biterr_flip_index;
 } from_gnd, from_exp;
 
 static void
@@ -82,7 +85,8 @@ init(void)
     UART_EXPERIMENT.BAUDCTRLB = (UART_BSCALE << 4) | (UART_BSEL >> 8);
 
     const struct uart_data initializer = { .data = 0, .updated = 0,
-        .inactivity = LED_DURATION, .led_toggle_interval = LED_DURATION / 2 };
+        .inactivity = LED_DURATION, .led_toggle_interval = LED_DURATION / 2,
+        .biterr_total_count = 0, .biterr_flip_index = 0 };
     from_gnd = initializer;
     from_exp = initializer;
 }
@@ -134,9 +138,28 @@ send_uart(USART_t *uart, struct uart_data *data)
     if (!(uart->STATUS & USART_DREIF_bm))
         return; /* cannot send, USART busy, drop byte */
 
-    // TODO apply error pattern
-    // TODO use ERRINH state
-    uart->DATA = data->data;
+    /* apply error pattern */
+    uint8_t to_send = data->data;
+    if (task_ctrl_signals.error_inhibit) {
+        data->biterr_total_count = 0;
+    } else {
+        uint32_t count = data->biterr_total_count;
+
+        if (count) {
+            count -= 8;
+            data->biterr_total_count = count;
+
+            int32_t flip = data->biterr_flip_index;
+            if (flip >= 8) {            /* bit to flip outside current byte */
+                flip -= 8;
+            } else if (flip >= 0) {     /* ok, flip bit */
+                to_send ^= (uint8_t) flip;
+                flip = -1;              /* mark as bit already flipped */
+            }
+            data->biterr_flip_index = flip;
+        }
+    }
+    uart->DATA = to_send;
     data->updated = 0;
 }
 
@@ -163,4 +186,20 @@ send(void)
 {
     send_uart(&UART_GROUNDSTATION, &from_exp);
     send_uart(&UART_EXPERIMENT, &from_gnd);
+
+    /* load new bit error patterns/settings */
+    uint8_t upd = task_sample_adc_inputs_biterror_generator.force_update;
+    task_sample_adc_inputs_biterror_generator.force_update = 0;
+    if (0 == from_exp.biterr_total_count || upd) {
+        from_exp.biterr_total_count =
+            task_sample_adc_inputs_biterror_generator.total_bit_count;
+        from_exp.biterr_flip_index =
+            task_sample_adc_inputs_biterror_generator.from_exp_flip;
+    }
+    if (0 == from_gnd.biterr_total_count || upd) {
+        from_gnd.biterr_total_count =
+            task_sample_adc_inputs_biterror_generator.total_bit_count;
+        from_gnd.biterr_flip_index =
+            task_sample_adc_inputs_biterror_generator.from_gnd_flip;
+    }
 }

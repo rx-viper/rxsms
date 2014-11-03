@@ -17,6 +17,7 @@
  */
 
 #include <avr/io.h>
+#include <stdlib.h>
 #include "task_sample_adc_inputs.h"
 #include "util.h"
 
@@ -74,7 +75,14 @@ production_signature_row_read_calibration(uint16_t *adca_calibration, uint16_t *
 static void
 init(void)
 {
-    adc_sense_buffer.is_updated = 0;
+    adc_sense_buffer.poti_bit_error_rate = 0;
+    adc_sense_buffer.poti_blocking_rate = 0;
+    adc_sense_buffer.poti_blocking_duration = 0;
+    adc_sense_buffer.current_sense = 0;
+    task_sample_adc_inputs_biterror_generator.total_bit_count = 0;
+    task_sample_adc_inputs_biterror_generator.from_exp_flip = 0;
+    task_sample_adc_inputs_biterror_generator.from_gnd_flip = 0;
+    task_sample_adc_inputs_biterror_generator.force_update = 0;
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
@@ -106,6 +114,48 @@ init(void)
     ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
+static uint32_t
+generate_bit_flip (const uint32_t count)
+{
+    union
+    {
+        uint32_t flip;
+        struct
+        {
+            uint8_t ui8[4];
+        } e;
+    } random_number;
+
+    for (uint8_t i = 0; i < sizeof(random_number); ++i)
+        random_number.e.ui8[i] = (uint8_t) rand();
+    /* mask the random number with range 0..2^32-1 to range 0..count-1 */
+    return random_number.flip & (count - 1);
+}
+
+static void
+update_error_generators(void)
+{
+    int16_t bit_error_rate = adc_sense_buffer.poti_bit_error_rate;
+    if (bit_error_rate < 0)
+        bit_error_rate = 0;
+
+    /* partition the ADC range 2047..0 into 16 bins
+       with respective probabilities 1/N:
+         bin | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       N=2^x |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
+     */
+    uint8_t bin = bit_error_rate / 16;
+    uint32_t count;
+    if (0 == bin)
+        count = 0;
+    else
+        count = ((uint32_t) 1) << (15 - bin + 7);
+    task_sample_adc_inputs_biterror_generator.total_bit_count = count;
+    task_sample_adc_inputs_biterror_generator.from_exp_flip =
+        generate_bit_flip(count);
+    task_sample_adc_inputs_biterror_generator.from_gnd_flip =
+        generate_bit_flip(count);
+}
 
 static void
 run(void)
@@ -123,31 +173,41 @@ run(void)
         if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
-        /* allow only non-negative values */
         int16_t adc_value = ADCA.CH0RES;
-        if (adc_value < 0)
-            adc_value = 0;
 
+        /* update adc_sense_buffer only iff the new value has
+           a significant difference
+           this hysteresis prevents updates of the generator probabilities at
+           the boundary of a setting
+         */
+        const int8_t MIN_DIFF = 50;
         if (BITERR == s) {
-            adc_sense_buffer.poti_bit_error_rate = adc_value;
-            adc_sense_buffer.is_updated = 0;
+            int16_t diff = adc_sense_buffer.poti_bit_error_rate - adc_value;
+            if (diff < -MIN_DIFF || diff > MIN_DIFF)
+                adc_sense_buffer.poti_bit_error_rate = adc_value;
             // TODO where to store the tempsense result?
             state = BLOCKRATE;
         } else if (BLOCKRATE == s) {
-            adc_sense_buffer.poti_blocking_rate = adc_value;
+            int16_t diff = adc_sense_buffer.poti_blocking_rate - adc_value;
+            if (diff < -MIN_DIFF || diff > MIN_DIFF)
+                adc_sense_buffer.poti_blocking_rate = adc_value;
             // TODO where to store the tempsense result?
             state = BLOCKDUR;
         } else if (BLOCKDUR == s) {
-            adc_sense_buffer.poti_blocking_duration = adc_value;
+            int16_t diff = adc_sense_buffer.poti_blocking_duration - adc_value;
+            if (diff < -MIN_DIFF || diff > MIN_DIFF)
+                adc_sense_buffer.poti_blocking_duration = adc_value;
             // TODO where to store the tempsense result?
             state = CURRSENSE;
         } else if (CURRSENSE == s) {
             adc_sense_buffer.current_sense = adc_value;
-            adc_sense_buffer.is_updated = 0xff;
             // TODO where to store the tempsense result?
-            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
+                             | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
             ADCA.CH0.SCAN = 3;
             state = BITERR;
+
+            update_error_generators();
         }
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
