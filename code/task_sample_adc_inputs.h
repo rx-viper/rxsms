@@ -41,4 +41,11 @@ struct
     uint8_t force_update;
 } task_sample_adc_inputs_biterror_generator;
 
+struct
+{
+    uint16_t duration;  ///< number of scheduling cycles to block transmission
+    uint16_t interval; ///< interval in scheduling cycles to throw coin
+    uint8_t force_update;
+} task_sample_adc_inputs_blocking_generator;
+
 #endif /* TASK_SAMPLE_ADC_INPUTS_H */

@@ -17,6 +17,7 @@
  */
 
 #include <avr/io.h>
+#include <stdlib.h>
 #include "task_sendrecv.h"
 #include "task_sample_adc_inputs.h"
 #include "task_ctrl.h"
@@ -130,6 +131,51 @@ update_led(struct uart_data *data, uint8_t ledmask)
 }
 
 static void
+ignore_recv(struct uart_data *data)
+{
+    data->updated = 0;
+    data->inactivity = 0;
+}
+
+static void
+recv(void)
+{
+    static uint16_t duration = 0;
+    static uint16_t interval = 0;
+
+    recv_uart(&UART_EXPERIMENT, &from_exp);
+
+    struct uart_data from_gnd_copy = from_gnd;
+    recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
+    if (task_ctrl_signals.lo_active) {
+        /* after LO we just ignore all incoming traffic from groundstation */
+        ignore_recv(&from_gnd);
+    } else {
+        from_gnd = from_gnd_copy;
+    }
+
+    --interval;
+    if (!interval) {
+        interval = 1;
+        --duration;
+        if (rand() & 1) {
+            ignore_recv(&from_gnd);
+            ignore_recv(&from_exp);
+        }
+    }
+
+    update_led(&from_exp, STATUS_LED_DOWNLINK_bm);
+    update_led(&from_gnd, STATUS_LED_UPLINK_bm);
+
+    const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
+    task_sample_adc_inputs_blocking_generator.force_update = 0;
+    if (!duration || upd) {
+        duration = task_sample_adc_inputs_blocking_generator.duration;
+        interval = task_sample_adc_inputs_blocking_generator.interval;
+    }
+}
+
+static void
 send_uart(USART_t *uart, struct uart_data *data)
 {
     if (!data->updated)
@@ -161,24 +207,6 @@ send_uart(USART_t *uart, struct uart_data *data)
     }
     uart->DATA = to_send;
     data->updated = 0;
-}
-
-static void
-recv(void)
-{
-    recv_uart(&UART_EXPERIMENT, &from_exp);
-    update_led(&from_exp, STATUS_LED_DOWNLINK_bm);
-
-    struct uart_data from_gnd_copy = from_gnd;
-    recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
-    if (task_ctrl_signals.lo_active) {
-        /* after LO we just ignore all incoming traffic from groundstation */
-        from_gnd.updated = 0;
-        from_gnd.inactivity = 0;
-    } else {
-        from_gnd = from_gnd_copy;
-    }
-    update_led(&from_gnd, STATUS_LED_UPLINK_bm);
 }
 
 static void

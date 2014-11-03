@@ -83,6 +83,9 @@ init(void)
     task_sample_adc_inputs_biterror_generator.from_exp_flip = 0;
     task_sample_adc_inputs_biterror_generator.from_gnd_flip = 0;
     task_sample_adc_inputs_biterror_generator.force_update = 0;
+    task_sample_adc_inputs_blocking_generator.duration = 0;
+    task_sample_adc_inputs_blocking_generator.interval = 0;
+    task_sample_adc_inputs_blocking_generator.force_update = 0;
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
@@ -162,6 +165,34 @@ update_biterror_generators(void)
 }
 
 static void
+update_blocking_generators(void)
+{
+    int16_t duration_poti = adc_sense_buffer.poti_blocking_duration;
+    int16_t frequency_poti = adc_sense_buffer.poti_blocking_rate;
+
+    if (duration_poti < 0)
+        duration_poti = 0;
+    if (frequency_poti < 0)
+        frequency_poti = 0;
+
+    /* 32 bins with 2000 sched cycles (=0.5s) each: 0s..15.5s */
+    uint16_t duration = 2000 * (duration_poti / 64);
+    /* 32 bins with 2000 sched cycles (=0.5s) each: 0s..15.5s */
+    uint8_t interval_bin = frequency_poti / 64;
+    uint16_t interval;
+    if (interval_bin)
+        interval = 2000 * interval_bin;
+    else
+        interval = 0;
+
+    if (task_sample_adc_inputs_blocking_generator.duration != duration ||
+        task_sample_adc_inputs_blocking_generator.interval != interval)
+        task_sample_adc_inputs_blocking_generator.force_update = 1;
+    task_sample_adc_inputs_blocking_generator.duration = duration;
+    task_sample_adc_inputs_blocking_generator.interval = interval;
+}
+
+static void
 run(void)
 {
     static enum { INIT, BITERR, BLOCKRATE, BLOCKDUR, CURRSENSE } state = INIT;
@@ -212,6 +243,7 @@ run(void)
             state = BITERR;
 
             update_biterror_generators();
+            update_blocking_generators();
         }
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
