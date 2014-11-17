@@ -200,7 +200,8 @@ run(void)
     if (INIT == s) {
         /* throw away the first measurement, as it might be wrong */
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
-        ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+        ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
+                         | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
         ADCA.CH0.SCAN = 3;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
         state = BITERR;
