@@ -19,6 +19,7 @@
 #include <avr/io.h>
 #include "task_ctrl.h"
 #include "task_buttons.h"
+#include "task_sample_adc_inputs.h"
 
 #define STATUS_LED_PORT         PORTE
 #define STATUS_LED_SODS_bm      PIN0_bm
@@ -65,7 +66,9 @@ apply_state(void)
         STATUS_LED_PORT.OUTCLR = STATUS_LED_SODS_bm;
         RXSM_CTRL_PORT.OUTSET = RXSM_CTRL_SODS_bm;
     }
-    if (task_ctrl_signals.error_inhibit)
+    if (task_ctrl_signals.error_inhibit ||
+        (!task_sample_adc_inputs_biterror_generator.total_bit_count &&
+        !task_sample_adc_inputs_blocking_generator.interval))
         STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
     else
         STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
