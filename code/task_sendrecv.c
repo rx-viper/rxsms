@@ -154,6 +154,8 @@ recv(void)
         from_gnd = from_gnd_copy;
     }
 
+    if (task_ctrl_signals.error_inhibit)
+        interval = 0;
     --interval;
     if (!interval) {
         interval = 1;
