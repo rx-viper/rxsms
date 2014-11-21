@@ -37,7 +37,7 @@
 #define UART_BSEL       (3269)
 #define UART_BSCALE     (-6)
 
-#define LED_DURATION    400
+#define LED_DURATION    500
 
 static void init(void);
 static void recv(void);

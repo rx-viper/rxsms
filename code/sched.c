@@ -27,7 +27,7 @@
 #include "task_sendrecv.h"
 #include "task_debug.h"
 
-#define SLOT_COUNT              10
+#define SLOT_COUNT              8
 #define SCHED_TIMER             TCC0
 #define SCHED_TIMER_OVF_vect    TCC0_OVF_vect
 #define SCHED_CLKSEL_gc     TC_CLKSEL_DIV8_gc
@@ -41,7 +41,7 @@
 /// Empty/unused slots must be set to NULL.
 static const struct task *const scheduling_map[SLOT_COUNT] = {
     &task_buttons, &task_sample_adc_inputs, NULL, &task_recv, &task_ctrl,
-    NULL, NULL, NULL, &task_send, &task_debug };
+    NULL, &task_send, &task_debug };
 
 /// The current slot number the scheduler is in.
 static uint8_t next_slot;

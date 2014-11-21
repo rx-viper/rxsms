@@ -38,7 +38,7 @@
 #define BUTTON_EXTENDED_PWR_bp  PIN1_bp
 
 /// The minimum time a button must be pressed to be counted as valid signal
-#define DURATION_DEBOUNCE    100
+#define DURATION_DEBOUNCE    125
 
 static void init(void);
 static void run(void);
