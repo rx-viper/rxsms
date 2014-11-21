@@ -77,7 +77,13 @@ ISR(SCHED_TIMER_OVF_vect)
 {
     uint8_t slot = next_slot;
     const struct task* t = scheduling_map[slot];
-    next_slot = (slot + 1) % SLOT_COUNT;
+#if SLOT_COUNT == 2 || SLOT_COUNT == 4 || SLOT_COUNT == 8 || SLOT_COUNT == 16
+    next_slot = ((uint8_t) (slot + 1)) % SLOT_COUNT;
+#else
+    if (++slot >= SLOT_COUNT)
+        slot = 0;
+    next_slot = slot;
+#endif
 
     if (NULL != t)
         t->run();
