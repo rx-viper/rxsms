@@ -130,8 +130,8 @@ void init_io(void)
 /// Power down all unneeded clocks and modules.
 void init_prr(void)
 {
-        /* enable DMA */
-	PR.PRGEN = PR_USB_bm | PR_AES_bm | PR_EBI_bm | PR_RTC_bm | PR_EVSYS_bm;
+	PR.PRGEN = PR_USB_bm | PR_AES_bm | PR_EBI_bm | PR_RTC_bm | PR_EVSYS_bm
+            | PR_DMA_bm;
         /* enable ADC */
 	PR.PRPA = PR_DAC_bm | PR_AC_bm;
         /* enable TCC0 */
