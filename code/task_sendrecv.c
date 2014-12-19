@@ -34,8 +34,8 @@
 
 #define UART_GROUNDSTATION  USARTD1
 #define UART_EXPERIMENT     USARTD0
-#define UART_BSEL       (3269)
-#define UART_BSCALE     (-6)
+#define UART_BSEL       (12)
+#define UART_BSCALE     (2)
 
 #define LED_DURATION    500
 
