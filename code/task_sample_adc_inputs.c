@@ -35,10 +35,12 @@
  * PORTA PIN 0..4
  */
 
-/* "ADC_CH_NOGAIN_MUXNEG_PADGND_gc" missing in avr/io.h corresponds to 0x05 */
-#define ADC_CH_NOGAIN_MUXNEG_PADGND_gc          0x05
-/* "ADC_CH_WGAIN_MUXNEG_PADGND_gc" missing in avr/io.h corresponds to 0x07 */
-#define ADC_CH_WGAIN_MUXNEG_PADGND_gc           0x07
+// FIXME - remove when everyone uses avr-libc >= 1.8.1
+// These symbols are not defined in io.h or have other names than in pre 1.8.1
+#if __AVR_LIBC_VERSION__ < 10801UL
+#define ADC_CURRLIMIT_HIGH_gc ADC_CURRLIMIT_LARGE_gc
+#define ADC_CH_MUXNEG_GND_MODE3_gc 0x05
+#endif
 
 #define ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc    ADC_CH_MUXPOS_PIN1_gc
 #define ADC_CH_MUXPOS_POTI_BLOCKING_RATE_gc     ADC_CH_MUXPOS_PIN2_gc
@@ -100,19 +102,19 @@ init(void)
 
     /* init ADCA CH0 and CH1 */
     ADCA.CTRLA = 0;
-    ADCA.CTRLB = ADC_CURRLIMIT_LARGE_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
+    ADCA.CTRLB = ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
     ADCA.REFCTRL = ADC_REFSEL_AREFA_gc | ADC_TEMPREF_bm;
     ADCA.EVCTRL = 0;
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
     ADCA.INTFLAGS = ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
     ADCA.CAL = adca_calibration;
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
-    ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+    ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH0.INTCTRL = 0;
     ADCA.CH0.SCAN = 3;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
-    ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+    ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH1.INTCTRL = 0;
     ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
@@ -201,7 +203,7 @@ run(void)
         /* throw away the first measurement, as it might be wrong */
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
-                         | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+                         | ADC_CH_MUXNEG_GND_MODE3_gc;
         ADCA.CH0.SCAN = 3;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
         state = BITERR;
@@ -239,7 +241,7 @@ run(void)
             adc_sense_buffer.current_sense = adc_value;
             // TODO where to store the tempsense result?
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
-                             | ADC_CH_NOGAIN_MUXNEG_PADGND_gc;
+                             | ADC_CH_MUXNEG_GND_MODE3_gc;
             ADCA.CH0.SCAN = 3;
             state = BITERR;
 
