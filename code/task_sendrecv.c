@@ -187,7 +187,7 @@ send_uart(USART_t *uart, struct uart_data *data)
         return; /* nothing to send */
 
     if (!(uart->STATUS & USART_DREIF_bm))
-        return; /* cannot send, USART busy, drop byte */
+        return; /* USART busy, cannot send now, retry later */
 
     /* apply error pattern */
     uint8_t to_send = data->data;
