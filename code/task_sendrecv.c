@@ -29,16 +29,17 @@
 #define UART_GROUNDSTATION_PORT     PORTD
 #define UART_GROUNDSTATION_RX_bm    PIN6_bm
 #define UART_GROUNDSTATION_TX_bm    PIN7_bm
+#define UART_GROUNDSTATION          USARTD1
+
 #define UART_EXPERIMENT_PORT        PORTD
 #define UART_EXPERIMENT_RX_bm       PIN2_bm
 #define UART_EXPERIMENT_TX_bm       PIN3_bm
+#define UART_EXPERIMENT             USARTD0
 
-#define UART_GROUNDSTATION  USARTD1
-#define UART_EXPERIMENT     USARTD0
 #define UART_BSEL       (12)
 #define UART_BSCALE     (2)
 
-#define LED_DURATION    500
+#define LED_DURATION    (500)
 
 static void init(void);
 static void recv(void);
