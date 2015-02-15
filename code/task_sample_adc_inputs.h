@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ struct
 
 struct
 {
-    uint32_t total_bit_count;
+    uint32_t stream_len_bytes;
     int32_t from_exp_flip;
     int32_t from_gnd_flip;
     uint8_t force_update;

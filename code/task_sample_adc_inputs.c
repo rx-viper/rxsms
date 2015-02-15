@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -81,7 +81,7 @@ init(void)
     adc_sense_buffer.poti_blocking_rate = 0;
     adc_sense_buffer.poti_blocking_duration = 0;
     adc_sense_buffer.current_sense = 0;
-    task_sample_adc_inputs_biterror_generator.total_bit_count = 0;
+    task_sample_adc_inputs_biterror_generator.stream_len_bytes = 0;
     task_sample_adc_inputs_biterror_generator.from_exp_flip = 0;
     task_sample_adc_inputs_biterror_generator.from_gnd_flip = 0;
     task_sample_adc_inputs_biterror_generator.force_update = 0;
@@ -119,8 +119,9 @@ init(void)
     ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
+// TODO check if uint32_t is correct. at other places I've seen int32_t...
 static uint32_t
-generate_bit_flip (const uint32_t count)
+generate_bit_flip (const uint32_t stream_len_bytes)
 {
     union
     {
@@ -133,8 +134,11 @@ generate_bit_flip (const uint32_t count)
 
     for (uint8_t i = 0; i < sizeof(random_number); ++i)
         random_number.e.ui8[i] = (uint8_t) rand();
-    /* mask the random number with range 0..2^32-1 to range 0..count-1 */
-    return random_number.flip & (count - 1);
+    /* mask the random number with range 0..2^32-1
+       to range 0..(stream_len_bytes * 8 - 1) */
+    if (stream_len_bytes)
+        return random_number.flip & (stream_len_bytes * 8 - 1);
+    return 0;
 }
 
 static void
@@ -146,24 +150,25 @@ update_biterror_generators(void)
 
     /* partition the ADC range 2047..0 into 16 bins
        with respective probabilities 1/N:
-         bin | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
-       N=2^x |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
+         bin      | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       N=2^x bit  |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
+       N=2^x byte |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
        except bin 0 with probability 0 (error gen disabled)
      */
     uint8_t bin = bit_error_rate / 16;
-    uint32_t count;
+    uint32_t stream_len_bytes;
     if (0 == bin)
-        count = 0;
+        stream_len_bytes = 0;
     else
-        count = ((uint32_t) 1) << (15 - bin + 7);
+        stream_len_bytes = ((uint32_t) 1) << (15 - bin + 4);
 
-    if (task_sample_adc_inputs_biterror_generator.total_bit_count != count)
+    if (task_sample_adc_inputs_biterror_generator.stream_len_bytes != stream_len_bytes)
         task_sample_adc_inputs_biterror_generator.force_update = 1;
-    task_sample_adc_inputs_biterror_generator.total_bit_count = count;
+    task_sample_adc_inputs_biterror_generator.stream_len_bytes = stream_len_bytes;
     task_sample_adc_inputs_biterror_generator.from_exp_flip =
-        generate_bit_flip(count);
+        generate_bit_flip(stream_len_bytes);
     task_sample_adc_inputs_biterror_generator.from_gnd_flip =
-        generate_bit_flip(count);
+        generate_bit_flip(stream_len_bytes);
 }
 
 static void

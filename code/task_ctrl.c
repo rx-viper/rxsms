@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -67,7 +67,7 @@ apply_state(void)
         RXSM_CTRL_PORT.OUTSET = RXSM_CTRL_SODS_bm;
     }
     if (task_ctrl_signals.error_inhibit ||
-        (!task_sample_adc_inputs_biterror_generator.total_bit_count &&
+        (!task_sample_adc_inputs_biterror_generator.stream_len_bytes &&
         !task_sample_adc_inputs_blocking_generator.interval))
         STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
     else
