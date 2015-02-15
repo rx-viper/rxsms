@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -25,6 +25,7 @@
 #include "task_sample_adc_inputs.h"
 #include "task_ctrl.h"
 #include "task_sendrecv.h"
+#include "task_error.h"
 #include "task_debug.h"
 
 #define SLOT_COUNT              8
@@ -41,7 +42,7 @@
 /// Empty/unused slots must be set to NULL.
 static const struct task *const scheduling_map[SLOT_COUNT] = {
     &task_buttons, &task_sample_adc_inputs, NULL, &task_recv, &task_ctrl,
-    NULL, &task_send, &task_debug };
+    &task_error, &task_send, &task_debug };
 
 /// The current slot number the scheduler is in.
 static uint8_t next_slot;
