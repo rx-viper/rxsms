@@ -38,14 +38,14 @@ struct
     uint32_t stream_len_bytes;
     int32_t from_exp_flip;
     int32_t from_gnd_flip;
-    uint8_t force_update;
+    uint8_t force_update : 1;
 } task_sample_adc_inputs_biterror_generator;
 
 struct
 {
     uint16_t duration;  ///< number of scheduling cycles to block transmission
     uint16_t interval; ///< interval in scheduling cycles to throw coin
-    uint8_t force_update;
+    uint8_t force_update : 1;
 } task_sample_adc_inputs_blocking_generator;
 
 #endif /* TASK_SAMPLE_ADC_INPUTS_H */
