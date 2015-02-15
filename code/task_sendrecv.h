@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,5 +24,15 @@
 
 const struct task task_recv;
 const struct task task_send;
+
+struct task_recv_uart_data
+{
+    uint8_t data;
+    uint8_t updated : 1;
+    uint16_t inactivity;
+    uint16_t led_toggle_interval;
+    uint32_t biterr_remaining_bytes;
+    uint32_t biterr_flip_index;
+} task_recv_from_gnd, task_recv_from_exp;
 
 #endif /* TASK_SENDRECV_H */

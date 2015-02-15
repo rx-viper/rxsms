@@ -48,16 +48,6 @@ static void send(void);
 const struct task task_recv = { .init = &init, .run = &recv };
 const struct task task_send = { .init = &init, .run = &send };
 
-static struct uart_data
-{
-    uint8_t data;
-    uint8_t updated : 1;
-    uint16_t inactivity;
-    uint16_t led_toggle_interval;
-    uint32_t biterr_total_count;
-    uint32_t biterr_flip_index;
-} from_gnd, from_exp;
-
 static void
 init_uart(PORT_t *port, uint8_t rx_pin, uint8_t tx_pin, USART_t *uart)
 {
@@ -88,15 +78,15 @@ init(void)
     init_uart(&UART_EXPERIMENT_PORT, UART_EXPERIMENT_RX_bm,
               UART_EXPERIMENT_TX_bm, &UART_EXPERIMENT);
 
-    const struct uart_data initializer = { .data = 0, .updated = 0,
+    const struct task_recv_uart_data initializer = { .data = 0, .updated = 0,
         .inactivity = LED_DURATION, .led_toggle_interval = LED_DURATION / 2,
-        .biterr_total_count = 0, .biterr_flip_index = 0 };
-    from_gnd = initializer;
-    from_exp = initializer;
+        .biterr_remaining_bytes = 0, .biterr_flip_index = 0 };
+    task_recv_from_gnd = initializer;
+    task_recv_from_exp = initializer;
 }
 
 static void
-recv_uart(USART_t *uart, struct uart_data *data)
+recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 {
     --data->inactivity;
     uint8_t err_flags = USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm;
@@ -118,7 +108,7 @@ recv_uart(USART_t *uart, struct uart_data *data)
 }
 
 static void
-update_led(struct uart_data *data, uint8_t ledmask)
+update_led(struct task_recv_uart_data *data, uint8_t ledmask)
 {
     if (0 == data->inactivity) {
         /* we have not seen any activity for some time, timeout */
@@ -134,7 +124,7 @@ update_led(struct uart_data *data, uint8_t ledmask)
 }
 
 static void
-ignore_recv(struct uart_data *data)
+ignore_recv(struct task_recv_uart_data *data)
 {
     data->updated = 0;
     data->inactivity = 0;
@@ -169,8 +159,8 @@ recv(void)
         }
     }
 
-    update_led(&from_exp, STATUS_LED_DOWNLINK_bm);
-    update_led(&from_gnd, STATUS_LED_UPLINK_bm);
+    update_led(&task_recv_from_exp, STATUS_LED_DOWNLINK_bm);
+    update_led(&task_recv_from_gnd, STATUS_LED_UPLINK_bm);
 
     const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
     task_sample_adc_inputs_blocking_generator.force_update = 0;
@@ -181,7 +171,7 @@ recv(void)
 }
 
 static void
-send_uart(USART_t *uart, struct uart_data *data)
+send_uart(USART_t *uart, struct task_recv_uart_data *data)
 {
     if (!data->updated)
         return; /* nothing to send */
