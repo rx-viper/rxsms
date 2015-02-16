@@ -111,12 +111,6 @@ recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 }
 
 static void
-ignore_recv(struct task_recv_uart_data *data)
-{
-    data->updated = 0;
-}
-
-static void
 recv(void)
 {
     static uint16_t duration = 0;
@@ -128,7 +122,7 @@ recv(void)
     recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
     if (task_ctrl_signals.lo_active) {
         /* after LO we just ignore all incoming traffic from groundstation */
-        ignore_recv(&task_recv_from_gnd);
+        task_recv_from_gnd.updated = 0;
     } else {
         task_recv_from_gnd = from_gnd_copy;
     }
@@ -140,8 +134,8 @@ recv(void)
         interval = 1;
         --duration;
         if (rand() & 1) {
-            ignore_recv(&task_recv_from_gnd);
-            ignore_recv(&task_recv_from_exp);
+            task_recv_from_gnd.updated = 0;
+            task_recv_from_exp.updated = 0;
         }
     }
 
