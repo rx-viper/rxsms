@@ -61,7 +61,7 @@ flip_bit(struct task_recv_uart_data *const data)
     if (flip >= 8) {            /* bit to flip outside current byte */
         flip -= 8;
     } else if (flip >= 0) {     /* ok, flip bit */
-        data->data ^= (uint8_t) flip;
+        data->data ^= 1 << ((uint8_t) flip);
         flip = -1;              /* mark as bit already flipped */
     }
     data->biterr_flip_index = flip;
