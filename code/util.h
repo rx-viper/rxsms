@@ -41,13 +41,6 @@
 	    : "memory" \
 	    )
 
-// FIXME remove this function. it is deprecated.
-static void nop(const uint8_t count)
-{
-#warning "deprecated: use __builtin_avr_delay_cycles() instead of nop()"
-	__builtin_avr_delay_cycles(count);
-}
-
 static void software_reset(void)
 {
 	CCP = CCP_IOREG_gc;
