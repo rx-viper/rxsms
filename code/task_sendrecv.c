@@ -39,7 +39,10 @@
 #define UART_BSEL       (12)
 #define UART_BSCALE     (2)
 
-#define LED_DURATION    (500)
+#define LED_DURATION    (250)
+#if LED_DURATION > 255
+#error task_recv_uart_data.inactivity and .led_toggle_interval are 8 bits only.
+#endif
 
 static void init(void);
 static void recv(void);
