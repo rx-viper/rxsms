@@ -70,6 +70,9 @@ flip_bit(struct task_recv_uart_data *const data)
 static void
 run(void)
 {
+    if (task_ctrl_signals.error_inhibit)
+	return;
+
     flip_bit(&task_recv_from_gnd);
     flip_bit(&task_recv_from_exp);
 
