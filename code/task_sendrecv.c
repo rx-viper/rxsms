@@ -111,22 +111,6 @@ recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 }
 
 static void
-update_led(struct task_recv_uart_data *data, uint8_t ledmask)
-{
-    if (0 == data->inactivity) {
-        /* we have not seen any activity for some time, timeout */
-        data->inactivity = LED_DURATION;
-        STATUS_LED_PORT.OUTCLR = ledmask;
-    } else {
-        if (0 == data->led_toggle_interval) {
-            /* a normal period of activity passed */
-            data->led_toggle_interval = LED_DURATION / 2;
-            STATUS_LED_PORT.OUTTGL = ledmask;
-        }
-    }
-}
-
-static void
 ignore_recv(struct task_recv_uart_data *data)
 {
     data->updated = 0;
@@ -162,14 +146,28 @@ recv(void)
         }
     }
 
-    update_led(&task_recv_from_exp, STATUS_LED_DOWNLINK_bm);
-    update_led(&task_recv_from_gnd, STATUS_LED_UPLINK_bm);
 
     const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
     task_sample_adc_inputs_blocking_generator.force_update = 0;
     if (!duration || upd) {
         duration = task_sample_adc_inputs_blocking_generator.duration;
         interval = task_sample_adc_inputs_blocking_generator.interval;
+    }
+}
+
+static void
+update_led(struct task_recv_uart_data *data, uint8_t ledmask)
+{
+    if (0 == data->inactivity) {
+        /* we have not seen any activity for some time, timeout */
+        data->inactivity = LED_DURATION;
+        STATUS_LED_PORT.OUTCLR = ledmask;
+    } else {
+        if (0 == data->led_toggle_interval) {
+            /* a normal period of activity passed */
+            data->led_toggle_interval = LED_DURATION / 2;
+            STATUS_LED_PORT.OUTTGL = ledmask;
+        }
     }
 }
 
@@ -189,6 +187,9 @@ send_uart(USART_t *uart, struct task_recv_uart_data *data)
 static void
 send(void)
 {
+    update_led(&task_recv_from_exp, STATUS_LED_DOWNLINK_bm);
+    update_led(&task_recv_from_gnd, STATUS_LED_UPLINK_bm);
+
     send_uart(&UART_GROUNDSTATION, &task_recv_from_exp);
     send_uart(&UART_EXPERIMENT, &task_recv_from_gnd);
 }
