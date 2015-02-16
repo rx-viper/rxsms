@@ -49,25 +49,22 @@ flip_bit(struct task_recv_uart_data *const data)
 
     if (task_ctrl_signals.error_inhibit) {
         data->biterr_remaining_bytes = 0;
-        return; /* no errors should be generated */
+        return; /* global error inhibit, no errors should be generated */
     }
 
-    uint8_t to_send = data->data;
-    uint32_t count = data->biterr_remaining_bytes;
-    if (count) {
-        count -= 1;
-        data->biterr_remaining_bytes = count;
+    if (0 == data->biterr_remaining_bytes)
+        return; /* specifically bit flip errors disabled */
 
-        int32_t flip = data->biterr_flip_index;
-        if (flip >= 8) {            /* bit to flip outside current byte */
-            flip -= 8;
-        } else if (flip >= 0) {     /* ok, flip bit */
-            to_send ^= (uint8_t) flip;
-            flip = -1;              /* mark as bit already flipped */
-        }
-        data->biterr_flip_index = flip;
+    --data->biterr_remaining_bytes;
+
+    int32_t flip = data->biterr_flip_index;
+    if (flip >= 8) {            /* bit to flip outside current byte */
+        flip -= 8;
+    } else if (flip >= 0) {     /* ok, flip bit */
+        data->data ^= (uint8_t) flip;
+        flip = -1;              /* mark as bit already flipped */
     }
-    data->data = to_send;
+    data->biterr_flip_index = flip;
 }
 
 static void
