@@ -154,6 +154,8 @@ update_biterror_generators(void)
        N=2^x bit  |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
        N=2^x byte |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
        except bin 0 with probability 0 (error gen disabled)
+
+       The value range is |0..2047| = 2048 and we want 16 bins out of it.
      */
     uint8_t bin = bit_error_rate / (2048 / 16);
     uint32_t stream_len_bytes;
