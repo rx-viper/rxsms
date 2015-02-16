@@ -19,6 +19,8 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include "task_sendrecv.h"
+#include "task_ctrl.h"
+#include "task_sample_adc_inputs.h"  /* FIXME remove when not needed */
 
 #define STATUS_LED_PORT         PORTD
 #define STATUS_LED_UPLINK_bm    PIN4_bm
@@ -134,15 +136,15 @@ recv(void)
     static uint16_t duration = 0;
     static uint16_t interval = 0;
 
-    recv_uart(&UART_EXPERIMENT, &from_exp);
+    recv_uart(&UART_EXPERIMENT, &task_recv_from_exp);
 
-    struct uart_data from_gnd_copy = from_gnd;
+    struct task_recv_uart_data from_gnd_copy = task_recv_from_gnd;
     recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
     if (task_ctrl_signals.lo_active) {
         /* after LO we just ignore all incoming traffic from groundstation */
-        ignore_recv(&from_gnd);
+        ignore_recv(&task_recv_from_gnd);
     } else {
-        from_gnd = from_gnd_copy;
+        task_recv_from_gnd = from_gnd_copy;
     }
 
     if (task_ctrl_signals.error_inhibit)
@@ -152,8 +154,8 @@ recv(void)
         interval = 1;
         --duration;
         if (rand() & 1) {
-            ignore_recv(&from_gnd);
-            ignore_recv(&from_exp);
+            ignore_recv(&task_recv_from_gnd);
+            ignore_recv(&task_recv_from_exp);
         }
     }
 
