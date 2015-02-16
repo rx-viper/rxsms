@@ -17,6 +17,7 @@
  */
 
 #include <avr/io.h>
+#include <stdlib.h>
 #include "task_error.h"
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
@@ -68,6 +69,33 @@ flip_bit(struct task_recv_uart_data *const data)
 }
 
 static void
+drop_communication(struct task_recv_uart_data *a,
+		   struct task_recv_uart_data *b)
+{
+    static uint16_t duration = 0;
+    static uint16_t interval = 0;
+
+    if (task_ctrl_signals.error_inhibit)
+        interval = 0;
+    --interval;
+    if (!interval) {
+        interval = 1;
+        --duration;
+        if (rand() & 1) {
+	    a->updated = 0;
+	    b->updated = 0;
+        }
+    }
+
+    const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
+    task_sample_adc_inputs_blocking_generator.force_update = 0;
+    if (!duration || upd) {
+        duration = task_sample_adc_inputs_blocking_generator.duration;
+        interval = task_sample_adc_inputs_blocking_generator.interval;
+    }
+}
+
+static void
 run(void)
 {
     if (task_ctrl_signals.error_inhibit)
@@ -96,4 +124,7 @@ run(void)
             task_sample_adc_inputs_biterror_generator.from_gnd_flip;
     }
     task_sample_adc_inputs_biterror_generator.force_update = 0;
+
+
+    drop_communication(&task_recv_from_gnd, &task_recv_from_exp);
 }

@@ -17,10 +17,8 @@
  */
 
 #include <avr/io.h>
-#include <stdlib.h>
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
-#include "task_sample_adc_inputs.h"  /* FIXME remove when not needed */
 
 #define STATUS_LED_PORT         PORTD
 #define STATUS_LED_UPLINK_bm    PIN4_bm
@@ -113,9 +111,6 @@ recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 static void
 recv(void)
 {
-    static uint16_t duration = 0;
-    static uint16_t interval = 0;
-
     recv_uart(&UART_EXPERIMENT, &task_recv_from_exp);
 
     struct task_recv_uart_data from_gnd_copy = task_recv_from_gnd;
@@ -125,26 +120,6 @@ recv(void)
         task_recv_from_gnd.updated = 0;
     } else {
         task_recv_from_gnd = from_gnd_copy;
-    }
-
-    if (task_ctrl_signals.error_inhibit)
-        interval = 0;
-    --interval;
-    if (!interval) {
-        interval = 1;
-        --duration;
-        if (rand() & 1) {
-            task_recv_from_gnd.updated = 0;
-            task_recv_from_exp.updated = 0;
-        }
-    }
-
-
-    const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
-    task_sample_adc_inputs_blocking_generator.force_update = 0;
-    if (!duration || upd) {
-        duration = task_sample_adc_inputs_blocking_generator.duration;
-        interval = task_sample_adc_inputs_blocking_generator.interval;
     }
 }
 
