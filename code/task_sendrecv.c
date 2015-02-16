@@ -82,7 +82,7 @@ init(void)
               UART_EXPERIMENT_TX_bm, &UART_EXPERIMENT);
 
     const struct task_recv_uart_data initializer = { .data = 0, .updated = 0,
-        .inactivity = LED_DURATION, .led_toggle_interval = LED_DURATION / 2,
+        .inactivity = LED_DURATION, .led_toggle_interval = 0,
         .biterr_remaining_bytes = 0, .biterr_flip_index = 0 };
     task_recv_from_gnd = initializer;
     task_recv_from_exp = initializer;
@@ -107,7 +107,6 @@ recv_uart(USART_t *uart, struct task_recv_uart_data *data)
     data->data = uart->DATA;
     data->updated = 1;
     data->inactivity = LED_DURATION;
-    --data->led_toggle_interval;
 }
 
 static void
@@ -163,11 +162,11 @@ update_led(struct task_recv_uart_data *data, uint8_t ledmask)
         data->inactivity = LED_DURATION;
         STATUS_LED_PORT.OUTCLR = ledmask;
     } else {
-        if (0 == data->led_toggle_interval) {
-            /* a normal period of activity passed */
-            data->led_toggle_interval = LED_DURATION / 2;
-            STATUS_LED_PORT.OUTTGL = ledmask;
-        }
+        ++data->led_toggle_interval;
+        if (data->led_toggle_interval >= LED_DURATION)
+            data->led_toggle_interval = 0; /* wrap-around */
+        if (LED_DURATION / 2 == data->led_toggle_interval)
+            STATUS_LED_PORT.OUTTGL = ledmask; /* a half square wave passed */
     }
 }
 
