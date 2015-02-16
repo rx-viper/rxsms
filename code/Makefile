@@ -33,29 +33,27 @@ F_CPU := 32000000
 
 DOCDIR := doc
 
+GCC_VERSION:=$(shell $(CC) -dumpversion)
+
 SRC := $(wildcard *.c)
 HDR := $(wildcard *.h)
 OBJ := $(patsubst %.c, %.o, $(SRC))
 
-CFLAGS += -mmcu=$(MCU)
-CFLAGS += -DF_CPU=$(F_CPU)UL
-CFLAGS += -O3
-CFLAGS += -fdata-sections
-CFLAGS += -ffunction-sections
-CFLAGS += -fshort-enums
-CFLAGS += -Wall
-CFLAGS += -Wextra
-#CFLAGS += -Werror-implicit-function-declaration
-CFLAGS += -Wmissing-prototypes
-CFLAGS += -Wpointer-arith
-CFLAGS += -Wstrict-prototypes
-#CFLAGS += -pedantic
-CFLAGS += -mrelax
-CFLAGS += -std=gnu99
-CFLAGS += -g3
+override CFLAGS+=-mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -O3 \
+	-fdata-sections -ffunction-sections -fshort-enums -Wall -Wextra \
+	-Werror-implicit-function-declaration  -Wmissing-prototypes \
+	-Wpointer-arith -Wstrict-prototypes -Wswitch-enum \
+	-mrelax -std=gnu99 -g3
+#	-pedantic
 # commented because it's too verbose
-#CFLAGS += -save-temps
-CFLAGS += -Wswitch-enum
+#	-save-temps
+
+ifeq ($(GCC_VERSION),4.9.2)
+  override CFLAGS+=-fdiagnostics-color
+  SIZE+=--target=elf32-avr
+else
+  SIZE+=--mcu=$(MCU) --format=avr
+endif
 
 LFLAGS += -mmcu=$(MCU) -O3
 LFLAGS += -Wl,-Map,$(TARGET).map
@@ -64,7 +62,7 @@ LFLAGS += -Wl,-Map,$(TARGET).map
 
 
 all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(TARGET).eep
-	@$(SIZE) --mcu=$(MCU) --format=avr $<
+	@$(SIZE) $<
 	@echo DONE
 
 %.hex: %.elf
