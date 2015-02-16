@@ -155,7 +155,7 @@ update_biterror_generators(void)
        N=2^x byte |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
        except bin 0 with probability 0 (error gen disabled)
      */
-    uint8_t bin = bit_error_rate / 16;
+    uint8_t bin = bit_error_rate / (2048 / 16);
     uint32_t stream_len_bytes;
     if (0 == bin)
         stream_len_bytes = 0;
