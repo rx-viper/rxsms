@@ -29,8 +29,6 @@ struct task_recv_uart_data
 {
     uint8_t data;
     uint8_t updated : 1;
-    uint8_t inactivity;
-    uint8_t led_toggle_interval;
     uint32_t biterr_remaining_bytes;
     uint32_t biterr_flip_index;
 } task_recv_from_gnd, task_recv_from_exp;

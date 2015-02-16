@@ -39,17 +39,18 @@
 #define UART_BSEL       (12)
 #define UART_BSCALE     (2)
 
-#define LED_DURATION    (250)
-#if LED_DURATION > 255
-#error task_recv_uart_data.inactivity and .led_toggle_interval are 8 bits only.
-#endif
-
 static void init(void);
 static void recv(void);
 static void send(void);
 /* common init routine for both as they access the same hardware */
 const struct task task_recv = { .init = &init, .run = &recv };
 const struct task task_send = { .init = &init, .run = &send };
+
+static struct uart_status
+{
+    uint8_t last_recv_ago;
+    uint8_t led_toggle_interval;
+} status_from_gnd, status_from_exp;
 
 static void
 init_uart(PORT_t *port, uint8_t rx_pin, uint8_t tx_pin, USART_t *uart)
@@ -82,16 +83,17 @@ init(void)
               UART_EXPERIMENT_TX_bm, &UART_EXPERIMENT);
 
     const struct task_recv_uart_data initializer = { .data = 0, .updated = 0,
-        .inactivity = LED_DURATION, .led_toggle_interval = 0,
         .biterr_remaining_bytes = 0, .biterr_flip_index = 0 };
     task_recv_from_gnd = initializer;
     task_recv_from_exp = initializer;
+    const struct uart_status status_init = { 0 };
+    status_from_gnd = status_init;
+    status_from_exp = status_init;
 }
 
 static void
 recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 {
-    --data->inactivity;
     uint8_t err_flags = USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm;
     if (uart->STATUS & err_flags) {
         /* clear error flags if set */
@@ -106,14 +108,12 @@ recv_uart(USART_t *uart, struct task_recv_uart_data *data)
 
     data->data = uart->DATA;
     data->updated = 1;
-    data->inactivity = LED_DURATION;
 }
 
 static void
 ignore_recv(struct task_recv_uart_data *data)
 {
     data->updated = 0;
-    data->inactivity = 0;
 }
 
 static void
@@ -155,18 +155,26 @@ recv(void)
 }
 
 static void
-update_led(struct task_recv_uart_data *data, uint8_t ledmask)
+update_led(uint8_t has_received, struct uart_status *status, uint8_t ledmask)
 {
-    if (0 == data->inactivity) {
-        /* we have not seen any activity for some time, timeout */
-        data->inactivity = LED_DURATION;
-        STATUS_LED_PORT.OUTCLR = ledmask;
-    } else {
-        ++data->led_toggle_interval;
-        if (data->led_toggle_interval >= LED_DURATION)
-            data->led_toggle_interval = 0; /* wrap-around */
-        if (LED_DURATION / 2 == data->led_toggle_interval)
+    /* switch off LED after this time of inactivity */
+    const uint8_t LED_TIMEOUT = 125;
+    /* period of flashing LED to indicate active communication */
+    const uint8_t LED_DURATION = 125;
+
+    if (has_received) {
+        status->last_recv_ago = 0;
+        if (++status->led_toggle_interval >= LED_DURATION)
+            status->led_toggle_interval = 0; /* wrap-around */
+        if (LED_DURATION/2 == status->led_toggle_interval)
             STATUS_LED_PORT.OUTTGL = ledmask; /* a half square wave passed */
+    } else {
+        /* saturating add, clear LED due to inactivity when timeout reached */
+        if (++status->last_recv_ago >= LED_TIMEOUT) {
+            status->last_recv_ago = LED_TIMEOUT;
+            status->led_toggle_interval = 0;
+            STATUS_LED_PORT.OUTCLR = ledmask;
+        }
     }
 }
 
@@ -186,8 +194,10 @@ send_uart(USART_t *uart, struct task_recv_uart_data *data)
 static void
 send(void)
 {
-    update_led(&task_recv_from_exp, STATUS_LED_DOWNLINK_bm);
-    update_led(&task_recv_from_gnd, STATUS_LED_UPLINK_bm);
+    update_led(task_recv_from_exp.updated, &status_from_exp,
+               STATUS_LED_DOWNLINK_bm);
+    update_led(task_recv_from_gnd.updated, &status_from_gnd,
+               STATUS_LED_UPLINK_bm);
 
     send_uart(&UART_GROUNDSTATION, &task_recv_from_exp);
     send_uart(&UART_EXPERIMENT, &task_recv_from_gnd);
