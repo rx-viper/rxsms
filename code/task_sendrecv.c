@@ -112,15 +112,11 @@ static void
 recv(void)
 {
     recv_uart(&UART_EXPERIMENT, &task_recv_from_exp);
+    recv_uart(&UART_GROUNDSTATION, &task_recv_from_gnd);
 
-    struct task_recv_uart_data from_gnd_copy = task_recv_from_gnd;
-    recv_uart(&UART_GROUNDSTATION, &from_gnd_copy);
-    if (task_ctrl_signals.lo_active) {
-        /* after LO we just ignore all incoming traffic from groundstation */
+    /* after LO we just ignore all incoming traffic from groundstation */
+    if (task_ctrl_signals.lo_active)
         task_recv_from_gnd.updated = 0;
-    } else {
-        task_recv_from_gnd = from_gnd_copy;
-    }
 }
 
 static void
