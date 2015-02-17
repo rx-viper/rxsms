@@ -20,33 +20,30 @@
 #define TASK_ADC_H
 
 #include <inttypes.h>
-#include "task.h" /* for struct task */
+#include "task.h"
 
 const struct task task_adc;
 
 // TODO maybe remove entirely or move to task_$FOO.c file if not needed
-struct
-{
+struct {
     int16_t poti_bit_error_rate;
     int16_t poti_blocking_rate;
     int16_t poti_blocking_duration;
     int16_t current_sense;
 } adc_sense_buffer;
 
-struct
-{
+struct {
     uint32_t stream_len_bytes;
     int32_t from_exp_flip;
     int32_t from_gnd_flip;
-    uint8_t force_update : 1;
+    uint8_t force_update:1;
 } task_adc_biterror_generator;
 
 // FIXME rename *blocking_* with more accurate *drop_*
-struct
-{
-    uint16_t duration;  ///< number of scheduling cycles to block transmission
-    uint16_t interval; ///< interval in scheduling cycles to throw coin
-    uint8_t force_update : 1;
+struct {
+    uint16_t duration;          ///< number of scheduling cycles to block transmission
+    uint16_t interval;          ///< interval in scheduling cycles to throw coin
+    uint8_t force_update:1;
 } task_adc_blocking_generator;
 
-#endif /* TASK_ADC_H */
+#endif                          /* TASK_ADC_H */

@@ -42,7 +42,8 @@
 /// Empty/unused slots must be set to NULL.
 static const struct task *const scheduling_map[SLOT_COUNT] = {
     &task_buttons, &task_adc, NULL, &task_recv,
-    &task_ctrl, &task_error, &task_send, &task_debug };
+    &task_ctrl, &task_error, &task_send, &task_debug
+};
 
 /// The current slot number the scheduler is in.
 static uint8_t next_slot;
@@ -59,7 +60,7 @@ sched_init(void)
     PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 
     for (uint8_t i = 0; i < SLOT_COUNT; ++i) {
-        const struct task* t = scheduling_map[i];
+        const struct task *t = scheduling_map[i];
         if (NULL != t)
             t->init();
     }
@@ -77,7 +78,7 @@ sched_start(void)
 ISR(SCHED_TIMER_OVF_vect)
 {
     uint8_t slot = next_slot;
-    const struct task* t = scheduling_map[slot];
+    const struct task *t = scheduling_map[slot];
 #if SLOT_COUNT == 2 || SLOT_COUNT == 4 || SLOT_COUNT == 8 || SLOT_COUNT == 16
     next_slot = ((uint8_t) (slot + 1)) % SLOT_COUNT;
 #else

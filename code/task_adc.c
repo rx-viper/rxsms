@@ -60,7 +60,8 @@ const struct task task_adc = { .init = &init, .run = &run };
 
 /// Reads the ADC calibration value and TEMPSENSE calibration value.
 static void
-production_signature_row_read_calibration(uint16_t *adca_calibration, uint16_t *tempsense_calibration)
+production_signature_row_read_calibration(uint16_t * adca_calibration,
+                                          uint16_t * tempsense_calibration)
 {
     uint8_t adcacal0_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL0;
     uint8_t adcacal1_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL1;
@@ -91,43 +92,45 @@ init(void)
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
-                 | ADC_POTI_BLOCKING_RATE_bm | ADC_POTI_BLOCKING_DURATION_bm
-                 | ADC_CURRENT_SENSE_bm;
+        | ADC_POTI_BLOCKING_RATE_bm | ADC_POTI_BLOCKING_DURATION_bm
+        | ADC_CURRENT_SENSE_bm;
     ADC_PORT.DIRCLR = pins;
     ADC_PORT.OUTCLR = pins;
 
     uint16_t adca_calibration, tempsense_calibration;
     production_signature_row_read_calibration(&adca_calibration,
-           &tempsense_calibration);
+                                              &tempsense_calibration);
 
     /* init ADCA CH0 and CH1 */
     ADCA.CTRLA = 0;
-    ADCA.CTRLB = ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
+    ADCA.CTRLB =
+        ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
     ADCA.REFCTRL = ADC_REFSEL_AREFA_gc | ADC_TEMPREF_bm;
     ADCA.EVCTRL = 0;
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
-    ADCA.INTFLAGS = ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
+    ADCA.INTFLAGS =
+        ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
     ADCA.CAL = adca_calibration;
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
-    ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
+    ADCA.CH0.MUXCTRL =
+        ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH0.INTCTRL = 0;
     ADCA.CH0.SCAN = 3;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
     ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH1.INTCTRL = 0;
-    ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
+    ADCA.CTRLA |=
+        ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
 // TODO check if uint32_t is correct. at other places I've seen int32_t...
 static uint32_t
-generate_bit_flip (const uint32_t stream_len_bytes)
+generate_bit_flip(const uint32_t stream_len_bytes)
 {
-    union
-    {
+    union {
         uint32_t flip;
-        struct
-        {
+        struct {
             uint8_t ui8[4];
         } e;
     } random_number;
@@ -150,7 +153,7 @@ update_biterror_generators(void)
 
     /* partition the ADC range 2047..0 into 16 bins
        with respective probabilities 1/N:
-         bin      | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       bin        | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
        N=2^x bit  |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
        N=2^x byte |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
        except bin 0 with probability 0 (error gen disabled)
@@ -210,12 +213,13 @@ run(void)
         /* throw away the first measurement, as it might be wrong */
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
-                         | ADC_CH_MUXNEG_GND_MODE3_gc;
+            | ADC_CH_MUXNEG_GND_MODE3_gc;
         ADCA.CH0.SCAN = 3;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
         state = BITERR;
     } else if (BITERR <= s && CURRSENSE >= s) {
-        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm) || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
+        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm)
+            || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
         int16_t adc_value = ADCA.CH0RES;
@@ -227,7 +231,8 @@ run(void)
          */
         const int8_t MIN_DIFF = 50;
         if (BITERR == s) {
-            int16_t diff = adc_sense_buffer.poti_bit_error_rate - adc_value;
+            int16_t diff =
+                adc_sense_buffer.poti_bit_error_rate - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
                 adc_sense_buffer.poti_bit_error_rate = adc_value;
             // TODO where to store the tempsense result?
@@ -239,7 +244,8 @@ run(void)
             // TODO where to store the tempsense result?
             state = BLOCKDUR;
         } else if (BLOCKDUR == s) {
-            int16_t diff = adc_sense_buffer.poti_blocking_duration - adc_value;
+            int16_t diff =
+                adc_sense_buffer.poti_blocking_duration - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
                 adc_sense_buffer.poti_blocking_duration = adc_value;
             // TODO where to store the tempsense result?
@@ -248,7 +254,7 @@ run(void)
             adc_sense_buffer.current_sense = adc_value;
             // TODO where to store the tempsense result?
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
-                             | ADC_CH_MUXNEG_GND_MODE3_gc;
+                | ADC_CH_MUXNEG_GND_MODE3_gc;
             ADCA.CH0.SCAN = 3;
             state = BITERR;
 

@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,16 +20,14 @@
 #define TASK_H
 
 /* a task that starts runs in background */
-struct bgtask
-{
-    void (*init)(void);
+struct bgtask {
+    void (*init) (void);
 };
 
 /* a normal real-time task */
-struct task
-{
-    void (*init)(void);
-    void (*run)(void);
+struct task {
+    void (*init) (void);
+    void (*run) (void);
 };
 
-#endif /* TASK_H */
+#endif                          /* TASK_H */

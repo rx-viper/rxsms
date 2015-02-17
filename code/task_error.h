@@ -23,4 +23,4 @@
 
 const struct task task_error;
 
-#endif /* TASK_ERROR_H */
+#endif                          /* TASK_ERROR_H */

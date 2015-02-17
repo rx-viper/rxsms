@@ -46,15 +46,15 @@ static void
 flip_bit(struct task_recv_uart_data *const data)
 {
     if (!data->updated)
-        return; /* no pending data */
+        return;                 /* no pending data */
 
     if (task_ctrl_signals.error_inhibit) {
         data->biterr_remaining_bytes = 0;
-        return; /* global error inhibit, no errors should be generated */
+        return;                 /* global error inhibit, no errors should be generated */
     }
 
     if (0 == data->biterr_remaining_bytes)
-        return; /* specifically bit flip errors disabled */
+        return;                 /* specifically bit flip errors disabled */
 
     --data->biterr_remaining_bytes;
 
@@ -70,7 +70,7 @@ flip_bit(struct task_recv_uart_data *const data)
 
 static void
 drop_communication(struct task_recv_uart_data *a,
-		   struct task_recv_uart_data *b)
+                   struct task_recv_uart_data *b)
 {
     static uint16_t duration = 0;
     static uint16_t interval = 0;
@@ -82,8 +82,8 @@ drop_communication(struct task_recv_uart_data *a,
         interval = 1;
         --duration;
         if (rand() & 1) {
-	    a->updated = 0;
-	    b->updated = 0;
+            a->updated = 0;
+            b->updated = 0;
         }
     }
 
@@ -99,7 +99,7 @@ static void
 run(void)
 {
     if (task_ctrl_signals.error_inhibit)
-	return;
+        return;
 
     flip_bit(&task_recv_from_gnd);
     flip_bit(&task_recv_from_exp);

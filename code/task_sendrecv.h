@@ -25,12 +25,11 @@
 const struct task task_recv;
 const struct task task_send;
 
-struct task_recv_uart_data
-{
+struct task_recv_uart_data {
     uint8_t data;
-    uint8_t updated : 1;
+    uint8_t updated:1;
     uint32_t biterr_remaining_bytes;
     uint32_t biterr_flip_index;
 } task_recv_from_gnd, task_recv_from_exp;
 
-#endif /* TASK_SENDRECV_H */
+#endif                          /* TASK_SENDRECV_H */

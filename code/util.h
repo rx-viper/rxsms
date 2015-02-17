@@ -41,23 +41,25 @@
 	    : "memory" \
 	    )
 
-static void software_reset(void)
+static void
+software_reset(void)
 {
-	CCP = CCP_IOREG_gc;
-	RST.CTRL = RST_SWRST_bm;
+    CCP = CCP_IOREG_gc;
+    RST.CTRL = RST_SWRST_bm;
 }
 
-static uint8_t prodsigrow_read_byte(const uint8_t byte_offs)
+static uint8_t
+prodsigrow_read_byte(const uint8_t byte_offs)
 {
-	uint8_t byte;
-	const uint16_t flash_addr = PROD_SIGNATURES_START + byte_offs;
-	NVM.CMD = NVM_CMD_READ_CALIB_ROW_gc;
-	asm volatile ("lpm  %[val], Z  \n\t"
-		      : [val] "=&r" (byte)
-		      : "z" (flash_addr)
-		      :);
-	NVM.CMD = NVM_CMD_NO_OPERATION_gc;
-	return byte;
+    uint8_t byte;
+    const uint16_t flash_addr = PROD_SIGNATURES_START + byte_offs;
+    NVM.CMD = NVM_CMD_READ_CALIB_ROW_gc;
+    asm volatile ("lpm  %[val], Z  \n\t"
+                  : [val] "=&r"(byte)
+                  : "z"(flash_addr)
+                  : );
+    NVM.CMD = NVM_CMD_NO_OPERATION_gc;
+    return byte;
 }
 
-#endif				/* UTIL_H */
+#endif                          /* UTIL_H */

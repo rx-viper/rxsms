@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -23,4 +23,4 @@ void init_clock(void);
 void init_io(void);
 void init_prr(void);
 
-#endif				/* INIT_H */
+#endif                          /* INIT_H */

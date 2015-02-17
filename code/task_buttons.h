@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -23,14 +23,13 @@
 
 const struct task task_buttons;
 
-struct
-{
-    uint8_t lo : 1;
-    uint8_t soe : 1;
-    uint8_t sods : 1;
-    uint8_t errinh : 1;
-    uint8_t pwr : 1;
+struct {
+    uint8_t lo:1;
+    uint8_t soe:1;
+    uint8_t sods:1;
+    uint8_t errinh:1;
+    uint8_t pwr:1;
 } task_buttons_toggle_request;
 
 
-#endif /* TASK_BUTTONS_H */
+#endif                          /* TASK_BUTTONS_H */

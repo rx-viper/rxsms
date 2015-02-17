@@ -44,14 +44,13 @@ static void send(void);
 const struct task task_recv = { .init = &init, .run = &recv };
 const struct task task_send = { .init = &init, .run = &send };
 
-static struct uart_status
-{
+static struct uart_status {
     uint8_t last_recv_ago;
     uint8_t led_toggle_interval;
 } status_from_gnd, status_from_exp;
 
 static void
-init_uart(PORT_t *port, uint8_t rx_pin, uint8_t tx_pin, USART_t *uart)
+init_uart(PORT_t * port, uint8_t rx_pin, uint8_t tx_pin, USART_t * uart)
 {
     port->OUTSET = tx_pin;
     port->DIRSET = tx_pin;
@@ -69,7 +68,7 @@ init(void)
 {
     static uint8_t is_initialized = 0;
     if (is_initialized)
-        return;     /* leave if init() is called multiple times */
+        return;                 /* leave if init() is called multiple times */
     is_initialized = 1;
 
     STATUS_LED_PORT.OUTCLR = STATUS_LED_UPLINK_bm | STATUS_LED_DOWNLINK_bm;
@@ -90,12 +89,12 @@ init(void)
 }
 
 static void
-recv_uart(USART_t *uart, struct task_recv_uart_data *data)
+recv_uart(USART_t * uart, struct task_recv_uart_data *data)
 {
     uint8_t err_flags = USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm;
     if (uart->STATUS & err_flags) {
         /* clear error flags if set */
-        uint8_t ignored __attribute__((unused));
+        uint8_t ignored __attribute__ ((unused));
         ignored = uart->DATA;
         ignored = uart->DATA;
         return;
@@ -116,7 +115,8 @@ recv(void)
 }
 
 static void
-update_led(uint8_t has_received, struct uart_status *status, uint8_t ledmask)
+update_led(uint8_t has_received, struct uart_status *status,
+           uint8_t ledmask)
 {
     /* switch off LED after this time of inactivity */
     const uint8_t LED_TIMEOUT = 125;
@@ -126,9 +126,9 @@ update_led(uint8_t has_received, struct uart_status *status, uint8_t ledmask)
     if (has_received) {
         status->last_recv_ago = 0;
         if (++status->led_toggle_interval >= LED_DURATION)
-            status->led_toggle_interval = 0; /* wrap-around */
-        if (LED_DURATION/2 == status->led_toggle_interval)
-            STATUS_LED_PORT.OUTTGL = ledmask; /* a half square wave passed */
+            status->led_toggle_interval = 0;    /* wrap-around */
+        if (LED_DURATION / 2 == status->led_toggle_interval)
+            STATUS_LED_PORT.OUTTGL = ledmask;   /* a half square wave passed */
     } else {
         /* saturating add, clear LED due to inactivity when timeout reached */
         if (++status->last_recv_ago >= LED_TIMEOUT) {
@@ -140,13 +140,13 @@ update_led(uint8_t has_received, struct uart_status *status, uint8_t ledmask)
 }
 
 static void
-send_uart(USART_t *uart, struct task_recv_uart_data *data)
+send_uart(USART_t * uart, struct task_recv_uart_data *data)
 {
     if (!data->updated)
-        return; /* nothing to send */
+        return;                 /* nothing to send */
 
     if (!(uart->STATUS & USART_DREIF_bm))
-        return; /* USART busy, cannot send now, retry later */
+        return;                 /* USART busy, cannot send now, retry later */
 
     uart->DATA = data->data;
     data->updated = 0;

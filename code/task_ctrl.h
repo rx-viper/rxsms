@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -24,13 +24,12 @@
 
 const struct task task_ctrl;
 
-struct
-{
-    uint8_t lo_active : 1;
-    uint8_t soe_active : 1;
-    uint8_t sods_active : 1;
-    uint8_t pwr_on : 1;
-    uint8_t error_inhibit : 1;
+struct {
+    uint8_t lo_active:1;
+    uint8_t soe_active:1;
+    uint8_t sods_active:1;
+    uint8_t pwr_on:1;
+    uint8_t error_inhibit:1;
 } task_ctrl_signals;
 
-#endif /* TASK_CTRL_H */
+#endif                          /* TASK_CTRL_H */

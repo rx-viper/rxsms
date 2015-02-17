@@ -1,6 +1,6 @@
 /*
  *   This file is part of RXSMS.
- *   Copyright 2014  Nicolas Benes
+ *   Copyright 2014, 2015  Nicolas Benes
  *
  *   RXSMS is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -45,8 +45,7 @@ static void run(void);
 
 const struct task task_buttons = { .init = &init, .run = &run };
 
-struct button
-{
+struct button {
     uint8_t pressed;
     uint8_t released;
     uint8_t triggered;
@@ -76,7 +75,8 @@ init(void)
     BUTTON_PORT.PINCTRL(BUTTON_SOE_bp) = PORT_OPC_PULLUP_gc;
     BUTTON_PORT.PINCTRL(BUTTON_SODS_bp) = PORT_OPC_PULLUP_gc;
     BUTTON_PORT.PINCTRL(BUTTON_ERRINH_bp) = PORT_OPC_PULLUP_gc;
-    BUTTON_EXTENDED_PORT.PINCTRL(BUTTON_EXTENDED_PWR_bp) = PORT_OPC_PULLUP_gc;
+    BUTTON_EXTENDED_PORT.PINCTRL(BUTTON_EXTENDED_PWR_bp) =
+        PORT_OPC_PULLUP_gc;
 #undef PINCTRL
 #undef PINCTRL_CONCAT
 
@@ -93,10 +93,10 @@ init(void)
 }
 
 static void
-debounce(uint8_t current, struct button * btn)
+debounce(uint8_t current, struct button *btn)
 {
     if (current) {
-        if (btn->released) /* prevent underflow when already 0 */
+        if (btn->released)      /* prevent underflow when already 0 */
             --btn->released;
         btn->pressed = DURATION_DEBOUNCE;
     } else {
