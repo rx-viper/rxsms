@@ -113,10 +113,6 @@ recv(void)
 {
     recv_uart(&UART_EXPERIMENT, &task_recv_from_exp);
     recv_uart(&UART_GROUNDSTATION, &task_recv_from_gnd);
-
-    /* after LO we just ignore all incoming traffic from groundstation */
-    if (task_ctrl_signals.lo_active)
-        task_recv_from_gnd.updated = 0;
 }
 
 static void
@@ -159,6 +155,10 @@ send_uart(USART_t *uart, struct task_recv_uart_data *data)
 static void
 send(void)
 {
+    /* after LO/umbilical disconnect, drop all incoming traffic from ground */
+    if (task_ctrl_signals.lo_active)
+        task_recv_from_gnd.updated = 0;
+
     update_led(task_recv_from_exp.updated, &status_from_exp,
                STATUS_LED_DOWNLINK_bm);
     update_led(task_recv_from_gnd.updated, &status_from_gnd,
