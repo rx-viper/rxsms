@@ -22,7 +22,7 @@
 #include "sched.h"
 #include "task.h"
 #include "task_buttons.h"
-#include "task_sample_adc_inputs.h"
+#include "task_adc.h"
 #include "task_ctrl.h"
 #include "task_sendrecv.h"
 #include "task_error.h"
@@ -41,8 +41,8 @@
 ///
 /// Empty/unused slots must be set to NULL.
 static const struct task *const scheduling_map[SLOT_COUNT] = {
-    &task_buttons, &task_sample_adc_inputs, NULL, &task_recv, &task_ctrl,
-    &task_error, &task_send, &task_debug };
+    &task_buttons, &task_adc, NULL, &task_recv,
+    &task_ctrl, &task_error, &task_send, &task_debug };
 
 /// The current slot number the scheduler is in.
 static uint8_t next_slot;

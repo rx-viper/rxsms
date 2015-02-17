@@ -16,13 +16,13 @@
  *   along with RXSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TASK_SAMPLE_ADC_INPUTS_H
-#define TASK_SAMPLE_ADC_INPUTS_H
+#ifndef TASK_ADC_H
+#define TASK_ADC_H
 
 #include <inttypes.h>
 #include "task.h" /* for struct task */
 
-const struct task task_sample_adc_inputs;
+const struct task task_adc;
 
 // TODO maybe remove entirely or move to task_$FOO.c file if not needed
 struct
@@ -39,13 +39,14 @@ struct
     int32_t from_exp_flip;
     int32_t from_gnd_flip;
     uint8_t force_update : 1;
-} task_sample_adc_inputs_biterror_generator;
+} task_adc_biterror_generator;
 
+// FIXME rename *blocking_* with more accurate *drop_*
 struct
 {
     uint16_t duration;  ///< number of scheduling cycles to block transmission
     uint16_t interval; ///< interval in scheduling cycles to throw coin
     uint8_t force_update : 1;
-} task_sample_adc_inputs_blocking_generator;
+} task_adc_blocking_generator;
 
-#endif /* TASK_SAMPLE_ADC_INPUTS_H */
+#endif /* TASK_ADC_H */

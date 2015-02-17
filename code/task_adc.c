@@ -18,7 +18,7 @@
 
 #include <avr/io.h>
 #include <stdlib.h>
-#include "task_sample_adc_inputs.h"
+#include "task_adc.h"
 #include "util.h"
 
 // TODO configure analog input pins with INTPUT_DISABLE
@@ -56,7 +56,7 @@
 
 static void init(void);
 static void run(void);
-const struct task task_sample_adc_inputs = { .init = &init, .run = &run };
+const struct task task_adc = { .init = &init, .run = &run };
 
 /// Reads the ADC calibration value and TEMPSENSE calibration value.
 static void
@@ -81,13 +81,13 @@ init(void)
     adc_sense_buffer.poti_blocking_rate = 0;
     adc_sense_buffer.poti_blocking_duration = 0;
     adc_sense_buffer.current_sense = 0;
-    task_sample_adc_inputs_biterror_generator.stream_len_bytes = 0;
-    task_sample_adc_inputs_biterror_generator.from_exp_flip = 0;
-    task_sample_adc_inputs_biterror_generator.from_gnd_flip = 0;
-    task_sample_adc_inputs_biterror_generator.force_update = 0;
-    task_sample_adc_inputs_blocking_generator.duration = 0;
-    task_sample_adc_inputs_blocking_generator.interval = 0;
-    task_sample_adc_inputs_blocking_generator.force_update = 0;
+    task_adc_biterror_generator.stream_len_bytes = 0;
+    task_adc_biterror_generator.from_exp_flip = 0;
+    task_adc_biterror_generator.from_gnd_flip = 0;
+    task_adc_biterror_generator.force_update = 0;
+    task_adc_blocking_generator.duration = 0;
+    task_adc_blocking_generator.interval = 0;
+    task_adc_blocking_generator.force_update = 0;
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
@@ -164,12 +164,12 @@ update_biterror_generators(void)
     else
         stream_len_bytes = ((uint32_t) 1) << (15 - bin + 4);
 
-    if (task_sample_adc_inputs_biterror_generator.stream_len_bytes != stream_len_bytes)
-        task_sample_adc_inputs_biterror_generator.force_update = 1;
-    task_sample_adc_inputs_biterror_generator.stream_len_bytes = stream_len_bytes;
-    task_sample_adc_inputs_biterror_generator.from_exp_flip =
+    if (task_adc_biterror_generator.stream_len_bytes != stream_len_bytes)
+        task_adc_biterror_generator.force_update = 1;
+    task_adc_biterror_generator.stream_len_bytes = stream_len_bytes;
+    task_adc_biterror_generator.from_exp_flip =
         generate_bit_flip(stream_len_bytes);
-    task_sample_adc_inputs_biterror_generator.from_gnd_flip =
+    task_adc_biterror_generator.from_gnd_flip =
         generate_bit_flip(stream_len_bytes);
 }
 
@@ -194,11 +194,11 @@ update_blocking_generators(void)
     else
         interval = 0;
 
-    if (task_sample_adc_inputs_blocking_generator.duration != duration ||
-        task_sample_adc_inputs_blocking_generator.interval != interval)
-        task_sample_adc_inputs_blocking_generator.force_update = 1;
-    task_sample_adc_inputs_blocking_generator.duration = duration;
-    task_sample_adc_inputs_blocking_generator.interval = interval;
+    if (task_adc_blocking_generator.duration != duration ||
+        task_adc_blocking_generator.interval != interval)
+        task_adc_blocking_generator.force_update = 1;
+    task_adc_blocking_generator.duration = duration;
+    task_adc_blocking_generator.interval = interval;
 }
 
 static void

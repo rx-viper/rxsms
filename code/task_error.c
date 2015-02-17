@@ -21,7 +21,7 @@
 #include "task_error.h"
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
-#include "task_sample_adc_inputs.h"
+#include "task_adc.h"
 
 /*
  * Ressources used _once_ by this task:
@@ -87,11 +87,11 @@ drop_communication(struct task_recv_uart_data *a,
         }
     }
 
-    const uint8_t upd = task_sample_adc_inputs_blocking_generator.force_update;
-    task_sample_adc_inputs_blocking_generator.force_update = 0;
+    const uint8_t upd = task_adc_blocking_generator.force_update;
+    task_adc_blocking_generator.force_update = 0;
     if (!duration || upd) {
-        duration = task_sample_adc_inputs_blocking_generator.duration;
-        interval = task_sample_adc_inputs_blocking_generator.interval;
+        duration = task_adc_blocking_generator.duration;
+        interval = task_adc_blocking_generator.interval;
     }
 }
 
@@ -109,22 +109,20 @@ run(void)
        rate has been changed (forced update) or the old run for bit errors has
        been completed (regular update).
      */
-    uint8_t force_update =
-        task_sample_adc_inputs_biterror_generator.force_update;
+    uint8_t force_update = task_adc_biterror_generator.force_update;
     if (0 == task_recv_from_exp.biterr_remaining_bytes || force_update) {
         task_recv_from_exp.biterr_remaining_bytes =
-            task_sample_adc_inputs_biterror_generator.stream_len_bytes;
+            task_adc_biterror_generator.stream_len_bytes;
         task_recv_from_exp.biterr_flip_index =
-            task_sample_adc_inputs_biterror_generator.from_exp_flip;
+            task_adc_biterror_generator.from_exp_flip;
     }
     if (0 == task_recv_from_gnd.biterr_remaining_bytes || force_update) {
         task_recv_from_gnd.biterr_remaining_bytes =
-            task_sample_adc_inputs_biterror_generator.stream_len_bytes;
+            task_adc_biterror_generator.stream_len_bytes;
         task_recv_from_gnd.biterr_flip_index =
-            task_sample_adc_inputs_biterror_generator.from_gnd_flip;
+            task_adc_biterror_generator.from_gnd_flip;
     }
-    task_sample_adc_inputs_biterror_generator.force_update = 0;
-
+    task_adc_biterror_generator.force_update = 0;
 
     drop_communication(&task_recv_from_gnd, &task_recv_from_exp);
 }
