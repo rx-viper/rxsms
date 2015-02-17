@@ -20,7 +20,6 @@
 #define INIT_H
 
 void init_clock(void);
-void init_io(void);
 void init_prr(void);
 
 #endif                          /* INIT_H */
