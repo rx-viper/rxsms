@@ -63,15 +63,17 @@ static void
 production_signature_row_read_calibration(uint16_t * adca_calibration,
                                           uint16_t * tempsense_calibration)
 {
-    uint8_t adcacal0_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL0;
-    uint8_t adcacal1_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL1;
-    uint8_t tempsense0_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_TEMPSENSE0;
-    uint8_t tempsense1_addr = (uint8_t) (uint16_t) &PRODSIGNATURES_TEMPSENSE1;
+    uint8_t addr0, addr1;
 
-    *adca_calibration = (prodsigrow_read_byte(adcacal1_addr) << 8)
-        | prodsigrow_read_byte(adcacal0_addr);
-    *tempsense_calibration = (prodsigrow_read_byte(tempsense1_addr) << 8)
-        | prodsigrow_read_byte(tempsense0_addr);
+    addr0 = (uint8_t) (uint16_t) & PRODSIGNATURES_ADCACAL0;
+    addr1 = (uint8_t) (uint16_t) & PRODSIGNATURES_ADCACAL1;
+    *adca_calibration = (prodsigrow_read_byte(addr1) << 8)
+        | prodsigrow_read_byte(addr0);
+
+    addr0 = (uint8_t) (uint16_t) & PRODSIGNATURES_TEMPSENSE0;
+    addr1 = (uint8_t) (uint16_t) & PRODSIGNATURES_TEMPSENSE1;
+    *tempsense_calibration = (prodsigrow_read_byte(addr1) << 8)
+        | prodsigrow_read_byte(addr0);
 }
 
 /// Init the ADC to scan the potis and optional current sense input.
