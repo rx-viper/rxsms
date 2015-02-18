@@ -24,12 +24,19 @@
 
 const struct task task_adc;
 
-struct {
-    int16_t poti_bit_error_rate;
-    int16_t poti_blocking_rate;
-    int16_t poti_blocking_duration;
-    int16_t current_sense;
-    int16_t tempsense[4];
+/*
+   note:  when changing the layout of this structure, concult with all other
+          uses and verify correct behaviour.
+ */
+union {
+    int16_t i16[8];
+    struct {
+        int16_t poti_bit_error_rate;
+        int16_t poti_blocking_rate;
+        int16_t poti_blocking_duration;
+        int16_t current_sense;
+        int16_t tempsense[4];
+    } e;
 } task_adc_raw;
 
 struct {

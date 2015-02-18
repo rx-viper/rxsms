@@ -80,10 +80,8 @@ production_signature_row_read_calibration(uint16_t * adca_calibration,
 static void
 init(void)
 {
-    task_adc_raw.poti_bit_error_rate = 0;
-    task_adc_raw.poti_blocking_rate = 0;
-    task_adc_raw.poti_blocking_duration = 0;
-    task_adc_raw.current_sense = 0;
+    for (uint8_t i = 0; i < sizeof(task_adc_raw); ++i)
+        ((uint8_t*) &task_adc_raw)[i] = 0;
     task_adc_biterror_generator.stream_len_bytes = 0;
     task_adc_biterror_generator.from_exp_flip = 0;
     task_adc_biterror_generator.from_gnd_flip = 0;
@@ -149,7 +147,7 @@ generate_bit_flip(const uint32_t stream_len_bytes)
 static void
 update_biterror_generators(void)
 {
-    int16_t bit_error_rate = task_adc_raw.poti_bit_error_rate;
+    int16_t bit_error_rate = task_adc_raw.e.poti_bit_error_rate;
     if (bit_error_rate < 0)
         bit_error_rate = 0;
 
@@ -181,8 +179,8 @@ update_biterror_generators(void)
 static void
 update_blocking_generators(void)
 {
-    int16_t duration_poti = task_adc_raw.poti_blocking_duration;
-    int16_t frequency_poti = task_adc_raw.poti_blocking_rate;
+    int16_t duration_poti = task_adc_raw.e.poti_blocking_duration;
+    int16_t frequency_poti = task_adc_raw.e.poti_blocking_rate;
 
     if (duration_poti < 0)
         duration_poti = 0;
@@ -224,38 +222,32 @@ run(void)
             || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
-        task_adc_raw.tempsense[s - BITERR] = ADCA.CH1RES;
-        int16_t adc_value = ADCA.CH0RES;
+        task_adc_raw.e.tempsense[s - BITERR] = ADCA.CH1RES;
 
-        /* Update task_adc_raw only iff the new value has a significant
-           difference.  This hysteresis prevents updates of the generator
-           probabilities at the boundary of a setting and cancels noise. */
-        const int8_t MIN_DIFF = 5;
-        if (BITERR == s) {
-            int16_t diff = task_adc_raw.poti_bit_error_rate - adc_value;
-            if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                task_adc_raw.poti_bit_error_rate = adc_value;
-            state = BLOCKRATE;
-        } else if (BLOCKRATE == s) {
-            int16_t diff = task_adc_raw.poti_blocking_rate - adc_value;
-            if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                task_adc_raw.poti_blocking_rate = adc_value;
-            state = BLOCKDUR;
-        } else if (BLOCKDUR == s) {
-            int16_t diff = task_adc_raw.poti_blocking_duration - adc_value;
-            if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                task_adc_raw.poti_blocking_duration = adc_value;
-            state = CURRSENSE;
-        } else if (CURRSENSE == s) {
-            task_adc_raw.current_sense = adc_value;
+        const int16_t adc_value = ADCA.CH0RES;
+        /* For the potentiometer inputs:
+             Update task_adc_raw only iff the new value exceeds a hysteresis.
+             This hysteresis prevents updates of the generator probabilities at
+             the boundary of a setting and cancels out noise.
+           For the current sensor:
+             Ignore the hysteresis since we want the exact sensor readings.  */
+        const int8_t MIN_DIFF = 8;
+        int16_t diff = task_adc_raw.i16[s - BITERR] - adc_value;
+        if (diff < -MIN_DIFF || diff > MIN_DIFF || CURRSENSE == s)
+            task_adc_raw.i16[s - BITERR] = adc_value;
+
+        ++state;
+        if (state > CURRSENSE) {
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
                 | ADC_CH_MUXNEG_GND_MODE3_gc;
             ADCA.CH0.SCAN = 3;
-            state = BITERR;
 
             update_biterror_generators();
             update_blocking_generators();
+
+            state = BITERR;
         }
+
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
     } else {
