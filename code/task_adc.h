@@ -24,12 +24,12 @@
 
 const struct task task_adc;
 
-// TODO maybe remove entirely or move to task_$FOO.c file if not needed
 struct {
     int16_t poti_bit_error_rate;
     int16_t poti_blocking_rate;
     int16_t poti_blocking_duration;
     int16_t current_sense;
+    int16_t tempsense[4];
 } task_adc_raw;
 
 struct {

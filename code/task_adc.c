@@ -224,34 +224,29 @@ run(void)
             || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
+        task_adc_raw.tempsense[s - BITERR] = ADCA.CH1RES;
         int16_t adc_value = ADCA.CH0RES;
 
-        /* update adc_sense_buffer only iff the new value has
-           a significant difference
-           this hysteresis prevents updates of the generator probabilities at
-           the boundary of a setting
-         */
+        /* Update task_adc_raw only iff the new value has a significant
+           difference.  This hysteresis prevents updates of the generator
+           probabilities at the boundary of a setting and cancels noise. */
         const int8_t MIN_DIFF = 5;
         if (BITERR == s) {
             int16_t diff = task_adc_raw.poti_bit_error_rate - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-            // TODO where to store the tempsense result?
                 task_adc_raw.poti_bit_error_rate = adc_value;
             state = BLOCKRATE;
         } else if (BLOCKRATE == s) {
             int16_t diff = task_adc_raw.poti_blocking_rate - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-            // TODO where to store the tempsense result?
                 task_adc_raw.poti_blocking_rate = adc_value;
             state = BLOCKDUR;
         } else if (BLOCKDUR == s) {
             int16_t diff = task_adc_raw.poti_blocking_duration - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-            // TODO where to store the tempsense result?
                 task_adc_raw.poti_blocking_duration = adc_value;
             state = CURRSENSE;
         } else if (CURRSENSE == s) {
-            // TODO where to store the tempsense result?
             task_adc_raw.current_sense = adc_value;
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
                 | ADC_CH_MUXNEG_GND_MODE3_gc;
