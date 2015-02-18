@@ -28,9 +28,6 @@
 #include "task_error.h"
 #include "task_debug.h"
 
-#define SCHED_SLOT_COUNT     8
-#define SCHED_SLOT_PERIOD_US 25
-
 #define SCHED_TIMER             TCC0
 #define SCHED_TIMER_OVF_vect    TCC0_OVF_vect
 #define SCHED_CLKSEL_gc     TC_CLKSEL_DIV8_gc

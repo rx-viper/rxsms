@@ -19,6 +19,9 @@
 #ifndef SCHED_H
 #define SCHED_H
 
+#define SCHED_SLOT_COUNT     8
+#define SCHED_SLOT_PERIOD_US 25
+
 void sched_init(void);
 void sched_start(void);
 
