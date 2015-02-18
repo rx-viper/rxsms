@@ -144,36 +144,58 @@ generate_bit_flip(const uint32_t stream_len_bytes)
     return 0;
 }
 
+/**
+ *  Partitions a value range 0..2047 into 16 regions ("bins") and returns
+ *  a bitmask with all bits cleared (bin 0) or the 15th bit set (bin 1), the
+ *  14th bit set (bit 2) and so on.
+ *
+ *  bin     | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1    0
+ *  bit set |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 none
+ *
+ *  It allows for generation of a (mask - 1) value that can be and-ed with a
+ *  uniformly distributed random number with binary range, i.e. 0..2^x-1, to
+ *  create a new uniform distributed random number of range 0..2^16-1.
+ */
+static uint16_t partition_range(int16_t adc) __ATTR_PURE__;
+static uint16_t
+partition_range(int16_t adc)
+{
+    if (adc < 0)
+        adc = 0;
+    else if (adc >= 2048)
+        adc = 2047;
+
+    uint8_t bin = adc / (2048 / 16);
+    if (0 == bin)
+        return 0;
+
+    uint8_t set_bit = 15 - bin;
+    if (set_bit > 7)
+        return (1 << (set_bit - 8)) << 8;
+    return 1 << set_bit;
+}
+
 static void
 update_biterror_generators(void)
 {
-    int16_t bit_error_rate = task_adc_raw.e.poti_bit_error_rate;
-    if (bit_error_rate < 0)
-        bit_error_rate = 0;
+    /* get a mask for the probability with either p=0, or p = 1 / 2^N
+       then decrease the probability by 2^(-4) to get the following values:
 
-    /* partition the ADC range 2047..0 into 16 bins
-       with respective probabilities 1/N:
-       bin        | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
-       N=2^x bit  |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
-       N=2^x byte |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
-       except bin 0 with probability 0 (error gen disabled)
+       bin          | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       2^N bytes    |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
+       2^(N+3) bits |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
 
-       The value range is |0..2047| = 2048 and we want 16 bins out of it.
+       Therefore, the bit error rate with the poti in bin=13 is
+           p = (1 bit error) / (2^9 bits)
      */
-    uint8_t bin = bit_error_rate / (2048 / 16);
-    uint32_t stream_len_bytes;
-    if (0 == bin)
-        stream_len_bytes = 0;
-    else
-        stream_len_bytes = ((uint32_t) 1) << (15 - bin + 4);
+    uint32_t stream_len = partition_range(task_adc_raw.e.poti_bit_error_rate);
+    stream_len <<= 4;
 
-    if (task_adc_biterror_generator.stream_len_bytes != stream_len_bytes)
+    if (task_adc_biterror_generator.stream_len_bytes != stream_len)
         task_adc_biterror_generator.force_update = 1;
-    task_adc_biterror_generator.stream_len_bytes = stream_len_bytes;
-    task_adc_biterror_generator.from_exp_flip =
-        generate_bit_flip(stream_len_bytes);
-    task_adc_biterror_generator.from_gnd_flip =
-        generate_bit_flip(stream_len_bytes);
+    task_adc_biterror_generator.stream_len_bytes = stream_len;
+    task_adc_biterror_generator.from_exp_flip = generate_bit_flip(stream_len);
+    task_adc_biterror_generator.from_gnd_flip = generate_bit_flip(stream_len);
 }
 
 static void
