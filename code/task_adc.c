@@ -231,7 +231,7 @@ run(void)
            this hysteresis prevents updates of the generator probabilities at
            the boundary of a setting
          */
-        const int8_t MIN_DIFF = 50;
+        const int8_t MIN_DIFF = 5;
         if (BITERR == s) {
             int16_t diff =
                 adc_sense_buffer.poti_bit_error_rate - adc_value;
