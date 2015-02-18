@@ -28,19 +28,20 @@
 #include "task_error.h"
 #include "task_debug.h"
 
-#define SLOT_COUNT              8
+#define SCHED_SLOT_COUNT     8
+#define SCHED_SLOT_PERIOD_US 25
+
 #define SCHED_TIMER             TCC0
 #define SCHED_TIMER_OVF_vect    TCC0_OVF_vect
 #define SCHED_CLKSEL_gc     TC_CLKSEL_DIV8_gc
 #define SCHED_CLKSEL_DEC    8
-#define SLOT_PERIOD_US      25
-#define SCHED_PERIOD        ((SLOT_PERIOD_US * 1e-6 * F_CPU / SCHED_CLKSEL_DEC))
+#define SCHED_PERIOD ((SCHED_SLOT_PERIOD_US * 1e-6 * F_CPU / SCHED_CLKSEL_DEC))
 
 
 /// Scheduling plan.
 ///
 /// Empty/unused slots must be set to NULL.
-static const struct task *const scheduling_map[SLOT_COUNT] = {
+static const struct task *const scheduling_map[SCHED_SLOT_COUNT] = {
     &task_buttons, &task_adc, NULL, &task_recv,
     &task_ctrl, &task_error, &task_send, &task_debug
 };
@@ -59,7 +60,7 @@ sched_init(void)
         TC_OVFINTLVL_LO_gc | TC_OVFINTLVL_MED_gc | TC_OVFINTLVL_HI_gc;
     PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
 
-    for (uint8_t i = 0; i < SLOT_COUNT; ++i) {
+    for (uint8_t i = 0; i < SCHED_SLOT_COUNT; ++i) {
         const struct task *t = scheduling_map[i];
         if (NULL != t)
             t->init();
@@ -79,10 +80,10 @@ ISR(SCHED_TIMER_OVF_vect)
 {
     uint8_t slot = next_slot;
     const struct task *t = scheduling_map[slot];
-#if SLOT_COUNT == 2 || SLOT_COUNT == 4 || SLOT_COUNT == 8 || SLOT_COUNT == 16
-    next_slot = ((uint8_t) (slot + 1)) % SLOT_COUNT;
+#if SCHED_SLOT_COUNT % 2 == 0
+    next_slot = ((uint8_t) (slot + 1)) % SCHED_SLOT_COUNT;
 #else
-    if (++slot >= SLOT_COUNT)
+    if (++slot >= SCHED_SLOT_COUNT)
         slot = 0;
     next_slot = slot;
 #endif
