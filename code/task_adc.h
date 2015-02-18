@@ -30,7 +30,7 @@ struct {
     int16_t poti_blocking_rate;
     int16_t poti_blocking_duration;
     int16_t current_sense;
-} adc_sense_buffer;
+} task_adc_raw;
 
 struct {
     uint32_t stream_len_bytes;

@@ -80,10 +80,10 @@ production_signature_row_read_calibration(uint16_t * adca_calibration,
 static void
 init(void)
 {
-    adc_sense_buffer.poti_bit_error_rate = 0;
-    adc_sense_buffer.poti_blocking_rate = 0;
-    adc_sense_buffer.poti_blocking_duration = 0;
-    adc_sense_buffer.current_sense = 0;
+    task_adc_raw.poti_bit_error_rate = 0;
+    task_adc_raw.poti_blocking_rate = 0;
+    task_adc_raw.poti_blocking_duration = 0;
+    task_adc_raw.current_sense = 0;
     task_adc_biterror_generator.stream_len_bytes = 0;
     task_adc_biterror_generator.from_exp_flip = 0;
     task_adc_biterror_generator.from_gnd_flip = 0;
@@ -149,7 +149,7 @@ generate_bit_flip(const uint32_t stream_len_bytes)
 static void
 update_biterror_generators(void)
 {
-    int16_t bit_error_rate = adc_sense_buffer.poti_bit_error_rate;
+    int16_t bit_error_rate = task_adc_raw.poti_bit_error_rate;
     if (bit_error_rate < 0)
         bit_error_rate = 0;
 
@@ -181,8 +181,8 @@ update_biterror_generators(void)
 static void
 update_blocking_generators(void)
 {
-    int16_t duration_poti = adc_sense_buffer.poti_blocking_duration;
-    int16_t frequency_poti = adc_sense_buffer.poti_blocking_rate;
+    int16_t duration_poti = task_adc_raw.poti_blocking_duration;
+    int16_t frequency_poti = task_adc_raw.poti_blocking_rate;
 
     if (duration_poti < 0)
         duration_poti = 0;
@@ -233,28 +233,26 @@ run(void)
          */
         const int8_t MIN_DIFF = 5;
         if (BITERR == s) {
-            int16_t diff =
-                adc_sense_buffer.poti_bit_error_rate - adc_value;
+            int16_t diff = task_adc_raw.poti_bit_error_rate - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                adc_sense_buffer.poti_bit_error_rate = adc_value;
             // TODO where to store the tempsense result?
+                task_adc_raw.poti_bit_error_rate = adc_value;
             state = BLOCKRATE;
         } else if (BLOCKRATE == s) {
-            int16_t diff = adc_sense_buffer.poti_blocking_rate - adc_value;
+            int16_t diff = task_adc_raw.poti_blocking_rate - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                adc_sense_buffer.poti_blocking_rate = adc_value;
             // TODO where to store the tempsense result?
+                task_adc_raw.poti_blocking_rate = adc_value;
             state = BLOCKDUR;
         } else if (BLOCKDUR == s) {
-            int16_t diff =
-                adc_sense_buffer.poti_blocking_duration - adc_value;
+            int16_t diff = task_adc_raw.poti_blocking_duration - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                adc_sense_buffer.poti_blocking_duration = adc_value;
             // TODO where to store the tempsense result?
+                task_adc_raw.poti_blocking_duration = adc_value;
             state = CURRSENSE;
         } else if (CURRSENSE == s) {
-            adc_sense_buffer.current_sense = adc_value;
             // TODO where to store the tempsense result?
+            task_adc_raw.current_sense = adc_value;
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
                 | ADC_CH_MUXNEG_GND_MODE3_gc;
             ADCA.CH0.SCAN = 3;
