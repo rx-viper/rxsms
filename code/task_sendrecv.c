@@ -118,9 +118,9 @@ update_led(uint8_t has_received, struct uart_status *status,
            uint8_t ledmask)
 {
     /* switch off LED after this time of inactivity */
-    const uint8_t LED_TIMEOUT = 125;
+    const uint8_t LED_TIMEOUT = 100;
     /* period of flashing LED to indicate active communication */
-    const uint8_t LED_DURATION = 125;
+    const uint8_t LED_DURATION = LED_TIMEOUT;
 
     if (has_received) {
         status->last_recv_ago = 0;
