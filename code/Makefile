@@ -62,7 +62,7 @@ LFLAGS += -Wl,-Map,$(TARGET).map
 
 
 all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(TARGET).eep
-	@$(SIZE) $<
+	$(SIZE) $<
 	@echo DONE
 
 %.hex: %.elf
