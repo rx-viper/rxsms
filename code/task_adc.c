@@ -157,8 +157,7 @@ generate_bit_flip(const uint32_t stream_len_bytes)
  *  uniformly distributed random number with binary range, i.e. 0..2^x-1, to
  *  create a new uniform distributed random number of range 0..2^16-1.
  */
-static uint16_t partition_range(int16_t adc) __ATTR_PURE__;
-static uint16_t
+static uint32_t
 partition_range(int16_t adc)
 {
     if (adc < 0)
