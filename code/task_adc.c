@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include "task_adc.h"
 #include "util.h"
+#include "sched.h"
 
 // TODO configure analog input pins with INTPUT_DISABLE
 //      in the respective PINnCTRL register of the IO port
@@ -208,29 +209,79 @@ update_biterror_generators(void)
 static void
 update_blocking_generators(void)
 {
-    int16_t duration_poti = task_adc_raw.e.poti_blocking_duration;
-    int16_t frequency_poti = task_adc_raw.e.poti_blocking_rate;
+    /* get a mask for the probability of a drop event with either
+       p=0, or p = 1 / 2^N, then decrease the probability by 2^(-3)
+       to get the following values:
 
-    if (duration_poti < 0)
-        duration_poti = 0;
-    if (frequency_poti < 0)
-        frequency_poti = 0;
+       bin            | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       2^N time units |  0  4  5  6  7  8  9 10 11 12 13 14 15 16 17  -
 
-    /* 32 bins with 2000 sched cycles (=0.5s) each: 0s..15.5s */
-    uint16_t duration = 2000 * (duration_poti / 64);
-    /* 32 bins with 2000 sched cycles (=0.5s) each: 0s..15.5s */
-    uint8_t interval_bin = frequency_poti / 64;
-    uint16_t interval;
-    if (interval_bin)
-        interval = 2000 * interval_bin;
-    else
-        interval = 0;
+       At bin=0 communication drop is disabled and at bin=15 all
+       communication is dropped entirely (infinite blocking, p=1).
 
-    if (task_adc_blocking_generator.duration != duration ||
-        task_adc_blocking_generator.interval != interval)
+       A "time unit" is fixed to the scheduler interval, i.e. the time
+       for a complete run through the scheduler task list:
+           time unit = SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT
+       In case of 25us per slots and a total of 8 slots
+           time unit = 200us
+
+       Therefore, if the drop rate poti is set to bin=6 a byte drop
+       event in the communication should have probability
+           p = (1 drop event) / (2^12 time units)
+       and, thus, occur once every
+           t = 1 / p = 2^12 * 200us = 0.8192s
+     */
+    uint32_t interval =
+        partition_range(task_adc_raw.e.poti_blocking_rate) << 3;
+    /* check corner case if we are in bin=15
+       if so, we should drop infinitely, i.e. p = 1 = 2^0 */
+    if (interval & _BV(3))
+        interval = 1;
+
+    if (task_adc_blocking_generator.interval != interval)
         task_adc_blocking_generator.force_update = 1;
-    task_adc_blocking_generator.duration = duration;
     task_adc_blocking_generator.interval = interval;
+    if (0 == interval)                  /* communication drop disabled */
+        return;
+    task_adc_blocking_generator.start_of_drop = get_random(interval);
+
+    int16_t adc = task_adc_raw.e.poti_blocking_duration;
+    if (adc < 0)
+        adc = 0;
+    if (adc > 2047)
+        adc = 2047;
+    /* partition range into 32 bins */
+    uint8_t duration_bin = adc / (2048 / 32);
+    uint16_t duration;
+    if (duration_bin < 6) {
+        if (0 == duration_bin)
+            duration = 1; /* max. a single byte dropped */
+        else if (1 == duration_bin)
+            duration = 2; /* 1<x<=2 bytes dropped, power of 2 */
+        else if (2 == duration_bin)
+            duration = 3; /* 2<x<=3 bytes dropped, prime number */
+        else if (3 == duration_bin)
+            duration = 7; /* 6<x<=7 bytes dropped, prime number */
+        else if (4 == duration_bin)
+            duration = 24; /* max. packet length permitted by RX specs */
+        else if (5 == duration_bin)
+            duration = 36; /* max. packet length without RX required pause */
+    } else {
+        duration_bin = duration_bin - 6;
+        uint8_t time_unit = 5e4 / (SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT);
+        if (duration_bin < 10)                 /* 50ms..500ms */
+            duration = time_unit * 1 * (duration_bin + 1);
+        else if (duration_bin < 20)            /* 0.6s..+0.1s..1.5s */
+            duration = time_unit * 2 * (duration_bin - 10 + 6);
+        else if (duration_bin < 24)            /* 2s, 3s, 4s, 5s */
+            duration = time_unit * 20 * (duration_bin - 20 + 2);
+        else                                   /* 10s, 20s */
+            duration = time_unit * 200 * (duration_bin - 24 + 1);
+    }
+
+    if (task_adc_blocking_generator.drop_duration != duration)
+        task_adc_blocking_generator.force_update = 1;
+    task_adc_blocking_generator.drop_duration = duration;
 }
 
 static void
