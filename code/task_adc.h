@@ -48,8 +48,9 @@ struct {
 
 // FIXME rename *blocking_* with more accurate *drop_*
 struct {
+    uint32_t interval;
+    uint32_t start_of_drop;
     uint16_t duration;          ///< number of scheduling cycles to block transmission
-    uint16_t interval;          ///< interval in scheduling cycles to throw coin
     uint8_t force_update:1;
 } task_adc_blocking_generator;
 
