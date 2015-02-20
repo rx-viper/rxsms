@@ -125,9 +125,8 @@ init(void)
         ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
-// TODO check if uint32_t is correct. at other places I've seen int32_t...
 static uint32_t
-generate_bit_flip(const uint32_t stream_len_bytes)
+get_random(const uint32_t mask)
 {
     union {
         uint32_t flip;
@@ -138,10 +137,10 @@ generate_bit_flip(const uint32_t stream_len_bytes)
 
     for (uint8_t i = 0; i < sizeof(random_number); ++i)
         random_number.e.ui8[i] = (uint8_t) rand();
-    /* mask the random number with range 0..2^32-1
-       to range 0..(stream_len_bytes * 8 - 1) */
-    if (stream_len_bytes)
-        return random_number.flip & (stream_len_bytes * 8 - 1);
+    /* mask the random number with range 0..2^32-1 to range 0..(mask - 1)
+       mask has to be 0 or 2^N, N in {0, ... , 31}                      */
+    if (mask)
+        return random_number.flip & (mask - 1);
     return 0;
 }
 
