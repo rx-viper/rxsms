@@ -36,9 +36,19 @@ static void run(void);
 
 const struct task task_error = { .init = &init, .run = &run };
 
+static struct
+{
+    uint32_t begin;
+    uint32_t end;
+    uint32_t reload;
+} drop_error;
+
 static void
 init(void)
 {
+    drop_error.begin = 0;
+    drop_error.end = 0;
+    drop_error.reload = 0;
 }
 
 /// flip a single bit in data stream
@@ -72,27 +82,18 @@ static void
 drop_communication(struct task_recv_uart_data *a,
                    struct task_recv_uart_data *b)
 {
-    static uint16_t duration = 0;
-    static uint16_t interval = 0;
-
-    if (task_ctrl_signals.error_inhibit)
-        interval = 0;
-    --interval;
-    if (!interval) {
-        interval = 1;
-        --duration;
-        if (rand() & 1) {
-            a->updated = 0;
-            b->updated = 0;
-        }
-    }
-
-    const uint8_t upd = task_adc_blocking_generator.force_update;
-    task_adc_blocking_generator.force_update = 0;
-    if (!duration || upd) {
-        duration = task_adc_blocking_generator.duration;
-        interval = task_adc_blocking_generator.interval;
-    }
+    if (drop_error.reload)
+        --drop_error.reload;
+    if (drop_error.begin)
+        --drop_error.begin;
+    if (!drop_error.end)
+        return; /* dropping is over */
+    --drop_error.end;
+    if (drop_error.begin)
+        return; /* dropping did not yet start */
+    /* now really drop */
+    a->updated = 0;
+    b->updated = 0;
 }
 
 static void
