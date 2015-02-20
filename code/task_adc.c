@@ -311,7 +311,7 @@ run(void)
              the boundary of a setting and cancels out noise.
            For the current sensor:
              Ignore the hysteresis since we want the exact sensor readings.  */
-        const int8_t MIN_DIFF = 8;
+        const int8_t MIN_DIFF = 16;
         int16_t diff = task_adc_raw.i16[s - BITERR] - adc_value;
         if (diff < -MIN_DIFF || diff > MIN_DIFF || CURRSENSE == s)
             task_adc_raw.i16[s - BITERR] = adc_value;
