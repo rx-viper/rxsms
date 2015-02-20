@@ -177,24 +177,32 @@ partition_range(int16_t adc)
 static void
 update_biterror_generators(void)
 {
-    /* get a mask for the probability with either p=0, or p = 1 / 2^N
-       then decrease the probability by 2^(-4) to get the following values:
+    /* get a mask for the probability of a bit error with either
+       p=0, or p = 1 / 2^N, then decrease the probability by 2^(-4)
+       to get the following values:
 
-       bin          | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
-       2^N bytes    |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
-       2^(N+3) bits |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
+       bin            | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1  0
+       2^N bytes      |  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18  -
+       2^(N+3) bits   |  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21  -
 
-       Therefore, the bit error rate with the poti in bin=13 is
+       The get_random(mask) function will generate a random uniform
+       distributed number in the range
+           0..(2^stream_len bytes * 8 bits/byte)
+           = 0..2^(stream_len_bytes + 3)
+
+       Therefore, the bit error rate with the poti set to bin=13 is
            p = (1 bit error) / (2^9 bits)
+       hence, a bit flip occurs once per
+           n = 1/p = 2^9 bits
      */
-    uint32_t stream_len = partition_range(task_adc_raw.e.poti_bit_error_rate);
-    stream_len <<= 4;
+    uint32_t stream_len =
+        partition_range(task_adc_raw.e.poti_bit_error_rate) << 4;
 
     if (task_adc_biterror_generator.stream_len_bytes != stream_len)
         task_adc_biterror_generator.force_update = 1;
     task_adc_biterror_generator.stream_len_bytes = stream_len;
-    task_adc_biterror_generator.from_exp_flip = generate_bit_flip(stream_len);
-    task_adc_biterror_generator.from_gnd_flip = generate_bit_flip(stream_len);
+    task_adc_biterror_generator.from_exp_flip = get_random(stream_len << 3);
+    task_adc_biterror_generator.from_gnd_flip = get_random(stream_len << 3);
 }
 
 static void
