@@ -89,7 +89,7 @@ init(void)
     task_adc_biterror_generator.force_update = 0;
     task_adc_blocking_generator.interval = 0;
     task_adc_blocking_generator.start_of_drop = 0;
-    task_adc_blocking_generator.duration = 0;
+    task_adc_blocking_generator.drop_duration = 0;
     task_adc_blocking_generator.force_update = 0;
 
     /* configure pins for input */

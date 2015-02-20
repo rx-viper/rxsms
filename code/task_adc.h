@@ -50,7 +50,7 @@ struct {
 struct {
     uint32_t interval;
     uint32_t start_of_drop;
-    uint16_t duration;          ///< number of scheduling cycles to block transmission
+    uint16_t drop_duration;
     uint8_t force_update:1;
 } task_adc_blocking_generator;
 
