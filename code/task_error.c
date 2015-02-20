@@ -97,33 +97,64 @@ drop_communication(struct task_recv_uart_data *a,
 }
 
 static void
-run(void)
+reload_settings(const uint8_t global_update)
 {
-    if (task_ctrl_signals.error_inhibit)
-        return;
-
-    flip_bit(&task_recv_from_gnd);
-    flip_bit(&task_recv_from_exp);
-
     /*
        Load new stream length in bytes and the bit to flip if the bit error
        rate has been changed (forced update) or the old run for bit errors has
        been completed (regular update).
      */
-    uint8_t force_update = task_adc_biterror_generator.force_update;
-    if (0 == task_recv_from_exp.biterr_remaining_bytes || force_update) {
+    uint8_t biterr_updated = task_adc_biterror_generator.force_update
+                           | global_update;
+    if (0 == task_recv_from_exp.biterr_remaining_bytes || biterr_updated) {
         task_recv_from_exp.biterr_remaining_bytes =
             task_adc_biterror_generator.stream_len_bytes;
         task_recv_from_exp.biterr_flip_index =
             task_adc_biterror_generator.from_exp_flip;
     }
-    if (0 == task_recv_from_gnd.biterr_remaining_bytes || force_update) {
+    if (0 == task_recv_from_gnd.biterr_remaining_bytes || biterr_updated) {
         task_recv_from_gnd.biterr_remaining_bytes =
             task_adc_biterror_generator.stream_len_bytes;
         task_recv_from_gnd.biterr_flip_index =
             task_adc_biterror_generator.from_gnd_flip;
     }
     task_adc_biterror_generator.force_update = 0;
+
+    /*
+       Load new point in time when to start dropping and load the duration for
+       the communication outage.
+     */
+    uint8_t drop_updated = task_adc_blocking_generator.force_update
+                         | global_update;
+    if ((0 == drop_error.end && 0 == drop_error.reload) || drop_updated) {
+        drop_error.reload = task_adc_blocking_generator.interval;
+        if (!drop_error.reload) {
+            /* communication drop disabled */
+            drop_error.begin = 0;
+            drop_error.end = 0;
+        } else {
+            drop_error.begin = task_adc_blocking_generator.start_of_drop;
+            drop_error.end = drop_error.begin
+                           + task_adc_blocking_generator.drop_duration + 1;
+        }
+    }
+    task_adc_blocking_generator.force_update = 0;
+}
+
+static void
+run(void)
+{
+    static uint8_t global_update = 0;
+    if (task_ctrl_signals.error_inhibit) {
+        global_update = 1;
+        return;
+    }
+
+    reload_settings(global_update);
+    global_update = 0;
+
+    flip_bit(&task_recv_from_gnd);
+    flip_bit(&task_recv_from_exp);
 
     drop_communication(&task_recv_from_gnd, &task_recv_from_exp);
 }
