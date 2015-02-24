@@ -32,8 +32,8 @@ union {
     int16_t i16[8];
     struct {
         int16_t poti_bit_error_rate;
-        int16_t poti_blocking_rate;
-        int16_t poti_blocking_duration;
+        int16_t poti_drop_rate;
+        int16_t poti_drop_duration;
         int16_t current_sense;
         int16_t tempsense[4];
     } e;
@@ -46,12 +46,11 @@ struct {
     uint8_t force_update:1;
 } task_adc_biterror_generator;
 
-// FIXME rename *blocking_* with more accurate *drop_*
 struct {
     uint32_t interval;
     uint32_t start_of_drop;
     uint16_t drop_duration;
     uint8_t force_update:1;
-} task_adc_blocking_generator;
+} task_adc_drop_generator;
 
 #endif                          /* TASK_ADC_H */

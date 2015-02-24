@@ -68,7 +68,7 @@ apply_state(void)
     }
     if (task_ctrl_signals.error_inhibit ||
         (!task_adc_biterror_generator.stream_len_bytes &&
-         !task_adc_blocking_generator.interval))
+         !task_adc_drop_generator.interval))
         STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
     else
         STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;

@@ -44,15 +44,15 @@
 #endif
 
 #define ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc    ADC_CH_MUXPOS_PIN1_gc
-#define ADC_CH_MUXPOS_POTI_BLOCKING_RATE_gc     ADC_CH_MUXPOS_PIN2_gc
-#define ADC_CH_MUXPOS_POTI_BLOCKING_DURATION_gc ADC_CH_MUXPOS_PIN3_gc
+#define ADC_CH_MUXPOS_POTI_DROP_RATE_gc         ADC_CH_MUXPOS_PIN2_gc
+#define ADC_CH_MUXPOS_POTI_DROP_DURATION_gc     ADC_CH_MUXPOS_PIN3_gc
 #define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN4_gc
 
 #define ADC_PORT                        PORTA
 #define ADC_REF_bm                      PIN0_bm
 #define ADC_POTI_BIT_ERROR_RATE_bm      PIN1_bm
-#define ADC_POTI_BLOCKING_RATE_bm       PIN2_bm
-#define ADC_POTI_BLOCKING_DURATION_bm   PIN3_bm
+#define ADC_POTI_DROP_RATE_bm           PIN2_bm
+#define ADC_POTI_DROP_DURATION_bm       PIN3_bm
 #define ADC_CURRENT_SENSE_bm            PIN4_bm
 
 static void init(void);
@@ -87,14 +87,14 @@ init(void)
     task_adc_biterror_generator.from_exp_flip = 0;
     task_adc_biterror_generator.from_gnd_flip = 0;
     task_adc_biterror_generator.force_update = 0;
-    task_adc_blocking_generator.interval = 0;
-    task_adc_blocking_generator.start_of_drop = 0;
-    task_adc_blocking_generator.drop_duration = 0;
-    task_adc_blocking_generator.force_update = 0;
+    task_adc_drop_generator.interval = 0;
+    task_adc_drop_generator.start_of_drop = 0;
+    task_adc_drop_generator.drop_duration = 0;
+    task_adc_drop_generator.force_update = 0;
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
-        | ADC_POTI_BLOCKING_RATE_bm | ADC_POTI_BLOCKING_DURATION_bm
+        | ADC_POTI_DROP_RATE_bm | ADC_POTI_DROP_DURATION_bm
         | ADC_CURRENT_SENSE_bm;
     ADC_PORT.DIRCLR = pins;
     ADC_PORT.OUTCLR = pins;
@@ -207,7 +207,7 @@ update_biterror_generators(void)
 }
 
 static void
-update_blocking_generators(void)
+update_drop_generators(void)
 {
     /* get a mask for the probability of a drop event with either
        p=0, or p = 1 / 2^N, then decrease the probability by 2^(-3)
@@ -232,20 +232,20 @@ update_blocking_generators(void)
            t = 1 / p = 2^12 * 200us = 0.8192s
      */
     uint32_t interval =
-        partition_range(task_adc_raw.e.poti_blocking_rate) << 3;
+        partition_range(task_adc_raw.e.poti_drop_rate) << 3;
     /* check corner case if we are in bin=15
        if so, we should drop infinitely, i.e. p = 1 = 2^0 */
     if (interval & _BV(3))
         interval = 1;
 
-    if (task_adc_blocking_generator.interval != interval)
-        task_adc_blocking_generator.force_update = 1;
-    task_adc_blocking_generator.interval = interval;
+    if (task_adc_drop_generator.interval != interval)
+        task_adc_drop_generator.force_update = 1;
+    task_adc_drop_generator.interval = interval;
     if (0 == interval)                  /* communication drop disabled */
         return;
-    task_adc_blocking_generator.start_of_drop = get_random(interval);
+    task_adc_drop_generator.start_of_drop = get_random(interval);
 
-    int16_t adc = task_adc_raw.e.poti_blocking_duration;
+    int16_t adc = task_adc_raw.e.poti_drop_duration;
     if (adc < 0)
         adc = 0;
     if (adc > 2047)
@@ -279,15 +279,15 @@ update_blocking_generators(void)
             duration = time_unit * 200 * (duration_bin - 24 + 1);
     }
 
-    if (task_adc_blocking_generator.drop_duration != duration)
-        task_adc_blocking_generator.force_update = 1;
-    task_adc_blocking_generator.drop_duration = duration;
+    if (task_adc_drop_generator.drop_duration != duration)
+        task_adc_drop_generator.force_update = 1;
+    task_adc_drop_generator.drop_duration = duration;
 }
 
 static void
 run(void)
 {
-    static enum { INIT, BITERR, BLOCKRATE, BLOCKDUR, CURRSENSE } state = INIT;
+    static enum { INIT, BITERR, DROPRATE, DROPDUR, CURRSENSE } state = INIT;
     const uint8_t s = state;
     if (INIT == s) {
         /* throw away the first measurement, as it might be wrong */
@@ -323,7 +323,7 @@ run(void)
             ADCA.CH0.SCAN = 3;
 
             update_biterror_generators();
-            update_blocking_generators();
+            update_drop_generators();
 
             state = BITERR;
         }

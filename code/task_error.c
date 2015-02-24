@@ -124,21 +124,21 @@ reload_settings(const uint8_t global_update)
        Load new point in time when to start dropping and load the duration for
        the communication outage.
      */
-    uint8_t drop_updated = task_adc_blocking_generator.force_update
+    uint8_t drop_updated = task_adc_drop_generator.force_update
                          | global_update;
     if ((0 == drop_error.end && 0 == drop_error.reload) || drop_updated) {
-        drop_error.reload = task_adc_blocking_generator.interval;
+        drop_error.reload = task_adc_drop_generator.interval;
         if (!drop_error.reload) {
             /* communication drop disabled */
             drop_error.begin = 0;
             drop_error.end = 0;
         } else {
-            drop_error.begin = task_adc_blocking_generator.start_of_drop;
+            drop_error.begin = task_adc_drop_generator.start_of_drop;
             drop_error.end = drop_error.begin
-                           + task_adc_blocking_generator.drop_duration + 1;
+                           + task_adc_drop_generator.drop_duration + 1;
         }
     }
-    task_adc_blocking_generator.force_update = 0;
+    task_adc_drop_generator.force_update = 0;
 }
 
 static void
