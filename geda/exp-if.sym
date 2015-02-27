@@ -1,0 +1,143 @@
+v 20110115 2
+B 300 0 2900 3500 3 0 1 0 -1 -1 0 -1 -1 -1 -1 -1
+P 0 200 300 200 1 0 0
+{
+T -200 200 5 10 0 0 0 0 1
+pintype=in
+T 355 195 5 10 1 1 0 0 1
+pinlabel=GND
+}
+T 300 3750 8 10 0 0 0 0 1
+use-license=unlimited
+T 300 4150 8 10 0 0 0 0 1
+author=2015 Nicolas Benes
+T 300 3550 8 10 1 0 0 0 1
+source=subcircuit.sch
+P 0 400 300 400 1 0 0
+{
+T -200 400 5 10 0 0 0 0 1
+pintype=in
+T 355 395 5 10 1 1 0 0 1
+pinlabel=VCC_3V3
+}
+P 0 600 300 600 1 0 0
+{
+T -200 600 5 10 0 0 0 0 1
+pintype=in
+T 355 595 5 10 1 1 0 0 1
+pinlabel=VCC_5V
+}
+P 0 3200 300 3200 1 0 0
+{
+T -200 3200 5 10 0 0 0 0 1
+pintype=in
+T 355 3195 5 10 1 1 0 0 1
+pinlabel=28V_SUPPLY
+}
+P 0 2400 300 2400 1 0 0
+{
+T -200 2400 5 10 0 0 0 0 1
+pintype=in
+T 355 2395 5 10 1 1 0 0 1
+pinlabel=\_LO\_
+}
+P 0 2200 300 2200 1 0 0
+{
+T -200 2200 5 10 0 0 0 0 1
+pintype=in
+T 355 2195 5 10 1 1 0 0 1
+pinlabel=\_SOE\_
+}
+P 0 2000 300 2000 1 0 0
+{
+T -200 2000 5 10 0 0 0 0 1
+pintype=in
+T 355 1995 5 10 1 1 0 0 1
+pinlabel=\_SODS\_
+}
+P 0 1100 300 1100 1 0 0
+{
+T -200 1100 5 10 0 0 0 0 1
+pintype=in
+T 355 1095 5 10 1 1 0 0 1
+pinlabel=TXIN
+}
+P 0 1500 300 1500 1 0 0
+{
+T -200 1500 5 10 0 0 0 0 1
+pintype=out
+T 355 1495 5 10 1 1 0 0 1
+pinlabel=RXOUT
+}
+P 3500 1600 3200 1600 1 0 0
+{
+T 3700 1600 5 10 0 0 0 6 1
+pintype=in
+T 3145 1595 5 10 1 1 0 6 1
+pinlabel=FROM_EXP+
+}
+P 3500 1400 3200 1400 1 0 0
+{
+T 3700 1400 5 10 0 0 0 6 1
+pintype=in
+T 3145 1395 5 10 1 1 0 6 1
+pinlabel=FROM_EXP-
+}
+P 3500 1200 3200 1200 1 0 0
+{
+T 3700 1200 5 10 0 0 0 6 1
+pintype=out
+T 3145 1195 5 10 1 1 0 6 1
+pinlabel=TO_EXP+
+}
+P 3500 1000 3200 1000 1 0 0
+{
+T 3700 1000 5 10 0 0 0 6 1
+pintype=out
+T 3145 995 5 10 1 1 0 6 1
+pinlabel=TO_EXP-
+}
+P 0 3000 300 3000 1 0 0
+{
+T -200 3000 5 10 0 0 0 0 1
+pintype=in
+T 355 2995 5 10 1 1 0 0 1
+pinlabel=EXPPWR_EN
+}
+P 3500 3200 3200 3200 1 0 0
+{
+T 3700 3200 5 10 0 0 0 6 1
+pintype=out
+T 3145 3195 5 10 1 1 0 6 1
+pinlabel=EXP_V+
+}
+P 0 2800 300 2800 1 0 0
+{
+T -200 2800 5 10 0 0 0 0 1
+pintype=out
+T 355 2795 5 10 1 1 0 0 1
+pinlabel=I_SENSE
+}
+P 3500 2400 3200 2400 1 0 0
+{
+T 3700 2400 5 10 0 0 0 6 1
+pintype=out
+T 3145 2395 5 10 1 1 0 6 1
+pinlabel=\_LO_EXP\_
+}
+P 3500 2200 3200 2200 1 0 0
+{
+T 3700 2200 5 10 0 0 0 6 1
+pintype=out
+T 3145 2195 5 10 1 1 0 6 1
+pinlabel=\_SOE_EXP\_
+}
+P 3500 2000 3200 2000 1 0 0
+{
+T 3700 2000 5 10 0 0 0 6 1
+pintype=out
+T 3145 1995 5 10 1 1 0 6 1
+pinlabel=\_SODS_EXP\_
+}
+T 300 3950 8 10 0 0 0 0 1
+dist-license=GPLv3+

@@ -1,0 +1,98 @@
+v 20110115 2
+B 300 0 3000 2500 3 0 1 0 -1 -1 0 -1 -1 -1 -1 -1
+P 0 200 300 200 1 0 0
+{
+T -200 200 5 10 0 0 0 0 1
+pintype=in
+T 355 195 5 10 1 1 0 0 1
+pinlabel=GND
+}
+P 3600 1200 3300 1200 1 0 0
+{
+T 3800 1200 5 10 0 0 0 6 1
+pintype=out
+T 3245 1195 5 10 1 1 0 6 1
+pinlabel=T2OUT
+}
+T 311 2750 8 10 0 0 0 0 1
+use-license=unlimited
+T 300 2950 8 10 0 0 0 0 1
+dist-license=GPLv3+
+T 300 3150 8 10 0 0 0 0 1
+author=2015 Nicolas Benes
+P 0 900 300 900 1 0 0
+{
+T -200 900 5 10 0 0 0 0 1
+pintype=out
+T 355 895 5 10 1 1 0 0 1
+pinlabel=R1OUT
+}
+P 3600 200 3300 200 1 0 0
+{
+T 3800 200 5 10 0 0 0 6 1
+pintype=in
+T 3245 195 5 10 1 1 0 6 1
+pinlabel=GND_EXT
+}
+T 300 2600 8 10 1 0 0 0 1
+source=subcircuit.sch
+P 0 1500 300 1500 1 0 0
+{
+T -200 1500 5 10 0 0 0 0 1
+pintype=in
+T 355 1495 5 10 1 1 0 0 1
+pinlabel=T1IN
+}
+P 0 1200 300 1200 1 0 0
+{
+T -200 1200 5 10 0 0 0 0 1
+pintype=in
+T 355 1195 5 10 1 1 0 0 1
+pinlabel=T2IN
+}
+P 0 2200 300 2200 1 0 0
+{
+T -200 2200 5 10 0 0 0 0 1
+pintype=in
+T 355 2195 5 10 1 1 0 0 1
+pinlabel=VCC_5V
+}
+P 0 1900 300 1900 1 0 0
+{
+T -200 1900 5 10 0 0 0 0 1
+pintype=in
+T 355 1895 5 10 1 1 0 0 1
+pinlabel=VCC_3V3
+}
+P 0 600 300 600 1 0 0
+{
+T -200 600 5 10 0 0 0 0 1
+pintype=out
+T 355 595 5 10 1 1 0 0 1
+pinlabel=R2OUT
+}
+P 3600 1500 3300 1500 1 0 0
+{
+T 3800 1500 5 10 0 0 0 6 1
+pintype=out
+T 3245 1495 5 10 1 1 0 6 1
+pinlabel=T1OUT
+}
+P 3600 900 3300 900 1 0 0
+{
+T 3800 900 5 10 0 0 0 6 1
+pintype=in
+T 3245 895 5 10 1 1 0 6 1
+pinlabel=R1IN
+}
+P 3600 600 3300 600 1 0 0
+{
+T 3800 600 5 10 0 0 0 6 1
+pintype=in
+T 3245 595 5 10 1 1 0 6 1
+pinlabel=R2IN
+}
+L 1700 2500 1700 0 3 0 0 0 -1 -1
+T 1800 1250 9 10 1 0 90 4 1
+Isolation Isolation Isolation
+L 1900 2500 1900 0 3 0 0 0 -1 -1
