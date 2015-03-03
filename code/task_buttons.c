@@ -67,7 +67,7 @@ init(void)
     /* 
      * must be done in two steps to allow resolving of num in PINCTRL first,
      * before doing the actual conatenation/token pasting; otherwise we would
-     * get something like PINBUTTON_SOE_bpCTRL, which is bullshit!
+     * get something like PINBUTTON_SOE_bpCTRL, which we do not want!
      */
 #define PINCTRL_CONCAT(num) PIN##num##CTRL
 #define PINCTRL(num)        PINCTRL_CONCAT(num)
