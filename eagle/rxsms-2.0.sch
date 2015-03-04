@@ -9831,30 +9831,36 @@ Siemens, Hewlett-Packard, Texas Instuments, Sharp, Motorola&lt;p&gt;
 <library name="mentor-switch">
 <packages>
 <package name="SWITCH_LED">
-<pad name="K" x="5.08" y="0" drill="0.8" shape="octagon"/>
-<pad name="3A" x="5.08" y="-2.54" drill="0.8" shape="octagon"/>
-<pad name="A1" x="5.08" y="2.54" drill="0.8" shape="octagon"/>
-<pad name="A" x="7.62" y="0" drill="0.8" shape="octagon"/>
-<pad name="1B" x="0" y="-2.54" drill="0.8" shape="octagon"/>
-<pad name="3B" x="0" y="2.54" drill="0.8" shape="octagon"/>
-<pad name="2B" x="-2.54" y="2.54" drill="0.8" shape="octagon"/>
-<pad name="2A" x="-5.08" y="-2.54" drill="0.8" shape="octagon"/>
-<wire x1="-7.62" y1="5.08" x2="8.89" y2="5.08" width="0.127" layer="21"/>
-<wire x1="8.89" y1="5.08" x2="8.89" y2="-5.08" width="0.127" layer="21"/>
-<wire x1="8.89" y1="-5.08" x2="-7.62" y2="-5.08" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="5.08" x2="-14.605" y2="5.08" width="0.127" layer="21"/>
-<wire x1="-14.605" y1="5.08" x2="-14.605" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-14.605" y1="3.81" x2="-16.51" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-7.62" y1="-5.08" x2="-14.605" y2="-5.08" width="0.127" layer="21"/>
-<wire x1="-14.605" y1="-5.08" x2="-14.605" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-14.605" y1="-3.81" x2="-16.51" y2="-3.81" width="0.127" layer="21"/>
-<wire x1="-16.51" y1="-3.81" x2="-16.51" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-16.51" y1="-2.54" x2="-16.51" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-16.51" y1="2.54" x2="-16.51" y2="3.81" width="0.127" layer="21"/>
-<wire x1="-16.51" y1="2.54" x2="-24.13" y2="2.54" width="0.127" layer="21"/>
-<wire x1="-24.13" y1="2.54" x2="-24.13" y2="-2.54" width="0.127" layer="21"/>
-<wire x1="-24.13" y1="-2.54" x2="-16.51" y2="-2.54" width="0.127" layer="21"/>
+<pad name="K" x="10.16" y="0" drill="0.8" shape="octagon"/>
+<pad name="3A" x="10.16" y="-2.54" drill="0.8" shape="octagon"/>
+<pad name="A1" x="10.16" y="2.54" drill="0.8" shape="octagon"/>
+<pad name="A" x="12.7" y="0" drill="0.8" shape="octagon"/>
+<pad name="1B" x="5.08" y="-2.54" drill="0.8" shape="octagon"/>
+<pad name="3B" x="5.08" y="2.54" drill="0.8" shape="octagon"/>
+<pad name="2B" x="2.54" y="2.54" drill="0.8" shape="octagon"/>
+<pad name="2A" x="0" y="-2.54" drill="0.8" shape="octagon"/>
+<wire x1="13.66" y1="-4.98" x2="13.66" y2="4.98" width="0.127" layer="21"/>
+<wire x1="13.66" y1="4.98" x2="0.53" y2="4.98" width="0.127" layer="21"/>
+<wire x1="-0.53" y1="4.98" x2="-6.84" y2="4.98" width="0.127" layer="21"/>
+<wire x1="-0.53" y1="4.43" x2="-0.53" y2="4.98" width="0.127" layer="21"/>
+<wire x1="-0.53" y1="4.43" x2="0.53" y2="4.43" width="0.127" layer="21"/>
+<wire x1="0.53" y1="4.43" x2="0.53" y2="4.98" width="0.127" layer="21"/>
+<wire x1="13.66" y1="-4.98" x2="0.5" y2="-4.98" width="0.127" layer="21"/>
+<wire x1="0.5" y1="-4.98" x2="0.5" y2="-5.48" width="0.127" layer="21"/>
+<wire x1="-0.5" y1="-4.98" x2="-0.5" y2="-5.48" width="0.127" layer="21"/>
+<wire x1="-0.5" y1="-5.48" x2="0.5" y2="-5.48" width="0.127" layer="21"/>
+<wire x1="-0.5" y1="-4.98" x2="-6.84" y2="-4.98" width="0.127" layer="21"/>
+<wire x1="-6.84" y1="4.98" x2="-6.84" y2="3.9" width="0.127" layer="21"/>
+<wire x1="-6.84" y1="3.9" x2="-6.84" y2="-3.9" width="0.127" layer="21"/>
+<wire x1="-6.84" y1="-3.9" x2="-6.84" y2="-4.98" width="0.127" layer="21"/>
+<wire x1="-6.84" y1="3.9" x2="-8.6" y2="3.9" width="0.127" layer="21"/>
+<wire x1="-6.84" y1="-3.9" x2="-8.6" y2="-3.9" width="0.127" layer="21"/>
+<wire x1="-8.6" y1="3.9" x2="-8.6" y2="2.5" width="0.127" layer="21"/>
+<wire x1="-8.6" y1="2.5" x2="-8.6" y2="-2.5" width="0.127" layer="21"/>
+<wire x1="-8.6" y1="-2.5" x2="-8.6" y2="-3.9" width="0.127" layer="21"/>
+<wire x1="-8.6" y1="2.5" x2="-16" y2="2.5" width="0.127" layer="21"/>
+<wire x1="-8.6" y1="-2.5" x2="-16" y2="-2.5" width="0.127" layer="21"/>
+<wire x1="-16" y1="2.5" x2="-16" y2="-2.5" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
