@@ -10181,7 +10181,7 @@ Siemens, Hewlett-Packard, Texas Instuments, Sharp, Motorola&lt;p&gt;
 <plain>
 <text x="246.38" y="109.22" size="1.778" layer="97">groundstation
 interface</text>
-<text x="246.38" y="73.66" size="1.778" layer="97">debug
+<text x="243.84" y="83.82" size="1.778" layer="97">debug
 interface</text>
 <text x="137.16" y="167.64" size="5.08" layer="97">TODO:
 Induktivitaet
@@ -10201,8 +10201,8 @@ Induktivitaet
 <instance part="C5" gate="G$1" x="180.34" y="116.84" rot="R270"/>
 <instance part="VSS2" gate="G$1" x="187.96" y="114.3"/>
 <instance part="X2" gate="G$1" x="233.68" y="111.76"/>
-<instance part="X3" gate="G$1" x="233.68" y="76.2"/>
-<instance part="VSS3" gate="G$1" x="233.68" y="58.42"/>
+<instance part="X3" gate="G$1" x="231.14" y="76.2"/>
+<instance part="VSS3" gate="G$1" x="231.14" y="58.42"/>
 <instance part="VSS4" gate="G$1" x="233.68" y="93.98"/>
 <instance part="U5" gate="G$1" x="200.66" y="154.94"/>
 <instance part="P+4" gate="1" x="137.16" y="165.1"/>
@@ -10256,7 +10256,7 @@ Induktivitaet
 <instance part="R34" gate="G$1" x="40.64" y="73.66"/>
 <instance part="R35" gate="G$1" x="40.64" y="58.42"/>
 <instance part="SJ1" gate="1" x="238.76" y="99.06"/>
-<instance part="SJ2" gate="1" x="238.76" y="63.5"/>
+<instance part="SJ2" gate="1" x="236.22" y="63.5"/>
 <instance part="JP1" gate="A" x="30.48" y="78.74"/>
 <instance part="JP2" gate="A" x="33.02" y="68.58" rot="R180"/>
 </instances>
@@ -10284,14 +10284,14 @@ Induktivitaet
 </segment>
 <segment>
 <pinref part="VSS3" gate="G$1" pin="VSS"/>
-<wire x1="233.68" y1="60.96" x2="233.68" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="231.14" y1="60.96" x2="231.14" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="X3" gate="G$1" pin="5"/>
-<wire x1="226.06" y1="71.12" x2="223.52" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="71.12" x2="223.52" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="63.5" x2="233.68" y2="63.5" width="0.1524" layer="91"/>
-<label x="226.06" y="63.5" size="1.778" layer="95"/>
+<wire x1="223.52" y1="71.12" x2="220.98" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="71.12" x2="220.98" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="220.98" y1="63.5" x2="231.14" y2="63.5" width="0.1524" layer="91"/>
+<label x="223.52" y="63.5" size="1.778" layer="95"/>
 <pinref part="SJ2" gate="1" pin="1"/>
-<junction x="233.68" y="63.5"/>
+<junction x="231.14" y="63.5"/>
 </segment>
 <segment>
 <pinref part="X2" gate="G$1" pin="5"/>
@@ -10479,19 +10479,19 @@ Induktivitaet
 <net name="N$9" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="T2OUT"/>
-<wire x1="175.26" y1="101.6" x2="213.36" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="213.36" y1="101.6" x2="213.36" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="101.6" x2="193.04" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="101.6" x2="193.04" y2="78.74" width="0.1524" layer="91"/>
 <pinref part="X3" gate="G$1" pin="2"/>
-<wire x1="213.36" y1="78.74" x2="226.06" y2="78.74" width="0.1524" layer="91"/>
+<wire x1="193.04" y1="78.74" x2="223.52" y2="78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="X3" gate="G$1" pin="3"/>
-<wire x1="226.06" y1="76.2" x2="210.82" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="210.82" y1="76.2" x2="210.82" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="223.52" y1="76.2" x2="190.5" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="76.2" x2="190.5" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="U1" gate="G$1" pin="R2IN"/>
-<wire x1="210.82" y1="96.52" x2="175.26" y2="96.52" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="96.52" x2="175.26" y2="96.52" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -10804,9 +10804,9 @@ Induktivitaet
 <net name="N$57" class="0">
 <segment>
 <pinref part="X3" gate="G$1" pin="G2"/>
-<wire x1="243.84" y1="68.58" x2="241.3" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="68.58" x2="238.76" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="SJ2" gate="1" pin="2"/>
-<wire x1="243.84" y1="63.5" x2="243.84" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="63.5" x2="241.3" y2="68.58" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$59" class="0">
@@ -10846,6 +10846,40 @@ Induktivitaet
 <label x="2.54" y="25.4" size="1.778" layer="95"/>
 <pinref part="R33" gate="G$1" pin="1"/>
 <wire x1="35.56" y1="25.4" x2="22.86" y2="25.4" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="EXP_CHG_IN" class="0">
+<segment>
+<pinref part="X3" gate="G$1" pin="1"/>
+<wire x1="223.52" y1="81.28" x2="218.44" y2="81.28" width="0.1524" layer="91"/>
+<label x="198.12" y="81.28" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="X3" gate="G$1" pin="6"/>
+<wire x1="241.3" y1="78.74" x2="238.76" y2="78.74" width="0.1524" layer="91"/>
+<pinref part="X3" gate="G$1" pin="7"/>
+<wire x1="238.76" y1="76.2" x2="241.3" y2="76.2" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="76.2" x2="241.3" y2="78.74" width="0.1524" layer="91"/>
+<label x="243.84" y="76.2" size="1.778" layer="95"/>
+<wire x1="241.3" y1="76.2" x2="243.84" y2="76.2" width="0.1524" layer="91"/>
+<junction x="241.3" y="76.2"/>
+</segment>
+</net>
+<net name="EXP_CHG_RET" class="0">
+<segment>
+<pinref part="X3" gate="G$1" pin="4"/>
+<wire x1="223.52" y1="73.66" x2="218.44" y2="73.66" width="0.1524" layer="91"/>
+<label x="198.12" y="73.66" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="X3" gate="G$1" pin="8"/>
+<wire x1="238.76" y1="73.66" x2="241.3" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="241.3" y1="73.66" x2="241.3" y2="71.12" width="0.1524" layer="91"/>
+<pinref part="X3" gate="G$1" pin="9"/>
+<wire x1="241.3" y1="71.12" x2="238.76" y2="71.12" width="0.1524" layer="91"/>
+<label x="243.84" y="71.12" size="1.778" layer="95"/>
+<wire x1="241.3" y1="71.12" x2="243.84" y2="71.12" width="0.1524" layer="91"/>
+<junction x="241.3" y="71.12"/>
 </segment>
 </net>
 </nets>
