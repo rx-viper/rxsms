@@ -574,9 +574,8 @@ device=INPUT
 T 22700 49800 5 10 1 1 0 0 1
 refdes=VCC_3V3
 }
-T 25200 50600 2 20 1 0 0 0 2
-inverter stages
-subject to change!
+T 25200 50600 2 20 1 0 0 0 1
+TODO: update
 C 32900 50600 1 0 0 inductor-1.sym
 {
 T 33100 51100 5 10 0 0 0 0 1
