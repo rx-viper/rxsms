@@ -13077,7 +13077,6 @@ Induktivitaet
 </sheet>
 <sheet>
 <plain>
-<text x="86.36" y="88.9" size="5.08" layer="97">C14, C15 CPOL-EU? oder MLCC?</text>
 <text x="27.94" y="152.4" size="5.08" layer="97">TODO Schraubklemmen, Inductor</text>
 </plain>
 <instances>
