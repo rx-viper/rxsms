@@ -12769,7 +12769,6 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="P+2" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="GND7" library="supply1" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
 <part name="C14" library="rcl" deviceset="C-EU" device="C0805K" value="22u/16V"/>
 <part name="C15" library="rcl" deviceset="C-EU" device="C0805K" value="22u/16V"/>
@@ -14145,7 +14144,7 @@ Induktivitaet
 </sheet>
 <sheet>
 <plain>
-<text x="27.94" y="152.4" size="5.08" layer="97">TODO Schraubklemmen, Inductor</text>
+<text x="27.94" y="152.4" size="5.08" layer="97">TODO Inductor</text>
 </plain>
 <instances>
 <instance part="FRAME3" gate="G$1" x="2.54" y="-2.54"/>
@@ -14157,7 +14156,6 @@ Induktivitaet
 <instance part="GND5" gate="1" x="78.74" y="104.14"/>
 <instance part="GND6" gate="1" x="124.46" y="104.14"/>
 <instance part="P+2" gate="1" x="53.34" y="134.62"/>
-<instance part="GND7" gate="1" x="45.72" y="106.68"/>
 <instance part="P+3" gate="1" x="93.98" y="134.62"/>
 <instance part="C14" gate="G$1" x="106.68" y="116.84"/>
 <instance part="C15" gate="G$1" x="144.78" y="116.84"/>
