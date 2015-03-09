@@ -48,6 +48,7 @@
 #define ADC_CH_MUXPOS_POTI_DROP_DURATION_gc     ADC_CH_MUXPOS_PIN3_gc
 #define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN4_gc
 
+#define ADC_PWRUP                       PR.PRPA &= ~PR_ADC_bm
 #define ADC_PORT                        PORTA
 #define ADC_REF_bm                      PIN0_bm
 #define ADC_POTI_BIT_ERROR_RATE_bm      PIN1_bm
@@ -91,6 +92,8 @@ init(void)
     task_adc_drop_generator.start_of_drop = 0;
     task_adc_drop_generator.drop_duration = 0;
     task_adc_drop_generator.force_update = 0;
+
+    ADC_PWRUP;
 
     /* configure pins for input */
     const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm

@@ -60,21 +60,17 @@ init_clock(void)
     CLK.LOCK = CLK_LOCK_bm;
 }
 
-/// Power down all unneeded clocks and modules.
+/// Power down all peripherals by default.
 void
 init_prr(void)
 {
     PR.PRGEN = PR_USB_bm | PR_AES_bm | PR_EBI_bm | PR_RTC_bm | PR_EVSYS_bm
         | PR_DMA_bm;
-    /* enable ADC */
-    PR.PRPA = PR_DAC_bm | PR_AC_bm;
-    /* enable TCC0 */
+    PR.PRPA = PR_DAC_bm | PR_ADC_bm | PR_AC_bm;
     PR.PRPC = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
-        | PR_HIRES_bm | PR_TC1_bm;
-    /* enable USARTD0, USARTD1 */
-    PR.PRPD = PR_TWI_bm | PR_SPI_bm | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
-    PR.PRPE = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
         | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
-    PR.PRPF = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
+    PR.PRPD = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
+        | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
+    PR.PRPE = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
         | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
 }

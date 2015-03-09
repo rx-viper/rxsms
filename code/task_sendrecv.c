@@ -28,11 +28,13 @@
 #define UART_GROUNDSTATION_RX_bm    PIN6_bm
 #define UART_GROUNDSTATION_TX_bm    PIN7_bm
 #define UART_GROUNDSTATION          USARTD1
+#define UART_GROUNDSTATION_PWRUP    PR.PRPD &= ~PR_USART1_bm
 
 #define UART_EXPERIMENT_PORT        PORTD
 #define UART_EXPERIMENT_RX_bm       PIN2_bm
 #define UART_EXPERIMENT_TX_bm       PIN3_bm
 #define UART_EXPERIMENT             USARTD0
+#define UART_EXPERIMENT_PWRUP       PR.PRPD &= ~PR_USART0_bm
 
 #define UART_BSEL       (12)
 #define UART_BSCALE     (2)
@@ -70,6 +72,9 @@ init(void)
     if (is_initialized)
         return;                 /* leave if init() is called multiple times */
     is_initialized = 1;
+
+    UART_GROUNDSTATION_PWRUP;
+    UART_EXPERIMENT_PWRUP;
 
     STATUS_LED_PORT.OUTCLR = STATUS_LED_UPLINK_bm | STATUS_LED_DOWNLINK_bm;
     STATUS_LED_PORT.DIRSET = STATUS_LED_UPLINK_bm | STATUS_LED_DOWNLINK_bm;

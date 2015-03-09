@@ -30,6 +30,7 @@
 
 #define SCHED_TIMER             TCC0
 #define SCHED_TIMER_OVF_vect    TCC0_OVF_vect
+#define SCHED_TIMER_PWRUP       PR.PRPC &= ~PR_TC0_bm
 #define SCHED_CLKSEL_gc     TC_CLKSEL_DIV8_gc
 #define SCHED_CLKSEL_DEC    8
 #define SCHED_PERIOD ((SCHED_SLOT_PERIOD_US * 1e-6 * F_CPU / SCHED_CLKSEL_DEC))
@@ -50,6 +51,7 @@ static uint8_t next_slot;
 void
 sched_init(void)
 {
+    SCHED_TIMER_PWRUP;
     SCHED_TIMER.PERBUF = SCHED_PERIOD;
     SCHED_TIMER.PER = SCHED_PERIOD;
     SCHED_TIMER.CTRLB = TC_WGMODE_SINGLESLOPE_gc;
