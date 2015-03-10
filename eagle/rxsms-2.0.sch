@@ -14072,25 +14072,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="R1" gate="G$1" pin="2"/>
 </segment>
 </net>
-<net name="ADC_POTI_BIT_ERROR_RATE" class="0">
+<net name="ADC_POTI_DROP_DURATION" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="PA0(ADC0/AREF)"/>
 <wire x1="88.9" y1="139.7" x2="78.74" y2="139.7" width="0.1524" layer="91"/>
 <label x="45.72" y="139.7" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="ADC_POTI_DROP_RATE" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="PA1(ADC1)"/>
-<wire x1="88.9" y1="137.16" x2="78.74" y2="137.16" width="0.1524" layer="91"/>
-<label x="45.72" y="137.16" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="ADC_POTI_DROP_DURATION" class="0">
-<segment>
-<pinref part="U2" gate="G$1" pin="PA2(ADC2)"/>
-<wire x1="88.9" y1="134.62" x2="78.74" y2="134.62" width="0.1524" layer="91"/>
-<label x="45.72" y="134.62" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ADC_CURRENT_SENSE" class="0">
@@ -14329,6 +14315,20 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <pinref part="U2" gate="G$1" pin="PE1(OC0B/XCK0/SCL)"/>
 <pinref part="JP6" gate="A" pin="3"/>
 <wire x1="157.48" y1="109.22" x2="208.28" y2="109.22" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="ADC_POTI_BIT_ERROR_RATE" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="PA2(ADC2)"/>
+<wire x1="88.9" y1="134.62" x2="78.74" y2="134.62" width="0.1524" layer="91"/>
+<label x="45.72" y="134.62" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="ADC_POTI_DROP_RATE" class="0">
+<segment>
+<pinref part="U2" gate="G$1" pin="PA1(ADC1)"/>
+<wire x1="88.9" y1="137.16" x2="78.74" y2="137.16" width="0.1524" layer="91"/>
+<label x="45.72" y="137.16" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
