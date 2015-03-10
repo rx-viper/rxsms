@@ -360,6 +360,7 @@ UsedLibrary="nup2202w1.lbr"
 UsedLibrary="light-pipe.lbr"
 UsedLibrary="TES3-4810WI.lbr"
 UsedLibrary="Coil.lbr"
+UsedLibrary="NC7WZ17.lbr"
 
 [Win_1]
 Type="Control Panel"
@@ -368,5 +369,5 @@ State=2
 Number=0
 
 [Desktop]
-Screen="1920 1080"
+Screen="1920 1200"
 Window="Win_1"
