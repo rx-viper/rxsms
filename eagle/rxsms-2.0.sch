@@ -12416,65 +12416,6 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
-<library name="TES3-4810WI">
-<packages>
-<package name="TES3-4810WI">
-<pad name="P23" x="0" y="0" drill="0.7" diameter="1.9304"/>
-<pad name="P22" x="2.54" y="0" drill="0.7" diameter="1.9304"/>
-<pad name="P3" x="2.54" y="-15.24" drill="0.7" diameter="1.9304"/>
-<pad name="P2" x="0" y="-15.24" drill="0.7" diameter="1.9304"/>
-<pad name="P16" x="17.78" y="0" drill="0.7" diameter="1.9304"/>
-<pad name="P14" x="22.86" y="0" drill="0.7" diameter="1.9304"/>
-<pad name="P11" x="22.86" y="-15.24" drill="0.7" diameter="1.9304"/>
-<wire x1="-4.5" y1="2.54" x2="27.3" y2="2.54" width="0.127" layer="21"/>
-<wire x1="27.3" y1="2.54" x2="27.3" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="27.3" y1="-17.78" x2="-4.5" y2="-17.78" width="0.127" layer="21"/>
-<wire x1="-4.5" y1="-17.78" x2="-4.5" y2="2.54" width="0.127" layer="21"/>
-<circle x="-3" y="-16.5" radius="0.70710625" width="0.127" layer="21"/>
-</package>
-</packages>
-<symbols>
-<symbol name="TES3-4810WI">
-<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-10.16" x2="0" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="0" y1="-10.16" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
-<wire x1="10.16" y1="10.16" x2="0" y2="10.16" width="0.254" layer="94"/>
-<pin name="+VIN1" x="-15.24" y="7.62" length="middle" direction="pwr"/>
-<pin name="+VIN2" x="-15.24" y="5.08" length="middle" direction="pwr"/>
-<pin name="-VIN1" x="-15.24" y="-5.08" length="middle" direction="pas"/>
-<pin name="-VIN2" x="-15.24" y="-7.62" length="middle" direction="pas"/>
-<pin name="+VOUT" x="15.24" y="7.62" length="middle" direction="pas" rot="R180"/>
-<pin name="-VOUT" x="15.24" y="-7.62" length="middle" direction="pas" rot="R180"/>
-<wire x1="0" y1="10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
-<wire x1="0" y1="10.16" x2="0" y2="-10.16" width="0.254" layer="94"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="TES3-4810WI">
-<gates>
-<gate name="G$1" symbol="TES3-4810WI" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="TES3-4810WI">
-<connects>
-<connect gate="G$1" pin="+VIN1" pad="P22"/>
-<connect gate="G$1" pin="+VIN2" pad="P23"/>
-<connect gate="G$1" pin="+VOUT" pad="P14"/>
-<connect gate="G$1" pin="-VIN1" pad="P2"/>
-<connect gate="G$1" pin="-VIN2" pad="P3"/>
-<connect gate="G$1" pin="-VOUT" pad="P16"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="OC_RS" value="801-9330" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="Coil">
 <packages>
 <package name="BOURNS-SRR0906">
@@ -13344,6 +13285,65 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="TEN3">
+<packages>
+<package name="TEN3-2410N">
+<pad name="P23" x="0" y="0" drill="0.7" diameter="1.9304"/>
+<pad name="P22" x="2.54" y="0" drill="0.7" diameter="1.9304"/>
+<pad name="P3" x="2.54" y="-15.24" drill="0.7" diameter="1.9304"/>
+<pad name="P2" x="0" y="-15.24" drill="0.7" diameter="1.9304"/>
+<pad name="P16" x="17.78" y="0" drill="0.7" diameter="1.9304"/>
+<pad name="P14" x="22.86" y="0" drill="0.7" diameter="1.9304"/>
+<pad name="P11" x="22.86" y="-15.24" drill="0.7" diameter="1.9304"/>
+<wire x1="-4.5" y1="2.54" x2="27.3" y2="2.54" width="0.127" layer="21"/>
+<wire x1="27.3" y1="2.54" x2="27.3" y2="-17.78" width="0.127" layer="21"/>
+<wire x1="27.3" y1="-17.78" x2="-4.5" y2="-17.78" width="0.127" layer="21"/>
+<wire x1="-4.5" y1="-17.78" x2="-4.5" y2="2.54" width="0.127" layer="21"/>
+<circle x="-3" y="-16.5" radius="0.70710625" width="0.127" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TEN3-2410N">
+<wire x1="-10.16" y1="10.16" x2="-10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-10.16" x2="0" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="0" y1="-10.16" x2="10.16" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-10.16" x2="10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="10.16" y1="10.16" x2="0" y2="10.16" width="0.254" layer="94"/>
+<pin name="+VIN1" x="-15.24" y="7.62" length="middle" direction="pwr"/>
+<pin name="+VIN2" x="-15.24" y="5.08" length="middle" direction="pwr"/>
+<pin name="-VIN1" x="-15.24" y="-5.08" length="middle" direction="pas"/>
+<pin name="-VIN2" x="-15.24" y="-7.62" length="middle" direction="pas"/>
+<pin name="+VOUT" x="15.24" y="7.62" length="middle" direction="pas" rot="R180"/>
+<pin name="-VOUT" x="15.24" y="-7.62" length="middle" direction="pas" rot="R180"/>
+<wire x1="0" y1="10.16" x2="-10.16" y2="10.16" width="0.254" layer="94"/>
+<wire x1="0" y1="10.16" x2="0" y2="-10.16" width="0.254" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TEN3-2410N">
+<gates>
+<gate name="G$1" symbol="TEN3-2410N" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="TEN3-2410N">
+<connects>
+<connect gate="G$1" pin="+VIN1" pad="P22"/>
+<connect gate="G$1" pin="+VIN2" pad="P23"/>
+<connect gate="G$1" pin="+VOUT" pad="P14"/>
+<connect gate="G$1" pin="-VIN1" pad="P2"/>
+<connect gate="G$1" pin="-VIN2" pad="P3"/>
+<connect gate="G$1" pin="-VOUT" pad="P16"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="OC_RS" value="801-9330" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13385,7 +13385,9 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="+3V2" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
 <part name="FRAME3" library="frames" deviceset="DINA4_L" device=""/>
-<part name="U3" library="_traco_tsr-1" deviceset="TSR_1-*" device="" technology="2450"/>
+<part name="U3" library="_traco_tsr-1" deviceset="TSR_1-*" device="" technology="2450">
+<attribute name="OC_FARNELL" value="1696320"/>
+</part>
 <part name="C12" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V"/>
 <part name="C13" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V"/>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
@@ -13624,7 +13626,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="X6" library="con-ptr500" deviceset="AK500/2" device=""/>
 <part name="P+15" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="GND40" library="supply1" deviceset="GND" device=""/>
-<part name="U$10" library="TES3-4810WI" deviceset="TES3-4810WI" device=""/>
+<part name="U$10" library="TEN3" deviceset="TEN3-2410N" device=""/>
 <part name="C30" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V"/>
 <part name="P+4" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="U$11" library="Coil" deviceset="COIL" device=""/>
