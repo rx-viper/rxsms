@@ -144,7 +144,7 @@
 </connects>
 <technologies>
 <technology name="">
-<attribute name="OC_FARNELL" value="1854507 (black); 1854508 (red); 1854511 (blue); 1854510 (yellow)" constant="no"/>
+<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" constant="no"/>
 </technology>
 </technologies>
 </device>

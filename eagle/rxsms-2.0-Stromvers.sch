@@ -1142,7 +1142,7 @@ Low profile connectors, straight&lt;p&gt;
 </connects>
 <technologies>
 <technology name="">
-<attribute name="OC_FARNELL" value="1854507 (black); 1854508 (red); 1854511 (blue); 1854510 (yellow)" constant="no"/>
+<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -6887,10 +6887,10 @@ Source: www.kingbright.com</description>
 <library name="light-pipe">
 <packages>
 <package name="RLP1-200-500">
-<wire x1="2.56" y1="-0.8" x2="2.56" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="4.56" y1="-1.8" x2="4.56" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="2.56" y1="-0.8" x2="4.56" y2="-0.8" width="0.127" layer="46" curve="-180"/>
-<wire x1="2.56" y1="-1.8" x2="4.56" y2="-1.8" width="0.127" layer="46" curve="180"/>
+<wire x1="2.56" y1="-0.8" x2="2.56" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="4.56" y1="-1.8" x2="4.56" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="2.56" y1="-0.8" x2="4.56" y2="-0.8" width="0.0254" layer="46" curve="-180"/>
+<wire x1="2.56" y1="-1.8" x2="4.56" y2="-1.8" width="0.0254" layer="46" curve="180"/>
 <wire x1="4.31" y1="1.6" x2="4.31" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="4.31" y1="-0.4" x2="4.31" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="4.31" y1="-2.2" x2="4.31" y2="-4.2" width="0.127" layer="21"/>
@@ -6901,33 +6901,33 @@ Source: www.kingbright.com</description>
 <wire x1="4.81" y1="-0.4" x2="4.31" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="4.81" y1="-2.2" x2="4.31" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="4.81" y1="-0.4" x2="4.81" y2="-2.2" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="1.9" x2="-1.5" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="1.5" y1="1.9" x2="-1.5" y2="1.9" width="0.127" layer="22"/>
-<wire x1="1.5" y1="-1.9" x2="-1.5" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="1.5" y1="1.9" x2="1.5" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="-2.56" y1="-0.8" x2="-2.56" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="-4.56" y1="-1.8" x2="-4.56" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="-2.56" y1="-0.8" x2="-4.56" y2="-0.8" width="0.127" layer="46" curve="180"/>
-<wire x1="-2.56" y1="-1.8" x2="-4.56" y2="-1.8" width="0.127" layer="46" curve="-180"/>
-<wire x1="-4.31" y1="1.6" x2="-4.31" y2="-0.4" width="0.127" layer="22"/>
-<wire x1="-4.31" y1="-0.4" x2="-4.31" y2="-2.2" width="0.127" layer="22"/>
-<wire x1="-4.31" y1="-2.2" x2="-4.31" y2="-4.2" width="0.127" layer="22"/>
-<wire x1="-4.31" y1="1.6" x2="-2.11" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-2.11" y1="1.6" x2="4.31" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-4.31" y1="-4.2" x2="-2.11" y2="-4.2" width="0.127" layer="22"/>
-<wire x1="-2.11" y1="-9.2" x2="-2.11" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-2.11" y1="-9.2" x2="-1.41" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="-1.41" y1="-9.2" x2="1.39" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="1.39" y1="-9.2" x2="2.11" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="-1.41" y1="-9.2" x2="-1.41" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="-1.41" y1="-11.8" x2="-1.41" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="1.39" y1="-9.2" x2="1.39" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="1.39" y1="-11.8" x2="1.39" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="1.39" y1="-15.3" x2="-1.41" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="1.39" y1="-11.8" x2="-1.41" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="-4.81" y1="-0.4" x2="-4.31" y2="-0.4" width="0.127" layer="22"/>
-<wire x1="-4.81" y1="-2.2" x2="-4.31" y2="-2.2" width="0.127" layer="22"/>
-<wire x1="-4.81" y1="-0.4" x2="-4.81" y2="-2.2" width="0.127" layer="22"/>
+<wire x1="-1.5" y1="1.9" x2="-1.5" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.9" x2="-1.5" y2="1.9" width="0.127" layer="21"/>
+<wire x1="1.5" y1="-1.9" x2="-1.5" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.9" x2="1.5" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-2.56" y1="-0.8" x2="-2.56" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="-4.56" y1="-1.8" x2="-4.56" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="-2.56" y1="-0.8" x2="-4.56" y2="-0.8" width="0.0254" layer="46" curve="180"/>
+<wire x1="-2.56" y1="-1.8" x2="-4.56" y2="-1.8" width="0.0254" layer="46" curve="-180"/>
+<wire x1="-4.31" y1="1.6" x2="-4.31" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="-4.31" y1="-0.4" x2="-4.31" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="-4.31" y1="-2.2" x2="-4.31" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="-4.31" y1="1.6" x2="-2.11" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-2.11" y1="1.6" x2="4.31" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-4.31" y1="-4.2" x2="-2.11" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="-2.11" y1="-9.2" x2="-2.11" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-2.11" y1="-9.2" x2="-1.41" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="-1.41" y1="-9.2" x2="1.39" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="1.39" y1="-9.2" x2="2.11" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="-1.41" y1="-9.2" x2="-1.41" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="-1.41" y1="-11.8" x2="-1.41" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="1.39" y1="-9.2" x2="1.39" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="1.39" y1="-11.8" x2="1.39" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="1.39" y1="-15.3" x2="-1.41" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="1.39" y1="-11.8" x2="-1.41" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="-4.81" y1="-0.4" x2="-4.31" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="-4.81" y1="-2.2" x2="-4.31" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="-4.81" y1="-0.4" x2="-4.81" y2="-2.2" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -6949,7 +6949,10 @@ Source: www.kingbright.com</description>
 <devices>
 <device name="" package="RLP1-200-500">
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="OC_FARNELL" value="1887972" constant="no"/>
+<attribute name="OC_RS" value="752-9141" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -7070,8 +7073,12 @@ Source: www.kingbright.com</description>
 </classes>
 <parts>
 <part name="FRAME4" library="frames" deviceset="DINA4_L" device=""/>
-<part name="X4" library="con-subd" deviceset="F15HP" device=""/>
-<part name="SV1" library="con-harting-ml" deviceset="ML26" device="L"/>
+<part name="X4" library="con-subd" deviceset="F15HP" device="">
+<attribute name="OC_FARNELL" value="1207598 + 2x 1855027"/>
+</part>
+<part name="SV1" library="con-harting-ml" deviceset="ML26" device="L">
+<attribute name="OC_FARNELL" value="1096983 (Gegenstück: 1200506 oder 1097038)"/>
+</part>
 <part name="FRAME8" library="frames" deviceset="DINA4_L" device=""/>
 <part name="P+13" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="GND38" library="supply1" deviceset="GND" device=""/>
@@ -7095,7 +7102,9 @@ Source: www.kingbright.com</description>
 <attribute name="OC_FARNELL" value="1779204"/>
 </part>
 <part name="R3" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
-<part name="LED1" library="led" deviceset="LED" device="CHIPLED_0805"/>
+<part name="LED1" library="led" deviceset="LED" device="CHIPLED_0805">
+<attribute name="OC_RS" value="692-0957"/>
+</part>
 <part name="U$1" library="light-pipe" deviceset="RLP1-200-500" device=""/>
 <part name="SJ1" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ2" library="jumper" deviceset="SJ" device=""/>
@@ -7126,7 +7135,9 @@ Source: www.kingbright.com</description>
 <attribute name="OC_FARNELL" x="160.02" y="93.98" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R3" gate="G$1" x="172.72" y="99.06"/>
-<instance part="LED1" gate="G$1" x="182.88" y="93.98"/>
+<instance part="LED1" gate="G$1" x="182.88" y="93.98">
+<attribute name="OC_RS" x="182.88" y="93.98" size="1.778" layer="96" display="off"/>
+</instance>
 <instance part="U$1" gate="G$1" x="43.18" y="35.56"/>
 <instance part="SJ1" gate="1" x="71.12" y="132.08"/>
 <instance part="SJ2" gate="1" x="71.12" y="139.7"/>
