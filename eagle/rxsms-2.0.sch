@@ -13839,7 +13839,9 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="P+13" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="GND39" library="supply1" deviceset="GND" device=""/>
 <part name="P+14" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="X6" library="con-ptr500" deviceset="AK500/2" device=""/>
+<part name="X6" library="con-ptr500" deviceset="AK500/2" device="">
+<attribute name="OC_FARNELL" value="1131855"/>
+</part>
 <part name="P+15" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="GND40" library="supply1" deviceset="GND" device=""/>
 <part name="U$10" library="TEN3" deviceset="TEN3-2410N" device=""/>

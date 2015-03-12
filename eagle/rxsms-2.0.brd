@@ -3559,7 +3559,7 @@ Based on the following sources:
 <attribute name="OC_NEWARK" value="unknown" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
 <attribute name="MPN" value="" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
 <attribute name="MF" value="" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
-<attribute name="OC_FARNELL" value="unknown" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="1131855" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$10" library="TEN3" package="TEN3-2410N" value="TEN3-2410N" x="58.42" y="48.26" rot="R180">
 <attribute name="OC_RS" value="801-9330" x="58.42" y="48.26" size="1.778" layer="27" rot="R180" display="off"/>
