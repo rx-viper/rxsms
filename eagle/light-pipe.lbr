@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.6.0">
+<eagle version="6.5.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -53,7 +53,7 @@
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
 <layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
-<layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
+<layer number="46" name="Milling" color="3" fill="1" visible="yes" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="49" name="Reference" color="7" fill="1" visible="yes" active="yes"/>
@@ -124,6 +124,49 @@
 <wire x1="-7.35" y1="-2.2" x2="-6.85" y2="-2.2" width="0.127" layer="22"/>
 <wire x1="-7.35" y1="-0.4" x2="-7.35" y2="-2.2" width="0.127" layer="22"/>
 </package>
+<package name="RLP1-200-500">
+<wire x1="2.56" y1="-0.8" x2="2.56" y2="-1.8" width="0.127" layer="46"/>
+<wire x1="4.56" y1="-1.8" x2="4.56" y2="-0.8" width="0.127" layer="46"/>
+<wire x1="2.56" y1="-0.8" x2="4.56" y2="-0.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="2.56" y1="-1.8" x2="4.56" y2="-1.8" width="0.127" layer="46" curve="180"/>
+<wire x1="4.31" y1="1.6" x2="4.31" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="4.31" y1="-0.4" x2="4.31" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="4.31" y1="-2.2" x2="4.31" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="4.31" y1="1.6" x2="2.11" y2="1.6" width="0.127" layer="21"/>
+<wire x1="4.31" y1="-4.2" x2="2.11" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="2.11" y1="-9.2" x2="2.11" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="2.11" y1="-4.2" x2="2.11" y2="1.6" width="0.127" layer="21"/>
+<wire x1="4.81" y1="-0.4" x2="4.31" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="4.81" y1="-2.2" x2="4.31" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="4.81" y1="-0.4" x2="4.81" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="1.9" x2="-1.5" y2="-1.9" width="0.127" layer="22"/>
+<wire x1="1.5" y1="1.9" x2="-1.5" y2="1.9" width="0.127" layer="22"/>
+<wire x1="1.5" y1="-1.9" x2="-1.5" y2="-1.9" width="0.127" layer="22"/>
+<wire x1="1.5" y1="1.9" x2="1.5" y2="-1.9" width="0.127" layer="22"/>
+<wire x1="-2.56" y1="-0.8" x2="-2.56" y2="-1.8" width="0.127" layer="46"/>
+<wire x1="-4.56" y1="-1.8" x2="-4.56" y2="-0.8" width="0.127" layer="46"/>
+<wire x1="-2.56" y1="-0.8" x2="-4.56" y2="-0.8" width="0.127" layer="46" curve="180"/>
+<wire x1="-2.56" y1="-1.8" x2="-4.56" y2="-1.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="-4.31" y1="1.6" x2="-4.31" y2="-0.4" width="0.127" layer="22"/>
+<wire x1="-4.31" y1="-0.4" x2="-4.31" y2="-2.2" width="0.127" layer="22"/>
+<wire x1="-4.31" y1="-2.2" x2="-4.31" y2="-4.2" width="0.127" layer="22"/>
+<wire x1="-4.31" y1="1.6" x2="-2.11" y2="1.6" width="0.127" layer="22"/>
+<wire x1="-2.11" y1="1.6" x2="4.31" y2="1.6" width="0.127" layer="22"/>
+<wire x1="-4.31" y1="-4.2" x2="-2.11" y2="-4.2" width="0.127" layer="22"/>
+<wire x1="-2.11" y1="-9.2" x2="-2.11" y2="1.6" width="0.127" layer="22"/>
+<wire x1="-2.11" y1="-9.2" x2="-1.41" y2="-9.2" width="0.127" layer="22"/>
+<wire x1="-1.41" y1="-9.2" x2="1.39" y2="-9.2" width="0.127" layer="22"/>
+<wire x1="1.39" y1="-9.2" x2="2.11" y2="-9.2" width="0.127" layer="22"/>
+<wire x1="-1.41" y1="-9.2" x2="-1.41" y2="-11.8" width="0.127" layer="22"/>
+<wire x1="-1.41" y1="-11.8" x2="-1.41" y2="-15.3" width="0.127" layer="22"/>
+<wire x1="1.39" y1="-9.2" x2="1.39" y2="-11.8" width="0.127" layer="22"/>
+<wire x1="1.39" y1="-11.8" x2="1.39" y2="-15.3" width="0.127" layer="22"/>
+<wire x1="1.39" y1="-15.3" x2="-1.41" y2="-15.3" width="0.127" layer="22"/>
+<wire x1="1.39" y1="-11.8" x2="-1.41" y2="-11.8" width="0.127" layer="22"/>
+<wire x1="-4.81" y1="-0.4" x2="-4.31" y2="-0.4" width="0.127" layer="22"/>
+<wire x1="-4.81" y1="-2.2" x2="-4.31" y2="-2.2" width="0.127" layer="22"/>
+<wire x1="-4.81" y1="-0.4" x2="-4.81" y2="-2.2" width="0.127" layer="22"/>
+</package>
 </packages>
 <symbols>
 <symbol name="RLP2-XXX-XXX">
@@ -131,7 +174,16 @@
 <wire x1="-10.16" y1="-5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
 <wire x1="10.16" y1="5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<text x="-5.08" y="0" size="1.778" layer="94">Light Pipe</text>
+<text x="-7.62" y="0" size="1.778" layer="94">Light Pipe 2x</text>
+<text x="-10.16" y="8.89" size="1.778" layer="95">&gt;NAME</text>
+<text x="-10.16" y="6.35" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+<symbol name="RLP1-XXX-500">
+<wire x1="-10.16" y1="5.08" x2="-10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
+<wire x1="10.16" y1="5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
+<text x="-7.62" y="0" size="1.778" layer="94">Light Pipe 1x</text>
 <text x="-10.16" y="8.89" size="1.778" layer="95">&gt;NAME</text>
 <text x="-10.16" y="6.35" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
@@ -143,6 +195,20 @@
 </gates>
 <devices>
 <device name="" package="RLP2-200-500">
+<technologies>
+<technology name="">
+<attribute name="OC_FARNELL" value="1886474" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="RLP1-200-500">
+<gates>
+<gate name="G$1" symbol="RLP1-XXX-500" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="RLP1-200-500">
 <technologies>
 <technology name=""/>
 </technologies>
