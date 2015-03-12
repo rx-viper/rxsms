@@ -13398,34 +13398,54 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="VDD2" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS5" library="supply1" deviceset="VSS" device=""/>
-<part name="R1" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R1" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="FRAME4" library="frames" deviceset="DINA4_L" device=""/>
 <part name="X4" library="con-subd" deviceset="F15HP" device=""/>
 <part name="U$4" library="UDN2596" deviceset="UDN2596" device=""/>
 <part name="Q2" library="transistor-small-signal" deviceset="BSS123" device=""/>
 <part name="U$5" library="SP491" deviceset="SP490" device=""/>
-<part name="R2" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R2" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="GND8" library="supply1" deviceset="GND" device=""/>
 <part name="+3V4" library="supply1" deviceset="+3V3" device=""/>
-<part name="R3" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R3" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="R4" library="rcl" deviceset="R-EU_" device="R0805" value="22k"/>
 <part name="U$6" library="BTS6134" deviceset="BTS6143" device=""/>
 <part name="P+1" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="R5" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R5" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="GND9" library="supply1" deviceset="GND" device=""/>
-<part name="R6" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
-<part name="R7" library="rcl" deviceset="R-EU_" device="R0805" value="100k"/>
+<part name="R6" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
+<part name="R7" library="rcl" deviceset="R-EU_" device="R0805" value="100k">
+<attribute name="OC_FARNELL" value="2333538"/>
+</part>
 <part name="C16" library="rcl" deviceset="C-EU" device="C0805K" value="100n"/>
 <part name="Q3" library="transistor-small-signal" deviceset="BSS123" device=""/>
-<part name="R8" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
-<part name="R9" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R8" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
+<part name="R9" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="P+5" library="supply1" deviceset="+5V" device=""/>
 <part name="P+6" library="supply1" deviceset="+5V" device=""/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="Q4" library="transistor-small-signal" deviceset="BSS123" device=""/>
-<part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
-<part name="R11" library="rcl" deviceset="R-EU_" device="R0805" value="10k"/>
+<part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
+<part name="R11" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
+<attribute name="OC_FARNELL" value="1887308"/>
+</part>
 <part name="P+7" library="supply1" deviceset="+5V" device=""/>
 <part name="+3V6" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND10" library="supply1" deviceset="GND" device=""/>
@@ -13656,7 +13676,9 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <instance part="GND2" gate="1" x="83.82" y="45.72"/>
 <instance part="+3V2" gate="G$1" x="15.24" y="88.9"/>
 <instance part="GND3" gate="1" x="15.24" y="63.5"/>
-<instance part="R1" gate="G$1" x="30.48" y="83.82"/>
+<instance part="R1" gate="G$1" x="30.48" y="83.82">
+<attribute name="OC_FARNELL" x="30.48" y="83.82" size="1.778" layer="96" display="off"/>
+</instance>
 <instance part="+3V14" gate="G$1" x="40.64" y="53.34" rot="MR0"/>
 <instance part="GND37" gate="1" x="218.44" y="101.6"/>
 <instance part="+3V17" gate="G$1" x="218.44" y="127"/>
@@ -15039,28 +15061,46 @@ interface</text>
 <instance part="U$4" gate="G$1" x="190.5" y="71.12" rot="MR0"/>
 <instance part="Q2" gate="G$1" x="121.92" y="165.1"/>
 <instance part="U$5" gate="G$1" x="96.52" y="27.94"/>
-<instance part="R2" gate="G$1" x="142.24" y="96.52" rot="R90"/>
+<instance part="R2" gate="G$1" x="142.24" y="96.52" rot="R90">
+<attribute name="OC_FARNELL" x="142.24" y="96.52" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="GND8" gate="1" x="210.82" y="88.9" rot="R90"/>
 <instance part="+3V4" gate="G$1" x="175.26" y="109.22"/>
-<instance part="R3" gate="G$1" x="152.4" y="96.52" rot="R90"/>
+<instance part="R3" gate="G$1" x="152.4" y="96.52" rot="R90">
+<attribute name="OC_FARNELL" x="152.4" y="96.52" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="R4" gate="G$1" x="38.1" y="96.52" rot="R90"/>
 <instance part="U$6" gate="G$1" x="167.64" y="160.02"/>
 <instance part="P+1" gate="1" x="213.36" y="172.72" rot="R270"/>
-<instance part="R5" gate="G$1" x="111.76" y="149.86" rot="R90"/>
+<instance part="R5" gate="G$1" x="111.76" y="149.86" rot="R90">
+<attribute name="OC_FARNELL" x="111.76" y="149.86" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="GND9" gate="1" x="121.92" y="137.16"/>
-<instance part="R6" gate="G$1" x="121.92" y="40.64" rot="R90"/>
-<instance part="R7" gate="G$1" x="121.92" y="22.86" rot="R90"/>
+<instance part="R6" gate="G$1" x="121.92" y="40.64" rot="R90">
+<attribute name="OC_FARNELL" x="121.92" y="40.64" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
+<instance part="R7" gate="G$1" x="121.92" y="22.86" rot="R90">
+<attribute name="OC_FARNELL" x="121.92" y="22.86" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="C16" gate="G$1" x="60.96" y="33.02"/>
 <instance part="Q3" gate="G$1" x="38.1" y="45.72" rot="R270"/>
-<instance part="R8" gate="G$1" x="27.94" y="50.8" rot="R90"/>
-<instance part="R9" gate="G$1" x="45.72" y="50.8" rot="R90"/>
+<instance part="R8" gate="G$1" x="27.94" y="50.8" rot="R90">
+<attribute name="OC_FARNELL" x="27.94" y="50.8" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
+<instance part="R9" gate="G$1" x="45.72" y="50.8" rot="R90">
+<attribute name="OC_FARNELL" x="45.72" y="50.8" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="P+5" gate="1" x="45.72" y="60.96"/>
 <instance part="P+6" gate="1" x="60.96" y="43.18"/>
 <instance part="GND11" gate="1" x="60.96" y="20.32"/>
 <instance part="+3V5" gate="G$1" x="27.94" y="60.96"/>
 <instance part="Q4" gate="G$1" x="38.1" y="12.7" rot="R270"/>
-<instance part="R10" gate="G$1" x="27.94" y="17.78" rot="R90"/>
-<instance part="R11" gate="G$1" x="45.72" y="17.78" rot="R90"/>
+<instance part="R10" gate="G$1" x="27.94" y="17.78" rot="R90">
+<attribute name="OC_FARNELL" x="27.94" y="17.78" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
+<instance part="R11" gate="G$1" x="45.72" y="17.78" rot="R90">
+<attribute name="OC_FARNELL" x="45.72" y="17.78" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="P+7" gate="1" x="45.72" y="27.94"/>
 <instance part="+3V6" gate="G$1" x="27.94" y="27.94"/>
 <instance part="GND10" gate="1" x="205.74" y="106.68"/>
