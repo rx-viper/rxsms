@@ -145,7 +145,7 @@
 <vertex x="-1" y="13.5"/>
 <vertex x="-1" y="2.5"/>
 </polygon>
-<text x="94" y="5" size="1.27" layer="16" font="vector" ratio="14" rot="MR0">11.03.2015
+<text x="94" y="5" size="1.27" layer="16" font="vector" ratio="14" rot="MR0">2015-March-11
 Max Rößner
 m.roessner@tum.de</text>
 <rectangle x1="89.7012" y1="49.64625" x2="89.7088" y2="49.65375" layer="29" rot="R90"/>
@@ -7868,6 +7868,14 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <contactref element="LED1" pad="A"/>
 <contactref element="R3" pad="2"/>
 <wire x1="16.05" y1="70.5" x2="11.85" y2="70.5" width="0.254" layer="1"/>
+</signal>
+<signal name="N$4">
+<polygon width="0.4064" layer="1">
+<vertex x="78" y="59"/>
+<vertex x="92" y="59"/>
+<vertex x="92" y="23"/>
+<vertex x="78" y="23"/>
+</polygon>
 </signal>
 </signals>
 <errors>
