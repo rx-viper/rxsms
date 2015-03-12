@@ -11349,10 +11349,10 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="1.04" y1="1.9" x2="4.04" y2="1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="-1.9" x2="4.04" y2="-1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="1.9" x2="1.04" y2="-1.9" width="0.127" layer="21"/>
-<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.127" layer="20"/>
-<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.127" layer="20"/>
-<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.127" layer="20" curve="-180"/>
-<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.127" layer="20" curve="180"/>
+<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.127" layer="46"/>
+<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.127" layer="46"/>
+<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.127" layer="46" curve="180"/>
 <wire x1="6.85" y1="1.6" x2="6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-0.4" x2="6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-2.2" x2="6.85" y2="-4.2" width="0.127" layer="21"/>
@@ -11370,33 +11370,33 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="7.35" y1="-0.4" x2="6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="7.35" y1="-2.2" x2="6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="7.35" y1="-0.4" x2="7.35" y2="-2.2" width="0.127" layer="21"/>
-<wire x1="-4.04" y1="1.9" x2="-4.04" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="-1.04" y1="1.9" x2="-4.04" y2="1.9" width="0.127" layer="22"/>
-<wire x1="-1.04" y1="-1.9" x2="-4.04" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="-1.04" y1="1.9" x2="-1.04" y2="-1.9" width="0.127" layer="22"/>
-<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.127" layer="20"/>
-<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.127" layer="20"/>
-<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.127" layer="20" curve="180"/>
-<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.127" layer="20" curve="-180"/>
-<wire x1="-6.85" y1="1.6" x2="-6.85" y2="-0.4" width="0.127" layer="22"/>
-<wire x1="-6.85" y1="-0.4" x2="-6.85" y2="-2.2" width="0.127" layer="22"/>
-<wire x1="-6.85" y1="-2.2" x2="-6.85" y2="-4.2" width="0.127" layer="22"/>
-<wire x1="-6.85" y1="1.6" x2="-4.65" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-4.65" y1="1.6" x2="4.65" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-6.85" y1="-4.2" x2="-4.65" y2="-4.2" width="0.127" layer="22"/>
-<wire x1="-4.65" y1="-9.2" x2="-4.65" y2="1.6" width="0.127" layer="22"/>
-<wire x1="-4.65" y1="-9.2" x2="-3.95" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="-3.95" y1="-9.2" x2="-1.15" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="-1.15" y1="-9.2" x2="1.15" y2="-9.2" width="0.127" layer="22"/>
-<wire x1="-3.95" y1="-9.2" x2="-3.95" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="-3.95" y1="-11.8" x2="-3.95" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="-1.15" y1="-9.2" x2="-1.15" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="-1.15" y1="-11.8" x2="-1.15" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="-1.15" y1="-15.3" x2="-3.95" y2="-15.3" width="0.127" layer="22"/>
-<wire x1="-1.15" y1="-11.8" x2="-3.95" y2="-11.8" width="0.127" layer="22"/>
-<wire x1="-7.35" y1="-0.4" x2="-6.85" y2="-0.4" width="0.127" layer="22"/>
-<wire x1="-7.35" y1="-2.2" x2="-6.85" y2="-2.2" width="0.127" layer="22"/>
-<wire x1="-7.35" y1="-0.4" x2="-7.35" y2="-2.2" width="0.127" layer="22"/>
+<wire x1="-4.04" y1="1.9" x2="-4.04" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-1.04" y1="1.9" x2="-4.04" y2="1.9" width="0.127" layer="21"/>
+<wire x1="-1.04" y1="-1.9" x2="-4.04" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-1.04" y1="1.9" x2="-1.04" y2="-1.9" width="0.127" layer="21"/>
+<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.127" layer="46"/>
+<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.127" layer="46"/>
+<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.127" layer="46" curve="180"/>
+<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="-6.85" y1="1.6" x2="-6.85" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="-6.85" y1="-0.4" x2="-6.85" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="-6.85" y1="-2.2" x2="-6.85" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="-6.85" y1="1.6" x2="-4.65" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-4.65" y1="1.6" x2="4.65" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-6.85" y1="-4.2" x2="-4.65" y2="-4.2" width="0.127" layer="21"/>
+<wire x1="-4.65" y1="-9.2" x2="-4.65" y2="1.6" width="0.127" layer="21"/>
+<wire x1="-4.65" y1="-9.2" x2="-3.95" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="-3.95" y1="-9.2" x2="-1.15" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="-1.15" y1="-9.2" x2="1.15" y2="-9.2" width="0.127" layer="21"/>
+<wire x1="-3.95" y1="-9.2" x2="-3.95" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="-3.95" y1="-11.8" x2="-3.95" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="-1.15" y1="-9.2" x2="-1.15" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="-1.15" y1="-11.8" x2="-1.15" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="-1.15" y1="-15.3" x2="-3.95" y2="-15.3" width="0.127" layer="21"/>
+<wire x1="-1.15" y1="-11.8" x2="-3.95" y2="-11.8" width="0.127" layer="21"/>
+<wire x1="-7.35" y1="-0.4" x2="-6.85" y2="-0.4" width="0.127" layer="21"/>
+<wire x1="-7.35" y1="-2.2" x2="-6.85" y2="-2.2" width="0.127" layer="21"/>
+<wire x1="-7.35" y1="-0.4" x2="-7.35" y2="-2.2" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>
@@ -11405,7 +11405,7 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="-10.16" y1="-5.08" x2="10.16" y2="-5.08" width="0.254" layer="94"/>
 <wire x1="10.16" y1="-5.08" x2="10.16" y2="5.08" width="0.254" layer="94"/>
 <wire x1="10.16" y1="5.08" x2="-10.16" y2="5.08" width="0.254" layer="94"/>
-<text x="-5.08" y="0" size="1.778" layer="94">Light Pipe</text>
+<text x="-7.62" y="0" size="1.778" layer="94">Light Pipe 2x</text>
 <text x="-10.16" y="8.89" size="1.778" layer="95">&gt;NAME</text>
 <text x="-10.16" y="6.35" size="1.778" layer="96">&gt;VALUE</text>
 </symbol>
@@ -11418,7 +11418,9 @@ Philips Semiconductors, SOT363.pdf</description>
 <devices>
 <device name="" package="RLP2-200-500">
 <technologies>
-<technology name=""/>
+<technology name="">
+<attribute name="OC_FARNELL" value="1886474" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
