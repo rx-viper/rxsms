@@ -13683,9 +13683,15 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="VDD6" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS9" library="supply1" deviceset="VSS" device=""/>
-<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="opt"/>
-<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="opt"/>
-<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="opt"/>
+<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<attribute name="OC_FARNELL" value="2309112"/>
+</part>
+<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<attribute name="OC_FARNELL" value="2309112"/>
+</part>
+<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<attribute name="OC_FARNELL" value="2309112"/>
+</part>
 <part name="SJ1" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ2" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ3" library="jumper" deviceset="SJ" device=""/>
@@ -14593,9 +14599,15 @@ interface</text>
 </instance>
 <instance part="VDD6" gate="G$1" x="101.6" y="48.26"/>
 <instance part="VSS9" gate="G$1" x="119.38" y="17.78"/>
-<instance part="R33" gate="G$1" x="40.64" y="25.4"/>
-<instance part="R34" gate="G$1" x="40.64" y="73.66"/>
-<instance part="R35" gate="G$1" x="40.64" y="58.42"/>
+<instance part="R33" gate="G$1" x="40.64" y="25.4">
+<attribute name="OC_FARNELL" x="40.64" y="25.4" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="R34" gate="G$1" x="40.64" y="73.66">
+<attribute name="OC_FARNELL" x="40.64" y="73.66" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="R35" gate="G$1" x="40.64" y="58.42">
+<attribute name="OC_FARNELL" x="40.64" y="58.42" size="1.778" layer="96" display="off"/>
+</instance>
 <instance part="SJ1" gate="1" x="241.3" y="99.06"/>
 <instance part="SJ2" gate="1" x="238.76" y="63.5" rot="R180"/>
 <instance part="JP1" gate="A" x="30.48" y="78.74"/>
