@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.6.0">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -16290,10 +16290,10 @@ D = Direct mounting &lt;p&gt;
 </classes>
 <parts>
 <part name="IC1" library="maxim" deviceset="MAX3232*" device="SE" technology="E" value="MAX3232ESE"/>
-<part name="C1" library="rcl" deviceset="C-EU" device="C0603K" value="1u/16V"/>
-<part name="C2" library="rcl" deviceset="C-EU" device="C0603K" value="1u/16V"/>
-<part name="C3" library="rcl" deviceset="C-EU" device="C0603K" value="1u/16V"/>
-<part name="C4" library="rcl" deviceset="C-EU" device="C0603K" value="1u/16V"/>
+<part name="C1" library="rcl" deviceset="C-EU" device="C0603K" value="200n"/>
+<part name="C2" library="rcl" deviceset="C-EU" device="C0603K" value="200n"/>
+<part name="C3" library="rcl" deviceset="C-EU" device="C0603K" value="200n"/>
+<part name="C4" library="rcl" deviceset="C-EU" device="C0603K" value="200n"/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="GND3" library="supply1" deviceset="GND" device=""/>
@@ -16401,12 +16401,6 @@ D = Direct mounting &lt;p&gt;
 <part name="SW4_STATUS1" library="led" deviceset="LED" device="CHIPLED_1206"/>
 <part name="GND32" library="supply1" deviceset="GND" device=""/>
 <part name="X1" library="con-subd" deviceset="F15HPS" device=""/>
-<part name="R24" library="rcl" deviceset="R-EU_" device="R0603" value="3k3"/>
-<part name="R25" library="rcl" deviceset="R-EU_" device="R0603" value="3k3"/>
-<part name="R26" library="rcl" deviceset="R-EU_" device="R0603" value="56k"/>
-<part name="R27" library="rcl" deviceset="R-EU_" device="R0603" value="56k"/>
-<part name="R28" library="rcl" deviceset="R-EU_" device="R0603" value="56k"/>
-<part name="GND33" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16414,9 +16408,8 @@ D = Direct mounting &lt;p&gt;
 <text x="-170.18" y="71.12" size="1.778" layer="95">BTS6143</text>
 <text x="63.5" y="53.34" size="1.778" layer="91">Verbesserungen: Rs232 &amp; rs455 Buchsen/Stecker MÜSSEN angelötet sein </text>
 <text x="83.82" y="50.8" size="1.778" layer="91">Statt 2*2 Schraubklemme -&gt; 4 Scharaubklemme </text>
+<text x="83.82" y="48.26" size="1.778" layer="91">Andere Tasten ( die nicht so sehr prellen !!)</text>
 <text x="83.82" y="45.72" size="1.778" layer="91">Potis weiter außeinander Platzieren</text>
-<text x="83.82" y="43.18" size="1.778" layer="91">GATE Widerstand an SUPPLY_CTRL</text>
-<text x="83.82" y="40.64" size="1.778" layer="91">an SP49 tatsaechlich VCC_5V benoetigt?</text>
 </plain>
 <instances>
 <instance part="IC1" gate="G$1" x="71.12" y="106.68"/>
@@ -16451,7 +16444,7 @@ D = Direct mounting &lt;p&gt;
 <instance part="U$4" gate="G$1" x="-177.8" y="5.08"/>
 <instance part="U$5" gate="G$1" x="-144.78" y="5.08"/>
 <instance part="GND13" gate="1" x="-177.8" y="-12.7"/>
-<instance part="P+3" gate="VCC" x="-177.8" y="35.56"/>
+<instance part="P+3" gate="VCC" x="-177.8" y="20.32"/>
 <instance part="R7" gate="G$1" x="-60.96" y="0" rot="R270"/>
 <instance part="R8" gate="G$1" x="-27.94" y="0" rot="R270"/>
 <instance part="R9" gate="G$1" x="-45.72" y="0" rot="R270"/>
@@ -16491,9 +16484,9 @@ D = Direct mounting &lt;p&gt;
 <instance part="C16" gate="G$1" x="-198.12" y="-5.08" rot="R90"/>
 <instance part="R17" gate="G$1" x="-114.3" y="160.02"/>
 <instance part="R18" gate="G$1" x="-114.3" y="172.72"/>
-<instance part="C12" gate="G$1" x="-104.14" y="137.16"/>
-<instance part="GND29" gate="1" x="-111.76" y="129.54"/>
-<instance part="P+6" gate="VCC" x="-111.76" y="154.94"/>
+<instance part="C12" gate="G$1" x="-101.6" y="134.62"/>
+<instance part="GND29" gate="1" x="-101.6" y="127"/>
+<instance part="P+6" gate="VCC" x="-101.6" y="142.24"/>
 <instance part="C13" gate="G$1" x="-15.24" y="86.36" rot="R90"/>
 <instance part="GND30" gate="1" x="-7.62" y="86.36" rot="R90"/>
 <instance part="P+7" gate="VCC" x="104.14" y="124.46"/>
@@ -16502,7 +16495,7 @@ D = Direct mounting &lt;p&gt;
 <instance part="SW3" gate="G$1" x="-55.88" y="-17.78"/>
 <instance part="SW2" gate="G$1" x="-40.64" y="-17.78"/>
 <instance part="SW1" gate="G$1" x="-22.86" y="-17.78"/>
-<instance part="GND2" gate="1" x="-38.1" y="175.26" rot="R90"/>
+<instance part="GND2" gate="1" x="-43.18" y="187.96" rot="R180"/>
 <instance part="U1" gate="G$1" x="-167.64" y="203.2"/>
 <instance part="X5" gate="-1" x="-210.82" y="203.2" rot="MR180"/>
 <instance part="X5" gate="-2" x="-210.82" y="198.12" rot="MR180"/>
@@ -16512,11 +16505,11 @@ D = Direct mounting &lt;p&gt;
 <instance part="GND5" gate="1" x="-116.84" y="190.5"/>
 <instance part="C17" gate="G$1" x="-96.52" y="198.12"/>
 <instance part="C18" gate="G$1" x="-132.08" y="198.12"/>
-<instance part="U$15" gate="G$1" x="-154.94" y="111.76"/>
-<instance part="GND12" gate="1" x="-170.18" y="129.54" rot="R270"/>
-<instance part="R4" gate="G$1" x="-121.92" y="114.3" rot="R90"/>
-<instance part="R5" gate="G$1" x="-127" y="119.38" rot="R90"/>
-<instance part="R6" gate="G$1" x="-129.54" y="134.62" rot="R90"/>
+<instance part="U$15" gate="G$1" x="-139.7" y="111.76"/>
+<instance part="GND12" gate="1" x="-154.94" y="129.54" rot="R270"/>
+<instance part="R4" gate="G$1" x="-106.68" y="114.3" rot="R90"/>
+<instance part="R5" gate="G$1" x="-111.76" y="119.38" rot="R90"/>
+<instance part="R6" gate="G$1" x="-114.3" y="134.62" rot="R90"/>
 <instance part="Q1" gate="G$1" x="12.7" y="129.54" rot="R270"/>
 <instance part="Q2" gate="G$1" x="30.48" y="127" rot="R270"/>
 <instance part="R14" gate="G$1" x="35.56" y="132.08" rot="R90"/>
@@ -16524,7 +16517,7 @@ D = Direct mounting &lt;p&gt;
 <instance part="R20" gate="G$1" x="17.78" y="134.62" rot="R90"/>
 <instance part="R21" gate="G$1" x="7.62" y="134.62" rot="R90"/>
 <instance part="U$16" gate="G$1" x="-68.58" y="170.18" rot="R180"/>
-<instance part="C19" gate="G$1" x="-45.72" y="154.94"/>
+<instance part="C19" gate="G$1" x="-40.64" y="180.34" rot="R90"/>
 <instance part="X2" gate="G$1" x="132.08" y="93.98"/>
 <instance part="SW5" gate="G$1" x="-91.44" y="-17.78"/>
 <instance part="R22" gate="G$1" x="-96.52" y="0" rot="R270"/>
@@ -16550,12 +16543,6 @@ D = Direct mounting &lt;p&gt;
 <instance part="X1" gate="-15" x="-198.12" y="170.18" rot="R180"/>
 <instance part="X1" gate="-G" x="-200.66" y="172.72" rot="R180"/>
 <instance part="X1" gate="-1" x="-198.12" y="134.62" rot="R180"/>
-<instance part="R24" gate="G$1" x="-111.76" y="137.16" rot="R90"/>
-<instance part="R25" gate="G$1" x="-111.76" y="147.32" rot="R90"/>
-<instance part="R26" gate="G$1" x="-144.78" y="22.86" rot="R90"/>
-<instance part="R27" gate="G$1" x="-177.8" y="22.86" rot="R90"/>
-<instance part="R28" gate="G$1" x="-210.82" y="22.86" rot="R90"/>
-<instance part="GND33" gate="1" x="-45.72" y="147.32"/>
 </instances>
 <busses>
 </busses>
@@ -16787,12 +16774,13 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="GND26" gate="1" pin="GND"/>
 <wire x1="-175.26" y1="43.18" x2="-172.72" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="-172.72" y1="43.18" x2="-172.72" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="-172.72" y1="43.18" x2="-172.72" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="R16" gate="G$1" pin="1"/>
 <wire x1="-177.8" y1="43.18" x2="-175.26" y2="43.18" width="0.1524" layer="91"/>
 <junction x="-175.26" y="43.18"/>
 <pinref part="X5" gate="-4" pin="KL"/>
-<wire x1="-172.72" y1="55.88" x2="-165.1" y2="55.88" width="0.1524" layer="91"/>
+<wire x1="-172.72" y1="58.42" x2="-167.64" y2="58.42" width="0.1524" layer="91"/>
+<wire x1="-167.64" y1="58.42" x2="-165.1" y2="55.88" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
@@ -16821,13 +16809,19 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="C12" gate="G$1" pin="2"/>
 <pinref part="GND29" gate="1" pin="GND"/>
-<pinref part="R24" gate="G$1" pin="1"/>
-<wire x1="-111.76" y1="132.08" x2="-104.14" y2="132.08" width="0.1524" layer="91"/>
-<junction x="-111.76" y="132.08"/>
 </segment>
 <segment>
 <pinref part="C13" gate="G$1" pin="2"/>
 <pinref part="GND30" gate="1" pin="GND"/>
+</segment>
+<segment>
+<wire x1="-43.18" y1="180.34" x2="-43.18" y2="185.42" width="0.1524" layer="91"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+<pinref part="U$16" gate="G$1" pin="GND"/>
+<wire x1="-53.34" y1="175.26" x2="-48.26" y2="175.26" width="0.1524" layer="91"/>
+<wire x1="-48.26" y1="175.26" x2="-43.18" y2="180.34" width="0.1524" layer="91"/>
+<pinref part="C19" gate="G$1" pin="1"/>
+<junction x="-43.18" y="180.34"/>
 </segment>
 <segment>
 <pinref part="GND15" gate="1" pin="GND"/>
@@ -16845,7 +16839,7 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="GND12" gate="1" pin="GND"/>
 <pinref part="U$15" gate="G$1" pin="GND"/>
-<wire x1="-167.64" y1="129.54" x2="-165.1" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="-152.4" y1="129.54" x2="-149.86" y2="129.54" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="GND32" gate="1" pin="GND"/>
@@ -16862,17 +16856,8 @@ D = Direct mounting &lt;p&gt;
 <pinref part="GND14" gate="1" pin="GND"/>
 <wire x1="-104.14" y1="7.62" x2="-104.14" y2="5.08" width="0.1524" layer="91"/>
 </segment>
-<segment>
-<pinref part="U$16" gate="G$1" pin="GND"/>
-<wire x1="-53.34" y1="175.26" x2="-40.64" y2="175.26" width="0.1524" layer="91"/>
-<pinref part="GND2" gate="1" pin="GND"/>
-</segment>
-<segment>
-<pinref part="C19" gate="G$1" pin="2"/>
-<pinref part="GND33" gate="1" pin="GND"/>
-</segment>
 </net>
-<net name="VCC" class="0">
+<net name="VCC_3V" class="0">
 <segment>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
 <wire x1="-124.46" y1="71.12" x2="-124.46" y2="68.58" width="0.1524" layer="91"/>
@@ -16911,9 +16896,29 @@ D = Direct mounting &lt;p&gt;
 <label x="-17.78" y="78.74" size="1.778" layer="95"/>
 </segment>
 <segment>
+<pinref part="U$5" gate="G$1" pin="P3"/>
+<wire x1="-144.78" y1="15.24" x2="-144.78" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="-144.78" y1="17.78" x2="-177.8" y2="17.78" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="P3"/>
+<wire x1="-177.8" y1="17.78" x2="-177.8" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="-177.8" y1="17.78" x2="-210.82" y2="17.78" width="0.1524" layer="91"/>
+<junction x="-177.8" y="17.78"/>
+<pinref part="U$3" gate="G$1" pin="P3"/>
+<wire x1="-210.82" y1="17.78" x2="-210.82" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="P+3" gate="VCC" pin="VCC"/>
+</segment>
+<segment>
 <pinref part="R13" gate="G$1" pin="2"/>
 <wire x1="40.64" y1="5.08" x2="40.64" y2="25.4" width="0.1524" layer="91"/>
 <label x="40.64" y="17.78" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="PA0(ADC0/AREF)"/>
+<wire x1="-86.36" y1="137.16" x2="-101.6" y2="137.16" width="0.1524" layer="91"/>
+<pinref part="C12" gate="G$1" pin="1"/>
+<pinref part="P+6" gate="VCC" pin="VCC"/>
+<wire x1="-101.6" y1="137.16" x2="-101.6" y2="139.7" width="0.1524" layer="91"/>
+<junction x="-101.6" y="137.16"/>
 </segment>
 <segment>
 <pinref part="IC1" gate="P" pin="VCC"/>
@@ -16933,14 +16938,14 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="R6" gate="G$1" pin="2"/>
 <pinref part="R5" gate="G$1" pin="2"/>
-<wire x1="-129.54" y1="139.7" x2="-127" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="-127" y1="139.7" x2="-127" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-114.3" y1="139.7" x2="-111.76" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="-111.76" y1="139.7" x2="-111.76" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="R4" gate="G$1" pin="2"/>
-<wire x1="-127" y1="139.7" x2="-121.92" y2="139.7" width="0.1524" layer="91"/>
-<wire x1="-121.92" y1="139.7" x2="-121.92" y2="119.38" width="0.1524" layer="91"/>
-<junction x="-127" y="139.7"/>
-<wire x1="-127" y1="139.7" x2="-127" y2="147.32" width="0.1524" layer="91"/>
-<label x="-127" y="147.32" size="1.778" layer="95"/>
+<wire x1="-111.76" y1="139.7" x2="-106.68" y2="139.7" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="139.7" x2="-106.68" y2="119.38" width="0.1524" layer="91"/>
+<junction x="-111.76" y="139.7"/>
+<wire x1="-111.76" y1="139.7" x2="-111.76" y2="147.32" width="0.1524" layer="91"/>
+<label x="-111.76" y="147.32" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R21" gate="G$1" pin="2"/>
@@ -16960,46 +16965,33 @@ D = Direct mounting &lt;p&gt;
 <wire x1="27.94" y1="142.24" x2="27.94" y2="132.08" width="0.1524" layer="91"/>
 <junction x="25.4" y="142.24"/>
 </segment>
-<segment>
-<pinref part="R25" gate="G$1" pin="2"/>
-<pinref part="P+6" gate="VCC" pin="VCC"/>
-</segment>
-<segment>
-<pinref part="R27" gate="G$1" pin="2"/>
-<pinref part="P+3" gate="VCC" pin="VCC"/>
-<wire x1="-177.8" y1="27.94" x2="-177.8" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="R28" gate="G$1" pin="2"/>
-<wire x1="-177.8" y1="30.48" x2="-177.8" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="-210.82" y1="27.94" x2="-210.82" y2="30.48" width="0.1524" layer="91"/>
-<pinref part="R26" gate="G$1" pin="2"/>
-<wire x1="-210.82" y1="30.48" x2="-177.8" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="-177.8" y1="30.48" x2="-144.78" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="-144.78" y1="30.48" x2="-144.78" y2="27.94" width="0.1524" layer="91"/>
-<junction x="-177.8" y="30.48"/>
-</segment>
 </net>
 <net name="TXD_EX" class="0">
 <segment>
-<label x="-40.64" y="170.18" size="1.778" layer="95"/>
+<label x="-40.64" y="172.72" size="1.778" layer="95"/>
 <pinref part="Q2" gate="G$1" pin="D"/>
 <pinref part="R14" gate="G$1" pin="1"/>
 <wire x1="35.56" y1="127" x2="45.72" y2="127" width="0.1524" layer="91"/>
 <junction x="35.56" y="127"/>
-<wire x1="45.72" y1="127" x2="45.72" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="45.72" y1="170.18" x2="-53.34" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="127" x2="45.72" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="45.72" y1="172.72" x2="-43.18" y2="172.72" width="0.1524" layer="91"/>
 <pinref part="U$16" gate="G$1" pin="D"/>
+<wire x1="-53.34" y1="170.18" x2="-45.72" y2="170.18" width="0.1524" layer="91"/>
+<wire x1="-45.72" y1="170.18" x2="-43.18" y2="172.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="RXD_EX" class="0">
 <segment>
-<label x="-40.64" y="162.56" size="1.778" layer="95"/>
+<label x="-40.64" y="157.48" size="1.778" layer="95"/>
 <pinref part="Q1" gate="G$1" pin="D"/>
 <pinref part="R20" gate="G$1" pin="1"/>
 <wire x1="17.78" y1="129.54" x2="20.32" y2="129.54" width="0.1524" layer="91"/>
 <junction x="17.78" y="129.54"/>
-<wire x1="20.32" y1="129.54" x2="20.32" y2="162.56" width="0.1524" layer="91"/>
-<wire x1="20.32" y1="162.56" x2="-53.34" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="129.54" x2="20.32" y2="157.48" width="0.1524" layer="91"/>
+<wire x1="20.32" y1="157.48" x2="-43.18" y2="157.48" width="0.1524" layer="91"/>
 <pinref part="U$16" gate="G$1" pin="R"/>
+<wire x1="-53.34" y1="162.56" x2="-48.26" y2="162.56" width="0.1524" layer="91"/>
+<wire x1="-48.26" y1="162.56" x2="-43.18" y2="157.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="DATA_FROM_EXP-" class="0">
@@ -17148,8 +17140,8 @@ D = Direct mounting &lt;p&gt;
 </segment>
 <segment>
 <pinref part="U$15" gate="G$1" pin="OUT5"/>
-<wire x1="-142.24" y1="116.84" x2="-132.08" y2="116.84" width="0.1524" layer="91"/>
-<label x="-142.24" y="116.84" size="1.778" layer="95"/>
+<wire x1="-127" y1="116.84" x2="-116.84" y2="116.84" width="0.1524" layer="91"/>
+<label x="-127" y="116.84" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SOE" class="0">
@@ -17160,8 +17152,8 @@ D = Direct mounting &lt;p&gt;
 </segment>
 <segment>
 <pinref part="U$15" gate="G$1" pin="OUT6"/>
-<wire x1="-142.24" y1="119.38" x2="-132.08" y2="119.38" width="0.1524" layer="91"/>
-<label x="-142.24" y="119.38" size="1.778" layer="95"/>
+<wire x1="-127" y1="119.38" x2="-116.84" y2="119.38" width="0.1524" layer="91"/>
+<label x="-127" y="119.38" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="LO" class="0">
@@ -17172,8 +17164,8 @@ D = Direct mounting &lt;p&gt;
 </segment>
 <segment>
 <pinref part="U$15" gate="G$1" pin="OUT7"/>
-<wire x1="-142.24" y1="121.92" x2="-132.08" y2="121.92" width="0.1524" layer="91"/>
-<label x="-142.24" y="121.92" size="1.778" layer="95"/>
+<wire x1="-127" y1="121.92" x2="-116.84" y2="121.92" width="0.1524" layer="91"/>
+<label x="-127" y="121.92" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SOE_" class="0">
@@ -17182,24 +17174,24 @@ D = Direct mounting &lt;p&gt;
 <label x="-91.44" y="121.92" size="1.778" layer="95"/>
 <pinref part="U$15" gate="G$1" pin="IN6"/>
 <pinref part="R5" gate="G$1" pin="1"/>
-<wire x1="-142.24" y1="114.3" x2="-127" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="-127" y1="114.3" x2="-124.46" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="114.3" x2="-124.46" y2="121.92" width="0.1524" layer="91"/>
-<junction x="-127" y="114.3"/>
-<wire x1="-124.46" y1="121.92" x2="-86.36" y2="121.92" width="0.1524" layer="91"/>
+<wire x1="-127" y1="114.3" x2="-111.76" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="-111.76" y1="114.3" x2="-109.22" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="-109.22" y1="114.3" x2="-109.22" y2="121.92" width="0.1524" layer="91"/>
+<junction x="-111.76" y="114.3"/>
+<wire x1="-109.22" y1="121.92" x2="-86.36" y2="121.92" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="LO_" class="0">
 <segment>
 <label x="-91.44" y="124.46" size="1.778" layer="95"/>
 <pinref part="U$2" gate="G$1" pin="PA5(ADC5)"/>
-<wire x1="-124.46" y1="124.46" x2="-86.36" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-109.22" y1="124.46" x2="-86.36" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="U$15" gate="G$1" pin="IN7"/>
 <pinref part="R6" gate="G$1" pin="1"/>
-<wire x1="-142.24" y1="129.54" x2="-129.54" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="-129.54" y1="129.54" x2="-124.46" y2="129.54" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="129.54" x2="-124.46" y2="124.46" width="0.1524" layer="91"/>
-<junction x="-129.54" y="129.54"/>
+<wire x1="-127" y1="129.54" x2="-114.3" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="-114.3" y1="129.54" x2="-109.22" y2="129.54" width="0.1524" layer="91"/>
+<wire x1="-109.22" y1="129.54" x2="-109.22" y2="124.46" width="0.1524" layer="91"/>
+<junction x="-114.3" y="129.54"/>
 </segment>
 </net>
 <net name="POTI1" class="0">
@@ -17253,8 +17245,7 @@ D = Direct mounting &lt;p&gt;
 <net name="N$7" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="1"/>
-<wire x1="-106.68" y1="68.58" x2="-101.6" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="-101.6" y1="68.58" x2="-101.6" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="68.58" x2="-101.6" y2="73.66" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="PDI-DATA"/>
 <wire x1="-101.6" y1="73.66" x2="-86.36" y2="73.66" width="0.1524" layer="91"/>
 </segment>
@@ -17263,8 +17254,7 @@ D = Direct mounting &lt;p&gt;
 <segment>
 <pinref part="U$1" gate="G$1" pin="5"/>
 <pinref part="U$2" gate="G$1" pin="PDI-CLK/!RESET"/>
-<wire x1="-106.68" y1="63.5" x2="-99.06" y2="63.5" width="0.1524" layer="91"/>
-<wire x1="-99.06" y1="63.5" x2="-99.06" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="63.5" x2="-99.06" y2="71.12" width="0.1524" layer="91"/>
 <wire x1="-99.06" y1="71.12" x2="-86.36" y2="71.12" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -17485,12 +17475,10 @@ D = Direct mounting &lt;p&gt;
 </net>
 <net name="VCC_5V" class="0">
 <segment>
-<wire x1="-53.34" y1="157.48" x2="-45.72" y2="157.48" width="0.1524" layer="91"/>
-<label x="-35.56" y="157.48" size="1.778" layer="95"/>
+<wire x1="-48.26" y1="152.4" x2="-30.48" y2="152.4" width="0.1524" layer="91"/>
+<label x="-40.64" y="152.4" size="1.778" layer="95"/>
 <pinref part="U$16" gate="G$1" pin="VCC"/>
-<pinref part="C19" gate="G$1" pin="1"/>
-<wire x1="-45.72" y1="157.48" x2="-35.56" y2="157.48" width="0.1524" layer="91"/>
-<junction x="-45.72" y="157.48"/>
+<wire x1="-48.26" y1="152.4" x2="-53.34" y2="157.48" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <label x="-152.4" y="203.2" size="1.778" layer="95"/>
@@ -17504,8 +17492,8 @@ D = Direct mounting &lt;p&gt;
 </segment>
 <segment>
 <pinref part="U$15" gate="G$1" pin="VCC"/>
-<wire x1="-142.24" y1="132.08" x2="-132.08" y2="132.08" width="0.1524" layer="91"/>
-<label x="-142.24" y="132.08" size="1.778" layer="95"/>
+<wire x1="-127" y1="132.08" x2="-116.84" y2="132.08" width="0.1524" layer="91"/>
+<label x="-127" y="132.08" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="R20" gate="G$1" pin="2"/>
@@ -17514,6 +17502,11 @@ D = Direct mounting &lt;p&gt;
 <wire x1="17.78" y1="154.94" x2="35.56" y2="154.94" width="0.1524" layer="91"/>
 <pinref part="R14" gate="G$1" pin="2"/>
 <wire x1="35.56" y1="137.16" x2="35.56" y2="154.94" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C19" gate="G$1" pin="2"/>
+<wire x1="-35.56" y1="180.34" x2="-17.78" y2="180.34" width="0.1524" layer="91"/>
+<label x="-27.94" y="180.34" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="28V_IN" class="0">
@@ -17529,24 +17522,60 @@ D = Direct mounting &lt;p&gt;
 <label x="-198.12" y="203.2" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC2(OC0C/RXD0)"/>
+<wire x1="-86.36" y1="91.44" x2="-101.6" y2="91.44" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$29" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC3(OC0D/TXD0)"/>
+<wire x1="-86.36" y1="88.9" x2="-101.6" y2="88.9" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$30" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC4(OC1A/!SS!)"/>
+<wire x1="-86.36" y1="86.36" x2="-101.6" y2="86.36" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$31" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC5(OC1B/MOSI/XCK1)"/>
+<wire x1="-86.36" y1="83.82" x2="-101.6" y2="83.82" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$32" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC6(MISO/RXD1)"/>
+<wire x1="-86.36" y1="81.28" x2="-101.6" y2="81.28" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$33" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PC7(SCK/TXD1/CLKO/EVO)"/>
+<wire x1="-86.36" y1="78.74" x2="-101.6" y2="78.74" width="0.1524" layer="91"/>
+</segment>
+</net>
 <net name="SODS_" class="0">
 <segment>
 <label x="-91.44" y="119.38" size="1.778" layer="95"/>
 <pinref part="U$2" gate="G$1" pin="PA7/(ADC7/AC0-OUT)"/>
-<wire x1="-119.38" y1="119.38" x2="-86.36" y2="119.38" width="0.1524" layer="91"/>
+<wire x1="-104.14" y1="119.38" x2="-86.36" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="U$15" gate="G$1" pin="IN5"/>
 <pinref part="R4" gate="G$1" pin="1"/>
-<wire x1="-142.24" y1="109.22" x2="-121.92" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="-121.92" y1="109.22" x2="-119.38" y2="109.22" width="0.1524" layer="91"/>
-<wire x1="-119.38" y1="109.22" x2="-119.38" y2="119.38" width="0.1524" layer="91"/>
-<junction x="-121.92" y="109.22"/>
+<wire x1="-127" y1="109.22" x2="-106.68" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="109.22" x2="-104.14" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="-104.14" y1="109.22" x2="-104.14" y2="119.38" width="0.1524" layer="91"/>
+<junction x="-106.68" y="109.22"/>
 </segment>
 </net>
 <net name="28V_OUT" class="0">
 <segment>
 <pinref part="U$15" gate="G$1" pin="VK"/>
-<wire x1="-165.1" y1="109.22" x2="-180.34" y2="109.22" width="0.1524" layer="91"/>
-<label x="-177.8" y="109.22" size="1.778" layer="95"/>
+<wire x1="-149.86" y1="109.22" x2="-165.1" y2="109.22" width="0.1524" layer="91"/>
+<label x="-162.56" y="109.22" size="1.778" layer="95"/>
 </segment>
 <segment>
 <wire x1="-172.72" y1="134.62" x2="-172.72" y2="154.94" width="0.1524" layer="91"/>
@@ -17561,6 +17590,12 @@ D = Direct mounting &lt;p&gt;
 <wire x1="-139.7" y1="78.74" x2="-124.46" y2="78.74" width="0.1524" layer="91"/>
 <label x="-134.62" y="78.74" size="1.778" layer="95"/>
 <pinref part="U$14" gate="G$1" pin="LOAD/1,5"/>
+</segment>
+</net>
+<net name="N$34" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="PD0(OC0A)"/>
+<wire x1="-25.4" y1="134.62" x2="-5.08" y2="134.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$35" class="0">
@@ -17603,42 +17638,6 @@ D = Direct mounting &lt;p&gt;
 <pinref part="U$2" gate="G$1" pin="PC1(OC0B/XCK0/SCL)"/>
 <wire x1="-86.36" y1="93.98" x2="-101.6" y2="93.98" width="0.1524" layer="91"/>
 <label x="-101.6" y="93.98" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$12" class="0">
-<segment>
-<pinref part="U$2" gate="G$1" pin="PA0(ADC0/AREF)"/>
-<wire x1="-86.36" y1="137.16" x2="-96.52" y2="137.16" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="137.16" x2="-96.52" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="-96.52" y1="142.24" x2="-104.14" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="C12" gate="G$1" pin="1"/>
-<wire x1="-104.14" y1="139.7" x2="-104.14" y2="142.24" width="0.1524" layer="91"/>
-<pinref part="R24" gate="G$1" pin="2"/>
-<pinref part="R25" gate="G$1" pin="1"/>
-<wire x1="-104.14" y1="142.24" x2="-111.76" y2="142.24" width="0.1524" layer="91"/>
-<junction x="-111.76" y="142.24"/>
-<junction x="-104.14" y="142.24"/>
-</segment>
-</net>
-<net name="N$11" class="0">
-<segment>
-<pinref part="U$5" gate="G$1" pin="P3"/>
-<pinref part="R26" gate="G$1" pin="1"/>
-<wire x1="-144.78" y1="17.78" x2="-144.78" y2="15.24" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$37" class="0">
-<segment>
-<pinref part="U$4" gate="G$1" pin="P3"/>
-<pinref part="R27" gate="G$1" pin="1"/>
-<wire x1="-177.8" y1="17.78" x2="-177.8" y2="15.24" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$39" class="0">
-<segment>
-<pinref part="U$3" gate="G$1" pin="P3"/>
-<pinref part="R28" gate="G$1" pin="1"/>
-<wire x1="-210.82" y1="17.78" x2="-210.82" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
