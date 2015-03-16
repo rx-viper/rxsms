@@ -20,19 +20,19 @@
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
 
-#define STATUS_LED_PORT         PORTD
-#define STATUS_LED_UPLINK_bm    PIN4_bm
-#define STATUS_LED_DOWNLINK_bm  PIN5_bm
+#define STATUS_LED_PORT         PORTC
+#define STATUS_LED_UPLINK_bm    PIN0_bm
+#define STATUS_LED_DOWNLINK_bm  PIN1_bm
 
 #define UART_GROUNDSTATION_PORT     PORTD
-#define UART_GROUNDSTATION_RX_bm    PIN6_bm
-#define UART_GROUNDSTATION_TX_bm    PIN7_bm
-#define UART_GROUNDSTATION          USARTD1
+#define UART_GROUNDSTATION_RX_bm    PIN2_bm
+#define UART_GROUNDSTATION_TX_bm    PIN3_bm
+#define UART_GROUNDSTATION          USARTD0
 
-#define UART_EXPERIMENT_PORT        PORTD
+#define UART_EXPERIMENT_PORT        PORTC
 #define UART_EXPERIMENT_RX_bm       PIN2_bm
 #define UART_EXPERIMENT_TX_bm       PIN3_bm
-#define UART_EXPERIMENT             USARTD0
+#define UART_EXPERIMENT             USARTC0
 
 #define UART_BSEL       (12)
 #define UART_BSCALE     (2)

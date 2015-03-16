@@ -33,7 +33,8 @@
  * ADCA
  * ADCA.CH0..CH1
  * ADC TEMPREF
- * PORTA PIN 0..4
+ * PORTA PIN 0..3
+ * PORTB PIN 0
  */
 
 // FIXME - remove when everyone uses avr-libc >= 1.8.1
@@ -43,17 +44,20 @@
 #define ADC_CH_MUXNEG_GND_MODE3_gc 0x05
 #endif
 
-#define ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc    ADC_CH_MUXPOS_PIN1_gc
-#define ADC_CH_MUXPOS_POTI_DROP_RATE_gc         ADC_CH_MUXPOS_PIN2_gc
-#define ADC_CH_MUXPOS_POTI_DROP_DURATION_gc     ADC_CH_MUXPOS_PIN3_gc
-#define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN4_gc
+#define ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc    ADC_CH_MUXPOS_PIN2_gc
+#define ADC_CH_MUXPOS_POTI_DROP_RATE_gc         ADC_CH_MUXPOS_PIN1_gc
+#define ADC_CH_MUXPOS_POTI_DROP_DURATION_gc     ADC_CH_MUXPOS_PIN0_gc
+#define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN3_gc
+
+#define ADC_REF_PORT                    PORTB
+#define ADC_REF_bm                      PIN0_bm
+#define ADC_REFSEL_gc                   ADC_REFSEL_AREFB_gc
 
 #define ADC_PORT                        PORTA
-#define ADC_REF_bm                      PIN0_bm
-#define ADC_POTI_BIT_ERROR_RATE_bm      PIN1_bm
-#define ADC_POTI_DROP_RATE_bm           PIN2_bm
-#define ADC_POTI_DROP_DURATION_bm       PIN3_bm
-#define ADC_CURRENT_SENSE_bm            PIN4_bm
+#define ADC_POTI_BIT_ERROR_RATE_bm      PIN2_bm
+#define ADC_POTI_DROP_RATE_bm           PIN1_bm
+#define ADC_POTI_DROP_DURATION_bm       PIN0_bm
+#define ADC_CURRENT_SENSE_bm            PIN3_bm
 
 static void init(void);
 static void run(void);
@@ -93,9 +97,10 @@ init(void)
     task_adc_drop_generator.force_update = 0;
 
     /* configure pins for input */
-    const uint8_t pins = ADC_REF_bm | ADC_POTI_BIT_ERROR_RATE_bm
-        | ADC_POTI_DROP_RATE_bm | ADC_POTI_DROP_DURATION_bm
-        | ADC_CURRENT_SENSE_bm;
+    ADC_REF_PORT.DIRCLR = ADC_REF_bm;
+    ADC_REF_PORT.OUTCLR = ADC_REF_bm;
+    const uint8_t pins = ADC_POTI_BIT_ERROR_RATE_bm | ADC_POTI_DROP_RATE_bm
+        | ADC_POTI_DROP_DURATION_bm | ADC_CURRENT_SENSE_bm;
     ADC_PORT.DIRCLR = pins;
     ADC_PORT.OUTCLR = pins;
 
@@ -107,7 +112,7 @@ init(void)
     ADCA.CTRLA = 0;
     ADCA.CTRLB =
         ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
-    ADCA.REFCTRL = ADC_REFSEL_AREFA_gc | ADC_TEMPREF_bm;
+    ADCA.REFCTRL = ADC_TEMPREF_bm | ADC_REFSEL_gc;
     ADCA.EVCTRL = 0;
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
     ADCA.INTFLAGS =
