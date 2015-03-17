@@ -75,8 +75,8 @@ all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(TARGET).eep
 %.lss: %.elf
 	$(MV) $@ $(TARGET).prev.lss || true
 	$(MV) $(TARGET)-dense.lss $(TARGET)-dense.prev.lss || true
-	$(OBJDUMP) -h -S -z $< | $(EXPAND) > $@
-	$(OBJDUMP) -h -d -z $< | $(EXPAND) > $(TARGET)-dense.lss
+	$(OBJDUMP) -S $< | $(EXPAND) > $@
+	$(OBJDUMP) -d $< | $(EXPAND) > $(TARGET)-dense.lss
 
 %.elf: $(OBJ)
 	@$(ECHO) Link $@
