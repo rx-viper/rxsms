@@ -29,13 +29,13 @@
  */
 
 #define BUTTON_PORT         PORTB
-#define BUTTON_LO_bp        PIN0_bp
-#define BUTTON_SOE_bp       PIN1_bp
-#define BUTTON_SODS_bp      PIN2_bp
-#define BUTTON_ERRINH_bp    PIN3_bp
+#define BUTTON_LO_bp        PIN3_bp
+#define BUTTON_SOE_bp       PIN2_bp
+#define BUTTON_SODS_bp      PIN1_bp
 
-#define BUTTON_EXTENDED_PORT    PORTC
-#define BUTTON_EXTENDED_PWR_bp  PIN1_bp
+#define BUTTON_EXTENDED_PORT        PORTE
+#define BUTTON_EXTENDED_PWR_bp      PIN1_bp
+#define BUTTON_EXTENDED_ERRINH_bp   PIN0_bp
 
 /// The minimum time a button must be pressed to be counted as valid signal
 #define DURATION_DEBOUNCE    125
@@ -61,8 +61,9 @@ static void
 init(void)
 {
     BUTTON_PORT.DIRCLR = _BV(BUTTON_LO_bp) | _BV(BUTTON_SOE_bp)
-        | _BV(BUTTON_SODS_bp) | _BV(BUTTON_ERRINH_bp);
-    BUTTON_EXTENDED_PORT.DIRCLR = _BV(BUTTON_EXTENDED_PWR_bp);
+        | _BV(BUTTON_SODS_bp);
+    BUTTON_EXTENDED_PORT.DIRCLR = _BV(BUTTON_EXTENDED_PWR_bp)
+        | _BV(BUTTON_EXTENDED_ERRINH_bp);
 
     /* 
      * must be done in two steps to allow resolving of num in PINCTRL first,
@@ -74,8 +75,9 @@ init(void)
     BUTTON_PORT.PINCTRL(BUTTON_LO_bp) = PORT_OPC_PULLUP_gc;
     BUTTON_PORT.PINCTRL(BUTTON_SOE_bp) = PORT_OPC_PULLUP_gc;
     BUTTON_PORT.PINCTRL(BUTTON_SODS_bp) = PORT_OPC_PULLUP_gc;
-    BUTTON_PORT.PINCTRL(BUTTON_ERRINH_bp) = PORT_OPC_PULLUP_gc;
     BUTTON_EXTENDED_PORT.PINCTRL(BUTTON_EXTENDED_PWR_bp) =
+        PORT_OPC_PULLUP_gc;
+    BUTTON_EXTENDED_PORT.PINCTRL(BUTTON_EXTENDED_ERRINH_bp) =
         PORT_OPC_PULLUP_gc;
 #undef PINCTRL
 #undef PINCTRL_CONCAT
@@ -124,7 +126,7 @@ run(void)
     debounce(port & _BV(BUTTON_LO_bp), &lo);
     debounce(port & _BV(BUTTON_SOE_bp), &soe);
     debounce(port & _BV(BUTTON_SODS_bp), &sods);
-    debounce(port & _BV(BUTTON_ERRINH_bp), &errinh);
+    debounce(extended_port & _BV(BUTTON_EXTENDED_ERRINH_bp), &errinh);
     debounce(extended_port & _BV(BUTTON_EXTENDED_PWR_bp), &pwr);
 
     /* check if stable, and thus, valid */

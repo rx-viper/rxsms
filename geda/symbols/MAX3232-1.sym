@@ -1,0 +1,194 @@
+v 20110115 2
+B 500 0 2000 5000 3 0 1 0 -1 -1 0 -1 -1 -1 -1 -1
+T 500 6300 8 10 0 0 0 0 1
+device=MAX3232
+T 500 6100 8 10 0 0 0 0 1
+description=3.0V to 5.5V, Low-Power, up to 1Mbps, True RS-232 Transceivers Using Four 0.1μF External Capacitors
+T 500 5100 8 10 1 1 0 0 1
+refdes=U?
+T 500 5900 8 10 0 0 0 0 1
+numslots=0
+T 1700 5100 9 10 1 0 0 0 1
+MAX3232
+P 200 1700 500 1700 1 0 0
+{
+T 0 1700 5 10 0 0 0 0 1
+pintype=in
+T 555 1695 5 10 1 1 0 0 1
+pinlabel=T1IN
+T 405 1745 5 10 1 1 0 6 1
+pinnumber=11
+T 0 1700 5 10 0 0 0 0 1
+pinseq=11
+}
+P 200 1200 500 1200 1 0 0
+{
+T 0 1200 5 10 0 0 0 0 1
+pintype=in
+T 555 1195 5 10 1 1 0 0 1
+pinlabel=T2IN
+T 405 1245 5 10 1 1 0 6 1
+pinnumber=10
+T 0 1200 5 10 0 0 0 0 1
+pinseq=10
+}
+P 2800 700 2500 700 1 0 0
+{
+T 3000 700 5 10 0 0 0 6 1
+pintype=in
+T 2445 695 5 10 1 1 0 6 1
+pinlabel=R1IN
+T 2595 745 5 10 1 1 0 0 1
+pinnumber=13
+T 3000 700 5 10 0 0 0 6 1
+pinseq=13
+}
+P 2800 200 2500 200 1 0 0
+{
+T 3000 200 5 10 0 0 0 6 1
+pintype=in
+T 2445 195 5 10 1 1 0 6 1
+pinlabel=R2IN
+T 2595 245 5 10 1 1 0 0 1
+pinnumber=8
+T 3000 200 5 10 0 0 0 6 1
+pinseq=8
+}
+P 200 200 500 200 1 0 0
+{
+T 0 200 5 10 0 0 0 0 1
+pintype=out
+T 555 195 5 10 1 1 0 0 1
+pinlabel=R2OUT
+T 405 245 5 10 1 1 0 6 1
+pinnumber=9
+T 0 200 5 10 0 0 0 0 1
+pinseq=9
+}
+P 200 700 500 700 1 0 0
+{
+T 0 700 5 10 0 0 0 0 1
+pintype=out
+T 555 695 5 10 1 1 0 0 1
+pinlabel=R1OUT
+T 405 745 5 10 1 1 0 6 1
+pinnumber=12
+T 0 700 5 10 0 0 0 0 1
+pinseq=12
+}
+P 2800 1200 2500 1200 1 0 0
+{
+T 3000 1200 5 10 0 0 0 6 1
+pintype=out
+T 2445 1195 5 10 1 1 0 6 1
+pinlabel=T2OUT
+T 2595 1245 5 10 1 1 0 0 1
+pinnumber=7
+T 3000 1200 5 10 0 0 0 6 1
+pinseq=7
+}
+P 2800 1700 2500 1700 1 0 0
+{
+T 3000 1700 5 10 0 0 0 6 1
+pintype=out
+T 2445 1695 5 10 1 1 0 6 1
+pinlabel=T1OUT
+T 2595 1745 5 10 1 1 0 0 1
+pinnumber=14
+T 3000 1700 5 10 0 0 0 6 1
+pinseq=14
+}
+P 200 4700 500 4700 1 0 0
+{
+T 0 4700 5 10 0 0 0 0 1
+pintype=pwr
+T 555 4695 5 10 1 1 0 0 1
+pinlabel=C1+
+T 405 4745 5 10 1 1 0 6 1
+pinnumber=1
+T 0 4700 5 10 0 0 0 0 1
+pinseq=1
+}
+P 2800 4700 2500 4700 1 0 0
+{
+T 3000 4700 5 10 0 0 0 6 1
+pintype=pwr
+T 2445 4695 5 10 1 1 0 6 1
+pinlabel=VCC
+T 2595 4745 5 10 1 1 0 0 1
+pinnumber=16
+T 3000 4700 5 10 0 0 0 6 1
+pinseq=16
+}
+P 2800 3700 2500 3700 1 0 0
+{
+T 3000 3700 5 10 0 0 0 6 1
+pintype=pwr
+T 2445 3695 5 10 1 1 0 6 1
+pinlabel=GND
+T 2595 3745 5 10 1 1 0 0 1
+pinnumber=15
+T 3000 3700 5 10 0 0 0 6 1
+pinseq=15
+}
+P 200 3200 500 3200 1 0 0
+{
+T 0 3200 5 10 0 0 0 0 1
+pintype=pwr
+T 555 3195 5 10 1 1 0 0 1
+pinlabel=C2+
+T 405 3245 5 10 1 1 0 6 1
+pinnumber=4
+T 0 3200 5 10 0 0 0 0 1
+pinseq=4
+}
+P 200 2200 500 2200 1 0 0
+{
+T 0 2200 5 10 0 0 0 0 1
+pintype=pwr
+T 555 2195 5 10 1 1 0 0 1
+pinlabel=C2-
+T 405 2245 5 10 1 1 0 6 1
+pinnumber=5
+T 0 2200 5 10 0 0 0 0 1
+pinseq=5
+}
+T 511 5300 8 10 0 0 0 0 1
+use-license=unlimited
+T 500 5500 8 10 0 0 0 0 1
+dist-license=GPLv3+
+T 500 5700 8 10 0 0 0 0 1
+author=Nicolas Benes
+P 200 3700 500 3700 1 0 0
+{
+T 0 3700 5 10 0 0 0 0 1
+pintype=pwr
+T 555 3695 5 10 1 1 0 0 1
+pinlabel=C1-
+T 405 3745 5 10 1 1 0 6 1
+pinnumber=3
+T 0 3700 5 10 0 0 0 0 1
+pinseq=3
+}
+P 2800 3200 2500 3200 1 0 0
+{
+T 3000 3200 5 10 0 0 0 6 1
+pintype=pwr
+T 2445 3195 5 10 1 1 0 6 1
+pinlabel=V+
+T 2595 3245 5 10 1 1 0 0 1
+pinnumber=2
+T 3000 3200 5 10 0 0 0 6 1
+pinseq=2
+}
+P 2800 2200 2500 2200 1 0 0
+{
+T 3000 2200 5 10 0 0 0 6 1
+pintype=pwr
+T 2445 2195 5 10 1 1 0 6 1
+pinlabel=V-
+T 2595 2245 5 10 1 1 0 0 1
+pinnumber=6
+T 3000 2200 5 10 0 0 0 6 1
+pinseq=6
+}

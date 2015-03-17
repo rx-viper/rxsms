@@ -1,0 +1,12 @@
+"Qty";"Value";"Device";"Package";"Parts";"Description";"MF";"MPN";"OC_BUERKLIN";"OC_FARNELL";"OC_NEWARK";"OC_RS";
+"1";"";"F15HP";"F15HP";"X4";"SUB-D";"";"";"";"1207598 + 2x 1855027";"unknown";"";
+"1";"";"LEDCHIPLED_0805";"CHIPLED_0805";"LED1";"LED";"";"";"";"";"";"692-0957";
+"1";"";"ML26L";"ML26L";"SV1";"HARTING";"";"";"";"1096983 (Gegenstück: 1200506 oder 1097038)";"unknown";"";
+"3";"";"SJ";"SJ";"SJ1, SJ2, SJ3";"SMD solder JUMPER";"";"";"";"";"";"";
+"2";"12V";"ZENER-DIODEDO34-7";"DO34Z7";"D1, D2";"Z-Diode";"";"";"";"1779204";"";"";
+"2";"1k";"R-EU_R0805";"R0805";"R1, R3";"RESISTOR, European symbol";"";"";"";"";"";"";
+"1";"470";"R-EU_R0805";"R0805";"R2";"RESISTOR, European symbol";"";"";"";"";"";"";
+"1";"BUERKLIN17H912";"BUERKLIN17H912";"BUERKLIN17H912";"U$6";"";"";"";"17H912";"";"";"";
+"1";"FDD4141TO252";"FDD4141TO252";"TO252";"Q1";"P-Channel PowerTrench® MOSFET";"";"";"";"2101406";"";"";
+"3";"JACK";"JACK";"JACK";"U$3, U$4, U$5";"";"";"";"";"1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)";"";"";
+"1";"RLP1-200-500";"RLP1-200-500";"RLP1-200-500";"U$1";"";"";"";"";"1887972";"";"752-9141";

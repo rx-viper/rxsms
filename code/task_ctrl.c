@@ -21,64 +21,58 @@
 #include "task_buttons.h"
 #include "task_adc.h"
 
-#define STATUS_LED_PORT         PORTE
-#define STATUS_LED_SODS_bm      PIN0_bm
-#define STATUS_LED_SOE_bm       PIN1_bm
-#define STATUS_LED_LO_bm        PIN2_bm
-#define STATUS_LED_ERRINH_bm    PIN3_bm
+#define STATUS_LED_PORT         PORTA
+#define STATUS_LED_LO_bm        PIN7_bm
+#define STATUS_LED_ERRINH_bm    PIN6_bm
 
-#define STATUS_LED_EXTENDED_PORT    PORTC
-#define STATUS_LED_EXTENDED_PWR_bm  PIN0_bm
+#define RXSM_LO_PORT        PORTD
+#define RXSM_LO_bm          PIN0_bm
+#define RXSM_SOE_PORT       PORTD
+#define RXSM_SOE_bm         PIN1_bm
+#define RXSM_SODS_PORT      PORTC
+#define RXSM_SODS_bm        PIN5_bm
 
-#define RXSM_CTRL_PORT      PORTA
-#define RXSM_CTRL_LO_bm     PIN5_bm
-#define RXSM_CTRL_SOE_bm    PIN6_bm
-#define RXSM_CTRL_SODS_bm   PIN7_bm
-
-#define PWRSUPPLY_CTRL_PORT     PORTD
-#define PWRSUPPLY_CTRL_PWRSW_bm PIN1_bm
+#define RXSM_EXPPWR_PORT    PORTC
+#define RXSM_EXPPWR_bm      PIN4_bm
 
 static void init(void);
 static void run(void);
 const struct task task_ctrl = { .init = &init, .run = &run };
+
+// TODO actually read the LO pin's value back
 
 static void
 apply_state(void)
 {
     if (task_ctrl_signals.lo_active) {
         STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
-        RXSM_CTRL_PORT.OUTCLR = RXSM_CTRL_LO_bm;
+        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
     } else {
         STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
-        RXSM_CTRL_PORT.OUTSET = RXSM_CTRL_LO_bm;
+        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
     }
-    if (task_ctrl_signals.soe_active) {
-        STATUS_LED_PORT.OUTSET = STATUS_LED_SOE_bm;
-        RXSM_CTRL_PORT.OUTCLR = RXSM_CTRL_SOE_bm;
-    } else {
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_SOE_bm;
-        RXSM_CTRL_PORT.OUTSET = RXSM_CTRL_SOE_bm;
-    }
-    if (task_ctrl_signals.sods_active) {
-        STATUS_LED_PORT.OUTSET = STATUS_LED_SODS_bm;
-        RXSM_CTRL_PORT.OUTCLR = RXSM_CTRL_SODS_bm;
-    } else {
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_SODS_bm;
-        RXSM_CTRL_PORT.OUTSET = RXSM_CTRL_SODS_bm;
-    }
+
+    if (task_ctrl_signals.soe_active)
+        RXSM_SOE_PORT.OUTCLR = RXSM_SOE_bm;
+    else
+        RXSM_SOE_PORT.OUTSET = RXSM_SOE_bm;
+
+    if (task_ctrl_signals.sods_active)
+        RXSM_SODS_PORT.OUTCLR = RXSM_SODS_bm;
+    else
+        RXSM_SODS_PORT.OUTSET = RXSM_SODS_bm;
+
     if (task_ctrl_signals.error_inhibit ||
         (!task_adc_biterror_generator.stream_len_bytes &&
          !task_adc_drop_generator.interval))
         STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
     else
         STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
-    if (task_ctrl_signals.pwr_on) {
-        STATUS_LED_EXTENDED_PORT.OUTSET = STATUS_LED_EXTENDED_PWR_bm;
-        PWRSUPPLY_CTRL_PORT.OUTSET = PWRSUPPLY_CTRL_PWRSW_bm;
-    } else {
-        STATUS_LED_EXTENDED_PORT.OUTCLR = STATUS_LED_EXTENDED_PWR_bm;
-        PWRSUPPLY_CTRL_PORT.OUTCLR = PWRSUPPLY_CTRL_PWRSW_bm;
-    }
+
+    if (task_ctrl_signals.pwr_on)
+        RXSM_EXPPWR_PORT.OUTSET = RXSM_EXPPWR_bm;
+    else
+        RXSM_EXPPWR_PORT.OUTCLR = RXSM_EXPPWR_bm;
 }
 
 static void
@@ -96,12 +90,13 @@ init(void)
      * OUTPUT register is already set correctly. Then the pins are switched to
      * drive loads, and already have the correct output value. */
     apply_state();
-    STATUS_LED_PORT.DIRSET = STATUS_LED_LO_bm | STATUS_LED_SOE_bm
-        | STATUS_LED_SODS_bm | STATUS_LED_ERRINH_bm;
-    STATUS_LED_EXTENDED_PORT.DIRSET = STATUS_LED_EXTENDED_PWR_bm;
-    RXSM_CTRL_PORT.DIRSET = RXSM_CTRL_LO_bm | RXSM_CTRL_SOE_bm
-        | RXSM_CTRL_SODS_bm;
-    PWRSUPPLY_CTRL_PORT.DIRSET = PWRSUPPLY_CTRL_PWRSW_bm;
+    STATUS_LED_PORT.DIRSET = STATUS_LED_LO_bm | STATUS_LED_ERRINH_bm;
+#define PORTINIT(port)  RXSM_##port##_PORT.DIRSET = RXSM_##port##_bm
+    PORTINIT(LO);
+    PORTINIT(SOE);
+    PORTINIT(SODS);
+    PORTINIT(EXPPWR);
+#undef PORTINIT
 }
 
 static void

@@ -1,0 +1,12 @@
+"Part";"Value";"Device";"Package";"Description";"MF";"MPN";"OC_FARNELL";"OC_NEWARK";"OC_RS";
+"LED1_SODS";"gelb";"LEDCHIPLED_0805";"CHIPLED_0805";"LED";"";"";"2099242";"";"";
+"LED2_SOE";"gelb";"LEDCHIPLED_0805";"CHIPLED_0805";"LED";"";"";"2099242";"";"";
+"LED3_LO";"gelb";"LEDCHIPLED_0805";"CHIPLED_0805";"LED";"";"";"2099242";"";"";
+"LED4_PWR";"gelb";"LEDCHIPLED_0805";"CHIPLED_0805";"LED";"";"";"2099242";"";"";
+"R1";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"1887280";"";"";
+"R2";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"1887280";"";"";
+"R3";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"1887280";"";"";
+"R4";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"1887280";"";"";
+"SJ1";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";
+"SW1";"SCHURTER-LSH-1301.9314";"SCHURTER-LSH-1301.9314";"LSH";"Schurter LSH Printmount Switches, Gullwing Leads [SMT]";"";"";"1217763";"";"";
+"X2";"";"M15HPS";"M15HP";"SUB-D";"";"";"1097065 + 2x 1855027";"unknown";"692-7976 + 2x 719-9753";
