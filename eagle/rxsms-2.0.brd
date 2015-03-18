@@ -9826,8 +9826,8 @@ Based on the following sources:
 <vertex x="81.28" y="113.03"/>
 <vertex x="81.28" y="118.11"/>
 <vertex x="157.48" y="118.11"/>
-<vertex x="157.48" y="20.32"/>
-<vertex x="130.81" y="20.32"/>
+<vertex x="157.48" y="19.685"/>
+<vertex x="130.175" y="19.685"/>
 <vertex x="128.27" y="17.78"/>
 <vertex x="111.76" y="17.78"/>
 <vertex x="111.76" y="2.54"/>
@@ -9867,8 +9867,8 @@ Based on the following sources:
 <vertex x="81.28" y="114.935"/>
 <vertex x="81.28" y="118.11"/>
 <vertex x="157.48" y="118.11"/>
-<vertex x="157.48" y="20.32"/>
-<vertex x="130.81" y="20.32"/>
+<vertex x="157.48" y="19.685"/>
+<vertex x="130.175" y="19.685"/>
 <vertex x="128.27" y="17.78"/>
 <vertex x="111.76" y="17.78"/>
 <vertex x="111.76" y="2.54"/>
