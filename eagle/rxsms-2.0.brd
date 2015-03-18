@@ -5809,26 +5809,26 @@ Rate</text>
 <text x="103.915" y="40" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="top-right">Duration</text>
 <text x="102.01" y="91.6625" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="top-left">Bit Error
 Rate</text>
-<text x="153.8925" y="85" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">LO</text>
-<text x="153.8925" y="70" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">SOE</text>
-<text x="153.8925" y="55" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">SODS</text>
-<text x="153.8925" y="40" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">PWR</text>
-<text x="153.8925" y="25" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">ERROR
+<text x="153.8925" y="85" size="2.54" layer="1" font="vector" ratio="14" rot="R90" align="center">LO</text>
+<text x="153.8925" y="70" size="2.54" layer="1" font="vector" ratio="14" rot="R90" align="center">SOE</text>
+<text x="153.8925" y="55" size="2.54" layer="1" font="vector" ratio="14" rot="R90" align="center">SODS</text>
+<text x="153.8925" y="40" size="2.54" layer="1" font="vector" ratio="14" rot="R90" align="center">PWR</text>
+<text x="153.8925" y="25" size="1.778" layer="1" font="vector" ratio="14" rot="R90" align="center">ERROR
 INHIBIT</text>
-<text x="153.8925" y="85" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center">LO</text>
-<text x="153.8925" y="70" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center">SOE</text>
-<text x="153.8925" y="55" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center">SODS</text>
-<text x="153.8925" y="40" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center">PWR</text>
-<text x="153.8925" y="25" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center">ERROR
+<text x="153.8925" y="85" size="2.54" layer="29" font="vector" ratio="14" rot="R90" align="center">LO</text>
+<text x="153.8925" y="70" size="2.54" layer="29" font="vector" ratio="14" rot="R90" align="center">SOE</text>
+<text x="153.8925" y="55" size="2.54" layer="29" font="vector" ratio="14" rot="R90" align="center">SODS</text>
+<text x="153.8925" y="40" size="2.54" layer="29" font="vector" ratio="14" rot="R90" align="center">PWR</text>
+<text x="153.8925" y="25" size="1.778" layer="29" font="vector" ratio="14" rot="R90" align="center">ERROR
 INHIBIT</text>
 <text x="153.8925" y="11" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">USB</text>
-<text x="153.8925" y="103.73" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center-right">UL
+<text x="153.8925" y="103.73" size="1.778" layer="1" font="vector" ratio="14" rot="R90" align="center-right">UL
 EXP&lt;-</text>
-<text x="153.8925" y="106.27" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center-left">DL
+<text x="153.8925" y="106.27" size="1.778" layer="1" font="vector" ratio="14" rot="R90" align="center-left">DL
 -&gt;GND</text>
-<text x="153.8925" y="106.27" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center-left">DL
+<text x="153.8925" y="106.27" size="1.778" layer="29" font="vector" ratio="14" rot="R90" align="center-left">DL
 -&gt;GND</text>
-<text x="153.8925" y="103.73" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center-right">UL
+<text x="153.8925" y="103.73" size="1.778" layer="29" font="vector" ratio="14" rot="R90" align="center-right">UL
 EXP&lt;-</text>
 <text x="92.915" y="15.6525" size="1.27" layer="1" font="vector" ratio="14" align="top-left">PDI</text>
 <text x="72.295" y="12.905" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="center">R/UART1</text>
