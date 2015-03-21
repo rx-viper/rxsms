@@ -44,25 +44,33 @@
 #define ADC_CH_MUXNEG_GND_MODE3_gc 0x05
 #endif
 
-#define ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc    ADC_CH_MUXPOS_PIN2_gc
-#define ADC_CH_MUXPOS_POTI_DROP_RATE_gc         ADC_CH_MUXPOS_PIN1_gc
-#define ADC_CH_MUXPOS_POTI_DROP_DURATION_gc     ADC_CH_MUXPOS_PIN0_gc
-#define ADC_CH_MUXPOS_CURRENT_SENSE_gc          ADC_CH_MUXPOS_PIN3_gc
+#define ADC_REF_PORT        PORTB
+#define ADC_REF_bm          PIN0_bm
+#define ADC_REFSEL_gc       ADC_REFSEL_AREFB_gc
 
-#define ADC_REF_PORT                    PORTB
-#define ADC_REF_bm                      PIN0_bm
-#define ADC_REFSEL_gc                   ADC_REFSEL_AREFB_gc
+#define ADC_PWRUP           PR.PRPA &= ~PR_ADC_bm
+#define ADC_PORT            PORTA
+#define ADC_PORT_PINS_gc    (PIN0_bm | PIN1_bm | PIN2_bm | PIN3_bm)
 
-#define ADC_PWRUP                       PR.PRPA &= ~PR_ADC_bm
-#define ADC_PORT                        PORTA
-#define ADC_POTI_BIT_ERROR_RATE_bm      PIN2_bm
-#define ADC_POTI_DROP_RATE_bm           PIN1_bm
-#define ADC_POTI_DROP_DURATION_bm       PIN0_bm
-#define ADC_CURRENT_SENSE_bm            PIN3_bm
+#define FIRST_CHANNEL_NAME  DROPDUR
+#define ADC_CH_MUXPOS_FIRST ADC_CH_MUXPOS_PIN0_gc
+#define ADC_CH_MUXPOS_LAST  ADC_CH_MUXPOS_PIN3_gc
+#define STATE_NAME_FIRST    DROPDUR
 
 static void init(void);
 static void run(void);
 const struct task task_adc = { .init = &init, .run = &run };
+
+static enum
+{
+    INIT,
+    DROPDUR,
+    DROPRATE,
+    BITERR,
+    CURRSENSE,
+    _END
+} state = INIT;
+
 
 /// Reads the ADC calibration value and TEMPSENSE calibration value.
 static void
@@ -96,16 +104,15 @@ init(void)
     task_adc_drop_generator.start_of_drop = 0;
     task_adc_drop_generator.drop_duration = 0;
     task_adc_drop_generator.force_update = 0;
+    state = INIT;
 
     ADC_PWRUP;
 
     /* configure pins for input */
     ADC_REF_PORT.DIRCLR = ADC_REF_bm;
     ADC_REF_PORT.OUTCLR = ADC_REF_bm;
-    const uint8_t pins = ADC_POTI_BIT_ERROR_RATE_bm | ADC_POTI_DROP_RATE_bm
-        | ADC_POTI_DROP_DURATION_bm | ADC_CURRENT_SENSE_bm;
-    ADC_PORT.DIRCLR = pins;
-    ADC_PORT.OUTCLR = pins;
+    ADC_PORT.DIRCLR = ADC_PORT_PINS_gc;
+    ADC_PORT.OUTCLR = ADC_PORT_PINS_gc;
 
     uint16_t adca_calibration, tempsense_calibration;
     production_signature_row_read_calibration(&adca_calibration,
@@ -122,10 +129,12 @@ init(void)
         ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm | ADC_CH0IF_bm;
     ADCA.CAL = adca_calibration;
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
-    ADCA.CH0.MUXCTRL =
-        ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
+    ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH0.INTCTRL = 0;
-    ADCA.CH0.SCAN = 3;
+#if ADC_CH_MUXPOS_FIRST != 0
+#error "need to use OFFSET nibble in ADC.CH.SCAN register"
+#endif
+    ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
     ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
@@ -295,22 +304,23 @@ update_drop_generators(void)
 static void
 run(void)
 {
-    static enum { INIT, BITERR, DROPRATE, DROPDUR, CURRSENSE } state = INIT;
     const uint8_t s = state;
     if (INIT == s) {
         /* throw away the first measurement, as it might be wrong */
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
-        ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
-            | ADC_CH_MUXNEG_GND_MODE3_gc;
-        ADCA.CH0.SCAN = 3;
+        ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
+#if ADC_CH_MUXPOS_FIRST != 0
+#error "need to use OFFSET nibble in ADC.CH.SCAN register"
+#endif
+        ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
-        state = BITERR;
-    } else if (BITERR <= s && CURRSENSE >= s) {
+        state = FIRST_CHANNEL_NAME;
+    } else if (FIRST_CHANNEL_NAME <= s && s < _END) {
         if (!(ADCA.INTFLAGS & ADC_CH0IF_bm)
             || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
-        task_adc_raw.e.tempsense[s - BITERR] = ADCA.CH1RES;
+        task_adc_raw.e.tempsense[s - FIRST_CHANNEL_NAME] = ADCA.CH1RES;
 
         const int16_t adc_value = ADCA.CH0RES;
         /* For the potentiometer inputs:
@@ -319,21 +329,35 @@ run(void)
              the boundary of a setting and cancels out noise.
            For the current sensor:
              Ignore the hysteresis since we want the exact sensor readings.  */
-        const int8_t MIN_DIFF = 16;
-        int16_t diff = task_adc_raw.i16[s - BITERR] - adc_value;
-        if (diff < -MIN_DIFF || diff > MIN_DIFF || CURRSENSE == s)
-            task_adc_raw.i16[s - BITERR] = adc_value;
+        if (CURRSENSE == s) {
+            task_adc_raw.e.current_sense = adc_value;
+        } else {
+            int16_t *old_value;
+            if (DROPDUR == s)
+                old_value = &task_adc_raw.e.poti_drop_duration;
+            else if (DROPRATE == s)
+                old_value = &task_adc_raw.e.poti_drop_rate;
+            else
+                old_value = &task_adc_raw.e.poti_bit_error_rate;
+            const int8_t MIN_DIFF = 16;
+            int16_t diff = *old_value - adc_value;
+            if (diff < -MIN_DIFF || diff > MIN_DIFF)
+                *old_value = adc_value;
+        }
 
         ++state;
-        if (state > CURRSENSE) {
-            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_POTI_BIT_ERROR_RATE_gc
+        if (_END == state) {
+            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST
                 | ADC_CH_MUXNEG_GND_MODE3_gc;
-            ADCA.CH0.SCAN = 3;
+#if ADC_CH_MUXPOS_FIRST != 0
+#error "need to use OFFSET nibble in ADC.CH.SCAN register"
+#endif
+            ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
 
             update_biterror_generators();
             update_drop_generators();
 
-            state = BITERR;
+            state = FIRST_CHANNEL_NAME;
         }
 
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
