@@ -55,7 +55,6 @@
 #define FIRST_CHANNEL_NAME  DROPDUR
 #define ADC_CH_MUXPOS_FIRST ADC_CH_MUXPOS_PIN0_gc
 #define ADC_CH_MUXPOS_LAST  ADC_CH_MUXPOS_PIN3_gc
-#define STATE_NAME_FIRST    DROPDUR
 
 static void init(void);
 static void run(void);
