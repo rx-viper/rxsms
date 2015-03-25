@@ -62,6 +62,36 @@ update_lo(void)
             STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
         else
             STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
+    }
+
+    // count with underflow wrap-around
+    if (0 == --led_cnt)
+        led_cnt = led_period;
+}
+
+static void
+update_error_inhibit(void)
+{
+    // four cases:
+    //                       |   error inhibit ON  |   error inhibit OFF
+    // poti errors disabled  |     LED cont. ON    |   LED flashing
+    // poti errors  enabled  |     LED cont. ON    |      LED OFF
+    const uint16_t led_period = 5000;
+    static uint16_t led_cnt = led_period;
+    if (task_ctrl_signals.error_inhibit)
+        led_cnt = led_period;
+
+    if (!task_ctrl_signals.error_inhibit &&
+        (task_adc_biterror_generator.stream_len_bytes ||
+         task_adc_drop_generator.interval)) {
+        led_cnt = led_period;
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
+    } else {
+        if (led_cnt > led_period / 2)
+            STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
+        else
+            STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
+    }
 
     // count with underflow wrap-around
     if (0 == --led_cnt)
@@ -83,12 +113,7 @@ apply_state(void)
     else
         RXSM_SODS_PORT.OUTSET = RXSM_SODS_bm;
 
-    if (task_ctrl_signals.error_inhibit ||
-        (!task_adc_biterror_generator.stream_len_bytes &&
-         !task_adc_drop_generator.interval))
-        STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
-    else
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
+    update_error_inhibit();
 
     if (task_ctrl_signals.pwr_on)
         RXSM_EXPPWR_PORT.OUTSET = RXSM_EXPPWR_bm;
