@@ -40,18 +40,38 @@ static void init(void);
 static void run(void);
 const struct task task_ctrl = { .init = &init, .run = &run };
 
-// TODO actually read the LO pin's value back
+static void
+update_lo(void)
+{
+    // four cases:
+    //                       | our's LO unasserted | our's LO asserted
+    // their's LO unasserted |        LED OFF      |   LED cont. ON
+    // their's LO   asserted |     LED flashing    |   LED cont. ON
+    const uint16_t led_period = 5000;
+    static uint16_t led_cnt = led_period;
+
+    if (RXSM_LO_PORT.OUT & RXSM_LO_bm)
+        led_cnt = led_period;
+
+    task_ctrl_signals.lo_active = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
+    if (!task_ctrl_signals.lo_active) {
+        led_cnt = led_period;
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
+    } else {
+        if (led_cnt > led_period / 2)
+            STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
+        else
+            STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
+
+    // count with underflow wrap-around
+    if (0 == --led_cnt)
+        led_cnt = led_period;
+}
 
 static void
 apply_state(void)
 {
-    if (task_ctrl_signals.lo_active) {
-        STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
-        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
-    } else {
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
-        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
-    }
+    update_lo();
 
     if (task_ctrl_signals.soe_active)
         RXSM_SOE_PORT.OUTCLR = RXSM_SOE_bm;
@@ -110,16 +130,9 @@ init(void)
 static void
 run(void)
 {
-    /* TODO: at a later point in time, we don't want to use
-     * the button requests directly. instead task_sync should
-     * send the button requests to others and should receive
-     * requests as well, and finally when all simulators are
-     * synchronized, we use the requests from task_sync to
-     * synchronously switch the signals for all simulators.
-     */
     /* update our state according task_buttons */
     if (task_buttons_toggle_request.lo)
-        task_ctrl_signals.lo_active ^= 1;
+        RXSM_LO_PORT.OUTTGL = RXSM_LO_bm;
     if (task_buttons_toggle_request.soe)
         task_ctrl_signals.soe_active ^= 1;
     if (task_buttons_toggle_request.sods)
