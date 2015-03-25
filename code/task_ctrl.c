@@ -27,6 +27,7 @@
 
 #define RXSM_LO_PORT        PORTD
 #define RXSM_LO_bm          PIN0_bm
+#define RXSM_LO_bp          PIN0_bp
 #define RXSM_SOE_PORT       PORTD
 #define RXSM_SOE_bm         PIN1_bm
 #define RXSM_SODS_PORT      PORTC
@@ -91,6 +92,13 @@ init(void)
      * drive loads, and already have the correct output value. */
     apply_state();
     STATUS_LED_PORT.DIRSET = STATUS_LED_LO_bm | STATUS_LED_ERRINH_bm;
+
+#define PINCTRL_CONCAT(num) PIN##num##CTRL
+#define PINCTRL(num)        PINCTRL_CONCAT(num)
+    RXSM_LO_PORT.PINCTRL(RXSM_LO_bp) = PORT_OPC_WIREDAND_gc;
+#undef PINCTRL
+#undef PINCTRL_CONCAT
+
 #define PORTINIT(port)  RXSM_##port##_PORT.DIRSET = RXSM_##port##_bm
     PORTINIT(LO);
     PORTINIT(SOE);
