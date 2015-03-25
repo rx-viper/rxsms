@@ -40,6 +40,8 @@ static void init(void);
 static void run(void);
 const struct task task_ctrl = { .init = &init, .run = &run };
 
+static uint8_t is_our_lo_asserted;
+
 static void
 update_lo(void)
 {
@@ -50,8 +52,12 @@ update_lo(void)
     const uint16_t led_period = 5000;
     static uint16_t led_cnt = led_period;
 
-    if (RXSM_LO_PORT.OUT & RXSM_LO_bm)
+    if (is_our_lo_asserted) {
         led_cnt = led_period;
+        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
+    } else {
+        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
+    }
 
     task_ctrl_signals.lo_active = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
     if (!task_ctrl_signals.lo_active) {
@@ -125,6 +131,7 @@ static void
 init(void)
 {
     /* by default, the error inhibit is ON, all others OFF/INACTIVE */
+    is_our_lo_asserted = 0;
     task_ctrl_signals.lo_active = 0;
     task_ctrl_signals.soe_active = 0;
     task_ctrl_signals.sods_active = 0;
@@ -157,7 +164,7 @@ run(void)
 {
     /* update our state according task_buttons */
     if (task_buttons_toggle_request.lo)
-        RXSM_LO_PORT.OUTTGL = RXSM_LO_bm;
+        is_our_lo_asserted ^= RXSM_LO_bm;
     if (task_buttons_toggle_request.soe)
         task_ctrl_signals.soe_active ^= 1;
     if (task_buttons_toggle_request.sods)
