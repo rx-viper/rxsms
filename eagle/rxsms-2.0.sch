@@ -13185,6 +13185,9 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <part name="R7" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
 <attribute name="OC_FARNELL" value="1887308"/>
 </part>
+<part name="SJ5" library="jumper" deviceset="SJ" device=""/>
+<part name="SJ6" library="jumper" deviceset="SJ" device=""/>
+<part name="P+16" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 </parts>
 <sheets>
 <sheet>
@@ -14745,7 +14748,7 @@ interface</text>
 <instance part="+3V6" gate="G$1" x="27.94" y="27.94"/>
 <instance part="GND10" gate="1" x="205.74" y="106.68"/>
 <instance part="P+8" gate="1" x="195.58" y="152.4"/>
-<instance part="P+9" gate="1" x="218.44" y="68.58" rot="R270"/>
+<instance part="P+9" gate="1" x="236.22" y="68.58" rot="R270"/>
 <instance part="P+10" gate="1" x="213.36" y="165.1" rot="R270"/>
 <instance part="SJ3" gate="1" x="210.82" y="114.3"/>
 <instance part="R50" gate="G$1" x="134.62" y="149.86" rot="R90">
@@ -14759,6 +14762,9 @@ interface</text>
 <instance part="R7" gate="G$1" x="38.1" y="83.82" rot="R90">
 <attribute name="OC_FARNELL" x="38.1" y="83.82" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
+<instance part="SJ5" gate="1" x="213.36" y="68.58"/>
+<instance part="SJ6" gate="1" x="213.36" y="60.96"/>
+<instance part="P+16" gate="1" x="236.22" y="60.96" rot="R270"/>
 </instances>
 <busses>
 </busses>
@@ -15102,16 +15108,16 @@ interface</text>
 <pinref part="P+8" gate="1" pin="+12V"/>
 </segment>
 <segment>
-<pinref part="U$4" gate="G$1" pin="VK"/>
-<wire x1="200.66" y1="68.58" x2="215.9" y2="68.58" width="0.1524" layer="91"/>
-<label x="203.2" y="66.04" size="1.778" layer="95"/>
-<pinref part="P+9" gate="1" pin="+12V"/>
-</segment>
-<segment>
 <pinref part="U$6" gate="G$1" pin="LOAD/1,5"/>
 <wire x1="210.82" y1="165.1" x2="187.96" y2="165.1" width="0.1524" layer="91"/>
 <pinref part="P+10" gate="1" pin="+12V"/>
 <label x="195.58" y="165.1" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="SJ6" gate="1" pin="2"/>
+<wire x1="233.68" y1="60.96" x2="218.44" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="P+16" gate="1" pin="+24V"/>
+<label x="220.98" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="+28V_SUPPLY" class="0">
@@ -15120,6 +15126,12 @@ interface</text>
 <pinref part="P+1" gate="1" pin="+24V"/>
 <wire x1="187.96" y1="172.72" x2="210.82" y2="172.72" width="0.1524" layer="91"/>
 <label x="190.5" y="172.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="P+9" gate="1" pin="+12V"/>
+<wire x1="218.44" y1="68.58" x2="233.68" y2="68.58" width="0.1524" layer="91"/>
+<label x="220.98" y="68.58" size="1.778" layer="95"/>
+<pinref part="SJ5" gate="1" pin="2"/>
 </segment>
 </net>
 <net name="N$58" class="0">
@@ -15160,6 +15172,18 @@ interface</text>
 <wire x1="152.4" y1="86.36" x2="129.54" y2="86.36" width="0.1524" layer="91"/>
 <junction x="152.4" y="86.36"/>
 <label x="114.3" y="86.36" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$32" class="0">
+<segment>
+<pinref part="SJ6" gate="1" pin="1"/>
+<wire x1="208.28" y1="60.96" x2="205.74" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="VK"/>
+<wire x1="205.74" y1="60.96" x2="205.74" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="205.74" y1="68.58" x2="200.66" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="SJ5" gate="1" pin="1"/>
+<wire x1="205.74" y1="68.58" x2="208.28" y2="68.58" width="0.1524" layer="91"/>
+<junction x="205.74" y="68.58"/>
 </segment>
 </net>
 </nets>
