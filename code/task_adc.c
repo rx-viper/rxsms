@@ -55,6 +55,7 @@
 #define FIRST_CHANNEL_NAME  DROPDUR
 #define ADC_CH_MUXPOS_FIRST ADC_CH_MUXPOS_PIN0_gc
 #define ADC_CH_MUXPOS_LAST  ADC_CH_MUXPOS_PIN3_gc
+#define INPUT_SCAN_COUNT    3
 
 static void init(void);
 static void run(void);
@@ -130,10 +131,7 @@ init(void)
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFF_gc;
     ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
     ADCA.CH0.INTCTRL = 0;
-#if ADC_CH_MUXPOS_FIRST != 0
-#error "need to use OFFSET nibble in ADC.CH.SCAN register"
-#endif
-    ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
+    ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
 
     ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
     ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
@@ -308,10 +306,7 @@ run(void)
         /* throw away the first measurement, as it might be wrong */
         ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
         ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
-#if ADC_CH_MUXPOS_FIRST != 0
-#error "need to use OFFSET nibble in ADC.CH.SCAN register"
-#endif
-        ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
+        ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
         ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
         state = FIRST_CHANNEL_NAME;
     } else if (FIRST_CHANNEL_NAME <= s && s < _END) {
@@ -348,10 +343,7 @@ run(void)
         if (_END == state) {
             ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST
                 | ADC_CH_MUXNEG_GND_MODE3_gc;
-#if ADC_CH_MUXPOS_FIRST != 0
-#error "need to use OFFSET nibble in ADC.CH.SCAN register"
-#endif
-            ADCA.CH0.SCAN = ADC_CH_MUXPOS_LAST - ADC_CH_MUXPOS_FIRST;
+            ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
 
             update_biterror_generators();
             update_drop_generators();
