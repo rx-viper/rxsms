@@ -9190,35 +9190,23 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <element name="LED1_LO" library="led" package="CHIPLED_1206" value="YELLOW" x="125.7" y="85">
 <attribute name="OC_FARNELL" value="2099249" x="125.7" y="85" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R36" library="rcl" package="R0805" value="68" x="132.08" y="85">
-<attribute name="OC_FARNELL" value="2074509" x="132.08" y="85" size="1.778" layer="27" display="off"/>
+<element name="R37" library="rcl" package="R0805" value="2k2" x="123.19" y="84.13" rot="R270">
+<attribute name="OC_FARNELL" value="2332076" x="123.19" y="84.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R37" library="rcl" package="R0805" value="68" x="123.19" y="84.13" rot="R270">
-<attribute name="OC_FARNELL" value="2074509" x="123.19" y="84.13" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="R39" library="rcl" package="R0805" value="2k2" x="123.19" y="69.13" rot="R270">
+<attribute name="OC_FARNELL" value="2332076" x="123.19" y="69.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R39" library="rcl" package="R0805" value="68" x="123.19" y="69.13" rot="R270">
-<attribute name="OC_FARNELL" value="2074509" x="123.19" y="69.13" size="1.778" layer="27" rot="R270" display="off"/>
-</element>
-<element name="R38" library="rcl" package="R0805" value="68" x="132.08" y="70" rot="R180">
-<attribute name="OC_FARNELL" value="2074509" x="132.08" y="70" size="1.778" layer="27" rot="R180" display="off"/>
-</element>
-<element name="R40" library="rcl" package="R0805" value="68" x="123.19" y="54.13" rot="R270">
-<attribute name="OC_FARNELL" value="2074509" x="123.19" y="54.13" size="1.778" layer="27" rot="R270" display="off"/>
-</element>
-<element name="R41" library="rcl" package="R0805" value="68" x="132.08" y="55" rot="R180">
-<attribute name="OC_FARNELL" value="2074509" x="132.08" y="55" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="R40" library="rcl" package="R0805" value="2k2" x="123.19" y="54.13" rot="R270">
+<attribute name="OC_FARNELL" value="2332076" x="123.19" y="54.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="T9_SODS" library="SMSIp67" package="IP67" value="SMS_IP67" x="135.5" y="55" rot="R270">
 <attribute name="OC_FARNELL" value="1217758" x="135.5" y="55" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R42" library="rcl" package="R0805" value="68" x="132.08" y="25">
-<attribute name="OC_FARNELL" value="2074509" x="132.08" y="25" size="1.778" layer="27" display="off"/>
-</element>
 <element name="LED4_ERRINH" library="led" package="CHIPLED_1206" value="GREEN" x="125.7" y="25">
 <attribute name="OC_FARNELL" value="2099244" x="125.7" y="25" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R43" library="rcl" package="R0805" value="68" x="123.19" y="24.13" rot="R270">
-<attribute name="OC_FARNELL" value="2074509" x="123.19" y="24.13" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="R43" library="rcl" package="R0805" value="1k" x="123.19" y="24.13" rot="R270">
+<attribute name="OC_FARNELL" value="9237496" x="123.19" y="24.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="T5_ERRINH" library="SMSIp67" package="IP67" value="SMS_IP67" x="135.5" y="25" rot="R270">
 <attribute name="OC_FARNELL" value="1217758" x="135.5" y="25" size="1.778" layer="27" rot="R270" display="off"/>
@@ -9232,11 +9220,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <element name="LED5_PWR" library="led" package="CHIPLED_1206" value="GREEN" x="125.7" y="40">
 <attribute name="OC_FARNELL" value="2099244" x="125.7" y="40" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R44" library="rcl" package="R0805" value="68" x="123.19" y="39.13" rot="R270">
-<attribute name="OC_FARNELL" value="2074509" x="123.19" y="39.13" size="1.778" layer="27" rot="R270" display="off"/>
-</element>
-<element name="R45" library="rcl" package="R0805" value="68" x="132.08" y="40">
-<attribute name="OC_FARNELL" value="2074509" x="132.08" y="40" size="1.778" layer="27" display="off"/>
+<element name="R44" library="rcl" package="R0805" value="1k" x="123.19" y="39.13" rot="R270">
+<attribute name="OC_FARNELL" value="9237496" x="123.19" y="39.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R46" library="rcl" package="R0805" value="1k/100" x="137.16" y="95.25" rot="R180">
 <attribute name="OC_FARNELL" value="9237496/2332058" x="137.16" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
@@ -9709,22 +9694,9 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <wire x1="25.4" y1="13.97" x2="27.94" y2="11.43" width="0.3048" layer="16"/>
 <wire x1="27.94" y1="11.43" x2="34.29" y2="11.43" width="0.3048" layer="16"/>
 <via x="34.29" y="11.43" extent="1-16" drill="0.6"/>
-<wire x1="146.685" y1="59.69" x2="146.685" y2="74.93" width="0.3048" layer="1"/>
-<wire x1="146.685" y1="74.93" x2="146.685" y2="88.9" width="0.3048" layer="1"/>
-<wire x1="142.5" y1="58.865" x2="143.325" y2="59.69" width="0.3048" layer="1"/>
-<wire x1="143.325" y1="59.69" x2="146.685" y2="59.69" width="0.3048" layer="1"/>
 <wire x1="128.3" y1="43.865" x2="128.185" y2="43.75" width="0.3048" layer="1"/>
 <wire x1="128.185" y1="43.75" x2="127.7" y2="43.75" width="0.3048" layer="1"/>
-<wire x1="142.5" y1="43.865" x2="143.085" y2="44.45" width="0.3048" layer="1"/>
-<wire x1="143.085" y1="44.45" x2="146.685" y2="44.45" width="0.3048" layer="1"/>
-<wire x1="146.685" y1="59.69" x2="146.685" y2="44.45" width="0.3048" layer="1"/>
-<wire x1="146.685" y1="44.45" x2="146.685" y2="29.21" width="0.3048" layer="1"/>
-<wire x1="146.685" y1="29.21" x2="146.34" y2="28.865" width="0.3048" layer="1"/>
-<wire x1="146.34" y1="28.865" x2="142.5" y2="28.865" width="0.3048" layer="1"/>
 <wire x1="142.5" y1="88.865" x2="142.535" y2="88.9" width="0.3048" layer="1"/>
-<wire x1="142.535" y1="88.9" x2="146.685" y2="88.9" width="0.3048" layer="1"/>
-<wire x1="142.5" y1="73.865" x2="143.565" y2="74.93" width="0.3048" layer="1"/>
-<wire x1="143.565" y1="74.93" x2="146.685" y2="74.93" width="0.3048" layer="1"/>
 <wire x1="127.815" y1="43.865" x2="125.46" y2="46.22" width="0.3048" layer="1"/>
 <wire x1="125.46" y1="46.22" x2="125.46" y2="47.625" width="0.3048" layer="1"/>
 <via x="113.03" y="58.42" extent="1-16" drill="0.6"/>
@@ -10156,9 +10128,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="OK4" pad="8"/>
 <contactref element="OK4" pad="7"/>
 <contactref element="R39" pad="1"/>
-<contactref element="R38" pad="2"/>
 <contactref element="R40" pad="1"/>
-<contactref element="R41" pad="2"/>
 <contactref element="C37" pad="1"/>
 <wire x1="23.175" y1="15.24" x2="23.495" y2="15.56" width="0.3048" layer="1"/>
 <wire x1="23.495" y1="15.56" x2="23.495" y2="18.5166" width="0.3048" layer="1"/>
@@ -10190,9 +10160,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <wire x1="109.855" y1="5.715" x2="108.43" y2="5.715" width="0.3048" layer="1"/>
 <wire x1="101.6" y1="8.62" x2="104.14" y2="8.62" width="0.3048" layer="1"/>
 <wire x1="123.19" y1="55.08" x2="123.27" y2="55" width="0.3048" layer="1"/>
-<wire x1="123.27" y1="55" x2="131.13" y2="55" width="0.3048" layer="1"/>
 <wire x1="123.19" y1="70.08" x2="123.27" y2="70" width="0.3048" layer="1"/>
-<wire x1="123.27" y1="70" x2="131.13" y2="70" width="0.3048" layer="1"/>
 <wire x1="18.415" y1="84.14" x2="19.685" y2="82.87" width="0.3048" layer="1"/>
 <wire x1="19.685" y1="82.87" x2="20.955" y2="82.87" width="0.3048" layer="1"/>
 <wire x1="20.955" y1="82.87" x2="23.18" y2="82.87" width="0.3048" layer="1"/>
@@ -10569,9 +10537,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="Q2" pad="1"/>
 <contactref element="R5" pad="2"/>
 <contactref element="R44" pad="1"/>
-<contactref element="R45" pad="1"/>
 <wire x1="123.19" y1="40.08" x2="123.27" y2="40" width="0.3048" layer="1"/>
-<wire x1="123.27" y1="40" x2="131.13" y2="40" width="0.3048" layer="1"/>
 <wire x1="53.66" y1="90.34" x2="53.66" y2="87.63" width="0.3048" layer="1"/>
 <contactref element="U2" pad="14"/>
 <wire x1="53.66" y1="87.63" x2="53.66" y2="80.96" width="0.3048" layer="1"/>
@@ -11537,54 +11503,43 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="R37" pad="2"/>
 <wire x1="123.19" y1="83.18" x2="123.26" y2="83.25" width="0.3048" layer="1"/>
 <wire x1="123.26" y1="83.25" x2="125.7" y2="83.25" width="0.3048" layer="1"/>
-</signal>
-<signal name="N$32">
 <contactref element="T8_LO" pad="A"/>
-<contactref element="R36" pad="2"/>
-<wire x1="133.03" y1="85" x2="137.5" y2="85" width="0.3048" layer="1"/>
+<wire x1="137.5" y1="85" x2="135.75" y2="83.25" width="0.3048" layer="1"/>
+<wire x1="135.75" y1="83.25" x2="125.7" y2="83.25" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED_LO">
 <contactref element="R37" pad="1"/>
-<contactref element="R36" pad="1"/>
 <wire x1="123.19" y1="85.08" x2="123.27" y2="85" width="0.3048" layer="1"/>
-<wire x1="123.27" y1="85" x2="131.13" y2="85" width="0.3048" layer="1"/>
 <contactref element="U2" pad="3"/>
 <wire x1="72.25" y1="37.55" x2="72.25" y2="38.595" width="0.254" layer="1"/>
 <wire x1="72.25" y1="38.595" x2="75.565" y2="41.91" width="0.254" layer="1"/>
 <wire x1="75.565" y1="41.91" x2="88.9" y2="41.91" width="0.254" layer="1"/>
 <via x="88.9" y="41.91" extent="1-16" drill="0.6"/>
 <wire x1="88.9" y1="41.91" x2="137.16" y2="41.91" width="0.3048" layer="16"/>
-<wire x1="137.16" y1="41.91" x2="137.795" y2="41.275" width="0.3048" layer="16"/>
-<wire x1="137.795" y1="41.275" x2="146.685" y2="41.275" width="0.3048" layer="16"/>
-<wire x1="146.685" y1="41.275" x2="146.685" y2="83.185" width="0.3048" layer="16"/>
-<wire x1="146.685" y1="83.185" x2="146.05" y2="83.82" width="0.3048" layer="16"/>
-<wire x1="146.05" y1="83.82" x2="135.89" y2="83.82" width="0.3048" layer="16"/>
-<wire x1="135.89" y1="83.82" x2="134.62" y2="82.55" width="0.3048" layer="16"/>
-<wire x1="134.62" y1="82.55" x2="132.08" y2="82.55" width="0.3048" layer="16"/>
-<via x="132.08" y="82.55" extent="1-16" drill="0.6"/>
-<wire x1="132.08" y1="82.55" x2="131.13" y2="83.5" width="0.3048" layer="1"/>
-<wire x1="131.13" y1="83.5" x2="131.13" y2="85" width="0.3048" layer="1"/>
-</signal>
-<signal name="N$34">
-<contactref element="R38" pad="1"/>
-<contactref element="T3_SOE" pad="A"/>
-<wire x1="133.03" y1="70" x2="137.5" y2="70" width="0.3048" layer="1"/>
+<wire x1="133.34" y1="85.08" x2="123.19" y2="85.08" width="0.3048" layer="1"/>
+<wire x1="137.16" y1="41.91" x2="140.97" y2="45.72" width="0.3048" layer="16"/>
+<via x="140.97" y="45.72" extent="1-16" drill="0.6"/>
+<wire x1="140.97" y1="45.72" x2="146.3675" y2="51.1175" width="0.3048" layer="1"/>
+<wire x1="146.3675" y1="51.1175" x2="146.3675" y2="83.185" width="0.3048" layer="1"/>
+<wire x1="146.3675" y1="83.185" x2="145.7325" y2="83.82" width="0.3048" layer="1"/>
+<wire x1="145.7325" y1="83.82" x2="139.7" y2="83.82" width="0.3048" layer="1"/>
+<wire x1="139.7" y1="83.82" x2="138.7475" y2="84.7725" width="0.3048" layer="1"/>
+<wire x1="138.7475" y1="84.7725" x2="138.7475" y2="85.725" width="0.3048" layer="1"/>
+<wire x1="138.7475" y1="85.725" x2="138.1125" y2="86.36" width="0.3048" layer="1"/>
+<wire x1="138.1125" y1="86.36" x2="134.62" y2="86.36" width="0.3048" layer="1"/>
+<wire x1="134.62" y1="86.36" x2="133.34" y2="85.08" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$61">
 <contactref element="LED4_ERRINH" pad="A"/>
 <contactref element="R43" pad="2"/>
 <wire x1="123.19" y1="23.18" x2="123.26" y2="23.25" width="0.3048" layer="1"/>
 <wire x1="123.26" y1="23.25" x2="125.7" y2="23.25" width="0.3048" layer="1"/>
-</signal>
-<signal name="N$62">
 <contactref element="T7_ERRINH" pad="A"/>
-<contactref element="R42" pad="2"/>
-<wire x1="137.5" y1="25" x2="133.03" y2="25" width="0.3048" layer="1"/>
+<wire x1="137.5" y1="25" x2="135.75" y2="23.25" width="0.3048" layer="1"/>
+<wire x1="135.75" y1="23.25" x2="125.7" y2="23.25" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED_ERRINH">
 <contactref element="R43" pad="1"/>
-<contactref element="R42" pad="1"/>
-<wire x1="131.13" y1="25" x2="123.27" y2="25" width="0.3048" layer="1"/>
 <wire x1="123.27" y1="25" x2="123.19" y2="25.08" width="0.3048" layer="1"/>
 <contactref element="U2" pad="2"/>
 <wire x1="73.05" y1="37.55" x2="73.05" y2="38.76" width="0.254" layer="1"/>
@@ -11601,11 +11556,9 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="R44" pad="2"/>
 <wire x1="123.19" y1="38.18" x2="123.26" y2="38.25" width="0.3048" layer="1"/>
 <wire x1="123.26" y1="38.25" x2="125.7" y2="38.25" width="0.3048" layer="1"/>
-</signal>
-<signal name="N$64">
-<contactref element="R45" pad="2"/>
 <contactref element="T6_PWR" pad="A"/>
-<wire x1="137.5" y1="40" x2="133.03" y2="40" width="0.3048" layer="1"/>
+<wire x1="137.5" y1="40" x2="135.75" y2="38.25" width="0.3048" layer="1"/>
+<wire x1="135.75" y1="38.25" x2="125.7" y2="38.25" width="0.3048" layer="1"/>
 </signal>
 <signal name="LED_TO_EXP_ACTIVE">
 <contactref element="R46" pad="2"/>
@@ -11720,12 +11673,18 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="LED2_SOE" pad="A"/>
 <wire x1="125.7" y1="68.25" x2="125.63" y2="68.18" width="0.3048" layer="1"/>
 <wire x1="125.63" y1="68.18" x2="123.19" y2="68.18" width="0.3048" layer="1"/>
+<contactref element="T3_SOE" pad="A"/>
+<wire x1="137.5" y1="70" x2="135.75" y2="68.25" width="0.3048" layer="1"/>
+<wire x1="135.75" y1="68.25" x2="125.7" y2="68.25" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$17">
-<contactref element="R40" pad="2"/>
 <contactref element="LED3_SODS" pad="A"/>
-<wire x1="123.19" y1="53.18" x2="123.26" y2="53.25" width="0.3048" layer="1"/>
 <wire x1="123.26" y1="53.25" x2="125.7" y2="53.25" width="0.3048" layer="1"/>
+<contactref element="R40" pad="2"/>
+<contactref element="T10_SODS" pad="A"/>
+<wire x1="137.5" y1="55" x2="135.75" y2="53.25" width="0.3048" layer="1"/>
+<wire x1="135.75" y1="53.25" x2="125.7" y2="53.25" width="0.3048" layer="1"/>
+<wire x1="123.19" y1="53.18" x2="123.26" y2="53.25" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$23">
 <contactref element="LED8" pad="A"/>
@@ -11848,11 +11807,6 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <wire x1="62.29" y1="95.19" x2="61.06" y2="95.19" width="0.8128" layer="1"/>
 <wire x1="61.23" y1="97.79" x2="61.06" y2="97.62" width="0.8128" layer="1"/>
 <wire x1="61.06" y1="97.62" x2="61.06" y2="95.19" width="0.8128" layer="1"/>
-</signal>
-<signal name="N$60">
-<contactref element="R41" pad="1"/>
-<contactref element="T10_SODS" pad="A"/>
-<wire x1="137.5" y1="55" x2="133.03" y2="55" width="0.3048" layer="1"/>
 </signal>
 <signal name="N$74">
 </signal>
