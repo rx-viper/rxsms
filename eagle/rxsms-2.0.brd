@@ -9238,14 +9238,14 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <element name="R45" library="rcl" package="R0805" value="68" x="132.08" y="40">
 <attribute name="OC_FARNELL" value="2074509" x="132.08" y="40" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R46" library="rcl" package="R0805" value="68" x="137.16" y="95.25" rot="R180">
-<attribute name="OC_FARNELL" value="2074509" x="137.16" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="R46" library="rcl" package="R0805" value="1k/100" x="137.16" y="95.25" rot="R180">
+<attribute name="OC_FARNELL" value="9237496/2332058" x="137.16" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="LED6" library="led" package="CHIPLED_1206" value="BERNSTEIN" x="146.2" y="102.46" rot="R270">
 <attribute name="OC_FARNELL" value="2322083" x="146.2" y="102.46" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R47" library="rcl" package="R0805" value="68" x="137.16" y="99.06" rot="R180">
-<attribute name="OC_FARNELL" value="2074509" x="137.16" y="99.06" size="1.778" layer="27" rot="R180" display="off"/>
+<element name="R47" library="rcl" package="R0805" value="1k/100" x="137.16" y="99.06" rot="R180">
+<attribute name="OC_FARNELL" value="9237496/2332058" x="137.16" y="99.06" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="LED8" library="led" package="CHIPLED_1206" value="GREEN" x="69.85" y="83.82" rot="R90">
 <attribute name="OC_FARNELL" value="2099244" x="69.85" y="83.82" size="1.778" layer="27" rot="R90" display="off"/>
@@ -9268,8 +9268,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <element name="LED3_SODS" library="led" package="CHIPLED_1206" value="YELLOW" x="125.7" y="55">
 <attribute name="OC_FARNELL" value="2099249" x="125.7" y="55" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R49" library="rcl" package="R0805" value="150" x="74.93" y="83.82">
-<attribute name="OC_FARNELL" value="1099794" x="74.93" y="83.82" size="1.778" layer="27" display="off"/>
+<element name="R49" library="rcl" package="R0805" value="2k7" x="74.93" y="83.82">
+<attribute name="OC_FARNELL" value="2332077" x="74.93" y="83.82" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R50" library="rcl" package="R0805" value="330" x="54.61" y="95.25" rot="R180">
 <attribute name="OC_FARNELL" value="1500705" x="54.61" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>

@@ -13083,14 +13083,14 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <part name="R45" library="rcl" deviceset="R-EU_" device="R0805" value="68">
 <attribute name="OC_FARNELL" value="2074509"/>
 </part>
-<part name="R46" library="rcl" deviceset="R-EU_" device="R0805" value="68">
-<attribute name="OC_FARNELL" value="2074509"/>
+<part name="R46" library="rcl" deviceset="R-EU_" device="R0805" value="1k/100">
+<attribute name="OC_FARNELL" value="9237496/2332058"/>
 </part>
 <part name="LED6" library="led" deviceset="LED" device="CHIPLED_1206" value="BERNSTEIN">
 <attribute name="OC_FARNELL" value="2322083"/>
 </part>
-<part name="R47" library="rcl" deviceset="R-EU_" device="R0805" value="68">
-<attribute name="OC_FARNELL" value="2074509"/>
+<part name="R47" library="rcl" deviceset="R-EU_" device="R0805" value="1k/100">
+<attribute name="OC_FARNELL" value="9237496/2332058"/>
 </part>
 <part name="GND32" library="supply1" deviceset="GND" device=""/>
 <part name="LED8" library="led" deviceset="LED" device="CHIPLED_1206" value="GREEN">
@@ -13116,8 +13116,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_FARNELL" value="2099249"/>
 </part>
 <part name="P+12" library="supply1" deviceset="+5V" device=""/>
-<part name="R49" library="rcl" deviceset="R-EU_" device="R0805" value="150">
-<attribute name="OC_FARNELL" value="1099794"/>
+<part name="R49" library="rcl" deviceset="R-EU_" device="R0805" value="2k7">
+<attribute name="OC_FARNELL" value="2332077"/>
 </part>
 <part name="R50" library="rcl" deviceset="R-EU_" device="R0805" value="330">
 <attribute name="OC_FARNELL" value="1500705"/>
