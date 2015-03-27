@@ -14592,24 +14592,24 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </signal>
 </signals>
 <errors>
-<approved hash="2,20,3e7ba6b3a2153add"/>
+<approved hash="2,20,3f53a79b545dcc95"/>
 <approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,3eaba663a1b5397d"/>
-<approved hash="2,20,3f53a79b545dcc95"/>
+<approved hash="2,20,3e7ba6b3a2153add"/>
 <approved hash="2,20,017399bb9c0d04c5"/>
 <approved hash="2,20,263bbef3b3952b5d"/>
+<approved hash="4,1,11fa5e7a581e179e"/>
+<approved hash="4,1,0ca24322488e070e"/>
 <approved hash="4,1,11fa5e7a505e1fde"/>
 <approved hash="4,1,00a24f22494e06ce"/>
-<approved hash="4,1,0ca24322488e070e"/>
 <approved hash="4,1,0882470249ee066e"/>
 <approved hash="4,1,0f8a400a429e0d1e"/>
-<approved hash="4,1,11fa5e7a581e179e"/>
-<approved hash="4,16,0f8a400a429e0d1e"/>
-<approved hash="4,16,0882470249ee066e"/>
-<approved hash="4,16,11fa5e7a581e179e"/>
+<approved hash="4,16,11fa5e7a505e1fde"/>
 <approved hash="4,16,0ca24322488e070e"/>
 <approved hash="4,16,00a24f22494e06ce"/>
-<approved hash="4,16,11fa5e7a505e1fde"/>
+<approved hash="4,16,0882470249ee066e"/>
+<approved hash="4,16,11fa5e7a581e179e"/>
+<approved hash="4,16,0f8a400a429e0d1e"/>
 </errors>
 </board>
 </drawing>
