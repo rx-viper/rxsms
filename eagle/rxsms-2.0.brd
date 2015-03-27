@@ -11743,13 +11743,13 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_FARNELL" value="2320853" x="123.19" y="8.255" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R12" library="rcl" package="R0805" value="24/1%" x="124.46" y="11.43">
-<attribute name="OC_FARNELL" value="1894163" x="124.46" y="11.43" size="1.778" layer="27" display="off"/>
+<attribute name="OC_RS" value="666-2386" x="124.46" y="11.43" size="1.778" layer="27" display="off"/>
 </element>
 <element name="C18" library="rcl" package="C0805K" value="1u" x="123.19" y="5.08">
 <attribute name="OC_FARNELL" value="2320853" x="123.19" y="5.08" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R13" library="rcl" package="R0805" value="24/1%" x="124.46" y="13.97">
-<attribute name="OC_FARNELL" value="1894163" x="124.46" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="OC_RS" value="666-2386" x="124.46" y="13.97" size="1.778" layer="27" display="off"/>
 </element>
 <element name="C19" library="rcl" package="C0805K" value="1u" x="104.14" y="7.62" rot="R270">
 <attribute name="OC_FARNELL" value="2320853" x="104.14" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
@@ -12011,10 +12011,10 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_RS" value="463-690" x="131.445" y="8.89" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C34" library="rcl" package="C0805K" value="4n7" x="143.51" y="16.51" rot="R180">
-<attribute name="OC_FARNELL" value="1759241" x="143.51" y="16.51" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2407305" x="143.51" y="16.51" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="R48" library="rcl" package="R0805" value="1M" x="143.51" y="13.97">
-<attribute name="OC_FARNELL" value="2332111" x="143.51" y="13.97" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="2333544" x="143.51" y="13.97" size="1.778" layer="27" display="off"/>
 </element>
 <element name="LED7" library="led" package="CHIPLED_1206" value="BERNSTEIN" x="146.2" y="107.54" rot="R270">
 <attribute name="OC_FARNELL" value="2322083" x="146.2" y="107.54" size="1.778" layer="27" rot="R270" display="off"/>

@@ -12846,7 +12846,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_FARNELL" value="2320853"/>
 </part>
 <part name="R12" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="GND12" library="supply1" deviceset="GND" device=""/>
 <part name="+3V7" library="supply1" deviceset="+3V3" device=""/>
@@ -12854,7 +12854,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_FARNELL" value="2320853"/>
 </part>
 <part name="R13" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="C19" library="rcl" deviceset="C-EU" device="C0805K" value="1u">
 <attribute name="OC_FARNELL" value="2320853"/>
@@ -13134,10 +13134,10 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_RS" value="463-690"/>
 </part>
 <part name="C34" library="rcl" deviceset="C-EU" device="C0805K" value="4n7">
-<attribute name="OC_FARNELL" value="1759241"/>
+<attribute name="OC_FARNELL" value="2407305"/>
 </part>
 <part name="R48" library="rcl" deviceset="R-EU_" device="R0805" value="1M">
-<attribute name="OC_FARNELL" value="2332111"/>
+<attribute name="OC_FARNELL" value="2333544"/>
 </part>
 <part name="LED7" library="led" deviceset="LED" device="CHIPLED_1206" value="BERNSTEIN">
 <attribute name="OC_FARNELL" value="2322083"/>
@@ -15251,7 +15251,7 @@ interface</text>
 <attribute name="OC_FARNELL" x="58.42" y="76.2" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R12" gate="G$1" x="76.2" y="66.04">
-<attribute name="OC_FARNELL" x="76.2" y="66.04" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="76.2" y="66.04" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="GND12" gate="1" x="-7.62" y="48.26"/>
 <instance part="+3V7" gate="G$1" x="-7.62" y="86.36"/>
@@ -15259,7 +15259,7 @@ interface</text>
 <attribute name="OC_FARNELL" x="68.58" y="76.2" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R13" gate="G$1" x="76.2" y="58.42">
-<attribute name="OC_FARNELL" x="76.2" y="58.42" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="76.2" y="58.42" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="C19" gate="G$1" x="2.54" y="76.2">
 <attribute name="OC_FARNELL" x="2.54" y="76.2" size="1.778" layer="96" display="off"/>
