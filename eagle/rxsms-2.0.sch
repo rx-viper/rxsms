@@ -12635,6 +12635,54 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="jack">
+<packages>
+<package name="JACK">
+<wire x1="-13.5" y1="-6" x2="5.5" y2="-6" width="0.127" layer="21"/>
+<wire x1="5.5" y1="-6" x2="5.5" y2="6" width="0.127" layer="21"/>
+<wire x1="5.5" y1="6" x2="-13.5" y2="6" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="6" x2="-13.5" y2="5.5" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="5.5" x2="-13.5" y2="-5.5" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="-5.5" x2="-13.5" y2="-6" width="0.127" layer="21"/>
+<wire x1="-13.5" y1="5.5" x2="-27.5" y2="5.5" width="0.127" layer="21"/>
+<wire x1="-27.5" y1="5.5" x2="-27.5" y2="-5.5" width="0.127" layer="21"/>
+<wire x1="-27.5" y1="-5.5" x2="-13.5" y2="-5.5" width="0.127" layer="21"/>
+<pad name="P$1" x="0" y="0" drill="2.2" diameter="3.81"/>
+<pad name="NC2" x="3.8" y="5.06" drill="1.2" diameter="2.54"/>
+<pad name="NC4" x="3.8" y="-5.06" drill="1.2" diameter="2.54"/>
+<pad name="NC1" x="-6.36" y="5.06" drill="1.2" diameter="2.54"/>
+<pad name="NC3" x="-6.36" y="-5.06" drill="1.2" diameter="2.54"/>
+</package>
+</packages>
+<symbols>
+<symbol name="JACK">
+<pin name="P$1" x="-5.08" y="0" length="middle" direction="pas"/>
+<wire x1="0" y1="2.54" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="10.16" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-2.54" x2="10.16" y2="2.54" width="0.254" layer="94"/>
+<wire x1="10.16" y1="2.54" x2="0" y2="2.54" width="0.254" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="JACK">
+<gates>
+<gate name="G$1" symbol="JACK" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="JACK">
+<connects>
+<connect gate="G$1" pin="P$1" pad="P$1"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13188,6 +13236,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <part name="SJ5" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ6" library="jumper" deviceset="SJ" device=""/>
 <part name="P+16" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
+<part name="U$3" library="jack" deviceset="JACK" device=""/>
+<part name="U$9" library="jack" deviceset="JACK" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -16220,9 +16270,11 @@ other resistor values are possible as well.</text>
 <instance part="P+14" gate="1" x="134.62" y="137.16"/>
 <instance part="X6" gate="-1" x="60.96" y="119.38"/>
 <instance part="X6" gate="-2" x="60.96" y="114.3"/>
-<instance part="P+15" gate="1" x="68.58" y="129.54"/>
-<instance part="GND40" gate="1" x="68.58" y="109.22"/>
+<instance part="P+15" gate="1" x="68.58" y="144.78"/>
+<instance part="GND40" gate="1" x="68.58" y="91.44"/>
 <instance part="GND38" gate="1" x="109.22" y="101.6" rot="R270"/>
+<instance part="U$3" gate="G$1" x="60.96" y="101.6" rot="R180"/>
+<instance part="U$9" gate="G$1" x="60.96" y="129.54" rot="R180"/>
 </instances>
 <busses>
 </busses>
@@ -16300,8 +16352,12 @@ other resistor values are possible as well.</text>
 <pinref part="X6" gate="-1" pin="KL"/>
 <pinref part="P+15" gate="1" pin="+24V"/>
 <wire x1="66.04" y1="119.38" x2="68.58" y2="119.38" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="119.38" x2="68.58" y2="127" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="119.38" x2="68.58" y2="129.54" width="0.1524" layer="91"/>
 <label x="71.12" y="119.38" size="1.778" layer="95"/>
+<pinref part="U$9" gate="G$1" pin="P$1"/>
+<wire x1="68.58" y1="129.54" x2="68.58" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="129.54" x2="68.58" y2="129.54" width="0.1524" layer="91"/>
+<junction x="68.58" y="129.54"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -16334,7 +16390,12 @@ other resistor values are possible as well.</text>
 <pinref part="X6" gate="-2" pin="KL"/>
 <pinref part="GND40" gate="1" pin="GND"/>
 <wire x1="66.04" y1="114.3" x2="68.58" y2="114.3" width="0.1524" layer="91"/>
-<wire x1="68.58" y1="114.3" x2="68.58" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="114.3" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="U$3" gate="G$1" pin="P$1"/>
+<wire x1="68.58" y1="101.6" x2="68.58" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
+<junction x="68.58" y="101.6"/>
+<label x="71.12" y="96.52" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="SV1" gate="1" pin="4"/>
