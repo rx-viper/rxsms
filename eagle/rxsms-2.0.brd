@@ -10866,10 +10866,10 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="1.04" y1="1.9" x2="4.04" y2="1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="-1.9" x2="4.04" y2="-1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="1.9" x2="1.04" y2="-1.9" width="0.127" layer="21"/>
-<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.127" layer="46" curve="-180"/>
-<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.127" layer="46" curve="180"/>
+<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.0254" layer="46" curve="-180"/>
+<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.0254" layer="46" curve="180"/>
 <wire x1="6.85" y1="1.6" x2="6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-0.4" x2="6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-2.2" x2="6.85" y2="-4.2" width="0.127" layer="21"/>
@@ -10891,10 +10891,10 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="-1.04" y1="1.9" x2="-4.04" y2="1.9" width="0.127" layer="21"/>
 <wire x1="-1.04" y1="-1.9" x2="-4.04" y2="-1.9" width="0.127" layer="21"/>
 <wire x1="-1.04" y1="1.9" x2="-1.04" y2="-1.9" width="0.127" layer="21"/>
-<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.127" layer="46" curve="180"/>
-<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.0254" layer="46" curve="180"/>
+<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.0254" layer="46" curve="-180"/>
 <wire x1="-6.85" y1="1.6" x2="-6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="-6.85" y1="-0.4" x2="-6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="-6.85" y1="-2.2" x2="-6.85" y2="-4.2" width="0.127" layer="21"/>
@@ -12025,7 +12025,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="OC_FARNELL" value="1500705" x="54.61" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="X5" library="light-pipe" package="RLP2-200-500" value="RLP2-200-500" x="146.2" y="105" rot="R90">
-<attribute name="OC_FARNELL" value="1886474" x="146.2" y="105" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_RS" value="752-9157" x="146.2" y="105" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="SV1" library="con-harting-ml" package="ML26L" value="" x="55" y="103.1">
 <attribute name="OC_NEWARK" value="unknown" x="55" y="103.1" size="1.778" layer="27" display="off"/>

@@ -11349,10 +11349,10 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="1.04" y1="1.9" x2="4.04" y2="1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="-1.9" x2="4.04" y2="-1.9" width="0.127" layer="21"/>
 <wire x1="1.04" y1="1.9" x2="1.04" y2="-1.9" width="0.127" layer="21"/>
-<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.127" layer="46" curve="-180"/>
-<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.127" layer="46" curve="180"/>
+<wire x1="5.1" y1="-0.8" x2="5.1" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="7.1" y1="-1.8" x2="7.1" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="5.1" y1="-0.8" x2="7.1" y2="-0.8" width="0.0254" layer="46" curve="-180"/>
+<wire x1="5.1" y1="-1.8" x2="7.1" y2="-1.8" width="0.0254" layer="46" curve="180"/>
 <wire x1="6.85" y1="1.6" x2="6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-0.4" x2="6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="6.85" y1="-2.2" x2="6.85" y2="-4.2" width="0.127" layer="21"/>
@@ -11374,10 +11374,10 @@ Philips Semiconductors, SOT363.pdf</description>
 <wire x1="-1.04" y1="1.9" x2="-4.04" y2="1.9" width="0.127" layer="21"/>
 <wire x1="-1.04" y1="-1.9" x2="-4.04" y2="-1.9" width="0.127" layer="21"/>
 <wire x1="-1.04" y1="1.9" x2="-1.04" y2="-1.9" width="0.127" layer="21"/>
-<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.127" layer="46"/>
-<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.127" layer="46"/>
-<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.127" layer="46" curve="180"/>
-<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.127" layer="46" curve="-180"/>
+<wire x1="-5.1" y1="-0.8" x2="-5.1" y2="-1.8" width="0.0254" layer="46"/>
+<wire x1="-7.1" y1="-1.8" x2="-7.1" y2="-0.8" width="0.0254" layer="46"/>
+<wire x1="-5.1" y1="-0.8" x2="-7.1" y2="-0.8" width="0.0254" layer="46" curve="180"/>
+<wire x1="-5.1" y1="-1.8" x2="-7.1" y2="-1.8" width="0.0254" layer="46" curve="-180"/>
 <wire x1="-6.85" y1="1.6" x2="-6.85" y2="-0.4" width="0.127" layer="21"/>
 <wire x1="-6.85" y1="-0.4" x2="-6.85" y2="-2.2" width="0.127" layer="21"/>
 <wire x1="-6.85" y1="-2.2" x2="-6.85" y2="-4.2" width="0.127" layer="21"/>
@@ -11419,7 +11419,7 @@ Philips Semiconductors, SOT363.pdf</description>
 <device name="" package="RLP2-200-500">
 <technologies>
 <technology name="">
-<attribute name="OC_FARNELL" value="1886474" constant="no"/>
+<attribute name="OC_RS" value="752-9157" constant="no"/>
 </technology>
 </technologies>
 </device>

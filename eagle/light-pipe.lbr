@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -197,7 +197,7 @@
 <device name="" package="RLP2-200-500">
 <technologies>
 <technology name="">
-<attribute name="OC_FARNELL" value="1886474" constant="no"/>
+<attribute name="OC_RS" value="752-9157" constant="no"/>
 </technology>
 </technologies>
 </device>
