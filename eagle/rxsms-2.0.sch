@@ -13733,14 +13733,14 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1759265"/>
 </part>
 <part name="R19" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="C28" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
 </part>
 <part name="GND20" library="supply1" deviceset="GND" device=""/>
 <part name="R20" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="C29" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
@@ -13866,7 +13866,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="GND28" library="supply1" deviceset="GND" device=""/>
 <part name="R16" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="C25" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
@@ -13876,7 +13876,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1217758"/>
 </part>
 <part name="R17" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="C26" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
@@ -13891,7 +13891,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="GND29" library="supply1" deviceset="GND" device=""/>
 <part name="R18" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="C27" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
@@ -13923,7 +13923,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="2099244"/>
 </part>
 <part name="R43" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="T5_ERRINH" library="SMSIp67" deviceset="SMS_IP67" device="">
 <attribute name="OC_FARNELL" value="1217758"/>
@@ -13938,16 +13938,16 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="2099244"/>
 </part>
 <part name="R44" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
-<attribute name="OC_FARNELL" value="9237496"/>
+<attribute name="OC_FARNELL" value="2332071"/>
 </part>
 <part name="R46" library="rcl" deviceset="R-EU_" device="R0805" value="1k/100">
-<attribute name="OC_FARNELL" value="9237496/2332058"/>
+<attribute name="OC_FARNELL" value="2332071/2332058"/>
 </part>
 <part name="LED6" library="led" deviceset="LED" device="CHIPLED_1206" value="BERNSTEIN">
 <attribute name="OC_FARNELL" value="2322083"/>
 </part>
 <part name="R47" library="rcl" deviceset="R-EU_" device="R0805" value="1k/100">
-<attribute name="OC_FARNELL" value="9237496/2332058"/>
+<attribute name="OC_FARNELL" value="2332071/2332058"/>
 </part>
 <part name="GND32" library="supply1" deviceset="GND" device=""/>
 <part name="LED8" library="led" deviceset="LED" device="CHIPLED_1206" value="GREEN">

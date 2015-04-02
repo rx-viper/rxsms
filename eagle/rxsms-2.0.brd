@@ -11891,13 +11891,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="1759265" x="100.965" y="27.54" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R19" library="rcl" package="R0805" value="1k" x="124.46" y="35.56" rot="R180">
-<attribute name="OC_FARNELL" value="9237496" x="124.46" y="35.56" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="124.46" y="35.56" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C28" library="rcl" package="C0805K" value="100n" x="124.46" y="33.02">
 <attribute name="OC_FARNELL" value="1759265" x="124.46" y="33.02" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R20" library="rcl" package="R0805" value="1k" x="124.46" y="20.32" rot="R180">
-<attribute name="OC_FARNELL" value="9237496" x="124.46" y="20.32" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="124.46" y="20.32" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C29" library="rcl" package="C0805K" value="100n" x="124.46" y="17.78">
 <attribute name="OC_FARNELL" value="1759265" x="124.46" y="17.78" size="1.778" layer="27" display="off"/>
@@ -12023,7 +12023,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_BUERKLIN" value="12 G 205" x="150.2" y="40" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="R16" library="rcl" package="R0805" value="1k" x="124.46" y="80.01" rot="R180">
-<attribute name="OC_FARNELL" value="9237496" x="124.46" y="80.01" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="124.46" y="80.01" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C25" library="rcl" package="C0805K" value="100n" x="124.46" y="77.47">
 <attribute name="OC_FARNELL" value="1759265" x="124.46" y="77.47" size="1.778" layer="27" display="off"/>
@@ -12032,7 +12032,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="1217758" x="135.5" y="70" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R17" library="rcl" package="R0805" value="1k" x="124.46" y="64.77" rot="R180">
-<attribute name="OC_FARNELL" value="9237496" x="124.46" y="64.77" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="124.46" y="64.77" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C26" library="rcl" package="C0805K" value="100n" x="124.46" y="62.23">
 <attribute name="OC_FARNELL" value="1759265" x="124.46" y="62.23" size="1.778" layer="27" display="off"/>
@@ -12044,7 +12044,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_BUERKLIN" value="12 G 203" x="150.2" y="85" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="R18" library="rcl" package="R0805" value="1k" x="124.46" y="50.165" rot="R180">
-<attribute name="OC_FARNELL" value="9237496" x="124.46" y="50.165" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="124.46" y="50.165" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C27" library="rcl" package="C0805K" value="100n" x="124.46" y="47.625">
 <attribute name="OC_FARNELL" value="1759265" x="124.46" y="47.625" size="1.778" layer="27" display="off"/>
@@ -12071,7 +12071,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="2099244" x="125.7" y="25" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R43" library="rcl" package="R0805" value="1k" x="123.19" y="24.13" rot="R270">
-<attribute name="OC_FARNELL" value="9237496" x="123.19" y="24.13" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="123.19" y="24.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="T5_ERRINH" library="SMSIp67" package="IP67" value="SMS_IP67" x="135.5" y="25" rot="R270">
 <attribute name="OC_FARNELL" value="1217758" x="135.5" y="25" size="1.778" layer="27" rot="R270" display="off"/>
@@ -12086,16 +12086,16 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="2099244" x="125.7" y="40" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R44" library="rcl" package="R0805" value="1k" x="123.19" y="39.13" rot="R270">
-<attribute name="OC_FARNELL" value="9237496" x="123.19" y="39.13" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="OC_FARNELL" value="2332071" x="123.19" y="39.13" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R46" library="rcl" package="R0805" value="1k/100" x="137.16" y="95.25" rot="R180">
-<attribute name="OC_FARNELL" value="9237496/2332058" x="137.16" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071/2332058" x="137.16" y="95.25" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="LED6" library="led" package="CHIPLED_1206" value="BERNSTEIN" x="146.2" y="102.46" rot="R270">
 <attribute name="OC_FARNELL" value="2322083" x="146.2" y="102.46" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R47" library="rcl" package="R0805" value="1k/100" x="137.16" y="99.06" rot="R180">
-<attribute name="OC_FARNELL" value="9237496/2332058" x="137.16" y="99.06" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2332071/2332058" x="137.16" y="99.06" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="LED8" library="led" package="CHIPLED_1206" value="GREEN" x="69.85" y="83.82" rot="R90">
 <attribute name="OC_FARNELL" value="2099244" x="69.85" y="83.82" size="1.778" layer="27" rot="R90" display="off"/>
