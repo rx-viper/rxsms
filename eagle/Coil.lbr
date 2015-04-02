@@ -107,7 +107,7 @@
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="COIL">
+<deviceset name="COIL" prefix="L">
 <gates>
 <gate name="G$1" symbol="COIL" x="0" y="0"/>
 </gates>

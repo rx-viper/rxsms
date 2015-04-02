@@ -12455,7 +12455,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="COIL">
+<deviceset name="COIL" prefix="L">
 <gates>
 <gate name="G$1" symbol="COIL" x="0" y="0"/>
 </gates>
@@ -13995,14 +13995,14 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="P+4" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="U$11" library="Coil" deviceset="COIL" device=""/>
+<part name="L1" library="Coil" deviceset="COIL" device=""/>
 <part name="C31" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
 <attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="C35" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
 <attribute name="OC_FARNELL" value="2346932"/>
 </part>
-<part name="U$12" library="Coil" deviceset="COIL" device=""/>
+<part name="L2" library="Coil" deviceset="COIL" device=""/>
 <part name="C36" library="rcl" deviceset="C-EU" device="C0805K" value="100n">
 <attribute name="OC_FARNELL" value="1759265"/>
 </part>
@@ -14771,7 +14771,7 @@ interface</text>
 <attribute name="OC_FARNELL" x="152.4" y="154.94" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="P+4" gate="1" x="152.4" y="165.1"/>
-<instance part="U$11" gate="G$1" x="162.56" y="160.02"/>
+<instance part="L1" gate="G$1" x="162.56" y="160.02"/>
 <instance part="C31" gate="G$1" x="170.18" y="154.94">
 <attribute name="OC_FARNELL" x="170.18" y="154.94" size="1.778" layer="96" display="off"/>
 </instance>
@@ -15378,7 +15378,7 @@ interface</text>
 <pinref part="U$10" gate="G$1" pin="+VIN2"/>
 <wire x1="185.42" y1="157.48" x2="177.8" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="177.8" y1="157.48" x2="177.8" y2="160.02" width="0.1524" layer="91"/>
-<pinref part="U$11" gate="G$1" pin="1"/>
+<pinref part="L1" gate="G$1" pin="1"/>
 <wire x1="167.64" y1="160.02" x2="170.18" y2="160.02" width="0.1524" layer="91"/>
 <junction x="177.8" y="160.02"/>
 <pinref part="C31" gate="G$1" pin="1"/>
@@ -15392,7 +15392,7 @@ interface</text>
 <pinref part="P+4" gate="1" pin="+24V"/>
 <wire x1="152.4" y1="162.56" x2="152.4" y2="160.02" width="0.1524" layer="91"/>
 <pinref part="C30" gate="G$1" pin="1"/>
-<pinref part="U$11" gate="G$1" pin="2"/>
+<pinref part="L1" gate="G$1" pin="2"/>
 <wire x1="152.4" y1="160.02" x2="152.4" y2="157.48" width="0.1524" layer="91"/>
 <wire x1="157.48" y1="160.02" x2="152.4" y2="160.02" width="0.1524" layer="91"/>
 <junction x="152.4" y="160.02"/>
@@ -15441,7 +15441,7 @@ interface</text>
 <instance part="C35" gate="G$1" x="60.96" y="116.84">
 <attribute name="OC_FARNELL" x="60.96" y="116.84" size="1.778" layer="96" display="off"/>
 </instance>
-<instance part="U$12" gate="G$1" x="45.72" y="124.46"/>
+<instance part="L2" gate="G$1" x="45.72" y="124.46"/>
 <instance part="C36" gate="G$1" x="119.38" y="116.84">
 <attribute name="OC_FARNELL" x="119.38" y="116.84" size="1.778" layer="96" display="off"/>
 </instance>
@@ -15537,7 +15537,7 @@ interface</text>
 <wire x1="35.56" y1="132.08" x2="35.56" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="C12" gate="G$1" pin="1"/>
 <label x="38.1" y="132.08" size="1.778" layer="95"/>
-<pinref part="U$12" gate="G$1" pin="2"/>
+<pinref part="L2" gate="G$1" pin="2"/>
 <wire x1="35.56" y1="124.46" x2="35.56" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="124.46" x2="35.56" y2="124.46" width="0.1524" layer="91"/>
 <junction x="35.56" y="124.46"/>
@@ -15545,7 +15545,7 @@ interface</text>
 </net>
 <net name="VI" class="0">
 <segment>
-<pinref part="U$12" gate="G$1" pin="1"/>
+<pinref part="L2" gate="G$1" pin="1"/>
 <pinref part="U3" gate="G$1" pin="VI"/>
 <wire x1="50.8" y1="124.46" x2="60.96" y2="124.46" width="0.1524" layer="91"/>
 <pinref part="C35" gate="G$1" pin="1"/>
