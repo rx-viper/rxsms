@@ -13574,10 +13574,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1696320"/>
 </part>
 <part name="C12" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
-<attribute name="OC_FARNELL" value="2210979"/>
+<attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="C13" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
-<attribute name="OC_FARNELL" value="2210979"/>
+<attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="+3V3" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND5" library="supply1" deviceset="GND" device=""/>
@@ -13992,15 +13992,15 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="GND40" library="supply1" deviceset="GND" device=""/>
 <part name="U$10" library="TEN3" deviceset="TEN3-2410N" device=""/>
 <part name="C30" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
-<attribute name="OC_FARNELL" value="2210979"/>
+<attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="P+4" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="U$11" library="Coil" deviceset="COIL" device=""/>
 <part name="C31" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
-<attribute name="OC_FARNELL" value="2210979"/>
+<attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="C35" library="rcl" deviceset="C-EU" device="C0805K" value="4u7/50V">
-<attribute name="OC_FARNELL" value="2210979"/>
+<attribute name="OC_FARNELL" value="2346932"/>
 </part>
 <part name="U$12" library="Coil" deviceset="COIL" device=""/>
 <part name="C36" library="rcl" deviceset="C-EU" device="C0805K" value="100n">

@@ -11758,10 +11758,10 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="1696320" x="78.74" y="91.44" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="C12" library="rcl" package="C0805K" value="4u7/50V" x="62.23" y="85.09">
-<attribute name="OC_FARNELL" value="2210979" x="62.23" y="85.09" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="2346932" x="62.23" y="85.09" size="1.778" layer="27" display="off"/>
 </element>
 <element name="C13" library="rcl" package="C0805K" value="4u7/50V" x="80.01" y="83.82">
-<attribute name="OC_FARNELL" value="2210979" x="80.01" y="83.82" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="2346932" x="80.01" y="83.82" size="1.778" layer="27" display="off"/>
 </element>
 <element name="C14" library="rcl" package="C0805K" value="22u/16V" x="83.82" y="76.2" rot="R270">
 <attribute name="OC_FARNELL" value="2346925" x="83.82" y="76.2" size="1.778" layer="27" rot="R270" display="off"/>
@@ -12141,16 +12141,16 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_RS" value="801-9330" x="58.42" y="48.26" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C30" library="rcl" package="C0805K" value="4u7/50V" x="63.5" y="80.01" rot="R180">
-<attribute name="OC_FARNELL" value="2210979" x="63.5" y="80.01" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2346932" x="63.5" y="80.01" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="U$11" library="Coil" package="BOURNS-SRR0906" value="COIL" x="58.42" y="73.66" rot="R180">
 <attribute name="OC_FARNELL" value="2333799" x="58.42" y="73.66" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C31" library="rcl" package="C0805K" value="4u7/50V" x="63.5" y="67.31" rot="R180">
-<attribute name="OC_FARNELL" value="2210979" x="63.5" y="67.31" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="OC_FARNELL" value="2346932" x="63.5" y="67.31" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="C35" library="rcl" package="C0805K" value="4u7/50V" x="62.23" y="97.79">
-<attribute name="OC_FARNELL" value="2210979" x="62.23" y="97.79" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="2346932" x="62.23" y="97.79" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$12" library="Coil" package="BOURNS-SRR0906" value="COIL" x="67.31" y="91.44">
 <attribute name="OC_FARNELL" value="2333799" x="67.31" y="91.44" size="1.778" layer="27" display="off"/>
