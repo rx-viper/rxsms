@@ -5830,8 +5830,8 @@ Charging Line</text>
 <text x="17.875" y="55.675" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center-left">DEBUG
 Charging Line</text>
 <text x="17.875" y="12.495" size="1.27" layer="29" font="vector" ratio="14" rot="R90" align="center-left">Groundstation</text>
-<text x="87.63" y="102.87" size="1.27" layer="1" font="vector" ratio="14" rot="R180" align="center">V+   V-</text>
-<text x="87.63" y="102.87" size="1.27" layer="29" font="vector" ratio="14" rot="R180" align="center">V+   V-</text>
+<text x="95.25" y="114.3" size="1.778" layer="1" font="vector" ratio="14" rot="SR180" align="center">V-  V+</text>
+<text x="95.25" y="114.3" size="1.778" layer="29" font="vector" ratio="14" rot="SR180" align="center">V-  V+</text>
 <rectangle x1="75.9625" y1="61.15" x2="76.2225" y2="61.17" layer="29"/>
 <rectangle x1="76.8625" y1="61.15" x2="77.1025" y2="61.17" layer="29"/>
 <rectangle x1="77.8225" y1="61.15" x2="78.0625" y2="61.17" layer="29"/>
@@ -11362,6 +11362,99 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </package>
 </packages>
 </library>
+<library name="transistor-fet">
+<description>&lt;b&gt;Field Effect Transistors&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;p&gt;
+&lt;p&gt;
+Symbols changed according to IEC617&lt;p&gt; 
+All types, packages and assignment to symbols and pins checked&lt;p&gt;
+Package outlines partly checked&lt;p&gt;
+&lt;p&gt;
+JFET = junction FET&lt;p&gt;
+IGBT-x = insulated gate bipolar transistor&lt;p&gt;
+x=N: NPN; x=P: PNP&lt;p&gt;
+IGFET-mc-nnn; (IGFET=insulated gate field effect transistor)&lt;P&gt;
+m=D: depletion mode (Verdr&amp;auml;ngungstyp)&lt;p&gt;
+m=E: enhancement mode (Anreicherungstyp)&lt;p&gt;
+c: N=N-channel; P=P-Channel&lt;p&gt;
+GDSB: gate, drain, source, bulk&lt;p&gt;
+&lt;p&gt;
+by R. Vogg  15.March.2002</description>
+<packages>
+<package name="TO252">
+<description>&lt;b&gt;SMALL OUTLINE TRANSISTOR&lt;/b&gt;&lt;p&gt;
+TS-003</description>
+<wire x1="3.2766" y1="3.8354" x2="3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="3.277" y1="-2.159" x2="-3.277" y2="-2.159" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="-2.159" x2="-3.2766" y2="3.8354" width="0.2032" layer="21"/>
+<wire x1="-3.277" y1="3.835" x2="3.2774" y2="3.8346" width="0.2032" layer="51"/>
+<wire x1="-3.973" y1="5.983" x2="3.973" y2="5.983" width="0.0508" layer="39"/>
+<wire x1="3.973" y1="-5.983" x2="-3.973" y2="-5.983" width="0.0508" layer="39"/>
+<wire x1="-3.973" y1="-5.983" x2="-3.973" y2="5.983" width="0.0508" layer="39"/>
+<wire x1="3.973" y1="5.983" x2="3.973" y2="-5.983" width="0.0508" layer="39"/>
+<wire x1="-2.5654" y1="3.937" x2="-2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="-2.5654" y1="4.6482" x2="-2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="-2.1082" y1="5.1054" x2="2.1082" y2="5.1054" width="0.2032" layer="51"/>
+<wire x1="2.1082" y1="5.1054" x2="2.5654" y2="4.6482" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="4.6482" x2="2.5654" y2="3.937" width="0.2032" layer="51"/>
+<wire x1="2.5654" y1="3.937" x2="-2.5654" y2="3.937" width="0.2032" layer="51"/>
+<smd name="3" x="0" y="2.5" dx="5.4" dy="6.2" layer="1"/>
+<smd name="1" x="-2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<smd name="2" x="2.28" y="-4.8" dx="1" dy="1.6" layer="1"/>
+<text x="-3.81" y="-2.54" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="5.08" y="-2.54" size="1.27" layer="27" rot="R90">&gt;VALUE</text>
+<rectangle x1="-2.7178" y1="-5.1562" x2="-1.8542" y2="-2.2606" layer="51"/>
+<rectangle x1="1.8542" y1="-5.1562" x2="2.7178" y2="-2.2606" layer="51"/>
+<rectangle x1="-0.4318" y1="-3.0226" x2="0.4318" y2="-2.2606" layer="21"/>
+<polygon width="0.1998" layer="51">
+<vertex x="-2.5654" y="3.937"/>
+<vertex x="-2.5654" y="4.6482"/>
+<vertex x="-2.1082" y="5.1054"/>
+<vertex x="2.1082" y="5.1054"/>
+<vertex x="2.5654" y="4.6482"/>
+<vertex x="2.5654" y="3.937"/>
+</polygon>
+</package>
+</packages>
+</library>
+<library name="diode">
+<description>&lt;b&gt;Diodes&lt;/b&gt;&lt;p&gt;
+Based on the following sources:
+&lt;ul&gt;
+&lt;li&gt;Motorola : www.onsemi.com
+&lt;li&gt;Fairchild : www.fairchildsemi.com
+&lt;li&gt;Philips : www.semiconductors.com
+&lt;li&gt;Vishay : www.vishay.de
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="DO34Z7">
+<description>&lt;B&gt;DIODE&lt;/B&gt;&lt;p&gt;
+diameter 1.8 mm, horizontal, grid 7.62 mm</description>
+<wire x1="-1.524" y1="-0.889" x2="1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="0.889" x2="-1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="1.524" y1="-0.889" x2="1.524" y2="0.889" width="0.1524" layer="21"/>
+<wire x1="-1.524" y1="0.889" x2="-1.524" y2="-0.889" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="0" x2="2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-3.81" y1="0" x2="-2.921" y2="0" width="0.508" layer="51"/>
+<wire x1="-0.508" y1="0" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="0.508" x2="0.889" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.889" y1="-0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="1.27" y2="0" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="0.889" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0" x2="-0.127" y2="-0.508" width="0.1524" layer="21"/>
+<wire x1="0.127" y1="0.508" x2="-0.127" y2="0.508" width="0.1524" layer="21"/>
+<wire x1="-0.127" y1="0.508" x2="-0.127" y2="0" width="0.1524" layer="21"/>
+<pad name="C" x="-3.81" y="0" drill="0.8128" shape="long"/>
+<pad name="A" x="3.81" y="0" drill="0.8128" shape="long"/>
+<text x="-1.524" y="1.143" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="-1.524" y="-2.413" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<rectangle x1="-1.143" y1="-0.889" x2="-0.762" y2="0.889" layer="21"/>
+<rectangle x1="1.524" y1="-0.254" x2="2.921" y2="0.254" layer="21"/>
+<rectangle x1="-2.921" y1="-0.254" x2="-1.524" y2="0.254" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -12040,11 +12133,11 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <attribute name="MF" value="" x="55" y="103.1" size="1.778" layer="27" display="off"/>
 <attribute name="OC_FARNELL" value="1096983" x="55" y="103.1" size="1.778" layer="27" display="off"/>
 </element>
-<element name="X6" library="con-ptr500" package="AK500/2" value="" x="87.63" y="111.76">
-<attribute name="OC_NEWARK" value="unknown" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
-<attribute name="MPN" value="" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
-<attribute name="OC_FARNELL" value="1131855" x="87.63" y="111.76" size="1.778" layer="27" display="off"/>
+<element name="X6" library="con-ptr500" package="AK500/2" value="" x="95.25" y="107.95">
+<attribute name="OC_NEWARK" value="unknown" x="95.25" y="107.95" size="1.778" layer="27" display="off"/>
+<attribute name="MPN" value="" x="95.25" y="107.95" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="" x="95.25" y="107.95" size="1.778" layer="27" display="off"/>
+<attribute name="OC_FARNELL" value="1131855" x="95.25" y="107.95" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U$10" library="TEN3" package="TEN3-2410N" value="TEN3-2410N" x="58.42" y="48.26" rot="R180">
 <attribute name="OC_RS" value="801-9330" x="58.42" y="48.26" size="1.778" layer="27" rot="R180" display="off"/>
@@ -12129,12 +12222,22 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 </element>
 <element name="SJ5" library="jumper" package="SJ" value="" x="57.15" y="80.01"/>
 <element name="SJ6" library="jumper" package="SJ" value="" x="46.99" y="72.39" rot="R270"/>
-<element name="U$3" library="jack" package="JACK" value="JACK" x="121.92" y="104.14" rot="R270">
-<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" x="121.92" y="104.14" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="U$3" library="jack" package="JACK" value="JACK" x="124.46" y="104.14" rot="R270">
+<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" x="124.46" y="104.14" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="U$9" library="jack" package="JACK" value="JACK" x="104.14" y="104.14" rot="R270">
-<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" x="104.14" y="104.14" size="1.778" layer="27" rot="R270" display="off"/>
+<element name="U$9" library="jack" package="JACK" value="JACK" x="109.22" y="104.14" rot="R270">
+<attribute name="OC_FARNELL" value="1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)" x="109.22" y="104.14" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
+<element name="Q13" library="transistor-fet" package="TO252" value="FDD4141TO252" x="83.82" y="104.14" rot="R180">
+<attribute name="OC_FARNELL" value="2101406" x="95.25" y="114.3" size="1.778" layer="27" rot="R180" display="off"/>
+</element>
+<element name="D1" library="diode" package="DO34Z7" value="12V" x="88.9" y="106.68" rot="R90">
+<attribute name="OC_FARNELL" value="1779204" x="72.39" y="88.9" size="1.778" layer="27" rot="R90" display="off"/>
+</element>
+<element name="R36" library="rcl" package="R0805" value="1k" x="86.36" y="113.9825" rot="R270"/>
+<element name="SJ7" library="jumper" package="SJ" value="" x="73.66" y="100.33" rot="R90"/>
+<element name="SJ8" library="jumper" package="SJ" value="" x="76.2" y="100.33" rot="R90"/>
+<element name="SJ9" library="jumper" package="SJ" value="" x="78.74" y="100.33" rot="R90"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -12249,8 +12352,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="SV1" pad="6"/>
 <polygon width="0.1905" layer="16" spacing="1.016" isolate="0.8128">
 <vertex x="24.13" y="100.33"/>
-<vertex x="57.15" y="100.33"/>
-<vertex x="57.15" y="107.95"/>
+<vertex x="55.88" y="100.33"/>
+<vertex x="55.88" y="107.95"/>
 <vertex x="92.71" y="107.95"/>
 <vertex x="92.71" y="113.03"/>
 <vertex x="13.97" y="113.03"/>
@@ -12488,9 +12591,11 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <vertex x="76.5175" y="99.3775"/>
 <vertex x="77.39560625" y="100.25560625" curve="-44.999295"/>
 <vertex x="77.575209375" y="100.33"/>
-<vertex x="87.63" y="100.33"/>
-<vertex x="87.63" y="114.935"/>
-<vertex x="81.28" y="114.935"/>
+<vertex x="90.17" y="100.33"/>
+<vertex x="95.25" y="105.41"/>
+<vertex x="95.25" y="108.9025"/>
+<vertex x="90.17" y="113.9825"/>
+<vertex x="81.28" y="113.9825"/>
 <vertex x="81.28" y="118.11"/>
 <vertex x="157.48" y="118.11"/>
 <vertex x="157.48" y="19.685"/>
@@ -12527,8 +12632,7 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <via x="102.87" y="76.835" extent="1-16" drill="0.6"/>
 <via x="80.01" y="58.42" extent="1-16" drill="0.6"/>
 <via x="93.98" y="67.31" extent="1-16" drill="0.6"/>
-<via x="93.98" y="73.66" extent="1-16" drill="0.6"/>
-<via x="92.71" y="98.7425" extent="1-16" drill="0.6"/>
+<via x="93.98" y="73.9775" extent="1-16" drill="0.6"/>
 <via x="75.2475" y="69.85" extent="1-16" drill="0.6"/>
 <via x="68.58" y="59.69" extent="1-16" drill="0.6"/>
 <via x="72.39" y="59.69" extent="1-16" drill="0.6"/>
@@ -12546,6 +12650,8 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <via x="69.5325" y="44.1325" extent="1-16" drill="0.6"/>
 <via x="67.31" y="52.07" extent="1-16" drill="0.6"/>
 <via x="20.32" y="73.66" extent="1-16" drill="0.6"/>
+<via x="91.44" y="98.7425" extent="1-16" drill="0.6"/>
+<contactref element="R36" pad="1"/>
 </signal>
 <signal name="VSS">
 <contactref element="U1" pad="15"/>
@@ -13676,43 +13782,27 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <signal name="+28V_SUPPLY">
 <contactref element="U$6" pad="TAB"/>
 <contactref element="C12" pad="1"/>
-<contactref element="SV1" pad="16"/>
-<contactref element="SV1" pad="26"/>
-<contactref element="SV1" pad="18"/>
-<contactref element="SV1" pad="20"/>
-<contactref element="SV1" pad="22"/>
-<contactref element="SV1" pad="24"/>
-<contactref element="SV1" pad="25"/>
-<contactref element="SV1" pad="15"/>
-<contactref element="SV1" pad="17"/>
-<contactref element="SV1" pad="19"/>
-<contactref element="SV1" pad="21"/>
-<contactref element="SV1" pad="23"/>
-<contactref element="X6" pad="1"/>
 <contactref element="C30" pad="1"/>
 <contactref element="U$11" pad="P4"/>
 <contactref element="U$12" pad="P4"/>
-<polygon width="0.4064" layer="1" spacing="1.016" isolate="0.8128">
-<vertex x="107.95" y="100.33"/>
-<vertex x="107.95" y="106.68"/>
-<vertex x="86.36" y="106.68"/>
-<vertex x="86.36" y="113.538"/>
-<vertex x="26.67" y="113.538"/>
+<polygon width="0.4064" layer="1" spacing="1.016" isolate="0.3048">
+<vertex x="83.82" y="106.68"/>
+<vertex x="83.82" y="109.093"/>
+<vertex x="80.01" y="112.903"/>
+<vertex x="26.67" y="112.903"/>
 <vertex x="26.67" y="105.41"/>
-<vertex x="56.388" y="105.41"/>
-<vertex x="56.642" y="105.156"/>
-<vertex x="56.642" y="101.346"/>
-<vertex x="57.58360625" y="100.40439375" curve="44.999295"/>
-<vertex x="57.763209375" y="100.33"/>
+<vertex x="54.61" y="105.41"/>
+<vertex x="55.88" y="106.68"/>
+<vertex x="71.12" y="106.68"/>
+<vertex x="72.39" y="105.41"/>
+<vertex x="72.39" y="100.33"/>
+<vertex x="80.3275" y="100.33"/>
+<vertex x="80.3275" y="106.68"/>
 </polygon>
 <wire x1="64.5" y1="80.01" x2="64.5" y2="77.7115125" width="0.8128" layer="1"/>
 <wire x1="64.5" y1="77.7115125" x2="64.59299375" y2="77.48700625" width="0.8128" layer="1" curve="45"/>
 <wire x1="64.59299375" y1="77.48700625" x2="64.67" y2="77.41" width="0.8128" layer="1"/>
 <wire x1="64.5" y1="80.01" x2="64.77" y2="80.01" width="0.8128" layer="1"/>
-<wire x1="61.06" y1="87.69" x2="59.63" y2="87.69" width="0.8128" layer="1"/>
-<wire x1="59.63" y1="87.69" x2="58.42" y2="88.9" width="0.8128" layer="1"/>
-<wire x1="58.42" y1="88.9" x2="58.42" y2="100.95" width="0.8128" layer="1"/>
-<wire x1="61.06" y1="87.69" x2="61.23" y2="87.52" width="0.8128" layer="1"/>
 <wire x1="61.23" y1="87.52" x2="61.23" y2="85.09" width="0.8128" layer="1"/>
 <wire x1="61.23" y1="85.09" x2="61.23" y2="83.55" width="0.8128" layer="1"/>
 <wire x1="61.23" y1="83.55" x2="61.595" y2="83.185" width="0.8128" layer="1"/>
@@ -13725,7 +13815,23 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <contactref element="SJ5" pad="2"/>
 <wire x1="57.912" y1="80.01" x2="58.42" y2="80.01" width="0.3048" layer="1"/>
 <wire x1="58.42" y1="80.01" x2="61.595" y2="83.185" width="0.3048" layer="1"/>
-<contactref element="U$9" pad="P$1"/>
+<contactref element="D1" pad="C"/>
+<contactref element="Q13" pad="2"/>
+<contactref element="SJ7" pad="2"/>
+<contactref element="SJ8" pad="2"/>
+<contactref element="SJ9" pad="2"/>
+<wire x1="81.54" y1="108.94" x2="81.26" y2="109.22" width="0.6096" layer="1"/>
+<wire x1="81.54" y1="108.94" x2="83.8" y2="106.68" width="0.3048" layer="1"/>
+<wire x1="83.8" y1="106.68" x2="86.36" y2="106.68" width="0.3048" layer="1"/>
+<wire x1="86.36" y1="106.68" x2="88.9" y2="104.14" width="0.3048" layer="1"/>
+<wire x1="88.9" y1="104.14" x2="88.9" y2="102.87" width="0.3048" layer="1"/>
+<wire x1="61.06" y1="87.69" x2="61" y2="87.63" width="0.6096" layer="1"/>
+<wire x1="61" y1="87.63" x2="59.69" y2="87.63" width="0.6096" layer="1"/>
+<wire x1="59.69" y1="87.63" x2="58.42" y2="88.9" width="0.6096" layer="1"/>
+<wire x1="58.42" y1="88.9" x2="58.42" y2="99.06" width="0.6096" layer="1"/>
+<wire x1="58.42" y1="99.06" x2="56.1975" y2="101.2825" width="0.6096" layer="1"/>
+<wire x1="56.1975" y1="101.2825" x2="56.1975" y2="106.68" width="0.6096" layer="1"/>
+<wire x1="61.06" y1="87.69" x2="61.23" y2="87.52" width="0.6096" layer="1"/>
 </signal>
 <signal name="N$25">
 <contactref element="U7" pad="4"/>
@@ -14602,26 +14708,77 @@ Es handelt sich hierbei um AK500 in horizontaler Ausführung.&lt;p&gt;
 <via x="56.1975" y="76.2" extent="1-16" drill="0.6"/>
 <wire x1="56.1975" y1="76.2" x2="46.99" y2="76.2" width="0.3048" layer="16"/>
 </signal>
+<signal name="N$34">
+<contactref element="D1" pad="A"/>
+<contactref element="R36" pad="2"/>
+<contactref element="Q13" pad="1"/>
+<wire x1="86.36" y1="113.0325" x2="86.1" y2="112.7725" width="0.3048" layer="1"/>
+<wire x1="86.1" y1="112.7725" x2="86.1" y2="110.49" width="0.3048" layer="1"/>
+<wire x1="86.1" y1="110.49" x2="86.1" y2="108.94" width="0.3048" layer="1"/>
+<wire x1="88.9" y1="110.49" x2="86.1" y2="110.49" width="0.3048" layer="1"/>
+</signal>
+<signal name="N$60">
+<contactref element="Q13" pad="3"/>
+<contactref element="SJ7" pad="1"/>
+<contactref element="SJ8" pad="1"/>
+<contactref element="SJ9" pad="1"/>
+<contactref element="SV1" pad="16"/>
+<contactref element="SV1" pad="26"/>
+<contactref element="SV1" pad="24"/>
+<contactref element="SV1" pad="22"/>
+<contactref element="SV1" pad="20"/>
+<contactref element="SV1" pad="18"/>
+<contactref element="SV1" pad="25"/>
+<contactref element="SV1" pad="15"/>
+<contactref element="SV1" pad="17"/>
+<contactref element="SV1" pad="19"/>
+<contactref element="SV1" pad="21"/>
+<contactref element="SV1" pad="23"/>
+<contactref element="X6" pad="1"/>
+<contactref element="U$9" pad="P$1"/>
+<polygon width="0.3048" layer="1">
+<vertex x="71.4375" y="100.33"/>
+<vertex x="71.4375" y="104.14"/>
+<vertex x="70.1675" y="105.41"/>
+<vertex x="57.4675" y="105.41"/>
+<vertex x="57.4675" y="101.2825"/>
+<vertex x="58.42" y="100.33"/>
+</polygon>
+<wire x1="92.71" y1="104.14" x2="109.22" y2="104.14" width="0.8128" layer="1"/>
+<wire x1="92.71" y1="104.14" x2="92.71" y2="102.87" width="0.8128" layer="1"/>
+<wire x1="92.71" y1="102.87" x2="90.17" y2="100.33" width="0.8128" layer="1"/>
+<wire x1="90.17" y1="100.33" x2="85.09" y2="100.33" width="0.8128" layer="1"/>
+<wire x1="85.09" y1="100.33" x2="83.82" y2="101.6" width="0.8128" layer="1"/>
+<wire x1="83.82" y1="101.6" x2="83.82" y2="101.64" width="0.6096" layer="1"/>
+<wire x1="73.66" y1="99.568" x2="76.2" y2="99.568" width="0.8128" layer="1"/>
+<wire x1="76.2" y1="99.568" x2="78.74" y2="99.568" width="0.8128" layer="1"/>
+<wire x1="78.74" y1="99.568" x2="81.748" y2="99.568" width="0.8128" layer="1"/>
+<wire x1="81.748" y1="99.568" x2="83.82" y2="101.64" width="0.8128" layer="1"/>
+<wire x1="73.66" y1="99.568" x2="70.612" y2="99.568" width="0.8128" layer="1"/>
+<wire x1="70.612" y1="99.568" x2="69.215" y2="100.965" width="0.8128" layer="1"/>
+<wire x1="92.7354" y1="107.95" x2="92.7354" y2="104.1654" width="0.8128" layer="1"/>
+<wire x1="92.7354" y1="104.1654" x2="92.71" y2="104.14" width="0.8128" layer="1"/>
+</signal>
 </signals>
 <errors>
+<approved hash="2,20,3eaba663a1b5397d"/>
 <approved hash="2,20,3e7ba6b3a2153add"/>
 <approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,3f53a79b545dcc95"/>
-<approved hash="2,20,3eaba663a1b5397d"/>
-<approved hash="2,20,263bbef3b3952b5d"/>
 <approved hash="2,20,017399bb9c0d04c5"/>
-<approved hash="4,1,0882470249ee066e"/>
-<approved hash="4,1,0f8a400a429e0d1e"/>
-<approved hash="4,1,11fa5e7a581e179e"/>
+<approved hash="2,20,263bbef3b3952b5d"/>
 <approved hash="4,1,0ca24322488e070e"/>
-<approved hash="4,1,00a24f22494e06ce"/>
+<approved hash="4,1,11fa5e7a581e179e"/>
 <approved hash="4,1,11fa5e7a505e1fde"/>
+<approved hash="4,1,0882470249ee066e"/>
+<approved hash="4,1,00a24f22494e06ce"/>
+<approved hash="4,1,0f8a400a429e0d1e"/>
+<approved hash="4,16,11fa5e7a581e179e"/>
+<approved hash="4,16,0ca24322488e070e"/>
 <approved hash="4,16,11fa5e7a505e1fde"/>
 <approved hash="4,16,00a24f22494e06ce"/>
 <approved hash="4,16,0f8a400a429e0d1e"/>
-<approved hash="4,16,0ca24322488e070e"/>
 <approved hash="4,16,0882470249ee066e"/>
-<approved hash="4,16,11fa5e7a581e179e"/>
 </errors>
 </board>
 </drawing>
