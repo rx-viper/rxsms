@@ -12593,8 +12593,8 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <vertex x="77.575209375" y="100.33"/>
 <vertex x="90.17" y="100.33"/>
 <vertex x="95.25" y="105.41"/>
-<vertex x="95.25" y="108.9025"/>
-<vertex x="90.17" y="113.9825"/>
+<vertex x="95.25" y="107.6325"/>
+<vertex x="88.9" y="113.9825"/>
 <vertex x="81.28" y="113.9825"/>
 <vertex x="81.28" y="118.11"/>
 <vertex x="157.48" y="118.11"/>
