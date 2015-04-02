@@ -11975,8 +11975,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="1887308" x="39.37" y="40.64" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R29" library="rcl" package="R0805" value="270" x="44.45" y="39.37" rot="R90">
-<attribute name="OC_RS" value="740-9019" x="44.45" y="39.37" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="2008375" x="44.45" y="39.37" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="2332064" x="44.45" y="39.37" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="OK4" library="optocoupler" package="SOIC08" value="HCPL0600" x="21.59" y="21.59" rot="R180">
 <attribute name="OC_NEWARK" value="88H7774" x="31.75" y="8.89" size="1.778" layer="27" rot="R180" display="off"/>
@@ -11999,8 +11998,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="1887308" x="24.13" y="33.02" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R32" library="rcl" package="R0805" value="270" x="24.13" y="28.575" rot="R90">
-<attribute name="OC_RS" value="740-9019" x="24.13" y="28.575" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="2008375" x="24.13" y="28.575" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="2332064" x="24.13" y="28.575" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="R33" library="rcl" package="R0805" value="opt" x="67.0306" y="11.9507" rot="R180">
 <attribute name="OC_FARNELL" value="2309112" x="67.0306" y="11.9507" size="1.778" layer="27" rot="R180" display="off"/>

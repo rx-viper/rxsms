@@ -13815,8 +13815,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1887308"/>
 </part>
 <part name="R29" library="rcl" deviceset="R-EU_" device="R0805" value="270">
-<attribute name="OC_FARNELL" value="2008375"/>
-<attribute name="OC_RS" value="740-9019"/>
+<attribute name="OC_FARNELL" value="2332064"/>
 </part>
 <part name="VDD5" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS8" library="supply1" deviceset="VSS" device=""/>
@@ -13838,8 +13837,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1887308"/>
 </part>
 <part name="R32" library="rcl" deviceset="R-EU_" device="R0805" value="270">
-<attribute name="OC_FARNELL" value="2008375"/>
-<attribute name="OC_RS" value="740-9019"/>
+<attribute name="OC_FARNELL" value="2332064"/>
 </part>
 <part name="VDD6" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS9" library="supply1" deviceset="VSS" device=""/>
@@ -14729,7 +14727,6 @@ interface</text>
 <attribute name="OC_FARNELL" x="119.38" y="119.38" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R29" gate="G$1" x="101.6" y="119.38" rot="R90">
-<attribute name="OC_RS" x="101.6" y="119.38" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="OC_FARNELL" x="101.6" y="119.38" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="VDD5" gate="G$1" x="101.6" y="129.54"/>
@@ -14752,7 +14749,6 @@ interface</text>
 <attribute name="OC_FARNELL" x="119.38" y="38.1" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="R32" gate="G$1" x="101.6" y="38.1" rot="R90">
-<attribute name="OC_RS" x="101.6" y="38.1" size="1.778" layer="96" rot="R90" display="off"/>
 <attribute name="OC_FARNELL" x="101.6" y="38.1" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
 <instance part="VDD6" gate="G$1" x="101.6" y="48.26"/>
