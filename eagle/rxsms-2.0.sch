@@ -13584,11 +13584,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="GND6" library="supply1" deviceset="GND" device=""/>
 <part name="P+2" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
-<part name="C14" library="rcl" deviceset="C-EU" device="C0805K" value="22u/16V">
-<attribute name="OC_FARNELL" value="2346925"/>
+<part name="C14" library="rcl" deviceset="C-EU" device="C0805K" value="22u/25V">
+<attribute name="OC_FARNELL" value="1907510"/>
 </part>
-<part name="C15" library="rcl" deviceset="C-EU" device="C0805K" value="22u/16V">
-<attribute name="OC_FARNELL" value="2346925"/>
+<part name="C15" library="rcl" deviceset="C-EU" device="C0805K" value="22u/25V">
+<attribute name="OC_FARNELL" value="1907510"/>
 </part>
 <part name="GND4" library="supply1" deviceset="GND" device=""/>
 <part name="VDD2" library="supply1" deviceset="VDD" device=""/>
