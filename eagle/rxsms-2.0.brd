@@ -11455,6 +11455,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 </package>
 </packages>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -12236,6 +12243,24 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <element name="SJ7" library="jumper" package="SJ" value="" x="73.66" y="100.33" rot="R90"/>
 <element name="SJ8" library="jumper" package="SJ" value="" x="76.2" y="100.33" rot="R90"/>
 <element name="SJ9" library="jumper" package="SJ" value="" x="78.74" y="100.33" rot="R90"/>
+<element name="SCREW1" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.0667" y="7.62">
+<attribute name="OC_FARNELL" value="2135988" x="-3.0667" y="7.62" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW2" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.1937" y="31.75">
+<attribute name="OC_FARNELL" value="2135988" x="-3.1937" y="31.75" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW3" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.3207" y="44.45">
+<attribute name="OC_FARNELL" value="2135988" x="-3.3207" y="44.45" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW4" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.4477" y="68.58">
+<attribute name="OC_FARNELL" value="2135988" x="-3.4477" y="68.58" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW5" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.5747" y="81.28">
+<attribute name="OC_FARNELL" value="2135988" x="-3.5747" y="81.28" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW6" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.7017" y="111.76">
+<attribute name="OC_FARNELL" value="2135988" x="-3.7017" y="111.76" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">

@@ -13509,6 +13509,9 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </library>
 <library name="dsub-mounting-screw">
 <packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="DSUB_MOUNTING_SCREW">
@@ -13526,7 +13529,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <gate name="G$1" symbol="DSUB_MOUNTING_SCREW" x="0" y="0"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="SCREW_DUMMY">
 <technologies>
 <technology name=""/>
 </technologies>
@@ -14097,22 +14100,22 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SJ9" library="jumper" deviceset="SJ" device=""/>
 <part name="P+13" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
 <part name="SCREW1" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 <part name="SCREW2" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 <part name="SCREW3" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 <part name="SCREW4" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 <part name="SCREW5" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 <part name="SCREW6" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
-<attribute name="OC_FARNELL" value="4218061"/>
+<attribute name="OC_FARNELL" value="2135988"/>
 </part>
 </parts>
 <sheets>

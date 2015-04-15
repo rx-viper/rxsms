@@ -70,6 +70,9 @@
 </layers>
 <library>
 <packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="DSUB_MOUNTING_SCREW">
@@ -87,7 +90,7 @@
 <gate name="G$1" symbol="DSUB_MOUNTING_SCREW" x="0" y="0"/>
 </gates>
 <devices>
-<device name="">
+<device name="" package="SCREW_DUMMY">
 <technologies>
 <technology name=""/>
 </technologies>

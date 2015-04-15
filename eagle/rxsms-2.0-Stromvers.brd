@@ -7429,6 +7429,13 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 </package>
 </packages>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7716,6 +7723,12 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <element name="SJ1" library="jumper" package="SJ" value="" x="57.5" y="69.295"/>
 <element name="SJ2" library="jumper" package="SJ" value="" x="57.5" y="73.28"/>
 <element name="SJ3" library="jumper" package="SJ" value="" x="57.5" y="77.265"/>
+<element name="SCREW1" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-7.4267" y="80">
+<attribute name="OC_FARNELL" value="2135988" x="-7.4267" y="80" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW2" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-7.0937" y="114">
+<attribute name="OC_FARNELL" value="2135988" x="-7.0937" y="114" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="+28V_SUPPLY">
