@@ -115,6 +115,12 @@
 "R48";"1M";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2333544";"";"";"";"";
 "R49";"2k7";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2332077";"";"";"";"";
 "R50";"330";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"1500705";"";"";"";"";
+"SCREW1";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
+"SCREW2";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
+"SCREW3";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
+"SCREW4";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
+"SCREW5";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
+"SCREW6";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"2135988";"";"";"";"";
 "SJ1";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";"";"";
 "SJ2";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";"";"";
 "SJ3";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";"";"";
@@ -158,8 +164,8 @@
 "U7";"TPS73125";"TPS731";"SOT25";"";"";"";"";"2112625";"";"";"";"";
 "U8";"NUP2202W1";"NUP2202W1";"SOT363_PHILIPS";"";"";"";"";"";"";"463-690";"";"";
 "X1";"PN61729-S";"PN61729-S";"PN61729-S";"BERG USB connector";"";"";"";"1642035";"unknown";"515-1989";"";"";
-"X2_GROUNDSTATION";"";"F09HP";"F09HP";"SUB-D";"";"";"";"1207597 (+2x 1855027)";"unknown";"";"";"";
-"X3_DEBUG";"";"F09HP";"F09HP";"SUB-D";"";"";"";"1207597 (+2x 1855027)";"unknown";"";"";"";
-"X4";"";"F15HP";"F15HP";"SUB-D";"";"";"";"1207598 (+2x 1855027)";"unknown";"";"";"";
+"X2_GROUNDSTATION";"";"F09HP";"F09HP";"SUB-D";"";"";"";"1207597";"unknown";"";"";"";
+"X3_DEBUG";"";"F09HP";"F09HP";"SUB-D";"";"";"";"1207597";"unknown";"";"";"";
+"X4";"";"F15HP";"F15HP";"SUB-D";"";"";"";"1207598";"unknown";"";"";"";
 "X5";"RLP2-200-500";"RLP2-200-500";"RLP2-200-500";"";"";"";"";"";"";"752-9157";"";"";
 "X6";"";"AK500/2";"AK500/2";"CONNECTOR";"";"";"";"1131855";"unknown";"";"";"";

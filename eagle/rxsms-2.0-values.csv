@@ -1,7 +1,7 @@
 "Qty";"Value";"Device";"Package";"Parts";"Description";"MF";"MPN";"OC_BUERKLIN";"OC_FARNELL";"OC_NEWARK";"OC_RS";"PACKAGE";"SUPPLIER";
 "1";"";"AK500/2";"AK500/2";"X6";"CONNECTOR";"";"";"";"1131855";"unknown";"";"";"";
-"2";"";"F09HP";"F09HP";"X2_GROUNDSTATION, X3_DEBUG";"SUB-D";"";"";"";"1207597 (+2x 1855027)";"unknown";"";"";"";
-"1";"";"F15HP";"F15HP";"X4";"SUB-D";"";"";"";"1207598 (+2x 1855027)";"unknown";"";"";"";
+"2";"";"F09HP";"F09HP";"X2_GROUNDSTATION, X3_DEBUG";"SUB-D";"";"";"";"1207597";"unknown";"";"";"";
+"1";"";"F15HP";"F15HP";"X4";"SUB-D";"";"";"";"1207598";"unknown";"";"";"";
 "2";"";"JP1E";"JP1";"JP1, JP2";"JUMPER";"";"";"";"";"";"";"";"";
 "1";"";"ML26L";"ML26L";"SV1";"HARTING";"";"";"";"1096983";"unknown";"";"";"";
 "5";"";"ML6";"ML6";"SV2, SV3, SV4, SV5, SV6";"HARTING";"";"";"";"1096984";"unknown";"740-7105";"";"";
@@ -23,6 +23,7 @@
 "4";"2k2";"R-EU_R0805";"R0805";"R4, R37, R39, R40";"RESISTOR, European symbol";"";"";"";"2332076";"";"";"";"";
 "1";"2k7";"R-EU_R0805";"R0805";"R49";"RESISTOR, European symbol";"";"";"";"2332077";"";"";"";"";
 "1";"330";"R-EU_R0805";"R0805";"R50";"RESISTOR, European symbol";"";"";"";"1500705";"";"";"";"";
+"6";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"SCREW1, SCREW2, SCREW3, SCREW4, SCREW5, SCREW6";"";"";"";"";"2135988";"";"";"";"";
 "1";"4n7";"C-EUC0805K";"C0805K";"C34";"CAPACITOR, European symbol";"";"";"";"2407305";"";"";"";"";
 "5";"4u7/50V";"C-EUC0805K";"C0805K";"C12, C13, C30, C31, C35";"CAPACITOR, European symbol";"";"";"";"2346932";"";"";"";"";
 "3";"50k";"STRK11K";"VERT_POTI";"U$7_BER, U$8_DROPR, U$9_DROPDUR";"Potentiometer";"";"";"";"1345093";"";"";"";"";
