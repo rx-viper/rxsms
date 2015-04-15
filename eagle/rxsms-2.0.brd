@@ -12348,19 +12348,6 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <contactref element="SV1" pad="5"/>
 <contactref element="SV1" pad="14"/>
 <contactref element="SV1" pad="6"/>
-<polygon width="0.1905" layer="16" spacing="1.016" isolate="0.8128">
-<vertex x="24.13" y="100.33"/>
-<vertex x="55.88" y="100.33"/>
-<vertex x="55.88" y="107.95"/>
-<vertex x="92.71" y="107.95"/>
-<vertex x="92.71" y="113.03"/>
-<vertex x="13.97" y="113.03"/>
-<vertex x="10.16" y="109.22"/>
-<vertex x="10.16" y="108.585"/>
-<vertex x="8.89" y="107.315"/>
-<vertex x="8.89" y="104.14"/>
-<vertex x="20.32" y="104.14"/>
-</polygon>
 <wire x1="28.21" y1="91.44" x2="28.448" y2="91.678" width="0.3048" layer="1"/>
 <wire x1="28.448" y1="91.678" x2="28.448" y2="94.488" width="0.3048" layer="1"/>
 <wire x1="28.448" y1="94.488" x2="31.115" y2="97.155" width="0.3048" layer="1"/>
@@ -14760,8 +14747,8 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <errors>
 <approved hash="2,20,3eaba663a1b5397d"/>
 <approved hash="2,20,3e7ba6b3a2153add"/>
-<approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,3f53a79b545dcc95"/>
+<approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,017399bb9c0d04c5"/>
 <approved hash="2,20,263bbef3b3952b5d"/>
 <approved hash="4,1,0ca24322488e070e"/>
@@ -14770,12 +14757,12 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <approved hash="4,1,0882470249ee066e"/>
 <approved hash="4,1,00a24f22494e06ce"/>
 <approved hash="4,1,0f8a400a429e0d1e"/>
-<approved hash="4,16,11fa5e7a581e179e"/>
-<approved hash="4,16,0ca24322488e070e"/>
 <approved hash="4,16,11fa5e7a505e1fde"/>
-<approved hash="4,16,00a24f22494e06ce"/>
 <approved hash="4,16,0f8a400a429e0d1e"/>
 <approved hash="4,16,0882470249ee066e"/>
+<approved hash="4,16,00a24f22494e06ce"/>
+<approved hash="4,16,11fa5e7a581e179e"/>
+<approved hash="4,16,0ca24322488e070e"/>
 </errors>
 </board>
 </drawing>
