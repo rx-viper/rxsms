@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -11721,13 +11721,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_NEWARK" value="unknown" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207597" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="X3_DEBUG" library="con-subd" package="F09HP" value="" x="11.17" y="56.4" rot="R90">
 <attribute name="OC_NEWARK" value="unknown" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207597" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="U2" library="avr-7" package="TQFP44" value="XMEGA-A4UTQFP" x="69.85" y="31.75" rot="R270">
 <attribute name="OC_FARNELL" value="2066309" x="69.85" y="31.75" size="1.778" layer="27" rot="R270" display="off"/>
@@ -11776,7 +11776,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_NEWARK" value="unknown" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207598 (+2x 1855027)" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207598" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="U$4" library="UDN2596" package="DIL20" value="UDN2596" x="35.56" y="80.01" rot="R90">
 <attribute name="OC_FARNELL" value="1103848" x="35.56" y="80.01" size="1.778" layer="27" rot="R90" display="off"/>

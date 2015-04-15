@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -13507,6 +13507,34 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+</packages>
+<symbols>
+<symbol name="DSUB_MOUNTING_SCREW">
+<wire x1="-7.62" y1="5.08" x2="7.62" y2="5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
+<text x="-5.08" y="0" size="1.778" layer="95">&gt;NAME</text>
+<text x="-5.08" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="DSUB_MOUNTING_SCREW" prefix="SCREW" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="DSUB_MOUNTING_SCREW" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -13537,10 +13565,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="VSS2" library="supply1" deviceset="VSS" device=""/>
 <part name="X2_GROUNDSTATION" library="con-subd" deviceset="F09HP" device="">
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)"/>
+<attribute name="OC_FARNELL" value="1207597"/>
 </part>
 <part name="X3_DEBUG" library="con-subd" deviceset="F09HP" device="">
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)"/>
+<attribute name="OC_FARNELL" value="1207597"/>
 </part>
 <part name="VSS3" library="supply1" deviceset="VSS" device=""/>
 <part name="VSS4" library="supply1" deviceset="VSS" device=""/>
@@ -13598,7 +13626,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="FRAME4" library="frames" deviceset="DINA4_L" device=""/>
 <part name="X4" library="con-subd" deviceset="F15HP" device="">
-<attribute name="OC_FARNELL" value="1207598 (+2x 1855027)"/>
+<attribute name="OC_FARNELL" value="1207598"/>
 </part>
 <part name="U$4" library="UDN2596" deviceset="UDN2596" device="">
 <attribute name="OC_FARNELL" value="1103848"/>
@@ -14068,6 +14096,24 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SJ8" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ9" library="jumper" deviceset="SJ" device=""/>
 <part name="P+13" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
+<part name="SCREW1" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
+<part name="SCREW2" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
+<part name="SCREW3" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
+<part name="SCREW4" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
+<part name="SCREW5" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
+<part name="SCREW6" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="4218061"/>
+</part>
 </parts>
 <sheets>
 <sheet>
@@ -14774,6 +14820,18 @@ interface</text>
 <instance part="L1" gate="G$1" x="162.56" y="160.02"/>
 <instance part="C31" gate="G$1" x="170.18" y="154.94">
 <attribute name="OC_FARNELL" x="170.18" y="154.94" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW1" gate="G$1" x="233.68" y="129.54">
+<attribute name="OC_FARNELL" x="233.68" y="129.54" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW2" gate="G$1" x="251.46" y="129.54">
+<attribute name="OC_FARNELL" x="251.46" y="129.54" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW3" gate="G$1" x="231.14" y="45.72">
+<attribute name="OC_FARNELL" x="231.14" y="45.72" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW4" gate="G$1" x="248.92" y="45.72">
+<attribute name="OC_FARNELL" x="248.92" y="45.72" size="1.778" layer="96" display="off"/>
 </instance>
 </instances>
 <busses>
@@ -15643,6 +15701,12 @@ interface</text>
 <instance part="SJ5" gate="1" x="213.36" y="68.58"/>
 <instance part="SJ6" gate="1" x="213.36" y="60.96"/>
 <instance part="P+16" gate="1" x="236.22" y="60.96" rot="R270"/>
+<instance part="SCREW5" gate="G$1" x="220.98" y="104.14">
+<attribute name="OC_FARNELL" x="220.98" y="104.14" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW6" gate="G$1" x="238.76" y="104.14">
+<attribute name="OC_FARNELL" x="238.76" y="104.14" size="1.778" layer="96" display="off"/>
+</instance>
 </instances>
 <busses>
 </busses>
