@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -68,6 +68,7 @@
 <layer number="96" name="Values" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="97" name="Info" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="98" name="Guide" color="6" fill="1" visible="yes" active="yes"/>
+<layer number="99" name="SpiceOrder" color="5" fill="1" visible="yes" active="yes"/>
 <layer number="200" name="200bmp" color="7" fill="1" visible="yes" active="yes"/>
 </layers>
 <schematic xreflabel="%F%N/%S.%C%R" xrefpart="/%S.%C%R">
@@ -381,14 +382,14 @@ D = Direct mounting &lt;p&gt;
 <wire x1="0" y1="22.86" x2="101.6" y2="22.86" width="0.1016" layer="94"/>
 <wire x1="0" y1="22.86" x2="0" y2="35.56" width="0.1016" layer="94"/>
 <wire x1="101.6" y1="22.86" x2="101.6" y2="15.24" width="0.1016" layer="94"/>
-<text x="1.27" y="1.27" size="2.54" layer="94" font="vector">Date:</text>
-<text x="12.7" y="1.27" size="2.54" layer="94" font="vector">&gt;LAST_DATE_TIME</text>
-<text x="72.39" y="1.27" size="2.54" layer="94" font="vector">Sheet:</text>
-<text x="86.36" y="1.27" size="2.54" layer="94" font="vector">&gt;SHEET</text>
-<text x="88.9" y="11.43" size="2.54" layer="94" font="vector">REV:</text>
-<text x="1.27" y="19.05" size="2.54" layer="94" font="vector">TITLE:</text>
-<text x="1.27" y="11.43" size="2.54" layer="94" font="vector">Document Number:</text>
-<text x="17.78" y="19.05" size="2.54" layer="94" font="vector">&gt;DRAWING_NAME</text>
+<text x="1.27" y="1.27" size="2.54" layer="94">Date:</text>
+<text x="12.7" y="1.27" size="2.54" layer="94">&gt;LAST_DATE_TIME</text>
+<text x="72.39" y="1.27" size="2.54" layer="94">Sheet:</text>
+<text x="86.36" y="1.27" size="2.54" layer="94">&gt;SHEET</text>
+<text x="88.9" y="11.43" size="2.54" layer="94">REV:</text>
+<text x="1.27" y="19.05" size="2.54" layer="94">TITLE:</text>
+<text x="1.27" y="11.43" size="2.54" layer="94">Document Number:</text>
+<text x="17.78" y="19.05" size="2.54" layer="94">&gt;DRAWING_NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -7062,6 +7063,37 @@ Source: www.kingbright.com</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="DSUB_MOUNTING_SCREW">
+<wire x1="-7.62" y1="5.08" x2="7.62" y2="5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="5.08" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="5.08" width="0.254" layer="94"/>
+<text x="-5.08" y="0" size="1.778" layer="95">&gt;NAME</text>
+<text x="-5.08" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="DSUB_MOUNTING_SCREW" prefix="SCREW" uservalue="yes">
+<gates>
+<gate name="G$1" symbol="DSUB_MOUNTING_SCREW" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SCREW_DUMMY">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7074,7 +7106,7 @@ Source: www.kingbright.com</description>
 <parts>
 <part name="FRAME4" library="frames" deviceset="DINA4_L" device=""/>
 <part name="X4" library="con-subd" deviceset="F15HP" device="">
-<attribute name="OC_FARNELL" value="1207598 + 2x 1855027"/>
+<attribute name="OC_FARNELL" value="1207598"/>
 </part>
 <part name="SV1" library="con-harting-ml" deviceset="ML26" device="L">
 <attribute name="OC_FARNELL" value="1096983 (Gegenstück: 1200506 oder 1097038)"/>
@@ -7109,6 +7141,12 @@ Source: www.kingbright.com</description>
 <part name="SJ1" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ2" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ3" library="jumper" deviceset="SJ" device=""/>
+<part name="SCREW1" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="2135988"/>
+</part>
+<part name="SCREW2" library="dsub-mounting-screw" deviceset="DSUB_MOUNTING_SCREW" device="" value="4-40/M3">
+<attribute name="OC_FARNELL" value="2135988"/>
+</part>
 </parts>
 <sheets>
 <sheet>
@@ -7142,6 +7180,12 @@ Source: www.kingbright.com</description>
 <instance part="SJ1" gate="1" x="71.12" y="132.08"/>
 <instance part="SJ2" gate="1" x="71.12" y="139.7"/>
 <instance part="SJ3" gate="1" x="71.12" y="147.32"/>
+<instance part="SCREW1" gate="G$1" x="121.92" y="137.16">
+<attribute name="OC_FARNELL" x="121.92" y="137.16" size="1.778" layer="96" display="off"/>
+</instance>
+<instance part="SCREW2" gate="G$1" x="139.7" y="137.16">
+<attribute name="OC_FARNELL" x="139.7" y="137.16" size="1.778" layer="96" display="off"/>
+</instance>
 </instances>
 <busses>
 </busses>

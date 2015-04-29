@@ -6,6 +6,8 @@
 "R1";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"";"";"";
 "R2";"470";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"";"";"";
 "R3";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"";"";"";
+"SCREW1";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"4218061";"";"";
+"SCREW2";"4-40/M3";"DSUB_MOUNTING_SCREW";"SCREW_DUMMY";"";"";"";"";"4218061";"";"";
 "SJ1";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";
 "SJ2";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";
 "SJ3";"";"SJ";"SJ";"SMD solder JUMPER";"";"";"";"";"";"";
@@ -15,4 +17,4 @@
 "U$4";"JACK";"JACK";"JACK";"";"";"";"";"1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)";"";"";
 "U$5";"JACK";"JACK";"JACK";"";"";"";"";"1854507 (black), 1854508 (red), 1854511 (blue), 1854510 (yellow)";"";"";
 "U$6";"BUERKLIN17H912";"BUERKLIN17H912";"BUERKLIN17H912";"";"";"";"17H912";"";"";"";
-"X4";"";"F15HP";"F15HP";"SUB-D";"";"";"";"1207598 + 2x 1855027";"unknown";"";
+"X4";"";"F15HP";"F15HP";"SUB-D";"";"";"";"1207598";"unknown";"";

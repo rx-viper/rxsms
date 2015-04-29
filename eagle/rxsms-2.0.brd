@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5781,7 +5781,7 @@
 <rectangle x1="96.900328125" y1="95.684853125" x2="97.065428125" y2="95.701359375" layer="29"/>
 <rectangle x1="96.9168375" y1="95.7013625" x2="97.04891875" y2="95.71786875" layer="29"/>
 <rectangle x1="96.949859375" y1="95.717871875" x2="97.032409375" y2="95.734384375" layer="29"/>
-<text x="96.2975" y="3.445" size="1.27" layer="16" font="vector" ratio="14" rot="MR0">2015-March-27
+<text x="96.2975" y="3.445" size="1.27" layer="16" font="vector" ratio="14" rot="MR0">2015-April-17
 Nicolas Benes, benes@in.tum.de, OpenPGP: 9CF7E24E92CAE7898C3B
 Max Rößner, m.roessner@tum.de</text>
 <text x="102.01" y="91.6625" size="1.27" layer="1" font="vector" ratio="14" rot="R90" align="top-left">Bit
@@ -11455,6 +11455,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 </package>
 </packages>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -11721,13 +11728,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_NEWARK" value="unknown" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207597" x="44.19" y="49.11" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="X3_DEBUG" library="con-subd" package="F09HP" value="" x="11.17" y="56.4" rot="R90">
 <attribute name="OC_NEWARK" value="unknown" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207597 (+2x 1855027)" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207597" x="69.59" y="85.61" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="U2" library="avr-7" package="TQFP44" value="XMEGA-A4UTQFP" x="69.85" y="31.75" rot="R270">
 <attribute name="OC_FARNELL" value="2066309" x="69.85" y="31.75" size="1.778" layer="27" rot="R270" display="off"/>
@@ -11776,7 +11783,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_NEWARK" value="unknown" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207598 (+2x 1855027)" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207598" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="U$4" library="UDN2596" package="DIL20" value="UDN2596" x="35.56" y="80.01" rot="R90">
 <attribute name="OC_FARNELL" value="1103848" x="35.56" y="80.01" size="1.778" layer="27" rot="R90" display="off"/>
@@ -12236,6 +12243,24 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <element name="SJ7" library="jumper" package="SJ" value="" x="73.66" y="100.33" rot="R90"/>
 <element name="SJ8" library="jumper" package="SJ" value="" x="76.2" y="100.33" rot="R90"/>
 <element name="SJ9" library="jumper" package="SJ" value="" x="78.74" y="100.33" rot="R90"/>
+<element name="SCREW1" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.0667" y="7.62">
+<attribute name="OC_FARNELL" value="2135988" x="-3.0667" y="7.62" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW2" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.1937" y="31.75">
+<attribute name="OC_FARNELL" value="2135988" x="-3.1937" y="31.75" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW3" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.3207" y="44.45">
+<attribute name="OC_FARNELL" value="2135988" x="-3.3207" y="44.45" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW4" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.4477" y="68.58">
+<attribute name="OC_FARNELL" value="2135988" x="-3.4477" y="68.58" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW5" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.5747" y="81.28">
+<attribute name="OC_FARNELL" value="2135988" x="-3.5747" y="81.28" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW6" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-3.7017" y="111.76">
+<attribute name="OC_FARNELL" value="2135988" x="-3.7017" y="111.76" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -12348,19 +12373,6 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <contactref element="SV1" pad="5"/>
 <contactref element="SV1" pad="14"/>
 <contactref element="SV1" pad="6"/>
-<polygon width="0.1905" layer="16" spacing="1.016" isolate="0.8128">
-<vertex x="24.13" y="100.33"/>
-<vertex x="55.88" y="100.33"/>
-<vertex x="55.88" y="107.95"/>
-<vertex x="92.71" y="107.95"/>
-<vertex x="92.71" y="113.03"/>
-<vertex x="13.97" y="113.03"/>
-<vertex x="10.16" y="109.22"/>
-<vertex x="10.16" y="108.585"/>
-<vertex x="8.89" y="107.315"/>
-<vertex x="8.89" y="104.14"/>
-<vertex x="20.32" y="104.14"/>
-</polygon>
 <wire x1="28.21" y1="91.44" x2="28.448" y2="91.678" width="0.3048" layer="1"/>
 <wire x1="28.448" y1="91.678" x2="28.448" y2="94.488" width="0.3048" layer="1"/>
 <wire x1="28.448" y1="94.488" x2="31.115" y2="97.155" width="0.3048" layer="1"/>
@@ -14760,8 +14772,8 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <errors>
 <approved hash="2,20,3eaba663a1b5397d"/>
 <approved hash="2,20,3e7ba6b3a2153add"/>
-<approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,3f53a79b545dcc95"/>
+<approved hash="2,20,3cb3a47ba88d3045"/>
 <approved hash="2,20,017399bb9c0d04c5"/>
 <approved hash="2,20,263bbef3b3952b5d"/>
 <approved hash="4,1,0ca24322488e070e"/>
@@ -14770,12 +14782,12 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <approved hash="4,1,0882470249ee066e"/>
 <approved hash="4,1,00a24f22494e06ce"/>
 <approved hash="4,1,0f8a400a429e0d1e"/>
-<approved hash="4,16,11fa5e7a581e179e"/>
-<approved hash="4,16,0ca24322488e070e"/>
 <approved hash="4,16,11fa5e7a505e1fde"/>
-<approved hash="4,16,00a24f22494e06ce"/>
 <approved hash="4,16,0f8a400a429e0d1e"/>
 <approved hash="4,16,0882470249ee066e"/>
+<approved hash="4,16,00a24f22494e06ce"/>
+<approved hash="4,16,11fa5e7a581e179e"/>
+<approved hash="4,16,0ca24322488e070e"/>
 </errors>
 </board>
 </drawing>

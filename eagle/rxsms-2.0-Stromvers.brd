@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.6.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -71,6 +71,7 @@
 <layer number="96" name="Values" color="7" fill="1" visible="no" active="no"/>
 <layer number="97" name="Info" color="7" fill="1" visible="no" active="no"/>
 <layer number="98" name="Guide" color="6" fill="1" visible="no" active="no"/>
+<layer number="99" name="SpiceOrder" color="5" fill="1" visible="no" active="no"/>
 <layer number="100" name="Muster" color="7" fill="1" visible="no" active="no"/>
 <layer number="101" name="Patch_Top" color="12" fill="4" visible="no" active="yes"/>
 <layer number="102" name="Vscore" color="7" fill="1" visible="no" active="yes"/>
@@ -7428,6 +7429,13 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 </package>
 </packages>
 </library>
+<library name="dsub-mounting-screw">
+<packages>
+<package name="SCREW_DUMMY">
+<circle x="0" y="0" radius="1.27" width="0.127" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -7673,7 +7681,7 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <attribute name="OC_NEWARK" value="unknown" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MPN" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="MF" value="" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="OC_FARNELL" value="1207598 + 2x 1855027" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="OC_FARNELL" value="1207598" x="11.17" y="97.05" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
 <element name="SV1" library="con-harting-ml" package="ML26L" value="" x="55" y="103.1">
 <attribute name="OC_NEWARK" value="unknown" x="55" y="103.1" size="1.778" layer="27" display="off"/>
@@ -7715,6 +7723,12 @@ Source: http://www.osram.convergy.de/ ... LG_R971.pdf</description>
 <element name="SJ1" library="jumper" package="SJ" value="" x="57.5" y="69.295"/>
 <element name="SJ2" library="jumper" package="SJ" value="" x="57.5" y="73.28"/>
 <element name="SJ3" library="jumper" package="SJ" value="" x="57.5" y="77.265"/>
+<element name="SCREW1" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-7.4267" y="80">
+<attribute name="OC_FARNELL" value="2135988" x="-7.4267" y="80" size="1.778" layer="27" display="off"/>
+</element>
+<element name="SCREW2" library="dsub-mounting-screw" package="SCREW_DUMMY" value="4-40/M3" x="-7.0937" y="114">
+<attribute name="OC_FARNELL" value="2135988" x="-7.0937" y="114" size="1.778" layer="27" display="off"/>
+</element>
 </elements>
 <signals>
 <signal name="+28V_SUPPLY">
