@@ -14094,7 +14094,9 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="D1" library="diode" deviceset="ZENER-DIODE" device="DO34-7" value="12V">
 <attribute name="OC_FARNELL" value="1779204"/>
 </part>
-<part name="R36" library="rcl" deviceset="R-EU_" device="R0805" value="1k"/>
+<part name="R36" library="rcl" deviceset="R-EU_" device="R0805" value="1k">
+<attribute name="OC_FARNELL" value="2332071"/>
+</part>
 <part name="SJ7" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ8" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ9" library="jumper" deviceset="SJ" device=""/>
@@ -17173,7 +17175,9 @@ other resistor values are possible as well.</text>
 <instance part="D1" gate="G$1" x="152.4" y="132.08" rot="R90">
 <attribute name="OC_FARNELL" x="152.4" y="132.08" size="1.778" layer="96" rot="R90" display="off"/>
 </instance>
-<instance part="R36" gate="G$1" x="152.4" y="116.84" rot="R90"/>
+<instance part="R36" gate="G$1" x="152.4" y="116.84" rot="R90">
+<attribute name="OC_FARNELL" x="152.4" y="116.84" size="1.778" layer="96" rot="R90" display="off"/>
+</instance>
 <instance part="SJ7" gate="1" x="139.7" y="154.94"/>
 <instance part="SJ8" gate="1" x="139.7" y="162.56"/>
 <instance part="SJ9" gate="1" x="139.7" y="170.18"/>

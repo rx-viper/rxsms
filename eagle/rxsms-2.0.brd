@@ -12239,7 +12239,9 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <element name="D1" library="diode" package="DO34Z7" value="12V" x="88.9" y="105.41" rot="R90">
 <attribute name="OC_FARNELL" value="1779204" x="72.39" y="87.63" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="R36" library="rcl" package="R0805" value="1k" x="82.55" y="113.9825" rot="R270"/>
+<element name="R36" library="rcl" package="R0805" value="1k" x="82.55" y="113.9825" rot="R270">
+<attribute name="OC_FARNELL" value="2332071" x="82.55" y="113.9825" size="1.778" layer="27" rot="R270" display="off"/>
+</element>
 <element name="SJ7" library="jumper" package="SJ" value="" x="73.66" y="100.33" rot="R90"/>
 <element name="SJ8" library="jumper" package="SJ" value="" x="76.2" y="100.33" rot="R90"/>
 <element name="SJ9" library="jumper" package="SJ" value="" x="78.74" y="100.33" rot="R90"/>
