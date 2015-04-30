@@ -361,6 +361,7 @@ UsedLibrary="light-pipe.lbr"
 UsedLibrary="TEN3.lbr"
 UsedLibrary="Coil.lbr"
 UsedLibrary="NC7WZ17.lbr"
+UsedLibrary="dsub-mounting-screw.lbr"
 
 [Win_1]
 Type="Control Panel"
