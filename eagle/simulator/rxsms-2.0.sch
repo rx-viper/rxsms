@@ -13872,13 +13872,13 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="VDD6" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS9" library="supply1" deviceset="VSS" device=""/>
-<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
-<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
-<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
 <part name="SJ1" library="jumper" deviceset="SJ" device=""/>

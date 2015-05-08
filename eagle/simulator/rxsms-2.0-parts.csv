@@ -101,9 +101,9 @@
 "R30";"10k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"1887308";"";"";"";"";
 "R31";"10k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"1887308";"";"";"";"";
 "R32";"270";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2332064";"";"";"";"";
-"R33";"opt";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
-"R34";"opt";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
-"R35";"opt";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
+"R33";"0";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
+"R34";"0";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
+"R35";"0";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2309112";"";"";"";"";
 "R36";"1k";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2332071";"";"";"";"";
 "R37";"2k2";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2332076";"";"";"";"";
 "R39";"2k2";"R-EU_R0805";"R0805";"RESISTOR, European symbol";"";"";"";"2332076";"";"";"";"";

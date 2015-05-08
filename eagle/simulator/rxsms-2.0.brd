@@ -12007,13 +12007,13 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <element name="R32" library="rcl" package="R0805" value="270" x="24.13" y="28.575" rot="R90">
 <attribute name="OC_FARNELL" value="2332064" x="24.13" y="28.575" size="1.778" layer="27" rot="R90" display="off"/>
 </element>
-<element name="R33" library="rcl" package="R0805" value="opt" x="67.0306" y="11.9507" rot="R180">
+<element name="R33" library="rcl" package="R0805" value="0" x="67.0306" y="11.9507" rot="R180">
 <attribute name="OC_FARNELL" value="2309112" x="67.0306" y="11.9507" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="R34" library="rcl" package="R0805" value="opt" x="64.77" y="15.24" rot="R270">
+<element name="R34" library="rcl" package="R0805" value="0" x="64.77" y="15.24" rot="R270">
 <attribute name="OC_FARNELL" value="2309112" x="64.77" y="15.24" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
-<element name="R35" library="rcl" package="R0805" value="opt" x="68.5548" y="14.0081" rot="R180">
+<element name="R35" library="rcl" package="R0805" value="0" x="68.5548" y="14.0081" rot="R180">
 <attribute name="OC_FARNELL" value="2309112" x="68.5548" y="14.0081" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
 <element name="SJ1" library="jumper" package="SJ" value="" x="16.51" y="7.62" rot="R270"/>
