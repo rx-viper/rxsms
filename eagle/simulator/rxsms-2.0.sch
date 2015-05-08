@@ -14086,8 +14086,12 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SJ5" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ6" library="jumper" deviceset="SJ" device=""/>
 <part name="P+16" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="U$3" library="jack" deviceset="JACK" device=""/>
-<part name="U$9" library="jack" deviceset="JACK" device=""/>
+<part name="U$3" library="jack" deviceset="JACK" device="" value="black">
+<attribute name="OC_FARNELL" value="1854507"/>
+</part>
+<part name="U$9" library="jack" deviceset="JACK" device="" value="red">
+<attribute name="OC_FARNELL" value="1854508"/>
+</part>
 <part name="Q13" library="transistor-fet" deviceset="FDD4141" device="TO252">
 <attribute name="OC_FARNELL" value="2101406"/>
 </part>
