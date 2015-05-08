@@ -13635,7 +13635,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1103848"/>
 </part>
 <part name="Q2" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="U$5" library="SP491" deviceset="SP490" device="">
@@ -13667,7 +13667,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="1759265"/>
 </part>
 <part name="Q3" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="R8" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
@@ -13681,7 +13681,7 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
 <part name="+3V5" library="supply1" deviceset="+3V3" device=""/>
 <part name="Q4" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="R10" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
@@ -13786,11 +13786,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="GND22" library="supply1" deviceset="GND" device=""/>
 <part name="OK1" library="optocoupler" deviceset="HCPL0600" device=""/>
 <part name="Q5" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="Q6" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="GND23" library="supply1" deviceset="GND" device=""/>
@@ -13808,11 +13808,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="VSS6" library="supply1" deviceset="VSS" device=""/>
 <part name="OK2" library="optocoupler" deviceset="HCPL0600" device=""/>
 <part name="Q7" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="Q8" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="GND24" library="supply1" deviceset="GND" device=""/>
@@ -13835,11 +13835,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="+3V10" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND25" library="supply1" deviceset="GND" device=""/>
 <part name="Q9" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="Q10" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="R28" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
@@ -13857,11 +13857,11 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="+3V11" library="supply1" deviceset="+3V3" device=""/>
 <part name="GND26" library="supply1" deviceset="GND" device=""/>
 <part name="Q11" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="Q12" library="transistor-small-signal" deviceset="BSS123" device="">
-<attribute name="OC_FARNELL" value="9558640RL"/>
+<attribute name="OC_FARNELL" value="9558640"/>
 <attribute name="OC_RS" value="545-0135"/>
 </part>
 <part name="R31" library="rcl" deviceset="R-EU_" device="R0805" value="10k">
