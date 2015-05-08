@@ -11858,10 +11858,10 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <attribute name="OC_FARNELL" value="2320853" x="101.6" y="7.62" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
 <element name="R14" library="rcl" package="R0805" value="24/1%" x="99.6696" y="15.4813">
-<attribute name="OC_FARNELL" value="1894163" x="99.6696" y="15.4813" size="1.778" layer="27" display="off"/>
+<attribute name="OC_RS" value="666-2386" x="99.6696" y="15.4813" size="1.778" layer="27" display="off"/>
 </element>
 <element name="R15" library="rcl" package="R0805" value="24/1%" x="97.4344" y="12.0015">
-<attribute name="OC_FARNELL" value="1894163" x="97.4344" y="12.0015" size="1.778" layer="27" display="off"/>
+<attribute name="OC_RS" value="666-2386" x="97.4344" y="12.0015" size="1.778" layer="27" display="off"/>
 </element>
 <element name="U4" library="LM1117" package="TO252" value="LM1117" x="73.66" y="74.93" rot="R90">
 <attribute name="OC_FARNELL" value="1685603" x="73.66" y="74.93" size="1.778" layer="27" rot="R90" display="off"/>

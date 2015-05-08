@@ -13718,10 +13718,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="2320853"/>
 </part>
 <part name="R14" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="R15" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="U4" library="LM1117" deviceset="LM1117" device="">
 <attribute name="OC_FARNELL" value="1685603"/>
@@ -16165,10 +16165,10 @@ interface</text>
 <attribute name="OC_FARNELL" x="-7.62" y="76.2" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R14" gate="G$1" x="-15.24" y="66.04">
-<attribute name="OC_FARNELL" x="-15.24" y="66.04" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="-15.24" y="66.04" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R15" gate="G$1" x="-15.24" y="58.42">
-<attribute name="OC_FARNELL" x="-15.24" y="58.42" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="-15.24" y="58.42" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="X1" gate="G$1" x="132.08" y="76.2">
 <attribute name="OC_RS" x="132.08" y="76.2" size="1.778" layer="96" display="off"/>
