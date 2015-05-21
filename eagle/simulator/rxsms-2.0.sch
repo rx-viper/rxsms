@@ -13718,10 +13718,10 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <attribute name="OC_FARNELL" value="2320853"/>
 </part>
 <part name="R14" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="R15" library="rcl" deviceset="R-EU_" device="R0805" value="24/1%">
-<attribute name="OC_FARNELL" value="1894163"/>
+<attribute name="OC_RS" value="666-2386"/>
 </part>
 <part name="U4" library="LM1117" deviceset="LM1117" device="">
 <attribute name="OC_FARNELL" value="1685603"/>
@@ -13872,13 +13872,13 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 </part>
 <part name="VDD6" library="supply1" deviceset="VDD" device=""/>
 <part name="VSS9" library="supply1" deviceset="VSS" device=""/>
-<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R33" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
-<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R34" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
-<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="opt">
+<part name="R35" library="rcl" deviceset="R-EU_" device="R0805" value="0">
 <attribute name="OC_FARNELL" value="2309112"/>
 </part>
 <part name="SJ1" library="jumper" deviceset="SJ" device=""/>
@@ -14086,8 +14086,12 @@ diameter 3 mm, horizontal, grid 12.7 mm</description>
 <part name="SJ5" library="jumper" deviceset="SJ" device=""/>
 <part name="SJ6" library="jumper" deviceset="SJ" device=""/>
 <part name="P+16" library="supply1" deviceset="+24V" device="" value="+28V_SUPPLY"/>
-<part name="U$3" library="jack" deviceset="JACK" device=""/>
-<part name="U$9" library="jack" deviceset="JACK" device=""/>
+<part name="U$3" library="jack" deviceset="JACK" device="" value="black">
+<attribute name="OC_FARNELL" value="1854507"/>
+</part>
+<part name="U$9" library="jack" deviceset="JACK" device="" value="red">
+<attribute name="OC_FARNELL" value="1854508"/>
+</part>
 <part name="Q13" library="transistor-fet" deviceset="FDD4141" device="TO252">
 <attribute name="OC_FARNELL" value="2101406"/>
 </part>
@@ -16165,10 +16169,10 @@ interface</text>
 <attribute name="OC_FARNELL" x="-7.62" y="76.2" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R14" gate="G$1" x="-15.24" y="66.04">
-<attribute name="OC_FARNELL" x="-15.24" y="66.04" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="-15.24" y="66.04" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="R15" gate="G$1" x="-15.24" y="58.42">
-<attribute name="OC_FARNELL" x="-15.24" y="58.42" size="1.778" layer="96" display="off"/>
+<attribute name="OC_RS" x="-15.24" y="58.42" size="1.778" layer="96" display="off"/>
 </instance>
 <instance part="X1" gate="G$1" x="132.08" y="76.2">
 <attribute name="OC_RS" x="132.08" y="76.2" size="1.778" layer="96" display="off"/>
