@@ -192,6 +192,7 @@ partition_range(int16_t adc)
 static void
 update_biterror_generators(void)
 {
+    /* TODO: We might precompute the necessary values for error generation */
     /* get a mask for the probability of a bit error with either
        p=0, or p = 1 / 2^N, then decrease the probability by 2^(-4)
        to get the following values:
@@ -223,6 +224,7 @@ update_biterror_generators(void)
 static void
 update_drop_generators(void)
 {
+    /* TODO: We might precompute the necessary values for error generation */
     /* get a mask for the probability of a drop event with either
        p=0, or p = 1 / 2^N, then decrease the probability by 2^(-3)
        to get the following values:
