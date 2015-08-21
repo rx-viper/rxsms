@@ -39,10 +39,14 @@
 
 // FIXME - remove when everyone uses avr-libc >= 1.8.1
 // These symbols are not defined in io.h or have other names than in pre 1.8.1
-#if __AVR_LIBC_VERSION__ < 10801UL
+#define GCC_VERSION (__GNUC__ * 10000 \
+		     + __GNUC_MINOR__ * 100 \
+		     + __GNUC_PATCHLEVEL__)
+#if GCC_VERSION == 40702
 #define ADC_CURRLIMIT_HIGH_gc ADC_CURRLIMIT_LARGE_gc
 #define ADC_CH_MUXNEG_GND_MODE3_gc 0x05
 #endif
+#undef GCC_VERSION
 
 #define ADC_REF_PORT        PORTB
 #define ADC_REF_bm          PIN0_bm
