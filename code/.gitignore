@@ -3,11 +3,8 @@
 *.s
 *.swp
 *~
-rxsms-dense.lss
-rxsms-dense.prev.lss
-rxsms.prev.lss
+*.lss*
 rxsms.eep
 rxsms.elf
 rxsms.hex
-rxsms.lss
 rxsms.map

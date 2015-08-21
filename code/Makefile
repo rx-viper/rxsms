@@ -61,7 +61,7 @@ LFLAGS += -Wl,-Map,$(TARGET).map
 .SECONDARY:
 
 
-all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(TARGET).eep
+all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(patsubst %.o, %.lss, $(OBJ)) $(TARGET).eep
 	$(SIZE) $<
 	@echo DONE
 
@@ -72,11 +72,17 @@ all: $(TARGET).elf  $(TARGET).hex  $(TARGET).lss $(TARGET).eep
 	$(OBJCOPY) -j .eeprom --set-section-flags=.eeprom="alloc,load" \
 		--change-section-lma .eeprom=0 --no-change-warnings -O ihex $< $@
 
-%.lss: %.elf
-	$(MV) $@ $(TARGET).prev.lss || true
-	$(MV) $(TARGET)-dense.lss $(TARGET)-dense.prev.lss || true
+$(TARGET).lss: $(TARGET).elf
+	$(MV) $@ $@-prev || true
+	$(MV) $@-dense $@-dense-prev || true
 	$(OBJDUMP) -S $< | $(EXPAND) > $@
-	$(OBJDUMP) -d $< | $(EXPAND) > $(TARGET)-dense.lss
+	$(OBJDUMP) -d $< | $(EXPAND) > $@-dense
+
+%.lss: %.o
+	$(MV) $@ $@-prev || true
+	$(MV) $@-dense $@-dense-prev || true
+	$(OBJDUMP) -S $< | $(EXPAND) > $@
+	$(OBJDUMP) -d $< | $(EXPAND) > $@-dense
 
 %.elf: $(OBJ)
 	@$(ECHO) Link $@
@@ -95,8 +101,7 @@ indent:
 
 clean:
 	$(RM) -rf $(DOCDIR) $(TARGET).elf  $(TARGET).hex  \
-		$(TARGET).lss $(TARGET).prev.lss \
-		$(TARGET)-dense.lss $(TARGET)-dense.prev.lss \
+		$(wildcard *.lss*) \
 		$(TARGET).eep $(TARGET).map $(OBJ) \
 		$(wildcard *.i) $(wildcard *.s)
 
