@@ -43,7 +43,7 @@ override CFLAGS+=-mmcu=$(MCU) -DF_CPU=$(F_CPU)UL -O3 \
 	-fdata-sections -ffunction-sections -fshort-enums -Wall -Wextra \
 	-Werror-implicit-function-declaration  -Wmissing-prototypes \
 	-Wpointer-arith -Wstrict-prototypes -Wswitch-enum \
-	-mrelax -std=gnu99 -g3
+	-mrelax -std=gnu11 -g3
 #	-pedantic
 # commented because it's too verbose
 #	-save-temps
