@@ -79,10 +79,8 @@ $(TARGET).lss: $(TARGET).elf
 	$(OBJDUMP) -d $< | $(EXPAND) > $@-dense
 
 %.lss: %.o
-	$(MV) $@ $@-prev || true
-	$(MV) $@-dense $@-dense-prev || true
-	$(OBJDUMP) -S $< | $(EXPAND) > $@
-	$(OBJDUMP) -d $< | $(EXPAND) > $@-dense
+	$(MV) $@ $@-prev 2>/dev/null || true
+	$(OBJDUMP) -r -d $< | $(EXPAND) > $@
 
 %.elf: $(OBJ)
 	@$(ECHO) Link $@
