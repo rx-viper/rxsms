@@ -58,11 +58,6 @@ flip_bit(struct task_recv_uart_data *const data)
     if (!data->updated)
         return;                 /* no pending data */
 
-    if (task_ctrl_signals.error_inhibit) {
-        data->biterr_remaining_bytes = 0;
-        return;                 /* global error inhibit, no errors should be generated */
-    }
-
     if (0 == data->biterr_remaining_bytes)
         return;                 /* specifically bit flip errors disabled */
 
