@@ -28,8 +28,10 @@
 #define RXSM_LO_PORT        PORTD
 #define RXSM_LO_bm          PIN0_bm
 #define RXSM_LO_bp          PIN0_bp
+
 #define RXSM_SOE_PORT       PORTD
 #define RXSM_SOE_bm         PIN1_bm
+
 #define RXSM_SODS_PORT      PORTC
 #define RXSM_SODS_bm        PIN5_bm
 
@@ -40,22 +42,9 @@ static void init(void);
 static void run(void);
 const struct task task_ctrl = { .init = &init, .run = &run };
 
-static uint8_t is_our_lo_asserted;
-
 static void
-update_lo(void)
+update_lo_led(void)
 {
-    // update the _actual LO line_
-    if (is_our_lo_asserted)
-        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
-    else
-        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
-
-    // tell other tasks whether LO happend
-    task_ctrl_signals.lo_asserted = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
-
-    // update the LO _status LED_
-
     // For multi-channel operation, LO is connected between all simulators.
     // There are four cases for the LO LED:
     //
@@ -69,19 +58,19 @@ update_lo(void)
     const uint16_t led_period = 5000;
     static uint16_t led_cnt = led_period;
 
-    if (is_our_lo_asserted) {
+    if (!(RXSM_LO_PORT.OUT & RXSM_LO_bm)) {         // our LO is asserted
         led_cnt = led_period;
-        STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;  // always ON
+        STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;  // LED always ON
         return;
     }
 
-    if (!task_ctrl_signals.lo_asserted) {
+    if (!task_ctrl_signals.lo_asserted) {           // LO is unasserted
         led_cnt = led_period;
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;  // always OFF
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;  // LED always OFF
         return;
     }
 
-    // LED flashing
+    // LO is asserted by another simulator          -- LED flashing
     if (led_cnt > led_period / 2)
         STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
     else
@@ -92,7 +81,7 @@ update_lo(void)
 }
 
 static void
-update_error_inhibit(void)
+update_error_inhibit_led(void)
 {
     // There are four cases for the Error Inhibit LED:
     //
@@ -102,95 +91,95 @@ update_error_inhibit(void)
     // poti errors  enabled  |     LED cont. ON    |      LED OFF
     const uint16_t led_period = 5000;
     static uint16_t led_cnt = led_period;
-    if (task_ctrl_signals.error_inhibit)
-        led_cnt = led_period;
 
-    if (!task_ctrl_signals.error_inhibit &&
-        (task_adc_biterror_generator.stream_len_bytes ||
-         task_adc_drop_generator.interval)) {
+    if (task_ctrl_signals.error_inhibit) {              // error inhibit ON
         led_cnt = led_period;
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
-    } else {
-        if (led_cnt > led_period / 2)
-            STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
-        else
-            STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
+        STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;  // LED always OFF
+        return;
     }
 
-    // count with underflow wrap-around
+    if (task_adc_biterror_generator.stream_len_bytes || // error inhibit OFF
+        task_adc_drop_generator.interval) {             // and poti errors ON
+        led_cnt = led_period;
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;  // LED always OFF
+        return;
+    }
+
+    // error inhibit is OFF but NO poti errors are set  -- LED flashing
+    if (led_cnt > led_period / 2)
+        STATUS_LED_PORT.OUTSET = STATUS_LED_ERRINH_bm;
+    else
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;
+
+    // decrement with underflow wrap-around
     if (0 == --led_cnt)
         led_cnt = led_period;
 }
 
 static void
-apply_state(void)
+read_signal_states(void)
 {
-    update_lo();
-
-    if (task_ctrl_signals.soe_asserted)
-        RXSM_SOE_PORT.OUTCLR = RXSM_SOE_bm;
-    else
-        RXSM_SOE_PORT.OUTSET = RXSM_SOE_bm;
-
-    if (task_ctrl_signals.sods_asserted)
-        RXSM_SODS_PORT.OUTCLR = RXSM_SODS_bm;
-    else
-        RXSM_SODS_PORT.OUTSET = RXSM_SODS_bm;
-
-    update_error_inhibit();
-
-    if (task_ctrl_signals.pwr_on)
-        RXSM_EXPPWR_PORT.OUTSET = RXSM_EXPPWR_bm;
-    else
-        RXSM_EXPPWR_PORT.OUTCLR = RXSM_EXPPWR_bm;
+    task_ctrl_signals.lo_asserted = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
+    task_ctrl_signals.soe_asserted = !(RXSM_SOE_PORT.IN & RXSM_SOE_bm);
+    task_ctrl_signals.sods_asserted = !(RXSM_SODS_PORT.IN & RXSM_SODS_bm);
+    task_ctrl_signals.pwr_on = 0 != (RXSM_EXPPWR_PORT.IN & RXSM_EXPPWR_bm);
 }
 
 static void
 init(void)
 {
-    /* by default, the error inhibit is ON, all others OFF/INACTIVE */
-    is_our_lo_asserted = 0;
-    task_ctrl_signals.lo_asserted = 0;
-    task_ctrl_signals.soe_asserted = 0;
-    task_ctrl_signals.sods_asserted = 0;
-    task_ctrl_signals.pwr_on = 0;
-    task_ctrl_signals.error_inhibit = 1;
-
-    /* first set the outputs, then the directions.
-     * this way, we can ensure that the outputs are undriven/passive but the
-     * OUTPUT register is already set correctly. Then the pins are switched to
-     * drive loads, and already have the correct output value. */
-    apply_state();
-    STATUS_LED_PORT.DIRSET = STATUS_LED_LO_bm | STATUS_LED_ERRINH_bm;
-
+    // first set the outputs, then the directions.
+    // this way, we can ensure that the outputs are undriven/passive but the
+    // OUTPUT register is already set correctly. Then the pins are switched to
+    // drive loads and already have the correct output value.
 #define PINCTRL_CONCAT(num) PIN##num##CTRL
 #define PINCTRL(num)        PINCTRL_CONCAT(num)
     RXSM_LO_PORT.PINCTRL(RXSM_LO_bp) = PORT_OPC_WIREDAND_gc;
 #undef PINCTRL
 #undef PINCTRL_CONCAT
 
-#define PORTINIT(port)  RXSM_##port##_PORT.DIRSET = RXSM_##port##_bm
-    PORTINIT(LO);
-    PORTINIT(SOE);
-    PORTINIT(SODS);
-    PORTINIT(EXPPWR);
-#undef PORTINIT
+    // by default, the error inhibit is ON, all others OFF/UNASSERTED
+#define OUTINIT(port, out)  RXSM_##port##_PORT.OUT##out = RXSM_##port##_bm
+    OUTINIT(LO, SET);
+    OUTINIT(SOE, SET);
+    OUTINIT(SODS, SET);
+    OUTINIT(EXPPWR, CLR);
+#undef OUTINIT
+
+#define DIRINIT(port)  RXSM_##port##_PORT.DIRSET = RXSM_##port##_bm
+    DIRINIT(LO);
+    DIRINIT(SOE);
+    DIRINIT(SODS);
+    DIRINIT(EXPPWR);
+#undef DIRINIT
+
+    // update our internal state
+    read_signal_states();
+    task_ctrl_signals.error_inhibit = 1;
+
+    // update the LEDs
+    update_lo_led();
+    update_error_inhibit_led();
+    STATUS_LED_PORT.DIRSET = STATUS_LED_LO_bm | STATUS_LED_ERRINH_bm;
 }
 
 static void
 run(void)
 {
-    /* update our state according task_buttons */
+    // update output signals according to task_buttons
     if (task_buttons_toggle_request.lo)
-        is_our_lo_asserted ^= RXSM_LO_bm;
+        RXSM_LO_PORT.OUTTGL = RXSM_LO_bm;
     if (task_buttons_toggle_request.soe)
-        task_ctrl_signals.soe_asserted ^= 1;
+        RXSM_SOE_PORT.OUTTGL = RXSM_SOE_bm;
     if (task_buttons_toggle_request.sods)
-        task_ctrl_signals.sods_asserted ^= 1;
+        RXSM_SODS_PORT.OUTTGL = RXSM_SODS_bm;
+    if (task_buttons_toggle_request.pwr)
+        RXSM_EXPPWR_PORT.OUTTGL = RXSM_EXPPWR_bm;
     if (task_buttons_toggle_request.errinh)
         task_ctrl_signals.error_inhibit ^= 1;
-    if (task_buttons_toggle_request.pwr)
-        task_ctrl_signals.pwr_on ^= 1;
 
-    apply_state();
+    read_signal_states();
+
+    update_lo_led();
+    update_error_inhibit_led();
 }
