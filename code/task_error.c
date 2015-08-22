@@ -38,9 +38,9 @@ const struct task task_error = { .init = &init, .run = &run };
 
 static struct
 {
-    uint32_t begin;
-    uint32_t end;
-    uint32_t reload;
+    __uint24 begin;
+    __uint24 end;
+    __uint24 reload;
 } drop_error;
 
 static void
@@ -68,7 +68,7 @@ flip_bit(struct task_recv_uart_data *const data)
 
     --data->biterr_remaining_bytes;
 
-    int32_t flip = data->biterr_flip_index;
+    __int24 flip = data->biterr_flip_index;
     if (flip >= 8) {            /* bit to flip outside current byte */
         flip -= 8;
     } else if (flip >= 0) {     /* ok, flip bit */

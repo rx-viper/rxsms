@@ -40,16 +40,16 @@ union {
 } task_adc_raw;
 
 struct {
-    uint32_t stream_len_bytes;
-    int32_t from_exp_flip;
-    int32_t from_gnd_flip;
+    __uint24 stream_len_bytes;
+    __int24 from_exp_flip;
+    __int24 from_gnd_flip;
     uint8_t force_update:1;
 } task_adc_biterror_generator;
 
 struct {
-    uint32_t interval;
-    uint32_t start_of_drop;
-    uint16_t drop_duration;
+    __uint24 interval;
+    __uint24 start_of_drop;
+    __uint24 drop_duration;
     uint8_t force_update:1;
 } task_adc_drop_generator;
 

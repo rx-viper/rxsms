@@ -75,6 +75,48 @@ static enum
     _END
 } state = INIT;
 
+/// Converts ms to the number of complete scheduler runs
+#define TIME_TO_INTVAL(ms) \
+	((ms) * (1000 / (SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT)))
+const __flash __uint24 duration_bin_map[] =
+{
+	1, 2, /* very short dropout durations */
+	3, 7, /* prime numbers */
+	24, /* max. packet len permitted by RX specs */
+	36, /* max. packet len w/o RX required pause */
+	/* 50ms .. 500ms delta 50ms */
+	TIME_TO_INTVAL(50),	TIME_TO_INTVAL(100),
+	TIME_TO_INTVAL(150),	TIME_TO_INTVAL(200),
+	TIME_TO_INTVAL(250),	TIME_TO_INTVAL(300),
+	TIME_TO_INTVAL(350),	TIME_TO_INTVAL(400),
+	TIME_TO_INTVAL(450),	TIME_TO_INTVAL(500),
+	/* 600ms .. 1.5s delta 100ms */
+	TIME_TO_INTVAL(600),	TIME_TO_INTVAL(700),
+	TIME_TO_INTVAL(800),	TIME_TO_INTVAL(900),
+	TIME_TO_INTVAL(1000),	TIME_TO_INTVAL(1100),
+	TIME_TO_INTVAL(1200),	TIME_TO_INTVAL(1300),
+	TIME_TO_INTVAL(1400),	TIME_TO_INTVAL(1500),
+	/* 2s .. 5s delta 1s */
+	TIME_TO_INTVAL(2000),	TIME_TO_INTVAL(3000),
+	TIME_TO_INTVAL(4000),	TIME_TO_INTVAL(5000),
+	/* 10s and 20s */
+	TIME_TO_INTVAL(10000UL),
+	TIME_TO_INTVAL(20000UL)
+};
+#undef TIME_TO_INTVAL
+
+const __flash __uint24 drop_rate_bin_map[] =
+{
+          0, (1UL<<17), (1UL<<16), _BV(15), _BV(14), _BV(13), _BV(12), _BV(11),
+    _BV(10),    _BV(9),    _BV(8),  _BV(7),  _BV(6),  _BV(5),  _BV(4),       1
+};
+
+const __flash __uint24 bit_error_rate_bin_map[] =
+{
+          0, (1UL<<18), (1UL<<17), (1UL<<16),
+    _BV(15), _BV(14), _BV(13), _BV(12), _BV(11), _BV(10), _BV(9), _BV(8),
+     _BV(7),  _BV(6),  _BV(5),  _BV(4)
+};
 
 /// Reads the ADC calibration value and TEMPSENSE calibration value.
 static void
@@ -144,53 +186,34 @@ init(void)
         ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
-static uint32_t
-get_random(const uint32_t mask)
+static __uint24
+get_random(const __uint24 mask)
 {
     union {
-        uint32_t flip;
+        __uint24 flip;
         struct {
-            uint8_t ui8[4];
+            uint8_t ui8[3];
         } e;
     } random_number;
 
     for (uint8_t i = 0; i < sizeof(random_number); ++i)
         random_number.e.ui8[i] = (uint8_t) rand();
-    /* mask the random number with range 0..2^32-1 to range 0..(mask - 1)
-       mask has to be 0 or 2^N, N in {0, ... , 31}                      */
+    /* mask the random number with range 0..2^24-1 to range 0..(mask - 1)
+       mask has to be 0 or 2^N, N in {0, ... , 23}                      */
     if (mask)
         return random_number.flip & (mask - 1);
     return 0;
 }
 
-/**
- *  Partitions a value range 0..2047 into 16 regions ("bins") and returns
- *  a bitmask with all bits cleared (bin 0) or the 15th bit set (bin 1), the
- *  14th bit set (bit 2) and so on.
- *
- *  bin     | 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1    0
- *  bit set |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 none
- *
- *  It allows for generation of a (mask - 1) value that can be and-ed with a
- *  uniformly distributed random number with binary range, i.e. 0..2^x-1, to
- *  create a new uniform distributed random number of range 0..2^16-1.
- */
-static uint32_t
-partition_range(int16_t adc)
+/// Limit the adc values to the allowed range 0..2047.
+static int16_t
+limit_adc(const int16_t adc)
 {
     if (adc < 0)
-        adc = 0;
-    else if (adc >= 2048)
-        adc = 2047;
-
-    uint8_t bin = adc / (2048 / 16);
-    if (0 == bin)
         return 0;
-
-    uint8_t set_bit = 15 - bin;
-    if (set_bit > 7)
-        return (1 << (set_bit - 8)) << 8;
-    return 1 << set_bit;
+    else if (adc > 2047)
+        return 2047;
+    return adc;
 }
 
 static void
@@ -215,8 +238,8 @@ update_biterror_generators(void)
        hence, a bit flip occurs once per
            n = 1/p = 2^9 bits
      */
-    uint32_t stream_len =
-        partition_range(task_adc_raw.e.poti_bit_error_rate) << 4;
+    int16_t adc = limit_adc(task_adc_raw.e.poti_bit_error_rate);
+    __uint24 stream_len = bit_error_rate_bin_map[adc / (2048 / 16)];
 
     if (task_adc_biterror_generator.stream_len_bytes != stream_len)
         task_adc_biterror_generator.force_update = 1;
@@ -251,12 +274,8 @@ update_drop_generators(void)
        and, thus, occur once every
            t = 1 / p = 2^12 * 200us = 0.8192s
      */
-    uint32_t interval =
-        partition_range(task_adc_raw.e.poti_drop_rate) << 3;
-    /* check corner case if we are in bin=15
-       if so, we should drop infinitely, i.e. p = 1 = 2^0 */
-    if (interval & _BV(3))
-        interval = 1;
+    int16_t adc = limit_adc(task_adc_raw.e.poti_drop_rate);
+    __uint24 interval = drop_rate_bin_map[adc / (2048 / 16)];
 
     if (task_adc_drop_generator.interval != interval)
         task_adc_drop_generator.force_update = 1;
@@ -265,39 +284,9 @@ update_drop_generators(void)
         return;
     task_adc_drop_generator.start_of_drop = get_random(interval);
 
-    int16_t adc = task_adc_raw.e.poti_drop_duration;
-    if (adc < 0)
-        adc = 0;
-    if (adc > 2047)
-        adc = 2047;
+    adc = limit_adc(task_adc_raw.e.poti_drop_duration);
     /* partition range into 32 bins */
-    uint8_t duration_bin = adc / (2048 / 32);
-    uint16_t duration;
-    if (duration_bin < 6) {
-        if (0 == duration_bin)
-            duration = 1; /* max. a single byte dropped */
-        else if (1 == duration_bin)
-            duration = 2; /* 1<x<=2 bytes dropped, power of 2 */
-        else if (2 == duration_bin)
-            duration = 3; /* 2<x<=3 bytes dropped, prime number */
-        else if (3 == duration_bin)
-            duration = 7; /* 6<x<=7 bytes dropped, prime number */
-        else if (4 == duration_bin)
-            duration = 24; /* max. packet length permitted by RX specs */
-        else if (5 == duration_bin)
-            duration = 36; /* max. packet length without RX required pause */
-    } else {
-        duration_bin = duration_bin - 6;
-        uint8_t time_unit = 5e4 / (SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT);
-        if (duration_bin < 10)                 /* 50ms..500ms */
-            duration = time_unit * 1 * (duration_bin + 1);
-        else if (duration_bin < 20)            /* 0.6s..+0.1s..1.5s */
-            duration = time_unit * 2 * (duration_bin - 10 + 6);
-        else if (duration_bin < 24)            /* 2s, 3s, 4s, 5s */
-            duration = time_unit * 20 * (duration_bin - 20 + 2);
-        else                                   /* 10s, 20s */
-            duration = time_unit * 200 * (duration_bin - 24 + 1);
-    }
+    __uint24 duration = duration_bin_map[adc / (2048 / 32)];
 
     if (task_adc_drop_generator.drop_duration != duration)
         task_adc_drop_generator.force_update = 1;
