@@ -62,6 +62,8 @@ run(void)
     static uint8_t current_byte = 0;
     static uint8_t buffer[16];
 
+    // TODO use DMA for sending
+
     if (!(UART_DEBUG.STATUS & USART_DREIF_bm))
         return;
 
@@ -70,9 +72,5 @@ run(void)
     ++current_byte;
     if (current_byte >= sizeof(buffer)) {
         current_byte = 0;
-        for (uint8_t i = 0; i < sizeof(task_adc_raw) / 2; ++i) {
-            buffer[2 * i + 1] = ((uint8_t*) &task_adc_raw)[2 * i];
-            buffer[2 * i] = ((uint8_t*) &task_adc_raw)[2 * i + 1];
-        }
     }
 }

@@ -65,6 +65,13 @@ static void init(void);
 static void run(void);
 const struct task task_adc = { .init = &init, .run = &run };
 
+static struct {
+    int16_t poti_bit_error_rate;
+    int16_t poti_drop_rate;
+    int16_t poti_drop_duration;
+    int16_t current_sense;
+} adc_raw;
+
 static enum
 {
     INIT,
@@ -140,8 +147,8 @@ production_signature_row_read_calibration(uint16_t * adca_calibration,
 static void
 init(void)
 {
-    for (uint8_t i = 0; i < sizeof(task_adc_raw); ++i)
-        ((uint8_t*) &task_adc_raw)[i] = 0;
+    for (uint8_t i = 0; i < sizeof(adc_raw); ++i)
+        ((uint8_t*) &adc_raw)[i] = 0;
     task_adc_biterror_generator.stream_len_bytes = 0;
     task_adc_biterror_generator.from_exp_flip = 0;
     task_adc_biterror_generator.from_gnd_flip = 0;
@@ -219,7 +226,6 @@ limit_adc(const int16_t adc)
 static void
 update_biterror_generators(void)
 {
-    /* TODO: We might precompute the necessary values for error generation */
     /* get a mask for the probability of a bit error with either
        p=0, or p = 1 / 2^N, then decrease the probability by 2^(-4)
        to get the following values:
@@ -238,7 +244,7 @@ update_biterror_generators(void)
        hence, a bit flip occurs once per
            n = 1/p = 2^9 bits
      */
-    int16_t adc = limit_adc(task_adc_raw.e.poti_bit_error_rate);
+    int16_t adc = limit_adc(adc_raw.poti_bit_error_rate);
     __uint24 stream_len = bit_error_rate_bin_map[adc / (2048 / 16)];
 
     if (task_adc_biterror_generator.stream_len_bytes != stream_len)
@@ -251,7 +257,6 @@ update_biterror_generators(void)
 static void
 update_drop_generators(void)
 {
-    /* TODO: We might precompute the necessary values for error generation */
     /* get a mask for the probability of a drop event with either
        p=0, or p = 1 / 2^N, then decrease the probability by 2^(-3)
        to get the following values:
@@ -274,7 +279,7 @@ update_drop_generators(void)
        and, thus, occur once every
            t = 1 / p = 2^12 * 200us = 0.8192s
      */
-    int16_t adc = limit_adc(task_adc_raw.e.poti_drop_rate);
+    int16_t adc = limit_adc(adc_raw.poti_drop_rate);
     __uint24 interval = drop_rate_bin_map[adc / (2048 / 16)];
 
     if (task_adc_drop_generator.interval != interval)
@@ -284,7 +289,7 @@ update_drop_generators(void)
         return;
     task_adc_drop_generator.start_of_drop = get_random(interval);
 
-    adc = limit_adc(task_adc_raw.e.poti_drop_duration);
+    adc = limit_adc(adc_raw.poti_drop_duration);
     /* partition range into 32 bins */
     __uint24 duration = duration_bin_map[adc / (2048 / 32)];
 
@@ -309,25 +314,23 @@ run(void)
             || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
             return;
 
-        task_adc_raw.e.tempsense[s - FIRST_CHANNEL_NAME] = ADCA.CH1RES;
-
         const int16_t adc_value = ADCA.CH0RES;
         /* For the potentiometer inputs:
-             Update task_adc_raw only iff the new value exceeds a hysteresis.
+             Update adc_raw only iff the new value exceeds a hysteresis.
              This hysteresis prevents updates of the generator probabilities at
              the boundary of a setting and cancels out noise.
            For the current sensor:
              Ignore the hysteresis since we want the exact sensor readings.  */
         if (CURRSENSE == s) {
-            task_adc_raw.e.current_sense = adc_value;
+            adc_raw.current_sense = adc_value;
         } else {
             int16_t *old_value;
             if (DROPDUR == s)
-                old_value = &task_adc_raw.e.poti_drop_duration;
+                old_value = &adc_raw.poti_drop_duration;
             else if (DROPRATE == s)
-                old_value = &task_adc_raw.e.poti_drop_rate;
+                old_value = &adc_raw.poti_drop_rate;
             else
-                old_value = &task_adc_raw.e.poti_bit_error_rate;
+                old_value = &adc_raw.poti_bit_error_rate;
             const int8_t MIN_DIFF = 16;
             int16_t diff = *old_value - adc_value;
             if (diff < -MIN_DIFF || diff > MIN_DIFF)
