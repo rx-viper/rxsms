@@ -19,12 +19,12 @@
 #ifndef TASK_H
 #define TASK_H
 
-/* a task that starts runs in background */
+/// A task that is initalized and runs automatically in background.
 struct bgtask {
     void (*init) (void);
 };
 
-/* a normal real-time task */
+/// A normal real-time task as called from the scheduler.
 struct task {
     void (*init) (void);
     void (*run) (void);

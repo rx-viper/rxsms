@@ -25,9 +25,9 @@
 const struct task task_ctrl;
 
 struct {
-    uint8_t lo_active:1;
-    uint8_t soe_active:1;
-    uint8_t sods_active:1;
+    uint8_t lo_asserted:1;
+    uint8_t soe_asserted:1;
+    uint8_t sods_asserted:1;
     uint8_t pwr_on:1;
     uint8_t error_inhibit:1;
 } task_ctrl_signals;

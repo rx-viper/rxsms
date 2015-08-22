@@ -45,32 +45,48 @@ static uint8_t is_our_lo_asserted;
 static void
 update_lo(void)
 {
-    // four cases:
-    //                       | our's LO unasserted | our's LO asserted
-    // their's LO unasserted |        LED OFF      |   LED cont. ON
-    // their's LO   asserted |     LED flashing    |   LED cont. ON
+    // update the _actual LO line_
+    if (is_our_lo_asserted)
+        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
+    else
+        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
+
+    // tell other tasks whether LO happend
+    task_ctrl_signals.lo_asserted = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
+
+    // update the LO _status LED_
+
+    // For multi-channel operation, LO is connected between all simulators.
+    // There are four cases for the LO LED:
+    //
+    //                       | our LO unasserted | our LO asserted
+    // ----------------------+-------------------+----------------
+    // other's LO unasserted |       LED OFF     |  LED cont. ON
+    // other's LO   asserted |    LED flashing   |  LED cont. ON
+    //
+    // "our LO": the LO line we control (local)
+    // "other's LO": the LO line another simulator controls (remote)
     const uint16_t led_period = 5000;
     static uint16_t led_cnt = led_period;
 
     if (is_our_lo_asserted) {
         led_cnt = led_period;
-        RXSM_LO_PORT.OUTCLR = RXSM_LO_bm;
-    } else {
-        RXSM_LO_PORT.OUTSET = RXSM_LO_bm;
+        STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;  // always ON
+        return;
     }
 
-    task_ctrl_signals.lo_active = !(RXSM_LO_PORT.IN & RXSM_LO_bm);
-    if (!task_ctrl_signals.lo_active) {
+    if (!task_ctrl_signals.lo_asserted) {
         led_cnt = led_period;
-        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
-    } else {
-        if (led_cnt > led_period / 2)
-            STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
-        else
-            STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;  // always OFF
+        return;
     }
 
-    // count with underflow wrap-around
+    // LED flashing
+    if (led_cnt > led_period / 2)
+        STATUS_LED_PORT.OUTSET = STATUS_LED_LO_bm;
+    else
+        STATUS_LED_PORT.OUTCLR = STATUS_LED_LO_bm;
+    // decrement with underflow wrap-around
     if (0 == --led_cnt)
         led_cnt = led_period;
 }
@@ -78,8 +94,10 @@ update_lo(void)
 static void
 update_error_inhibit(void)
 {
-    // four cases:
+    // There are four cases for the Error Inhibit LED:
+    //
     //                       |   error inhibit ON  |   error inhibit OFF
+    // ----------------------+---------------------+--------------------
     // poti errors disabled  |     LED cont. ON    |   LED flashing
     // poti errors  enabled  |     LED cont. ON    |      LED OFF
     const uint16_t led_period = 5000;
@@ -109,12 +127,12 @@ apply_state(void)
 {
     update_lo();
 
-    if (task_ctrl_signals.soe_active)
+    if (task_ctrl_signals.soe_asserted)
         RXSM_SOE_PORT.OUTCLR = RXSM_SOE_bm;
     else
         RXSM_SOE_PORT.OUTSET = RXSM_SOE_bm;
 
-    if (task_ctrl_signals.sods_active)
+    if (task_ctrl_signals.sods_asserted)
         RXSM_SODS_PORT.OUTCLR = RXSM_SODS_bm;
     else
         RXSM_SODS_PORT.OUTSET = RXSM_SODS_bm;
@@ -132,9 +150,9 @@ init(void)
 {
     /* by default, the error inhibit is ON, all others OFF/INACTIVE */
     is_our_lo_asserted = 0;
-    task_ctrl_signals.lo_active = 0;
-    task_ctrl_signals.soe_active = 0;
-    task_ctrl_signals.sods_active = 0;
+    task_ctrl_signals.lo_asserted = 0;
+    task_ctrl_signals.soe_asserted = 0;
+    task_ctrl_signals.sods_asserted = 0;
     task_ctrl_signals.pwr_on = 0;
     task_ctrl_signals.error_inhibit = 1;
 
@@ -166,9 +184,9 @@ run(void)
     if (task_buttons_toggle_request.lo)
         is_our_lo_asserted ^= RXSM_LO_bm;
     if (task_buttons_toggle_request.soe)
-        task_ctrl_signals.soe_active ^= 1;
+        task_ctrl_signals.soe_asserted ^= 1;
     if (task_buttons_toggle_request.sods)
-        task_ctrl_signals.sods_active ^= 1;
+        task_ctrl_signals.sods_asserted ^= 1;
     if (task_buttons_toggle_request.errinh)
         task_ctrl_signals.error_inhibit ^= 1;
     if (task_buttons_toggle_request.pwr)

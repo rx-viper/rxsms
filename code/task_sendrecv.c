@@ -160,7 +160,7 @@ static void
 send(void)
 {
     /* after LO/umbilical disconnect, drop all incoming traffic from ground */
-    if (task_ctrl_signals.lo_active)
+    if (task_ctrl_signals.lo_asserted)
         task_recv_from_gnd.updated = 0;
 
     update_led(task_recv_from_exp.updated, &status_from_exp,
