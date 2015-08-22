@@ -31,8 +31,7 @@
  *
  * Ressources _continously_ used by this task:
  * ADCA
- * ADCA.CH0..CH1
- * ADC TEMPREF
+ * ADCA.CH0
  * PORTA PIN 0..3
  * PORTB PIN 0
  */
@@ -125,21 +124,15 @@ const __flash __uint24 bit_error_rate_bin_map[] =
      _BV(7),  _BV(6),  _BV(5),  _BV(4)
 };
 
-/// Reads the ADC calibration value and TEMPSENSE calibration value.
+/// Reads the ADC calibration value.
 static void
-production_signature_row_read_calibration(uint16_t * adca_calibration,
-                                          uint16_t * tempsense_calibration)
+production_signature_row_read_calibration(uint16_t * adca_calibration)
 {
     uint8_t addr0, addr1;
 
-    addr0 = (uint8_t) (uint16_t) & PRODSIGNATURES_ADCACAL0;
-    addr1 = (uint8_t) (uint16_t) & PRODSIGNATURES_ADCACAL1;
+    addr0 = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL0;
+    addr1 = (uint8_t) (uint16_t) &PRODSIGNATURES_ADCACAL1;
     *adca_calibration = (prodsigrow_read_byte(addr1) << 8)
-        | prodsigrow_read_byte(addr0);
-
-    addr0 = (uint8_t) (uint16_t) & PRODSIGNATURES_TEMPSENSE0;
-    addr1 = (uint8_t) (uint16_t) & PRODSIGNATURES_TEMPSENSE1;
-    *tempsense_calibration = (prodsigrow_read_byte(addr1) << 8)
         | prodsigrow_read_byte(addr0);
 }
 
@@ -167,15 +160,14 @@ init(void)
     ADC_PORT.DIRCLR = ADC_PORT_PINS_gc;
     ADC_PORT.OUTCLR = ADC_PORT_PINS_gc;
 
-    uint16_t adca_calibration, tempsense_calibration;
-    production_signature_row_read_calibration(&adca_calibration,
-                                              &tempsense_calibration);
+    uint16_t adca_calibration;
+    production_signature_row_read_calibration(&adca_calibration);
 
-    /* init ADCA CH0 and CH1 */
+    /* init ADCA CH0 */
     ADCA.CTRLA = 0;
     ADCA.CTRLB =
         ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
-    ADCA.REFCTRL = ADC_TEMPREF_bm | ADC_REFSEL_gc;
+    ADCA.REFCTRL = ADC_REFSEL_gc;
     ADCA.EVCTRL = 0;
     ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
     ADCA.INTFLAGS =
@@ -186,16 +178,15 @@ init(void)
     ADCA.CH0.INTCTRL = 0;
     ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
 
-    ADCA.CH1.CTRL = ADC_CH_INPUTMODE_INTERNAL_gc;
-    ADCA.CH1.MUXCTRL = ADC_CH_MUXINT_TEMP_gc | ADC_CH_MUXNEG_GND_MODE3_gc;
-    ADCA.CH1.INTCTRL = 0;
-    ADCA.CTRLA |=
-        ADC_CH1START_bm | ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
+    ADCA.CTRLA |= ADC_CH0START_bm | ADC_FLUSH_bm | ADC_ENABLE_bm;
 }
 
 static __uint24
 get_random(const __uint24 mask)
 {
+    if (!mask)
+        return 0;
+
     union {
         __uint24 flip;
         struct {
@@ -207,9 +198,7 @@ get_random(const __uint24 mask)
         random_number.e.ui8[i] = (uint8_t) rand();
     /* mask the random number with range 0..2^24-1 to range 0..(mask - 1)
        mask has to be 0 or 2^N, N in {0, ... , 23}                      */
-    if (mask)
-        return random_number.flip & (mask - 1);
-    return 0;
+    return random_number.flip & (mask - 1);
 }
 
 /// Limit the adc values to the allowed range 0..2047.
@@ -304,14 +293,13 @@ run(void)
     const uint8_t s = state;
     if (INIT == s) {
         /* throw away the first measurement, as it might be wrong */
-        ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
+        ADCA.INTFLAGS = ADC_CH0IF_bm;
         ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
         ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
-        ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
+        ADCA.CTRLA |= ADC_CH0START_bm;
         state = FIRST_CHANNEL_NAME;
     } else if (FIRST_CHANNEL_NAME <= s && s < _END) {
-        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm)
-            || !(ADCA.INTFLAGS & ADC_CH1IF_bm))
+        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm))
             return;
 
         const int16_t adc_value = ADCA.CH0RES;
@@ -349,8 +337,8 @@ run(void)
             state = FIRST_CHANNEL_NAME;
         }
 
-        ADCA.INTFLAGS = ADC_CH1IF_bm | ADC_CH0IF_bm;
-        ADCA.CTRLA |= ADC_CH1START_bm | ADC_CH0START_bm;
+        ADCA.INTFLAGS = ADC_CH0IF_bm;
+        ADCA.CTRLA |= ADC_CH0START_bm;
     } else {
         /* this should not happen */
         init();
