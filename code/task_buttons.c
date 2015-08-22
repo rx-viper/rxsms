@@ -48,14 +48,8 @@ const struct task task_buttons = { .init = &init, .run = &run };
 struct button {
     uint8_t pressed;
     uint8_t released;
-    uint8_t triggered;
-};
-
-static struct button lo;
-static struct button soe;
-static struct button sods;
-static struct button errinh;
-static struct button pwr;
+    uint8_t triggered : 1;
+} lo, soe, sods, errinh, pwr;
 
 static void
 init(void)
@@ -129,35 +123,13 @@ run(void)
     debounce(extended_port & _BV(BUTTON_EXTENDED_ERRINH_bp), &errinh);
     debounce(extended_port & _BV(BUTTON_EXTENDED_PWR_bp), &pwr);
 
-    /* check if stable, and thus, valid */
-    if (lo.triggered) {
-        task_buttons_toggle_request.lo = 1;
-        lo.triggered = 0;
-    } else {
-        task_buttons_toggle_request.lo = 0;
-    }
-    if (soe.triggered) {
-        task_buttons_toggle_request.soe = 1;
-        soe.triggered = 0;
-    } else {
-        task_buttons_toggle_request.soe = 0;
-    }
-    if (sods.triggered) {
-        task_buttons_toggle_request.sods = 1;
-        sods.triggered = 0;
-    } else {
-        task_buttons_toggle_request.sods = 0;
-    }
-    if (errinh.triggered) {
-        task_buttons_toggle_request.errinh = 1;
-        errinh.triggered = 0;
-    } else {
-        task_buttons_toggle_request.errinh = 0;
-    }
-    if (pwr.triggered) {
-        task_buttons_toggle_request.pwr = 1;
-        pwr.triggered = 0;
-    } else {
-        task_buttons_toggle_request.pwr = 0;
-    }
+#define PUBLISH_STATE(signal) \
+        task_buttons_toggle_request.signal = signal.triggered; \
+        signal.triggered = 0
+    PUBLISH_STATE(lo);
+    PUBLISH_STATE(soe);
+    PUBLISH_STATE(sods);
+    PUBLISH_STATE(errinh);
+    PUBLISH_STATE(pwr);
+#undef PUBLISH_STATE
 }
