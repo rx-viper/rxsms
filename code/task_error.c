@@ -43,6 +43,12 @@ static struct
     __uint24 reload;
 } drop_error;
 
+static struct biterr_status
+{
+    __uint24 remaining_bytes;
+    __uint24 flip_index;
+} biterr_from_gnd, biterr_from_exp;
+
 static void
 init(void)
 {
@@ -53,24 +59,25 @@ init(void)
 
 /// flip a single bit in data stream
 static void
-flip_bit(struct task_recv_uart_data *const data)
+flip_bit(struct task_recv_uart_data *const data,
+         struct biterr_status *const biterr)
 {
     if (!data->updated)
         return;                 /* no pending data */
 
-    if (0 == data->biterr_remaining_bytes)
+    if (0 == biterr->remaining_bytes)
         return;                 /* specifically bit flip errors disabled */
 
-    --data->biterr_remaining_bytes;
+    --biterr->remaining_bytes;
 
-    __int24 flip = data->biterr_flip_index;
+    __int24 flip = biterr->flip_index;
     if (flip >= 8) {            /* bit to flip outside current byte */
         flip -= 8;
     } else if (flip >= 0) {     /* ok, flip bit */
         data->data ^= 1 << ((uint8_t) flip);
         flip = -1;              /* mark as bit already flipped */
     }
-    data->biterr_flip_index = flip;
+    biterr->flip_index = flip;
 }
 
 static void
@@ -94,31 +101,27 @@ drop_communication(struct task_recv_uart_data *a,
 static void
 reload_settings(const uint8_t global_update)
 {
-    /*
-       Load new stream length in bytes and the bit to flip if the bit error
-       rate has been changed (forced update) or the old run for bit errors has
-       been completed (regular update).
-     */
+    // Load new stream length in bytes and the bit to flip if the bit error
+    // rate has been changed (forced update) or the old run for bit errors has
+    // been completed (regular update).
     uint8_t biterr_updated = task_adc_biterror_generator.force_update
                            | global_update;
-    if (0 == task_recv_from_exp.biterr_remaining_bytes || biterr_updated) {
-        task_recv_from_exp.biterr_remaining_bytes =
+    if (0 == biterr_from_exp.remaining_bytes || biterr_updated) {
+        biterr_from_exp.remaining_bytes =
             task_adc_biterror_generator.stream_len_bytes;
-        task_recv_from_exp.biterr_flip_index =
+        biterr_from_exp.flip_index =
             task_adc_biterror_generator.from_exp_flip;
     }
-    if (0 == task_recv_from_gnd.biterr_remaining_bytes || biterr_updated) {
-        task_recv_from_gnd.biterr_remaining_bytes =
+    if (0 == biterr_from_gnd.remaining_bytes || biterr_updated) {
+        biterr_from_gnd.remaining_bytes =
             task_adc_biterror_generator.stream_len_bytes;
-        task_recv_from_gnd.biterr_flip_index =
+        biterr_from_gnd.flip_index =
             task_adc_biterror_generator.from_gnd_flip;
     }
     task_adc_biterror_generator.force_update = 0;
 
-    /*
-       Load new point in time when to start dropping and load the duration for
-       the communication outage.
-     */
+    // Load new point in time when to start dropping and load the duration for
+    // the communication outage.
     uint8_t drop_updated = task_adc_drop_generator.force_update
                          | global_update;
     if ((0 == drop_error.end && 0 == drop_error.reload) || drop_updated) {
@@ -148,8 +151,8 @@ run(void)
     reload_settings(global_update);
     global_update = 0;
 
-    flip_bit(&task_recv_from_gnd);
-    flip_bit(&task_recv_from_exp);
+    flip_bit(&task_recv_from_gnd, &biterr_from_gnd);
+    flip_bit(&task_recv_from_exp, &biterr_from_exp);
 
     drop_communication(&task_recv_from_gnd, &task_recv_from_exp);
 }
