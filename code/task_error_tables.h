@@ -33,28 +33,32 @@ struct value_as_string
 	((ms) * (1000 / (SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT)))
 const __flash __uint24 drop_duration_bin_map[] =
 {
-	1, 2, /* very short dropout durations */
-	3, 7, /* prime numbers */
-	24, /* max. packet len permitted by RX specs */
-	36, /* max. packet len w/o RX required pause */
-	/* 50ms .. 500ms delta 50ms */
-	TIME_TO_INTVAL(50),	TIME_TO_INTVAL(100),
-	TIME_TO_INTVAL(150),	TIME_TO_INTVAL(200),
-	TIME_TO_INTVAL(250),	TIME_TO_INTVAL(300),
-	TIME_TO_INTVAL(350),	TIME_TO_INTVAL(400),
-	TIME_TO_INTVAL(450),	TIME_TO_INTVAL(500),
-	/* 600ms .. 1.5s delta 100ms */
-	TIME_TO_INTVAL(600),	TIME_TO_INTVAL(700),
-	TIME_TO_INTVAL(800),	TIME_TO_INTVAL(900),
-	TIME_TO_INTVAL(1000),	TIME_TO_INTVAL(1100),
-	TIME_TO_INTVAL(1200),	TIME_TO_INTVAL(1300),
-	TIME_TO_INTVAL(1400),	TIME_TO_INTVAL(1500),
-	/* 2s .. 5s delta 1s */
-	TIME_TO_INTVAL(2000),	TIME_TO_INTVAL(3000),
-	TIME_TO_INTVAL(4000),	TIME_TO_INTVAL(5000),
-	/* 10s and 20s */
-	TIME_TO_INTVAL(10000UL),
-	TIME_TO_INTVAL(20000UL)
+    // very short dropout durations
+    1, 2,
+    // prime numbers
+    3, 7,
+    // max. packet len permitted by RX specs
+    24,
+    // max. packet len w/o RX required pause
+    36,
+    // 50ms .. 500ms delta 50ms
+    TIME_TO_INTVAL(50), TIME_TO_INTVAL(100),
+    TIME_TO_INTVAL(150), TIME_TO_INTVAL(200),
+    TIME_TO_INTVAL(250), TIME_TO_INTVAL(300),
+    TIME_TO_INTVAL(350), TIME_TO_INTVAL(400),
+    TIME_TO_INTVAL(450), TIME_TO_INTVAL(500),
+    // 600ms .. 1.5s delta 100ms
+    TIME_TO_INTVAL(600), TIME_TO_INTVAL(700),
+    TIME_TO_INTVAL(800), TIME_TO_INTVAL(900),
+    TIME_TO_INTVAL(1000), TIME_TO_INTVAL(1100),
+    TIME_TO_INTVAL(1200), TIME_TO_INTVAL(1300),
+    TIME_TO_INTVAL(1400), TIME_TO_INTVAL(1500),
+    // 2s .. 5s delta 1s
+    TIME_TO_INTVAL(2000), TIME_TO_INTVAL(3000),
+    TIME_TO_INTVAL(4000), TIME_TO_INTVAL(5000),
+    // 10s and 20s
+    TIME_TO_INTVAL(10000UL),
+    TIME_TO_INTVAL(20000UL)
 };
 #undef TIME_TO_INTVAL
 
