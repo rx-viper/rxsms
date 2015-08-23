@@ -19,6 +19,18 @@
 #include <avr/io.h>
 #include "task_debug.h"
 #include "task_adc.h"
+#include "task_error_tables.h"
+#include "task_ctrl.h"
+
+/*
+ * Ressources used _once_ by this task:
+ * (none)
+ *
+ * Ressources _continously_ used by this task:
+ * UART_DEBUG_PORT: UART_DEBUG_RX_bm, UART_DEBUG_TX_bm
+ * UART_DEBUG
+ * DMA.CH0
+ */
 
 #define UART_DEBUG_PORT     PORTD
 #define UART_DEBUG_RX_bm    PIN6_bm
@@ -26,12 +38,19 @@
 #define UART_DEBUG          USARTD1
 #define UART_DEBUG_PWRUP    PR.PRPD &= ~PR_USART1_bm
 
+#define DMA_TRIGSRC         DMA_CH_TRIGSRC_USARTD1_DRE_gc
+
 #define UART_BSEL       (131)
 #define UART_BSCALE     (-3)
 
 static void init(void);
 static void run(void);
 const struct task task_debug = { .init = &init, .run = &run };
+
+static uint8_t buffer[] =   "Error Inhibit: "       "XXX"   "  " \
+                            "Byte Dropout Rate: "   "01234" "  " \
+                            "Dropout Duration: "    "01234" "  " \
+                            "Bit Error Rate: "      "01234" "\n\r";
 
 static void
 init_uart(PORT_t * port, uint8_t rx_pin, uint8_t tx_pin, USART_t * uart)
@@ -48,29 +67,49 @@ init_uart(PORT_t * port, uint8_t rx_pin, uint8_t tx_pin, USART_t * uart)
 }
 
 static void
+start_dma(void)
+{
+    DMA.CH0.CTRLA = DMA_CH_ENABLE_bm | DMA_CH_REPEAT_bm | DMA_CH_TRFREQ_bm
+                  | DMA_CH_SINGLE_bm | DMA_CH_BURSTLEN_1BYTE_gc;
+}
+
+static void
 init(void)
 {
     UART_DEBUG_PWRUP;
     init_uart(&UART_DEBUG_PORT, UART_DEBUG_RX_bm, UART_DEBUG_TX_bm,
               &UART_DEBUG);
 
+    // configure our DMA channel CH0
+    DMA.CH0.ADDRCTRL =
+        DMA_CH_SRCRELOAD_BLOCK_gc | DMA_CH_SRCDIR_INC_gc |
+        DMA_CH_DESTRELOAD_NONE_gc  | DMA_CH_DESTDIR_FIXED_gc;
+    uint16_t src_addr = (uint16_t) buffer;
+    DMA.CH0.SRCADDR0 = (uint8_t) src_addr;
+    DMA.CH0.SRCADDR1 = (uint8_t) (src_addr >> 8);
+    DMA.CH0.SRCADDR2 = 0;
+    uint16_t dest_addr = (uint16_t) &UART_DEBUG.DATA;
+    DMA.CH0.DESTADDR0 = (uint8_t) dest_addr;
+    DMA.CH0.DESTADDR1 = (uint8_t) (dest_addr >> 8);
+    DMA.CH0.DESTADDR2 = 0;
+    DMA.CH0.TRIGSRC = DMA_TRIGSRC;
+    DMA.CH0.TRFCNT = sizeof(buffer) - 1;    // -1 due to '\0' at end of string
+    DMA.CH0.REPCNT = 1;
+
+    start_dma();
 }
 
 static void
 run(void)
 {
-    static uint8_t current_byte = 0;
-    static uint8_t buffer[16];
+    // do nothing as long as DMA is running
+    if ((DMA.CH0.CTRLB & (DMA_CH_CHBUSY_bm | DMA_CH_CHPEND_bm))
+        || !(DMA.INTFLAGS & DMA_CH0TRNIF_bm))
+        return;
+    // TODO update buffer
 
-    // TODO use DMA for sending
-
+    // wait until our UART is done
     if (!(UART_DEBUG.STATUS & USART_DREIF_bm))
         return;
-
-    UART_DEBUG.DATA = buffer[current_byte];
-
-    ++current_byte;
-    if (current_byte >= sizeof(buffer)) {
-        current_byte = 0;
-    }
+    start_dma();
 }
