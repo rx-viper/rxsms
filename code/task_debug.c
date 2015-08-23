@@ -47,9 +47,9 @@ static void init(void);
 static void run(void);
 const struct task task_debug = { .init = &init, .run = &run };
 
-static uint8_t buffer[] =   "Error Inhibit: "       "XXX"   "  " \
-                            "Byte Dropout Rate: "   "01234" "  " \
-                            "Dropout Duration: "    "01234" "  " \
+static uint8_t buffer[] =   "Error Inhibit: "       "XXX"   "        " \
+                            "Byte Dropout Rate: "   "01234" "        " \
+                            "Dropout Duration: "    "01234" "        " \
                             "Bit Error Rate: "      "01234" "\n\r";
 
 static void
@@ -99,6 +99,20 @@ init(void)
     start_dma();
 }
 
+
+static void
+memcpy_flash(uint8_t *dest, const __flash uint8_t *src, uint8_t n)
+{
+    if (!n)
+        return;
+    do {
+        *dest++ = *src++;
+    } while(--n);
+}
+
+const __flash uint8_t on[3] = "ON ";
+const __flash uint8_t off[3] = "OFF";
+
 static void
 run(void)
 {
@@ -106,7 +120,28 @@ run(void)
     if ((DMA.CH0.CTRLB & (DMA_CH_CHBUSY_bm | DMA_CH_CHPEND_bm))
         || !(DMA.INTFLAGS & DMA_CH0TRNIF_bm))
         return;
-    // TODO update buffer
+
+    // update buffer
+    uint8_t biterror_bin = task_adc_generator.biterror_rate_bin;
+    uint8_t drop_rate_bin = task_adc_generator.dropout_rate_bin;
+    uint8_t drop_duration_bin = task_adc_generator.dropout_duration_bin;
+
+    const __flash uint8_t *src;
+    if (task_ctrl_signals.error_inhibit) {
+        src = on;
+        biterror_bin = 0;
+        drop_rate_bin = 0;
+    } else {
+        src = off;
+    }
+    memcpy_flash(&buffer[15], src, sizeof(on));
+
+    src = (const __flash uint8_t *) &drop_rate_bin_string_map[drop_rate_bin];
+    memcpy_flash(&buffer[45], src, sizeof(struct value_as_string));
+    src = (const __flash uint8_t *) &drop_duration_bin_string_map[drop_duration_bin];
+    memcpy_flash(&buffer[76], src, sizeof(struct value_as_string));
+    src = (const __flash uint8_t *) &bit_error_rate_bin_string_map[biterror_bin];
+    memcpy_flash(&buffer[105], src, sizeof(struct value_as_string));
 
     // wait until our UART is done
     if (!(UART_DEBUG.STATUS & USART_DREIF_bm))
