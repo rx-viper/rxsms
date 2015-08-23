@@ -106,7 +106,12 @@ memcpy_flash(uint8_t *dest, const __flash uint8_t *src, uint8_t n)
     if (!n)
         return;
     do {
-        *dest++ = *src++;
+        // *dest++ = *src++;
+        asm volatile (
+            "lpm __tmp_reg__, %a[src]+  \n\t"
+            "st %a[dest]+, __tmp_reg__  \n\t"
+            : [src] "+z" (src), [dest] "+x" (dest)
+            : : );
     } while(--n);
 }
 
