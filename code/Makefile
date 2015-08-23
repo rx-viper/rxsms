@@ -97,10 +97,13 @@ doxy: | $(DOCDIR)
 indent:
 	$(INDENT) -kr -psl -nut $(SRC) $(HDR)
 
+program: $(TARGET).elf
+	avrdude -P usb -p x32a4u -c jtag2pdi -e -U flash:w:$<
+
 clean:
 	$(RM) -rf $(DOCDIR) $(TARGET).elf  $(TARGET).hex  \
 		$(wildcard *.lss*) \
 		$(TARGET).eep $(TARGET).map $(OBJ) \
 		$(wildcard *.i) $(wildcard *.s)
 
-.PHONY: all clean doxy indent
+.PHONY: all clean doxy indent program
