@@ -32,9 +32,7 @@
 int
 main(void)
 {
-    init_clock();
-    init_prr();
-
+    init();
 //XXX    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
 
     sched_init();

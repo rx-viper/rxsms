@@ -19,7 +19,6 @@
 #ifndef INIT_H
 #define INIT_H
 
-void init_clock(void);
-void init_prr(void);
+void init(void);
 
 #endif                          /* INIT_H */

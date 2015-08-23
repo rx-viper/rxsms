@@ -20,8 +20,8 @@
 #include "init.h"
 
 /// Set the CPU clock to F_CPU Hz.
-void
-init_clock(void)
+static void
+clock(void)
 {
     // enable 32.768 kHz and 32 MHz clock
     const uint8_t enable_clk = OSC.CTRL | OSC_RC32MEN_bm | OSC_RC32KEN_bm;
@@ -61,8 +61,8 @@ init_clock(void)
 }
 
 /// Power down all peripherals by default.
-void
-init_prr(void)
+static void
+prr(void)
 {
     PR.PRGEN = PR_USB_bm | PR_AES_bm | PR_EBI_bm | PR_RTC_bm | PR_EVSYS_bm
         | PR_DMA_bm;
@@ -73,4 +73,23 @@ init_prr(void)
         | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
     PR.PRPE = PR_TWI_bm | PR_USART1_bm | PR_USART0_bm | PR_SPI_bm
         | PR_HIRES_bm | PR_TC1_bm | PR_TC0_bm;
+}
+
+/// Enable the DMA *Controller* so tasks can initialize their individual
+/// DMA *Channels*.
+static void
+dma(void)
+{
+    PR.PRGEN &= ~PR_DMA_bm;
+    DMA.CTRL =
+        DMA_ENABLE_bm | DMA_DBUFMODE_DISABLED_gc | DMA_PRIMODE_RR0123_gc;
+}
+
+void
+init(void)
+{
+    clock();
+    prr();
+
+    dma();
 }
