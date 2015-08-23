@@ -22,6 +22,12 @@
 #include <inttypes.h>
 #include "sched.h"  /* for SCHED_SLOT_COUNT and SCHED_SLOT_PERIOD_US */
 
+/// Type to represent tables as string to be printed by task_debug.
+struct value_as_string
+{
+    char s[5];  // use array instead of char* so type has fixed size
+};
+
 /// Converts ms to the number of complete scheduler runs
 #define TIME_TO_INTVAL(ms) \
 	((ms) * (1000 / (SCHED_SLOT_PERIOD_US * SCHED_SLOT_COUNT)))
@@ -52,6 +58,20 @@ const __flash __uint24 drop_duration_bin_map[] =
 };
 #undef TIME_TO_INTVAL
 
+const __flash struct value_as_string drop_duration_bin_string_map[] =
+{
+    {" 1 B "}, {" 2 B "}, {" 3 B "}, {" 7 B "},
+    {"24 B "}, {"36 B "},
+    {" 50ms"}, {"100ms"}, {"150ms"}, {"200ms"},
+    {"250ms"}, {"300ms"}, {"350ms"}, {"400ms"},
+    {"450ms"}, {"500ms"},
+    {"600ms"}, {"700ms"}, {"800ms"}, {"900ms"},
+    {"1.0 s"}, {"1.1 s"}, {"1.2 s"}, {"1.3 s"},
+    {"1.4 s"}, {"1.5 s"},
+    {" 2 s "}, {" 3 s "}, {" 4 s "}, {" 5 s "},
+    {"10 s "}, {"20 s "}
+};
+
 // get a mask for the probability of a drop event with either
 // p=0, or p = 1 / 2^N, then decrease the probability by 2^(-3)
 // to get the following values:
@@ -79,6 +99,14 @@ const __flash __uint24 drop_rate_bin_map[] =
     _BV(10),    _BV(9),    _BV(8),  _BV(7),  _BV(6),  _BV(5),  _BV(4),       1
 };
 
+const __flash struct value_as_string drop_rate_bin_string_map[] =
+{
+    {"  0  "}, {"2^-17"}, {"2^-16"}, {"2^-15"},
+    {"2^-14"}, {"2^-13"}, {"2^-12"}, {"2^-11"},
+    {"2^-10"}, {"2^ -9"}, {"2^ -8"}, {"2^ -7"},
+    {"2^ -6"}, {"2^ -5"}, {"2^ -4"}, {"  1  "},
+};
+
 // get a mask for the probability of a bit error with either
 // p=0, or p = 1 / 2^N, then decrease the probability by 2^(-4)
 // to get the following values:
@@ -101,6 +129,14 @@ const __flash __uint24 bit_error_rate_bin_map[] =
           0, (1UL<<18), (1UL<<17), (1UL<<16),
     _BV(15), _BV(14), _BV(13), _BV(12), _BV(11), _BV(10), _BV(9), _BV(8),
      _BV(7),  _BV(6),  _BV(5),  _BV(4)
+};
+
+const __flash struct value_as_string bit_error_rate_bin_string_map[] =
+{
+    {"  0  "}, {"2^-18"}, {"2^-17"}, {"2^-16"},
+    {"2^-15"}, {"2^-14"}, {"2^-13"}, {"2^-12"},
+    {"2^-11"}, {"2^-10"}, {"2^ -9"}, {"2^ -8"},
+    {"2^ -7"}, {"2^ -6"}, {"2^ -5"}, {"2^ -4"},
 };
 
 #endif                          /* TASK_ERROR_TABLES_H */
