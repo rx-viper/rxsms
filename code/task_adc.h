@@ -25,17 +25,14 @@
 const struct task task_adc;
 
 struct {
-    __uint24 stream_len_bytes;
-    __int24 from_exp_flip;
-    __int24 from_gnd_flip;
-    uint8_t force_update:1;
-} task_adc_biterror_generator;
+    uint8_t biterror_force_update:1;
+    uint8_t biterror_rate_bin:4;
 
-struct {
-    __uint24 interval;
-    __uint24 start_of_drop;
-    __uint24 drop_duration;
-    uint8_t force_update:1;
-} task_adc_drop_generator;
+    uint8_t dropout_force_update:1;
+    uint8_t dropout_rate_bin:4;
+    uint8_t dropout_duration_bin:5;
+
+    __uint24 random[3];
+} task_adc_generator;
 
 #endif                          /* TASK_ADC_H */

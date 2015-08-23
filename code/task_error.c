@@ -19,6 +19,7 @@
 #include <avr/io.h>
 #include <stdlib.h>
 #include "task_error.h"
+#include "task_error_tables.h"
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
 #include "task_adc.h"
@@ -52,9 +53,60 @@ static struct biterr_status
 static void
 init(void)
 {
-    drop_error.begin = 0;
-    drop_error.end = 0;
-    drop_error.reload = 0;
+    for (uint8_t i = 0; i < sizeof(drop_error); ++i)
+        ((uint8_t*) &drop_error)[i] = 0;
+    for (uint8_t i = 0; i < sizeof(biterr_from_gnd); ++i)
+        ((uint8_t*) &biterr_from_gnd)[i] = 0;
+    for (uint8_t i = 0; i < sizeof(biterr_from_exp); ++i)
+        ((uint8_t*) &biterr_from_exp)[i] = 0;
+}
+
+static void
+reload_biterror(const uint8_t global_update)
+{
+    // Load new stream length in bytes and the bit to flip if the bit error
+    // rate has been changed (forced update) or the old run for bit errors has
+    // been completed (regular update).
+    const uint8_t update = task_adc_generator.biterror_force_update
+                        || global_update;
+    const uint8_t bin = task_adc_generator.biterror_rate_bin;
+    const __uint24 stream_len = bit_error_rate_bin_map[bin];
+    const __uint24 flipmask = (stream_len << 3) - 1;
+
+    if (0 == biterr_from_exp.remaining_bytes || update) {
+        biterr_from_exp.remaining_bytes = stream_len;
+        biterr_from_exp.flip_index = flipmask & task_adc_generator.random[0];
+    }
+    if (0 == biterr_from_gnd.remaining_bytes || update) {
+        biterr_from_gnd.remaining_bytes = stream_len;
+        biterr_from_gnd.flip_index = flipmask & task_adc_generator.random[1];
+    }
+    task_adc_generator.biterror_force_update = 0;
+}
+
+static void
+reload_dropout(const uint8_t global_update)
+{
+    // Load new point in time when to start dropping and load the duration for
+    // the communication outage.
+    const uint8_t update = task_adc_generator.dropout_force_update
+                        || global_update;
+    uint8_t bin = task_adc_generator.dropout_rate_bin;
+    const __uint24 interval = drop_rate_bin_map[bin];
+
+    if ((0 == drop_error.end && 0 == drop_error.reload) || update) {
+        drop_error.reload = interval;
+        if (!drop_error.reload) {
+            // communication drop disabled
+            drop_error.begin = 0;
+            drop_error.end = 0;
+        } else {
+            drop_error.begin = (interval - 1) & task_adc_generator.random[2];
+            bin = task_adc_generator.dropout_duration_bin;
+            drop_error.end = drop_error.begin + drop_duration_bin_map[bin] + 1;
+        }
+    }
+    task_adc_generator.dropout_force_update = 0;
 }
 
 /// flip a single bit in data stream
@@ -101,42 +153,8 @@ drop_communication(struct task_recv_uart_data *a,
 static void
 reload_settings(const uint8_t global_update)
 {
-    // Load new stream length in bytes and the bit to flip if the bit error
-    // rate has been changed (forced update) or the old run for bit errors has
-    // been completed (regular update).
-    uint8_t biterr_updated = task_adc_biterror_generator.force_update
-                           | global_update;
-    if (0 == biterr_from_exp.remaining_bytes || biterr_updated) {
-        biterr_from_exp.remaining_bytes =
-            task_adc_biterror_generator.stream_len_bytes;
-        biterr_from_exp.flip_index =
-            task_adc_biterror_generator.from_exp_flip;
-    }
-    if (0 == biterr_from_gnd.remaining_bytes || biterr_updated) {
-        biterr_from_gnd.remaining_bytes =
-            task_adc_biterror_generator.stream_len_bytes;
-        biterr_from_gnd.flip_index =
-            task_adc_biterror_generator.from_gnd_flip;
-    }
-    task_adc_biterror_generator.force_update = 0;
-
-    // Load new point in time when to start dropping and load the duration for
-    // the communication outage.
-    uint8_t drop_updated = task_adc_drop_generator.force_update
-                         | global_update;
-    if ((0 == drop_error.end && 0 == drop_error.reload) || drop_updated) {
-        drop_error.reload = task_adc_drop_generator.interval;
-        if (!drop_error.reload) {
-            /* communication drop disabled */
-            drop_error.begin = 0;
-            drop_error.end = 0;
-        } else {
-            drop_error.begin = task_adc_drop_generator.start_of_drop;
-            drop_error.end = drop_error.begin
-                           + task_adc_drop_generator.drop_duration + 1;
-        }
-    }
-    task_adc_drop_generator.force_update = 0;
+    reload_biterror(global_update);
+    reload_dropout(global_update);
 }
 
 static void

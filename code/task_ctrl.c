@@ -98,8 +98,8 @@ update_error_inhibit_led(void)
         return;
     }
 
-    if (task_adc_biterror_generator.stream_len_bytes || // error inhibit OFF
-        task_adc_drop_generator.interval) {             // and poti errors ON
+    if (task_adc_generator.biterror_rate_bin ||         // error inhibit OFF
+        task_adc_generator.dropout_rate_bin) {          // and poti errors ON
         led_cnt = led_period;
         STATUS_LED_PORT.OUTCLR = STATUS_LED_ERRINH_bm;  // LED always OFF
         return;
