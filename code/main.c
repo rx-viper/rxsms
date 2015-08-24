@@ -18,28 +18,30 @@
  *   along with RXSMS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <avr/io.h>
 #include <avr/interrupt.h>
 #include "init.h"
 #include "sched.h"
 
-/*! \brief Main function
- *
- *	Main function, speaks for itself :P
- *
- *	\todo clean up, put more code outside of this function
- */
+// NOTE:
+// We may use other FUSE settings, for instance to enable brown-out detection,
+// but it works fine without them now.
+// If they become necessary at a later point in time, we can add them then.
+//
+//      see FUSE_FUSEBYTE1..5 in the uC's io.h (ATxmega32A4u: iox32a4u.h)
+
+/// Initialize and start the scheduler, and as a result all tasks.
 int
 main(void)
 {
     init();
-//XXX    FUSE_FUSEBYTE5 |= BODACT_CONTINUOUS_gc | BODLVL_2V8_gc;     // initialise BROWN-OUT detection, tg: maybe try different values if reset occurs
 
     sched_init();
     sched_start();
     sei();
 
-    // TODO Initialize seed for Random - variable
     while (1) {
+        // nothing much to do here:
+        // the fun happens in the tasks executed by the scheduler ISR
+        //      see sched.c and task_*.c
     }
 }
