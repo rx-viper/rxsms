@@ -22,15 +22,13 @@
 #include "task_error_tables.h"
 #include "task_ctrl.h"
 
-/*
- * Ressources used _once_ by this task:
- * (none)
- *
- * Ressources _continously_ used by this task:
- * UART_DEBUG_PORT: UART_DEBUG_RX_bm, UART_DEBUG_TX_bm
- * UART_DEBUG
- * DMA.CH0
- */
+// Ressources used _once_ by this task:
+// (none)
+//
+// Ressources _continously_ used by this task:
+// UART_DEBUG_PORT: UART_DEBUG_RX_bm, UART_DEBUG_TX_bm
+// UART_DEBUG
+// DMA.CH0
 
 #define UART_DEBUG_PORT     PORTD
 #define UART_DEBUG_RX_bm    PIN6_bm

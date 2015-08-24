@@ -25,13 +25,11 @@
 #include "task_adc.h"
 #include "task_rng.h"
 
-/*
- * Ressources used _once_ by this task:
- * (none)
- *
- * Ressources _continously_ used by this task:
- * (none)
- */
+// Ressources used _once_ by this task:
+// (none)
+//
+// Ressources _continously_ used by this task:
+// (none)
 
 static void init(void);
 static void run(void);
@@ -131,19 +129,19 @@ flip_bit(struct task_recv_uart_data *const data,
          struct biterr_status *const biterr)
 {
     if (!data->updated)
-        return;                 /* no pending data */
+        return;                 // no pending data
 
     if (0 == biterr->remaining_bytes)
-        return;                 /* specifically bit flip errors disabled */
+        return;                 // specifically bit flip errors disabled
 
     --biterr->remaining_bytes;
 
     __int24 flip = biterr->flip_index;
-    if (flip >= 8) {            /* bit to flip outside current byte */
+    if (flip >= 8) {            // bit to flip outside current byte
         flip -= 8;
-    } else if (flip >= 0) {     /* ok, flip bit */
+    } else if (flip >= 0) {     // ok, flip bit
         data->data ^= 1 << ((uint8_t) flip);
-        flip = -1;              /* mark as bit already flipped */
+        flip = -1;              // mark as bit already flipped
     }
     biterr->flip_index = flip;
 }
@@ -157,20 +155,13 @@ drop_communication(struct task_recv_uart_data *a,
     if (drop_error.begin)
         --drop_error.begin;
     if (!drop_error.end)
-        return; /* dropping is over */
+        return; // dropping is over
     --drop_error.end;
     if (drop_error.begin)
-        return; /* dropping did not yet start */
-    /* now really drop */
+        return; // dropping did not yet start
+    // now really drop
     a->updated = 0;
     b->updated = 0;
-}
-
-static void
-reload_settings(const uint8_t global_update)
-{
-    reload_biterror(global_update);
-    reload_dropout(global_update);
 }
 
 static void
@@ -182,7 +173,8 @@ run(void)
         return;
     }
 
-    reload_settings(global_update);
+    reload_biterror(global_update);
+    reload_dropout(global_update);
     global_update = 0;
 
     flip_bit(&task_recv_from_gnd, &biterr_from_gnd);

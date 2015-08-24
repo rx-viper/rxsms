@@ -42,7 +42,7 @@
 static void init(void);
 static void recv(void);
 static void send(void);
-/* common init routine for both as they access the same hardware */
+// common init routine for both as they access the same hardware
 const struct task task_recv = { .init = &init, .run = &recv };
 const struct task task_send = { .init = &init, .run = &send };
 
@@ -70,7 +70,7 @@ init(void)
 {
     static uint8_t is_initialized = 0;
     if (is_initialized)
-        return;                 /* leave if init() is called multiple times */
+        return;                 // leave if init() is called multiple times
     is_initialized = 1;
 
     UART_GROUNDSTATION_PWRUP;
@@ -97,7 +97,7 @@ recv_uart(USART_t * uart, struct task_recv_uart_data *data)
 {
     uint8_t err_flags = USART_FERR_bm | USART_BUFOVF_bm | USART_PERR_bm;
     if (uart->STATUS & err_flags) {
-        /* clear error flags if set */
+        // clear error flags if set
         uint8_t ignored __attribute__ ((unused));
         ignored = uart->DATA;
         ignored = uart->DATA;
@@ -122,19 +122,19 @@ static void
 update_led(uint8_t has_received, struct uart_status *status,
            uint8_t ledmask)
 {
-    /* switch off LED after this time of inactivity */
+    // switch off LED after this time of inactivity
     const uint8_t LED_TIMEOUT = 100;
-    /* period of flashing LED to indicate active communication */
+    // period of flashing LED to indicate active communication
     const uint8_t LED_DURATION = LED_TIMEOUT;
 
     if (has_received) {
         status->last_recv_ago = 0;
         if (++status->led_toggle_interval >= LED_DURATION)
-            status->led_toggle_interval = 0;    /* wrap-around */
+            status->led_toggle_interval = 0;    // wrap-around
         if (LED_DURATION / 2 == status->led_toggle_interval)
-            STATUS_LED_PORT.OUTTGL = ledmask;   /* a half square wave passed */
+            STATUS_LED_PORT.OUTTGL = ledmask;   // a half square wave passed
     } else {
-        /* saturating add, clear LED due to inactivity when timeout reached */
+        // saturating add, clear LED due to inactivity when timeout reached
         if (++status->last_recv_ago >= LED_TIMEOUT) {
             status->last_recv_ago = LED_TIMEOUT;
             status->led_toggle_interval = 0;
@@ -147,10 +147,10 @@ static void
 send_uart(USART_t * uart, struct task_recv_uart_data *data)
 {
     if (!data->updated)
-        return;                 /* nothing to send */
+        return;                 // nothing to send
 
     if (!(uart->STATUS & USART_DREIF_bm))
-        return;                 /* USART busy, cannot send now, retry later */
+        return;                 // USART busy, cannot send now, retry later
 
     uart->DATA = data->data;
     data->updated = 0;
@@ -159,7 +159,7 @@ send_uart(USART_t * uart, struct task_recv_uart_data *data)
 static void
 send(void)
 {
-    /* after LO/umbilical disconnect, drop all incoming traffic from ground */
+    // after LO/umbilical disconnect, drop all incoming traffic from ground
     if (task_ctrl_signals.lo_asserted)
         task_recv_from_gnd.updated = 0;
 

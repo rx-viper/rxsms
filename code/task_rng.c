@@ -19,13 +19,11 @@
 #include <avr/io.h>
 #include "task_rng.h"
 
-/*
- * Ressources used _once_ by this task:
- * (none)
- *
- * Ressources _continously_ used by this task:
- * AES
- */
+// Ressources used _once_ by this task:
+// (none)
+//
+// Ressources _continously_ used by this task:
+// AES
 
 #define AES_PWRUP           PR.PRGEN &= ~PR_AES_bm
 

@@ -19,14 +19,12 @@
 #include <avr/io.h>
 #include "task_buttons.h"
 
-/*
- * Ressources used _once_ by this task:
- * (none)
- *
- * Ressources _continously_ used by this task:
- * BUTTON_PORT: BUTTON_LO_bp BUTTON_SOE_bp BUTTON_SODS_bp BUTTON_ERRINH_bp
- * BUTTON_EXTENDED_PORT: BUTTON_EXTENDED_PWR_bp
- */
+// Ressources used _once_ by this task:
+// (none)
+//
+// Ressources _continously_ used by this task:
+// BUTTON_PORT: BUTTON_LO_bp BUTTON_SOE_bp BUTTON_SODS_bp BUTTON_ERRINH_bp
+// BUTTON_EXTENDED_PORT: BUTTON_EXTENDED_PWR_bp
 
 #define BUTTON_PORT         PORTB
 #define BUTTON_LO_bp        PIN3_bp
@@ -59,11 +57,9 @@ init(void)
     BUTTON_EXTENDED_PORT.DIRCLR = _BV(BUTTON_EXTENDED_PWR_bp)
         | _BV(BUTTON_EXTENDED_ERRINH_bp);
 
-    /* 
-     * must be done in two steps to allow resolving of num in PINCTRL first,
-     * before doing the actual conatenation/token pasting; otherwise we would
-     * get something like PINBUTTON_SOE_bpCTRL, which we do not want!
-     */
+    // must be done in two steps to allow resolving of num in PINCTRL first,
+    // before doing the actual conatenation/token pasting; otherwise we would
+    // get something like PINBUTTON_SOE_bpCTRL, which we do not want!
 #define PINCTRL_CONCAT(num) PIN##num##CTRL
 #define PINCTRL(num)        PINCTRL_CONCAT(num)
     BUTTON_PORT.PINCTRL(BUTTON_LO_bp) = PORT_OPC_PULLUP_gc;
@@ -92,18 +88,18 @@ static void
 debounce(uint8_t current, struct button *btn)
 {
     if (current) {
-        if (btn->released)      /* prevent underflow when already 0 */
+        if (btn->released)      // prevent underflow when already 0
             --btn->released;
         btn->pressed = DURATION_DEBOUNCE;
     } else {
-        /* decrease other counter only, iff we were back to normal (released)
-         * state for long enough */
+        // decrease other counter only, iff we were back to normal (released)
+        // state for long enough
         if (!btn->released) {
-            /* prevent underflow when already 0 */
+            // prevent underflow when already 0
             if (btn->pressed) {
                 --btn->pressed;
             } else {
-                /* we have a valid low signal, so let's reset the high time */
+                // we have a valid low signal, so let's reset the high time
                 btn->triggered = 1;
                 btn->released = DURATION_DEBOUNCE;
             }

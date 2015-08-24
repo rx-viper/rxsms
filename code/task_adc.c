@@ -23,16 +23,14 @@
 // TODO configure analog input pins with INTPUT_DISABLE
 //      in the respective PINnCTRL register of the IO port
 
-/*
- * Ressources used _once_ by this task:
- * (none)
- *
- * Ressources _continously_ used by this task:
- * ADCA
- * ADCA.CH0
- * PORTA PIN 0..3
- * PORTB PIN 0
- */
+// Ressources used _once_ by this task:
+// (none)
+//
+// Ressources _continously_ used by this task:
+// ADCA
+// ADCA.CH0
+// PORTA PIN 0..3
+// PORTB PIN 0
 
 // FIXME - remove when everyone uses avr-libc >= 1.8.1
 // These symbols are not defined in io.h or have other names than in pre 1.8.1
