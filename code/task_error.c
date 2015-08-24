@@ -60,65 +60,67 @@ init(void)
         ((uint8_t*) &biterr_from_exp)[i] = 0;
 }
 
+// get 3 B of random data
+static __uint24
+get_random(void)
+{
+    union {
+        __uint24 retval;
+        uint8_t ui8[sizeof(__uint24)];
+    } val;
+    uint8_t rng_next = task_rng_random.next;
+    task_rng_random.next = rng_next + sizeof(val);
+    for (uint8_t i = 0; i < sizeof(val); ++i)
+        val.ui8[i] = task_rng_random.ui8[rng_next + i];
+    return val.retval;
+}
+
 static void
 reload_biterror(const uint8_t global_update)
 {
     // Load new stream length in bytes and the bit to flip if the bit error
     // rate has been changed (forced update) or the old run for bit errors has
     // been completed (regular update).
-    const uint8_t update = task_adc_generator.biterror_force_update
-                        || global_update;
-    const uint8_t bin = task_adc_generator.biterror_rate_bin;
-    const __uint24 stream_len = bit_error_rate_bin_map[bin];
-    const __uint24 flipmask = (stream_len << 3) - 1;
+    uint8_t bin = task_adc_generator.biterror_rate_bin;
+    __uint24 stream_len = bit_error_rate_bin_map[bin];
+    __uint24 flipmask = (stream_len << 3) - 1;
 
-    if (0 == biterr_from_exp.remaining_bytes || update) {
-        // get 3 B of random data
-        uint8_t rng_next = task_rng_random.next;
-        __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
-        task_rng_random.next = rng_next + 3;
-
+    uint8_t update = task_adc_generator.biterror_force_update || global_update;
+    if (!biterr_from_exp.remaining_bytes || update) {
         biterr_from_exp.remaining_bytes = stream_len;
-        biterr_from_exp.flip_index = flipmask & rng_val;
+        biterr_from_exp.flip_index = flipmask & get_random();
     }
-    if (0 == biterr_from_gnd.remaining_bytes || update) {
-        // get 3 B of random data
-        uint8_t rng_next = task_rng_random.next;
-        __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
-        task_rng_random.next = rng_next + 3;
-
+    if (!biterr_from_gnd.remaining_bytes || update) {
         biterr_from_gnd.remaining_bytes = stream_len;
-        biterr_from_gnd.flip_index = flipmask & rng_val;
+        biterr_from_gnd.flip_index = flipmask & get_random();
     }
     task_adc_generator.biterror_force_update = 0;
 }
 
+/// Load new point in time when to start dropping and load the duration for
+/// the communication outage.
 static void
 reload_dropout(const uint8_t global_update)
 {
-    // Load new point in time when to start dropping and load the duration for
-    // the communication outage.
-    const uint8_t update = task_adc_generator.dropout_force_update
-                        || global_update;
+    // we can leave directly iff we do not have a "forced update" condition
+    // and iff we do not have a "regular" update (which happens when both
+    // end and reload are 0)
+    if (!global_update && !task_adc_generator.dropout_force_update
+        && (drop_error.end || drop_error.reload))
+        return;
+
     uint8_t bin = task_adc_generator.dropout_rate_bin;
-    const __uint24 interval = drop_rate_bin_map[bin];
+    __uint24 interval = drop_rate_bin_map[bin];
 
-    if ((0 == drop_error.end && 0 == drop_error.reload) || update) {
-        drop_error.reload = interval;
-        if (!drop_error.reload) {
-            // communication drop disabled
-            drop_error.begin = 0;
-            drop_error.end = 0;
-        } else {
-            // get 3 B of random data
-            uint8_t rng_next = task_rng_random.next;
-            __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
-            task_rng_random.next = rng_next + 3;
-
-            drop_error.begin = (interval - 1) & rng_val;
-            bin = task_adc_generator.dropout_duration_bin;
-            drop_error.end = drop_error.begin + drop_duration_bin_map[bin] + 1;
-        }
+    drop_error.reload = interval;
+    if (0 == interval) {
+        // communication drop disabled
+        drop_error.begin = 0;
+        drop_error.end = 0;
+    } else {
+        drop_error.begin = (interval - 1) & get_random();
+        bin = task_adc_generator.dropout_duration_bin;
+        drop_error.end = drop_error.begin + drop_duration_bin_map[bin] + 1;
     }
     task_adc_generator.dropout_force_update = 0;
 }
