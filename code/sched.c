@@ -22,6 +22,7 @@
 #include "sched.h"
 #include "task.h"
 #include "task_buttons.h"
+#include "task_rng.h"
 #include "task_adc.h"
 #include "task_ctrl.h"
 #include "task_sendrecv.h"
@@ -40,7 +41,7 @@
 ///
 /// Empty/unused slots must be set to NULL.
 static const struct task *const scheduling_map[SCHED_SLOT_COUNT] = {
-    &task_buttons, &task_adc, NULL, &task_recv,
+    &task_rng, &task_buttons, &task_adc, &task_recv,
     &task_ctrl, &task_error, &task_send, &task_debug
 };
 

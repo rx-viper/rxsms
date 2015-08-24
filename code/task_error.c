@@ -23,6 +23,7 @@
 #include "task_sendrecv.h"
 #include "task_ctrl.h"
 #include "task_adc.h"
+#include "task_rng.h"
 
 /*
  * Ressources used _once_ by this task:
@@ -74,12 +75,22 @@ reload_biterror(const uint8_t global_update)
     const __uint24 flipmask = (stream_len << 3) - 1;
 
     if (0 == biterr_from_exp.remaining_bytes || update) {
+        // get 3 B of random data
+        uint8_t rng_next = task_rng_random.next;
+        __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
+        task_rng_random.next = rng_next + 3;
+
         biterr_from_exp.remaining_bytes = stream_len;
-        biterr_from_exp.flip_index = flipmask & task_adc_generator.random[0];
+        biterr_from_exp.flip_index = flipmask & rng_val;
     }
     if (0 == biterr_from_gnd.remaining_bytes || update) {
+        // get 3 B of random data
+        uint8_t rng_next = task_rng_random.next;
+        __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
+        task_rng_random.next = rng_next + 3;
+
         biterr_from_gnd.remaining_bytes = stream_len;
-        biterr_from_gnd.flip_index = flipmask & task_adc_generator.random[1];
+        biterr_from_gnd.flip_index = flipmask & rng_val;
     }
     task_adc_generator.biterror_force_update = 0;
 }
@@ -101,7 +112,12 @@ reload_dropout(const uint8_t global_update)
             drop_error.begin = 0;
             drop_error.end = 0;
         } else {
-            drop_error.begin = (interval - 1) & task_adc_generator.random[2];
+            // get 3 B of random data
+            uint8_t rng_next = task_rng_random.next;
+            __uint24 rng_val = (__uint24*) &task_rng_random.ui8[rng_next];
+            task_rng_random.next = rng_next + 3;
+
+            drop_error.begin = (interval - 1) & rng_val;
             bin = task_adc_generator.dropout_duration_bin;
             drop_error.end = drop_error.begin + drop_duration_bin_map[bin] + 1;
         }

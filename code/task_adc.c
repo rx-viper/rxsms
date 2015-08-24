@@ -17,7 +17,6 @@
  */
 
 #include <avr/io.h>
-#include <stdlib.h>
 #include "task_adc.h"
 #include "util.h"
 
@@ -100,7 +99,6 @@ init(void)
         ((uint8_t*) &adc_raw)[i] = 0;
     for (uint8_t i = 0; i < sizeof(task_adc_generator); ++i)
         ((uint8_t*) &task_adc_generator)[i] = 0;
-    srandom(0);
     state = INIT;
 
     ADC_PWRUP;
@@ -162,14 +160,6 @@ update_generator(void)
     if (GEN.dropout_duration_bin != bin)
         GEN.dropout_force_update = 1;
     GEN.dropout_duration_bin = bin;
-
-#if RANDOM_MAX < 0xFFFFFF
-#error "Need at least 3B of random data for __uint24 per random() call"
-#endif
-
-    const uint8_t array_len = sizeof(GEN.random) / sizeof(GEN.random[0]);
-    for (uint8_t i = 0; i < array_len; ++i)
-        GEN.random[i] = random();
 #undef GEN
 }
 
