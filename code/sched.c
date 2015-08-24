@@ -18,7 +18,7 @@
 
 
 #include <avr/interrupt.h>
-#include <stddef.h>
+#include <stddef.h>     /* for NULL */
 #include "sched.h"
 #include "task.h"
 #include "task_buttons.h"

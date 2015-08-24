@@ -17,7 +17,6 @@
  */
 
 #include <avr/io.h>
-#include <stdlib.h>
 #include "task_error.h"
 #include "task_error_tables.h"
 #include "task_sendrecv.h"
