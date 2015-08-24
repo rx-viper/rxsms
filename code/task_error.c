@@ -52,12 +52,6 @@ static struct biterr_status
 static void
 init(void)
 {
-    for (uint8_t i = 0; i < sizeof(drop_error); ++i)
-        ((uint8_t*) &drop_error)[i] = 0;
-    for (uint8_t i = 0; i < sizeof(biterr_from_gnd); ++i)
-        ((uint8_t*) &biterr_from_gnd)[i] = 0;
-    for (uint8_t i = 0; i < sizeof(biterr_from_exp); ++i)
-        ((uint8_t*) &biterr_from_exp)[i] = 0;
 }
 
 // get 3 B of random data

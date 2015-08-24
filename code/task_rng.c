@@ -57,7 +57,6 @@ init(void)
     for (uint8_t i = 0; i < sizeof(initial_data); ++i)
         AES.STATE = initial_data[i];
     start();
-    task_rng_random.next = 0;
 }
 
 static void

@@ -75,9 +75,6 @@ production_signature_row_read_calibration(uint16_t * adca_calibration)
 static void
 init(void)
 {
-    for (uint8_t i = 0; i < sizeof(task_adc_generator); ++i)
-        ((uint8_t*) &task_adc_generator)[i] = 0;
-
     ADC_PWRUP;
 
     // configure pins for input

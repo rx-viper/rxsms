@@ -83,13 +83,6 @@ init(void)
               UART_GROUNDSTATION_TX_bm, &UART_GROUNDSTATION);
     init_uart(&UART_EXPERIMENT_PORT, UART_EXPERIMENT_RX_bm,
               UART_EXPERIMENT_TX_bm, &UART_EXPERIMENT);
-
-    const struct task_recv_uart_data initializer = { 0 };
-    task_recv_from_gnd = initializer;
-    task_recv_from_exp = initializer;
-    const struct uart_status status_init = { 0 };
-    status_from_gnd = status_init;
-    status_from_exp = status_init;
 }
 
 static void

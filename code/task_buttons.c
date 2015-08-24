@@ -47,7 +47,19 @@ struct button {
     uint8_t pressed;
     uint8_t released;
     uint8_t triggered : 1;
-} lo, soe, sods, errinh, pwr;
+};
+
+#define BUTTON_INITIALIZER {.pressed = DURATION_DEBOUNCE, \
+                            .released = DURATION_DEBOUNCE, \
+                            .triggered = 0}
+#define BUTTON(name)    static struct button name = BUTTON_INITIALIZER
+BUTTON(lo);
+BUTTON(soe);
+BUTTON(sods);
+BUTTON(errinh);
+BUTTON(pwr);
+#undef BUTTON
+#undef BUTTON_INITIALIZER
 
 static void
 init(void)
@@ -71,17 +83,6 @@ init(void)
         PORT_OPC_PULLUP_gc;
 #undef PINCTRL
 #undef PINCTRL_CONCAT
-
-    const struct button initializer = {
-        .pressed = DURATION_DEBOUNCE,
-        .released = DURATION_DEBOUNCE,
-        .triggered = 0
-    };
-    lo = initializer;
-    soe = initializer;
-    sods = initializer;
-    errinh = initializer;
-    pwr = initializer;
 }
 
 static void
