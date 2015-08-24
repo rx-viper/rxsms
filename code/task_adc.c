@@ -53,7 +53,6 @@
 #define ADC_PORT            PORTA
 #define ADC_PORT_PINS_gc    (PIN0_bm | PIN1_bm | PIN2_bm | PIN3_bm)
 
-#define FIRST_CHANNEL_NAME  DROPDUR
 #define ADC_CH_MUXPOS_FIRST ADC_CH_MUXPOS_PIN0_gc
 #define ADC_CH_MUXPOS_LAST  ADC_CH_MUXPOS_PIN3_gc
 #define INPUT_SCAN_COUNT    3
@@ -61,23 +60,6 @@
 static void init(void);
 static void run(void);
 const struct task task_adc = { .init = &init, .run = &run };
-
-static struct {
-    int16_t poti_bit_error_rate;
-    int16_t poti_drop_rate;
-    int16_t poti_drop_duration;
-    int16_t current_sense;
-} adc_raw;
-
-static enum
-{
-    INIT,
-    DROPDUR,
-    DROPRATE,
-    BITERR,
-    CURRSENSE,
-    _END
-} state = INIT;
 
 /// Reads the ADC calibration value.
 static void
@@ -95,15 +77,12 @@ production_signature_row_read_calibration(uint16_t * adca_calibration)
 static void
 init(void)
 {
-    for (uint8_t i = 0; i < sizeof(adc_raw); ++i)
-        ((uint8_t*) &adc_raw)[i] = 0;
     for (uint8_t i = 0; i < sizeof(task_adc_generator); ++i)
         ((uint8_t*) &task_adc_generator)[i] = 0;
-    state = INIT;
 
     ADC_PWRUP;
 
-    /* configure pins for input */
+    // configure pins for input
     ADC_REF_PORT.DIRCLR = ADC_REF_bm;
     ADC_REF_PORT.OUTCLR = ADC_REF_bm;
     ADC_PORT.DIRCLR = ADC_PORT_PINS_gc;
@@ -112,7 +91,7 @@ init(void)
     uint16_t adca_calibration;
     production_signature_row_read_calibration(&adca_calibration);
 
-    /* init ADCA CH0 */
+    // init ADCA CH0
     ADCA.CTRLA = 0;
     ADCA.CTRLB =
         ADC_CURRLIMIT_HIGH_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;
@@ -142,79 +121,84 @@ limit_adc(const int16_t adc)
 }
 
 static void
-update_generator(void)
+update_generator(const int16_t bit_error_rate, const int16_t drop_rate,
+                 const int16_t drop_duration)
 {
 #define GEN task_adc_generator
     uint8_t bin;
-    bin = limit_adc(adc_raw.poti_bit_error_rate) / (2048 / 16);
+    bin = limit_adc(bit_error_rate) / (2048 / 16);
     if (GEN.biterror_rate_bin != bin)
         GEN.biterror_force_update = 1;
     GEN.biterror_rate_bin = bin;
 
-    bin = limit_adc(adc_raw.poti_drop_rate) / (2048 / 16);
+    bin = limit_adc(drop_rate) / (2048 / 16);
     if (GEN.dropout_rate_bin != bin)
         GEN.dropout_force_update = 1;
     GEN.dropout_rate_bin = bin;
 
-    bin = limit_adc(adc_raw.poti_drop_duration) / (2048 / 32);
+    bin = limit_adc(drop_duration) / (2048 / 32);
     if (GEN.dropout_duration_bin != bin)
         GEN.dropout_force_update = 1;
     GEN.dropout_duration_bin = bin;
 #undef GEN
 }
 
+/// Compare old and new ADC value and return the new value only iff a minimum
+/// difference is exceeded.
+static int16_t
+apply_hysteresis(int16_t prev_adc, int16_t new_adc)
+{
+    const int8_t MIN_DIFF = 16;
+    int16_t diff = prev_adc - new_adc;
+    if (diff < -MIN_DIFF || diff > MIN_DIFF)
+        return new_adc;
+    return prev_adc;
+}
+
 static void
 run(void)
 {
-    const uint8_t s = state;
-    if (INIT == s) {
-        /* throw away the first measurement, as it might be wrong */
+    // on the very first run() call:
+    //   SETUP throws away the first measurement that might be wrong
+    static enum {
+        SETUP, DROPDUR, DROPRATE, BITERR, CURRSENSE
+    } state = SETUP;
+
+    static int16_t bit_error_rate;
+    static int16_t drop_rate;
+    static int16_t drop_duration;
+    static int16_t current_sense;
+
+    if (SETUP == state) {
         ADCA.INTFLAGS = ADC_CH0IF_bm;
         ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST | ADC_CH_MUXNEG_GND_MODE3_gc;
         ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
         ADCA.CTRLA |= ADC_CH0START_bm;
-        state = FIRST_CHANNEL_NAME;
-    } else if (FIRST_CHANNEL_NAME <= s && s < _END) {
-        if (!(ADCA.INTFLAGS & ADC_CH0IF_bm))
-            return;
-
-        const int16_t adc_value = ADCA.CH0RES;
-        // For the potentiometer inputs:
-        //   Update adc_raw only iff the new value exceeds a hysteresis.
-        //   This hysteresis prevents updates at the boundary of a bin and
-        //   cancels out noise.
-        // For the current sensor:
-        //   Ignore the hysteresis since we want the exact sensor readings.
-        if (CURRSENSE == s) {
-            adc_raw.current_sense = adc_value;
-        } else {
-            int16_t *old_value;
-            if (DROPDUR == s)
-                old_value = &adc_raw.poti_drop_duration;
-            else if (DROPRATE == s)
-                old_value = &adc_raw.poti_drop_rate;
-            else
-                old_value = &adc_raw.poti_bit_error_rate;
-            const int8_t MIN_DIFF = 16;
-            int16_t diff = *old_value - adc_value;
-            if (diff < -MIN_DIFF || diff > MIN_DIFF)
-                *old_value = adc_value;
-        }
-
+        update_generator(bit_error_rate, drop_rate, drop_duration);
         ++state;
-        if (_END == state) {
-            ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_FIRST
-                | ADC_CH_MUXNEG_GND_MODE3_gc;
-            ADCA.CH0.SCAN = INPUT_SCAN_COUNT;
-            update_generator();
-            state = FIRST_CHANNEL_NAME;
-        }
-
-        ADCA.INTFLAGS = ADC_CH0IF_bm;
-        ADCA.CTRLA |= ADC_CH0START_bm;
-    } else {
-        /* this should not happen */
-        init();
-        state = INIT;
+        return;
     }
+
+    if (!(ADCA.INTFLAGS & ADC_CH0IF_bm))
+        return;
+    int16_t adc_value = ADCA.CH0RES;
+
+    if (CURRSENSE == state) {
+        // no hysteresis -- we want the exact sensor readings
+        current_sense = adc_value;
+        state = SETUP;
+        return;
+    }
+
+    // Use hysteresis to prevent frequent updates at the boundary of a bin due
+    // to noise.
+    if (DROPDUR == state)
+        drop_duration = apply_hysteresis(drop_duration, adc_value);
+    else if (DROPRATE == state)
+        drop_rate = apply_hysteresis(drop_rate, adc_value);
+    else if (BITERR == state)
+        bit_error_rate = apply_hysteresis(bit_error_rate, adc_value);
+    ADCA.INTFLAGS = ADC_CH0IF_bm;
+    ADCA.CTRLA |= ADC_CH0START_bm;
+    ++state;
 }
