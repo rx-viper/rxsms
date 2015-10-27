@@ -1,3 +1,27 @@
+S/N 001
+=======
+  * First prototyping board with bug in layout
+
+S/N 002
+=======
+  * Second prototyping board with bug in layout
+  * Delivered to ZARM
+
+S/N 003
+=======
+  * HW Variant: RX 2015-June-18
+    * Potentiometers U$7\_BER, U$8\_DROPR, and U$9\_DROPDUR are 10k
+      instead of 50k; OC\_RS `737-7833P` instead of OC\_FARNELL `1345093`
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 004
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
 S/N 005
 =======
   * HW Variant: RX 2015-June-18
@@ -16,6 +40,125 @@ S/N 006
   * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
   * TOP and BOT a bit sticky due to PCB cleaning, should be omitted in
     the future
+
+S/N 007
+=======
+  * HW Variant: RX 2015-June-18
+    * Potentiometers U$7\_BER, U$8\_DROPR, and U$9\_DROPDUR are 10k
+      instead of 50k; OC\_RS `737-7833P` instead of OC\_FARNELL `1345093`
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 008
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 009
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 010
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 011
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 012
+=======
+  * HW Variant: ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 013
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 014
+=======
+  * HW Variant: RX 2015-June-18
+    * Yellow SOE/SODS/LO LEDs and amber UL/DL LEDs replaced
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 015
+=======
+  * HW Variant: RX 2015-June-18
+    * Yellow SOE/SODS/LO LEDs and amber UL/DL LEDs replaced
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 016
+=======
+  * HW Variant: RX 2015-June-18
+    * Yellow SOE/SODS/LO LEDs and amber UL/DL LEDs replaced
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 017
+=======
+  * HW Variant: MST/ZARM 2015-June-18
+    * Resistors for push-button LEDs have additional 150 Ohm in parallel
+    * Yellow/green LEDs for ERRINH/PWR/SOE/SODS/LO were removed in favour for
+      push-button built-in ones
+    * Potentiometers U$7\_BER, U$8\_DROPR, and U$9\_DROPDUR are 10k
+      instead of 50k; OC\_RS `737-7833P` instead of OC\_FARNELL `1345093`
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 018
+=======
+  * HW Variant: RX 2015-June-18
+    * LEDs replaced
+    * Potentiometers U$7\_BER, U$8\_DROPR, and U$9\_DROPDUR are 10k
+      instead of 50k; OC\_RS `737-7833P` instead of OC\_FARNELL `1345093`
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 019
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 020
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 021
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 022
+=======
+  * HW Variant: RX 2015-June-18
+    * Yellow SOE/SODS/LO LEDs and amber UL/DL LEDs replaced
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 023
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
+
+S/N 024
+=======
+  * HW Variant: RX 2015-June-18
+  * SW Commit: `32d3e20025deeb8f889f18797c4b7563a8a7dacc`
 
 
 Template:
