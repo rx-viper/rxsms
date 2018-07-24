@@ -13554,7 +13554,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <contactref element="X3_DEBUG" pad="1"/>
 <contactref element="X3_DEBUG" pad="6"/>
 <contactref element="X3_DEBUG" pad="7"/>
-<polygon width="0.3048" layer="16">
+<polygon width="0.3048" layer="16" isolate="0.5">
 <vertex x="5.08" y="66.04"/>
 <vertex x="8.89" y="66.04"/>
 <vertex x="8.89" y="56.515"/>
@@ -13568,7 +13568,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <via x="7.62" y="64.77" extent="1-16" drill="0.6"/>
 <via x="6.35" y="63.5" extent="1-16" drill="0.6"/>
 <via x="7.62" y="63.5" extent="1-16" drill="0.6"/>
-<polygon width="0.3048" layer="1">
+<polygon width="0.3048" layer="1" isolate="0.5">
 <vertex x="5.08" y="62.865"/>
 <vertex x="8.89" y="62.865"/>
 <vertex x="8.89" y="83.82"/>
@@ -13582,7 +13582,7 @@ diameter 1.8 mm, horizontal, grid 7.62 mm</description>
 <contactref element="X3_DEBUG" pad="4"/>
 <contactref element="X3_DEBUG" pad="8"/>
 <contactref element="X3_DEBUG" pad="9"/>
-<polygon width="0.3048" layer="1">
+<polygon width="0.3048" layer="1" isolate="0.5" rank="2">
 <vertex x="13.97" y="57.15"/>
 <vertex x="1.27" y="57.15"/>
 <vertex x="1.27" y="98.425"/>
